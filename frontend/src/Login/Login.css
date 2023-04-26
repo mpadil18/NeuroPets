@@ -1,5 +1,11 @@
 .Login {
-    background-color: #F88B98;
+    background-color: #ffffff;
+    position: relative;
+    width: 390px;
+    height: 844px;
+    left: 0;
+    top: 0;
+
 }
 
 .login-form{
@@ -14,4 +20,66 @@ img {
     top: 102px;
     width: 320px;
     height: 320px;
+  }
+
+.logoTag {
+    Position: absolute;
+    width: 309px;
+    height: 309px;
+    left: 26px;
+    top: 100px;
+
+    
+}
+
+.wave{
+
+    position: absolute;
+    width: 768.5px;
+    height: 817.94px;
+    left: -216.5px;
+    top: 135.06px;
+}
+
+.loginField {
+    width: 75%;
+    height: 37px;
+    border-radius: 10px;
+    margin: 4px 2px;
+    background-color: #374350;
+    border: none;
+    color: white;
+    padding: 20px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-family: 'Roboto';
+    margin: 4px 2px;
+}
+
+.loginButton {
+    width: 135px;
+    height: 29px;
+    background-color: #F48F9C;
+    border-radius: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+    /* identical to box height */
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+::placeholder {
+    color: white;
+    text-align: left;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    display: flex;
   }

@@ -12,17 +12,12 @@ function Login() {
 
     return (
         <div className = "Login">
-            <img
-                src = "./logo.png"
-                alt = "NeuroPets logo"
-            >
-            </img>
-            <form className = "login-form" onSubmit = {login}>
-                <input value = {username} onChange = {(e) => setUsername(e.target.value)} placeholder="Username" id = "Username" />
-                <input value = {password} onChange = {(e) => setPassword(e.target.value)} placeholder="Password" id = "Password" />
-                <button>Log In</button>
-            </form>
-            <button>Need an acccount? Create one here</button>
+                <form className = "loginForm" onSubmit = {login}>
+                    <input className = "loginField" value = {username} onChange = {(e) => setUsername(e.target.value)} placeholder="Username" id = "Username" required />
+                    <input className = "loginField" value = {password} onChange = {(e) => setPassword(e.target.value)} placeholder="Password" id = "Password" required />
+                    <button className = "loginButton">Log In</button>
+                </form>
+                <button>Need an acccount? Create one here</button>
         </div>
     );
 }
