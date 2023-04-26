@@ -11,11 +11,17 @@ function Login() {
     }
 
     return (
-        <div className = "Login">
+            <div className = "Login">
             <img
                 src = "./logo.png"
                 alt = "NeuroPets logo"
+                
             >
+            </img>
+            <img
+                src =  "./neuropets-tag.png"
+                alt = "NeuroPets Tag"
+                >
             </img>
             <form className = "login-form" onSubmit = {login}>
                 <input value = {username} onChange = {(e) => setUsername(e.target.value)} placeholder="Username" id = "Username" />
@@ -24,6 +30,7 @@ function Login() {
             </form>
             <button>Need an acccount? Create one here</button>
         </div>
+        
     );
 }
 

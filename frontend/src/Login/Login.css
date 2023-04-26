@@ -1,5 +1,11 @@
 .Login {
-    background-color: #F88B98;
+    background-color: #ffffff;
+    position: relative;
+    width: 390px;
+    height: 844px;
+    left: 0;
+    top: 0;
+
 }
 
 .login-form{
@@ -15,3 +21,22 @@ img {
     width: 320px;
     height: 320px;
   }
+
+.logoTag {
+    Position: absolute;
+    width: 309px;
+    height: 309px;
+    left: 26px;
+    top: 100px;
+
+    
+}
+
+.wave{
+
+    position: absolute;
+    width: 768.5px;
+    height: 817.94px;
+    left: -216.5px;
+    top: 135.06px;
+}
