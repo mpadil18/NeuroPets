@@ -1,6 +1,7 @@
 // Page code
 import TextBox from "./textBox";
 import React, { useState } from 'react';
+import './RegPage.css';
 
 function RegPage() {
     return (
