@@ -1,0 +1,17 @@
+.Login {
+    background-color: #F88B98;
+}
+
+.login-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+img {
+    position: absolute;
+    left: 10px;
+    top: 102px;
+    width: 320px;
+    height: 320px;
+  }
