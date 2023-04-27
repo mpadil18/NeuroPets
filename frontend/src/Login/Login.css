@@ -5,14 +5,28 @@
     height: 844px;
     left: 0;
     top: 0;
+    z-index: -1
+}
 
+.wave {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: url("../../public/wave.svg") no-repeat center bottom;
+    height: 100vh;
+    background-size: cover;
 }
 
 .login-form{
-    display: flex;
     flex-direction: column;
     align-items: center;
+    position: fixed;
+    width: 100%;
+    bottom: 110px;
 }
+
+
 
 img {
     position: absolute;
@@ -20,6 +34,7 @@ img {
     top: 102px;
     width: 320px;
     height: 320px;
+    z-index: 1;
   }
 
 .logoTag {
@@ -29,21 +44,22 @@ img {
     left: 26px;
     top: 100px;
 
-    
+    z-index: 2;
 }
 
-.wave{
-
+.whiteBox {
     position: absolute;
-    width: 768.5px;
-    height: 817.94px;
-    left: -216.5px;
-    top: 135.06px;
+    width: 100%;
+    height: 240px;
+    left: 21px;
+    top: 549px;
+    background: #F9F9F9;
+    border-radius: 10px;
 }
 
 .loginField {
-    width: 75%;
-    height: 37px;
+    width: 65%;
+    height: 20px;
     border-radius: 10px;
     margin: 4px 2px;
     background-color: #374350;
@@ -61,7 +77,9 @@ img {
     width: 135px;
     height: 29px;
     background-color: #F48F9C;
+    border: none;
     border-radius: 10px;
+    outline: none;
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 700;
@@ -82,4 +100,19 @@ img {
     font-size: 16px;
     line-height: 19px;
     display: flex;
-  }
+}
+
+.createAccountRedirect {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    bottom: 40px;
+}
+
+.createAccountButton {
+    border: none;
+    outline: none;
+    background: none;
+}
