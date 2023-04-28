@@ -1,6 +1,5 @@
-
 import './App.css';
-//import firebase from './firebase';
+//import { db } from './firebase';
 
 function App() {
   return (
