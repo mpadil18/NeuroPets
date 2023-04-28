@@ -1,4 +1,6 @@
 import "./Login.css"
+import logo from "../assets/logo.png"
+import tag from "../assets/neuropets-tag.png"
 import React, { useState } from "react"
 
 function Login() {
@@ -12,23 +14,13 @@ function Login() {
     }
 
     const createAccount = (e) => {
-        console.log("direct to account creation");
+        console.log("redirect to account creation");
     }
 
     return (
             <div className = "Login">
-                <div className = "wave">
-                <img
-                    src = "./logo.png"
-                    alt = "NeuroPets logo"
-                    
-                >
-                </img>
-                <img
-                    src =  "./neuropets-tag.png"
-                    alt = "NeuroPets Tag"
-                    >
-                </img>
+                <img src = {logo} alt = "NeuroPets logo" />
+                <img src =  {tag} alt = "NeuroPets Tag" />
                 <div className = "whiteBox">
                     <form className = "login-form" onSubmit = {login}>
                         <input className = "loginField" value = {username} onChange = {(e) => setUsername(e.target.value)} placeholder="Username" id = "Username" required />
@@ -39,9 +31,7 @@ function Login() {
                 <div className = "createAccountRedirect">
                     <h3>Need an acccount? Create one <button onClick = {createAccount} className = "createAccountButton">here</button> </h3>
                 </div>
-                </div>
-        </div>
-        
+            </div>
     );
 }
 

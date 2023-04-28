@@ -1,40 +1,27 @@
 .Login {
-    background-color: #ffffff;
-    position: relative;
-    width: 390px;
-    height: 844px;
-    left: 0;
-    top: 0;
-    z-index: -1
-}
-
-.wave {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background: url("../../public/wave.svg") no-repeat center bottom;
     height: 100vh;
     background-size: cover;
+    background: url("../assets/wave.svg") no-repeat center bottom;
 }
 
 .login-form{
     flex-direction: column;
     align-items: center;
-    position: fixed;
+    position: relative;
     width: 100%;
-    bottom: 110px;
 }
-
-
 
 img {
     position: absolute;
-    left: 10px;
+    display: grid;
+    place-items: center;
     top: 102px;
     width: 320px;
     height: 320px;
-    z-index: 1;
   }
 
 .logoTag {
@@ -43,14 +30,13 @@ img {
     height: 309px;
     left: 26px;
     top: 100px;
-
     z-index: 2;
 }
 
 .whiteBox {
     position: absolute;
-    width: 100%;
-    height: 240px;
+    width: 90%;
+    height: 200px;
     left: 21px;
     top: 549px;
     background: #F9F9F9;
@@ -58,10 +44,9 @@ img {
 }
 
 .loginField {
-    width: 65%;
-    height: 20px;
+    width: 70%;
+    height: 10px;
     border-radius: 10px;
-    margin: 4px 2px;
     background-color: #374350;
     border: none;
     color: white;
@@ -74,8 +59,9 @@ img {
 }
 
 .loginButton {
-    width: 135px;
+    width: 40%;
     height: 29px;
+    margin-top: 5%;
     background-color: #F48F9C;
     border: none;
     border-radius: 10px;
@@ -85,7 +71,6 @@ img {
     font-weight: 700;
     font-size: 14px;
     line-height: 16px;
-    /* identical to box height */
     align-items: center;
     text-align: center;
     color: #FFFFFF;
@@ -103,16 +88,24 @@ img {
 }
 
 .createAccountRedirect {
-    display: flex;
     flex-direction: column;
-    align-items: center;
     position: fixed;
     width: 100%;
-    bottom: 40px;
+    bottom: 20px;
+    font-weight: bold;
+    line-height: 16px;
+    text-align: center;
+    color: #38393C;
 }
 
 .createAccountButton {
-    border: none;
-    outline: none;
     background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+    text-decoration: underline;
+    font-weight: bold;
 }
