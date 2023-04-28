@@ -1,11 +1,11 @@
 
 import './App.css';
-import CreateGoal from './Create-Goal/Create-Goal';
+//import firebase from './firebase';
 
 function App() {
   return (
     <div className="app-container">
-       <CreateGoal />
+      Hello 
     </div>
   );
 }
