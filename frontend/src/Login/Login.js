@@ -2,19 +2,33 @@ import "./Login.css"
 import logo from "../assets/logo.png"
 import tag from "../assets/neuropets-tag.png"
 import React, { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { signInWithEmailAndPassword } from "firebase/auth"
+import { auth } from "../firebase.js"
 
 function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    
+    const navigate = useNavigate();
 
     const login = (e) => {
         e.preventDefault();
-        console.log(username);
-        console.log(password);
+        signInWithEmailAndPassword(auth, username, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                //todo: navigate to next page
+                console.log(user);
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.errorMessage;
+                console.log(errorCode, errorMessage);
+            });
     }
 
     const createAccount = (e) => {
-        console.log("redirect to account creation");
+        navigate('../Registration/RegPage');
     }
 
     return (
