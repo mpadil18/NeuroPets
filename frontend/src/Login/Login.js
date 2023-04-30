@@ -14,6 +14,7 @@ function Login() {
 
     const login = (e) => {
         e.preventDefault();
+        //see https://firebase.google.com/docs/auth/web/password-auth for api details
         signInWithEmailAndPassword(auth, username, password)
             .then((userCredential) => {
                 const user = userCredential.user;

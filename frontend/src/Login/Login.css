@@ -55,7 +55,7 @@ img {
     display: inline-block;
     font-size: 16px;
     font-family: 'Roboto';
-    margin: 4px 2px;
+    margin: 2% 10%;
 }
 
 .loginButton {
@@ -74,6 +74,7 @@ img {
     align-items: center;
     text-align: center;
     color: #FFFFFF;
+    margin: 2% 30%;
 }
 
 ::placeholder {
