@@ -1,8 +1,6 @@
 import { initializeApp } from 'firebase/app';
-/* tell firebase to have access to firestore service */
 import { getFirestore } from 'firebase/firestore';
 
-// TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
   apiKey: "AIzaSyC8l0LYbvvZczdessb11nAce9rFRDiZIGM",
   authDomain: "neuropets-9c731.firebaseapp.com",
@@ -15,6 +13,4 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-/* Exporting gives us access to the database elsewhere in our app */
-//export const db = getFirestore(app);
 export const firestore = getFirestore(app)
