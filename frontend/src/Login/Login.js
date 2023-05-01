@@ -1,7 +1,6 @@
 import "./Login.css"
-import logo from "../assets/logo.png"
-import tag from "../assets/neuropets-tag.png"
 import React, { useState } from "react"
+import logo from "../assets/logo.svg"
 import { useNavigate } from "react-router-dom"
 import { signInWithEmailAndPassword } from "firebase/auth"
 import { auth } from "../firebase.js"
@@ -34,8 +33,7 @@ function Login() {
 
     return (
             <div className = "Login">
-                <img src = {logo} alt = "NeuroPets logo" />
-                <img src =  {tag} alt = "NeuroPets Tag" />
+                <img className = "NPlogo" src = {logo} alt = "NeuroPets Logo"/>
                 <div className = "whiteBox">
                     <form className = "login-form" onSubmit = {login}>
                         <input className = "loginField" value = {username} onChange = {(e) => setUsername(e.target.value)} placeholder="Username" id = "Username" required />
