@@ -1,5 +1,5 @@
 // Page code
-import './regPage.css';
+import './RegPage.css';
 import TextBox from "./textBox";
 import TopText from "../assets/upperBubble.svg"
 import { useNavigate } from "react-router-dom"

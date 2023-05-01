@@ -1,6 +1,6 @@
 import "./App.css";
 import Login from "./Login/Login"
-import RegPage from "./Registration/regPage";
+import RegPage from "./Registration/RegPage";
 import CreateGoal from './Create-Goal/Create-Goal';
 import { BrowserRouter , Routes, Route } from 'react-router-dom';
 
