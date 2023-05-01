@@ -1,11 +1,19 @@
-import './App.css';
-import RegPage from './regPage/regPage'; 
+import "./App.css";
+import Login from "./Login/Login"
+import RegPage from "./Registration/RegPage";
+import { BrowserRouter , Routes, Route } from 'react-router-dom';
 
+//add additional paths to different pages using same syntax <Route path = "..." element = {<.../>} />
 function App() {
   return (
-    <div className="App">
-        <RegPage />
-    </div>
+
+    <BrowserRouter>
+      <Routes>
+        <Route path = "" element = {<Login/>} /> 
+        <Route path = "/" element = {<Login/>} />
+        <Route path = "/RegPage" element = {<RegPage/>} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
