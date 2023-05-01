@@ -28,7 +28,7 @@ function Login() {
     }
 
     const createAccount = (e) => {
-        navigate('../RegPage');
+        navigate('../regPage');
     }
 
     return (
