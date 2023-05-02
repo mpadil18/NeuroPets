@@ -28,7 +28,7 @@ function Login() {
     }
 
     const createAccount = (e) => {
-        navigate('../RegPage');
+        navigate('../regPage');
     }
 
     return (
@@ -42,7 +42,7 @@ function Login() {
                     </form>
                 </div>
                 <div className = "createAccountRedirect">
-                    <h3>Need an acccount? Create one <button onClick = {createAccount} className = "createAccountButton">here</button> </h3>
+                    <h3>Need an acccount? Create one <button  onClick = {createAccount}className = "createAccountButton">here</button> </h3>
                 </div>
             </div>
     );
