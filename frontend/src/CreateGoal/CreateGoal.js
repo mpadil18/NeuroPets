@@ -1,4 +1,4 @@
-import "./Create-Goal.css"
+import "./CreateGoal.css"
 import ProfText from "../assets/ProfTextA.svg"
 function CreateGoal() {
     return (
