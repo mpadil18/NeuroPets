@@ -5,6 +5,7 @@ import CreateGoal from './CreateGoal/CreateGoal';
 import { BrowserRouter , Routes, Route } from 'react-router-dom';
 
 
+
 //add additional paths to different pages using same syntax <Route path = "..." element = {<.../>} />
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path = "/createGoal" element = {<CreateGoal />} />
       </Routes>
     </BrowserRouter>
+
   );
 }
 

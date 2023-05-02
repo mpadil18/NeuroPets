@@ -1,0 +1,19 @@
+.Create-Goal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 15% auto;
+    width: 348px;
+    height: 397px;
+    background: red;
+}
+
+.GoalText {
+    margin: 22px;
+    height: 222px;
+    background-color: #374350;
+    border-radius: 10px;
+    border: none;
+    padding: 20px;
+}
