@@ -1,10 +1,17 @@
 // Page code
+import './RegPage.css';
 import TextBox from "./textBox";
-import './regPage.css';
 import TopText from "../assets/upperBubble.svg"
+import { useNavigate } from "react-router-dom"
 import BottomText from "../assets/lowerBubble.svg"
 
 function RegPage() {
+  const navigate = useNavigate();
+
+  const createGoal = (e) => {
+    navigate('../createGoal');
+  }
+
     return (
       <div className="Registration">
         <div className="Imgbox">
@@ -22,7 +29,9 @@ function RegPage() {
           <label className="UserInfo">
             <TextBox placeholder="Confirm Password" />
           </label>
-          <button type="button">Register</button> 
+          <button type="button"
+          onClick = {createGoal}  
+          >Register</button> 
         </div>
       </div>
     );
