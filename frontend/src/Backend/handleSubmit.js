@@ -3,9 +3,9 @@ import {firestore} from './firebaseSetup';
 
 
 const handleSubmit = (testdata) => {
-    const ref = collection(firestore,"test_data")
+    const ref = collection(firestore,"goals")
     let data = {
-        testData : testdata
+        user_goal : testdata
     }
     try {
         addDoc(ref, data)

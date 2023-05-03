@@ -1,6 +1,7 @@
 import "./CreateGoal.css"
 import ProfText from "../assets/ProfTextA.svg"
 import React, { useState } from "react"
+import handleSubmit from "../Backend/handleSubmit"
 
 function CreateGoal() {
 
@@ -9,7 +10,12 @@ function CreateGoal() {
   const logState = () => {
     console.log(goalText); 
   }
-
+  
+  const submithandler = (e) => {
+    e.preventDefault()
+    handleSubmit(goalText)
+    setGoalText("")
+  }
     return (
       <div className="CreateGoal">
         <div className="CreateGoalBubble">
@@ -20,7 +26,7 @@ function CreateGoal() {
           onChange = {(e) => setGoalText(e.target.value)}
           />
 
-          <button className="BubbleButton" onClick = {logState}> 
+          <button className="BubbleButton" onClick = {submithandler}> 
             Save Goal
           </button>
         </div>
