@@ -86,4 +86,5 @@
 
 .CreateGoal .bubbleField {
   height: 50%;
+  resize: none;
 }
