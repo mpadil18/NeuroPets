@@ -9,7 +9,6 @@
     /* styles for the Assistant Interaction */
     max-height: 400px;
     max-width: 90%;
-    max-width: 600px;
     display: flex;
     flex-direction: column;
     margin: 0px auto 50px auto;
