@@ -43,6 +43,10 @@
     border-radius: 10px;
     padding-top: 20px;
     background-color: #F9F9F9;
+    text-align: center;
+    
+    /* font color for create account text */
+    color: #354550;
 
 }
   
@@ -69,6 +73,7 @@
     border-radius: 10px;
     background-color: #F89;
     color: #FFF;
+    display: block;
 
 }
 
