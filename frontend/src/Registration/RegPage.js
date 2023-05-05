@@ -29,7 +29,6 @@ function RegPage() {
   }
 
 
-
   const createGoal = (e) => {
     if (password !== confirmPassword) {
       // display error message to user if passwords do not match
