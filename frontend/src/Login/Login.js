@@ -19,6 +19,7 @@ function Login() {
                 const user = userCredential.user;
                 //todo: navigate to next page
                 console.log(user);
+                navigate('../Home');
             })
             .catch((error) => {
                 const errorCode = error.code;

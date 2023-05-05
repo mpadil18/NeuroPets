@@ -1,17 +1,4 @@
 /* src/RegPage.css */
-
-* {
-    /* Attributes for all components, add Robot font family */
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Roboto", sans-serif;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 15px;
-}
-
 .Registration {
     /* styles for the Registration container */
     background: url("../assets/wave.svg") no-repeat center bottom;
