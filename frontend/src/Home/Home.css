@@ -4,11 +4,18 @@
     background-size: cover;
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .pet { 
-    margin: 0px 0px 50px 0px; 
-    height: 320px;
+    margin: 0px 0px 0px 0px; 
+    height: 270px;
+}
+
+.ProfessorText {
+    max-height: 148px;
+    width: 100%;
 }
 
 .navbar {
@@ -36,8 +43,16 @@ li {
     background: url("../assets/navbarIcons/pencil.svg") no-repeat 
 }
 
+.petHabitatIcon {
+    background: url("../assets/navbarIcons/petHabitat.svg") no-repeat 
+}
+
 .homeIcon {
     background: url("../assets/navbarIcons/home.svg") no-repeat 
+}
+
+.shopIcon {
+    background: url("../assets/navbarIcons/shop.svg") no-repeat 
 }
 
 .settingsIcon {
