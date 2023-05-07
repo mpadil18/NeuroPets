@@ -87,6 +87,7 @@ function RegPage() {
         onClick = {createGoal}  
         >Register</button> 
       </div>
+      </div>
     );
 }
 
