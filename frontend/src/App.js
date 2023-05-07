@@ -3,7 +3,6 @@ import Login from "./Login/Login"
 import RegPage from "./Registration/RegPage";
 import CreateGoal from "./CreateGoal/CreateGoal";
 import Home from "./Home/Home"
-import CompleteGoal from "./CompleteGoal/CompleteGoal";
 import { BrowserRouter , Routes, Route } from 'react-router-dom';
 
 
@@ -18,7 +17,6 @@ function App() {
         <Route path = "/regPage" element = {<RegPage/>} />
         <Route path = "/createGoal" element = {<CreateGoal />} />
         <Route path = "/home" element = {<Home />} />
-        <Route path = "/completeGoal" element = {<CompleteGoal />} />
       </Routes>
     </BrowserRouter>
 
