@@ -90,23 +90,19 @@
 }
 .navbar {
     background-color: #EEE;
-    position: fixed;
-    top: 758px;
-    bottom: 0;
     width: 100%;
+    margin-top: 10px;
 }
 
 .navlist {
     display: flex;
     justify-content: space-evenly;
+    padding: 0;
 }
   
-li {
-    vertical-align: middle;
-    display: inline-block;
-    color: #f2f2f2;
-    padding: 50px;
-    font-size: 1.5rem;
+.navlist li {
+    padding: 25px;
+    list-style-type: none
 }
 
 .editGoalIcon {

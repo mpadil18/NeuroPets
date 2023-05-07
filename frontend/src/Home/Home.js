@@ -2,19 +2,43 @@ import "./Home.css"
 import ProfText from "../assets/ProfTextB.svg"
 import Pet from "../assets/pet.svg"
 import { useNavigate } from "react-router-dom"
+import { useEffect, useState } from "react";
+import { getAuth } from "firebase/auth";
+import { collection, getDocs, getDoc, doc} from "firebase/firestore"; 
+import { auth, firestore, db} from "../firebase.js";
 
 
 function Home() {
     const navigate = useNavigate();
 
     const completeGoal = (e) => {
-        navigate('../CompleteGoal');
+        //navigate('../CompleteGoal');
     }
+
+    const [userGoal, setUserGoal] = useState(null);
+
+    useEffect(() => {
+        const getAllData = async () => {
+            const user = auth.currentUser;
+            if (user) {
+                // Getting user data specific to the current user
+                const docRef = doc(db, 'all_data', user.uid);
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    // Gets the user's goal and saves to state
+                    let goal = docSnap.data().goal;
+                    console.log("All user data: ", docSnap.data(), "Goal: ", goal);
+                    setUserGoal(goal);
+                }
+            }
+        }
+    getAllData();
+    })
 
     return (
         <div className = "Home">
             <div className = "GoalBubble">
-                <p className = "BubbleText">Drink Water</p>
+                <p className = "BubbleText">{userGoal}</p>
             </div>
             <img className = "pet" src = {Pet} alt = "sample neuropet"/>
             <button className = "GoalButton" onClick = {completeGoal}>
