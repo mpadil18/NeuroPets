@@ -35,11 +35,11 @@ function Login() {
     return (
             <div className = "Login">
                 <img className = "NPlogo" src = {logo} alt = "NeuroPets Logo"/>
-                <div className = "whiteBox">
+                <div className = "InputBubble">
                     <form className = "login-form" onSubmit = {login}>
-                        <input className = "loginField" value = {username} onChange = {(e) => setUsername(e.target.value)} placeholder="Username" id = "Username" required />
-                        <input className = "loginField" value = {password} onChange = {(e) => setPassword(e.target.value)} placeholder="Password" id = "Password" required />
-                        <button className = "loginButton">Log In</button>
+                        <input className = "bubbleField" value = {username} onChange = {(e) => setUsername(e.target.value)} placeholder="Username" id = "Username" required />
+                        <input className = "bubbleField" value = {password} onChange = {(e) => setPassword(e.target.value)} placeholder="Password" id = "Password" required />
+                        <button className = "bubbleButton">Log In</button>
                     </form>
                 </div>
                 <div className = "createAccountRedirect">
