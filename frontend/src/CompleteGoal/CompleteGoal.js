@@ -1,15 +1,8 @@
 import "./CompleteGoal.css"
-import ProfText from "../assets/ProfTextB.svg"
 import Pet from "../assets/pet.svg"
-import { useNavigate } from "react-router-dom"
 import GreenCheckmark from "../assets/GreenCheckmark.svg"
 
 function Home() {
-    const navigate = useNavigate();
-
-    const completeGoal = (e) => {
-        navigate('../CompleteGoal');
-    }
 
     return (
         <div className = "Home">
