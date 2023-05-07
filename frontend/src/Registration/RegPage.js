@@ -55,23 +55,17 @@ function RegPage() {
   return (
     <div className="Registration">
       <div className="Imgbox">
-        <img className="Bubble" src={TopText} alt="top speech bubble"></img>
-        <img className="Bubble" src={BottomText} alt="bot speech bubble"></img>
+        <img className = "Bubble" src={TopText} alt="top speech bubble"></img>
+        <img className = "Bubble" src={BottomText} alt="bot speech bubble"></img>
       </div>
-      <div className="Create-Account">
-        Create Account <br></br>
-        <label className="UserInfo">
+      <div className="InputBubble">
+        <p className="SmallBubbleHeader">Create Account</p>
           <TextBox placeholder="Email" onChange={handleUsernameChange} />
-        </label>
-        <label className="UserInfo">
           <TextBox placeholder="Password" onChange={handlePasswordChange} />
-        </label>
-        <label className="UserInfo">
           <TextBox placeholder="Confirm Password" onChange={handleConfirmPasswordChange} />
-        </label>
-        <button type="button"
-          onClick={createGoal}
-        >Register</button>
+        <button className="bubbleButton"
+        onClick = {createGoal}  
+        >Register</button> 
       </div>
     </div>
   );
