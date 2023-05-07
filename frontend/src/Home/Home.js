@@ -2,14 +2,14 @@ import "./Home.css"
 import ProfText from "../assets/ProfTextB.svg"
 import Pet from "../assets/pet.svg"
 import GreenCheckmark from "../assets/GreenCheckmark.svg"
-import { useNavigate } from "react-router-dom"
+//import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react";
-import { collection, getDocs, getDoc, doc} from "firebase/firestore"; 
-import { auth, firestore, db} from "../firebase.js";
+import { getDoc, doc} from "firebase/firestore"; 
+import { auth, db} from "../firebase.js";
 
 
 function Home() {
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
 
     const [goalComplete, setGoalComplete] = useState(false);
 
