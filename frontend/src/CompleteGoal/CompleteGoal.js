@@ -1,8 +1,8 @@
-import "./Home.css"
+import "./CompleteGoal.css"
 import ProfText from "../assets/ProfTextB.svg"
 import Pet from "../assets/pet.svg"
 import { useNavigate } from "react-router-dom"
-
+import GreenCheckmark from "../assets/GreenCheckmark.svg"
 
 function Home() {
     const navigate = useNavigate();
@@ -17,12 +17,11 @@ function Home() {
                 <p className = "BubbleText">Drink Water</p>
             </div>
             <img className = "pet" src = {Pet} alt = "sample neuropet"/>
-            <button className = "GoalButton" onClick = {completeGoal}>
-                <p className = "G1Text">1/60 Days</p>
-                <p className = "G2Text">Complete...?</p>
-                
-            </button>
-            <img className = "ProfessorText" src={ProfText} alt="Professor speech bubble"></img>
+            <img className = "GreenCheck" src = {GreenCheckmark} alt = "green checkmark"/>
+            <div className = "CompleteGoal">
+                 <p className = "CompleteGoalText1">+1</p>
+                 <p className = "CompleteGoalText1">2/60 Days</p>
+            </div>
             <nav className = "navbar">
                 <ul className = "navlist">
                     <li className = "editGoalIcon"/>

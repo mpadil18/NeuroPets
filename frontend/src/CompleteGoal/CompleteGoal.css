@@ -1,0 +1,130 @@
+.Home {
+    background: url("../assets/wave.svg") no-repeat center bottom;
+    min-height: 100vh;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.GoalBubble {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0px 0px -40px 0px;
+    width: 347px;
+    height: 160px;
+    background: #F9F9F9;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+.BubbleText{
+    position: inherit;
+    margin: 18px 0px px 0px;
+
+    font-family: 'Poppins';
+    font-style: italic;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 60px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+}
+.CompleteGoal {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 156px;
+    height: 156px;
+    border-radius: 50%;
+
+    background: #ffffff;
+   
+}
+.CompleteGoalText1{
+    position: inherit;
+    margin: 0px 63px;
+ 
+
+    font-family: 'Syncopate';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 25px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+.CompleteGoalText2{
+    position: inherit;
+ 
+
+    font-family: 'Syncopate';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 25px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+.pet { 
+    position: relative;
+    margin: 22px 48px 0px 0px; 
+    height: 320px;
+    
+}
+
+.GreenCheck {
+    margin: 0px 46px;
+    max-height: 158px;
+    width: 100%;
+}
+.ProfessorText {
+    max-height: 148px;
+    width: 100%;
+}
+.navbar {
+    background-color: #EEE;
+    position: fixed;
+    top: 758px;
+    bottom: 0;
+    width: 100%;
+}
+
+.navlist {
+    display: flex;
+    justify-content: space-evenly;
+}
+  
+li {
+    vertical-align: middle;
+    display: inline-block;
+    color: #f2f2f2;
+    padding: 50px;
+    font-size: 1.5rem;
+}
+
+.editGoalIcon {
+    background: url("../assets/navbarIcons/pencil.svg") no-repeat 
+}
+.petHabitatIcon {
+    background: url("../assets/navbarIcons/petHabitat.svg") no-repeat 
+}
+.homeIcon {
+    background: url("../assets/navbarIcons/home.svg") no-repeat 
+}
+.shopIcon {
+    background: url("../assets/navbarIcons/shop.svg") no-repeat 
+}
+
+.settingsIcon {
+    background: url("../assets/navbarIcons/settings.svg") no-repeat 
+}
