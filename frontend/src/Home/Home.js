@@ -1,6 +1,7 @@
 import "./Home.css"
 import ProfText from "../assets/ProfTextB.svg"
 import Pet from "../assets/pet.svg"
+import GreenCheckmark from "../assets/GreenCheckmark.svg"
 import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react";
 import { getAuth } from "firebase/auth";
@@ -12,7 +13,30 @@ function Home() {
     const navigate = useNavigate();
 
     const completeGoal = (e) => {
-        //navigate('../CompleteGoal');
+        setGoalComplete(true);
+    }
+
+    const [goalComplete, setGoalComplete] = useState(false);
+    function ProgressButton(){
+        if (goalComplete) {
+            return (
+            <div>
+                <img className = "GreenCheck" src = {GreenCheckmark} alt = "green checkmark"/>
+                <div className = "CompleteGoal">
+                    <p className = "CompleteGoalText1">+1</p>
+                    <p className = "CompleteGoalText1">2/60 Days</p>
+                </div>
+            </div>
+            );
+        }
+        else {
+            return (
+                <button className = "GoalButton" onClick = {completeGoal}>
+                    <p className = "G1Text">1/60 Days</p>
+                    <p className = "G2Text">Complete...?</p>
+                </button>
+            );
+        }
     }
 
     const [userGoal, setUserGoal] = useState(null);
@@ -41,12 +65,8 @@ function Home() {
                 <p className = "BubbleText">{userGoal}</p>
             </div>
             <img className = "pet" src = {Pet} alt = "sample neuropet"/>
-            <button className = "GoalButton" onClick = {completeGoal}>
-                <p className = "G1Text">1/60 Days</p>
-                <p className = "G2Text">Complete...?</p>
-                
-            </button>
-            <img className = "ProfessorText" src={ProfText} alt="Professor speech bubble"></img>
+            <ProgressButton onClick = {completeGoal}></ProgressButton>
+            {!goalComplete && <img className = "ProfessorText" src={ProfText} alt="Professor speech bubble"></img>}
             <nav className = "navbar">
                 <ul className = "navlist">
                     <li className = "editGoalIcon"/>

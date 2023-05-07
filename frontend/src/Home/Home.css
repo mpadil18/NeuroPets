@@ -7,6 +7,7 @@
     align-items: center;
     flex-direction: column;
 }
+
 .GoalBubble {
     position: relative;
     display: flex;
@@ -19,12 +20,11 @@
     background: #F9F9F9;
     border-radius: 15px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
 }
+
 .BubbleText{
     position: inherit;
     margin: 18px 0px px 0px;
-
     font-family: 'Poppins';
     font-style: italic;
     font-weight: 400;
@@ -33,7 +33,31 @@
     display: flex;
     align-items: center;
     text-align: center;
+}
 
+.CompleteGoal {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 156px;
+    height: 130px;
+    border-radius: 50%;
+    background: #ffffff;
+}
+
+.CompleteGoalText1{
+    position: inherit;
+    margin: 0px 63px;
+    font-family: 'Syncopate';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 25px;
+    display: flex;
+    align-items: center;
+    text-align: center;
 }
 
 .pet { 
@@ -41,6 +65,11 @@
     margin: 22px 48px 0px 0px; 
     height: 320px;
     
+}
+
+.GreenCheck {
+    max-height: 158px;
+    width: 100%;
 }
 
 .GoalButton {
@@ -52,15 +81,12 @@
     width: 156px;
     height: 156px;
     border-radius: 50%;
-
     background: #F88B98;
-   
 }
 
 .G1Text {
     position: inherit;
     margin: 0px 63px; 
-
     font-family: 'Syncopate';
     font-style: normal;
     font-weight: 400;
@@ -69,12 +95,9 @@
     display: flex;
     align-items: center;
     text-align: center;
-    
 }
-.G2Text{
-    position: inherit;
-    
 
+.G2Text{
     font-family: 'Syncopate';
     font-style: normal;
     font-size: 5px;
@@ -84,14 +107,17 @@
     align-items: center;
     text-align: center;
 }
+
 .ProfessorText {
     max-height: 148px;
     width: 100%;
 }
+
 .navbar {
     background-color: #EEE;
     width: 100%;
     margin-top: 10px;
+    bottom: 0;
 }
 
 .navlist {
@@ -117,7 +143,6 @@
 .shopIcon {
     background: url("../assets/navbarIcons/shop.svg") no-repeat 
 }
-
 .settingsIcon {
     background: url("../assets/navbarIcons/settings.svg") no-repeat 
 }
