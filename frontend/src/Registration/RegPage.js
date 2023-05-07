@@ -1,3 +1,4 @@
+// Page code
 import './RegPage.css';
 import TextBox from "./textBox";
 import TopText from "../assets/upperBubble.svg"
@@ -86,8 +87,8 @@ function RegPage() {
         onClick = {createGoal}  
         >Register</button> 
       </div>
-    </div>
-  );
+    );
 }
 
 export default RegPage;
+
