@@ -57,9 +57,9 @@
    
 }
 
-.GText {
+.G1Text {
     position: inherit;
-    margin: 63px 63px; 
+    margin: 0px 63px; 
 
     font-family: 'Syncopate';
     font-style: normal;
@@ -70,6 +70,19 @@
     align-items: center;
     text-align: center;
     
+}
+.G2Text{
+    position: inherit;
+    
+
+    font-family: 'Syncopate';
+    font-style: normal;
+    font-size: 5px;
+    line-height: 5px;
+    line-height: 100%;
+    display: flex;
+    align-items: center;
+    text-align: center;
 }
 .ProfessorText {
     max-height: 148px;

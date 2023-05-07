@@ -10,7 +10,8 @@ function Home() {
             </div>
             <img className = "pet" src = {Pet} alt = "sample neuropet"/>
             <div className = "GoalButton">
-                <p className = "GText">1/60 Days</p>
+                <p className = "G1Text">1/60 Days</p>
+                <p className = "G2Text">Complete...?</p>
             </div>
             <img className = "ProfessorText" src={ProfText} alt="Professor speech bubble"></img>
             <nav className = "navbar">
