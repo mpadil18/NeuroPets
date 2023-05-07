@@ -1,77 +1,25 @@
 /* src/RegPage.css */
 
-* {
-    /* Attributes for all components, add Robot font family */
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Roboto", sans-serif;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 15px;
-}
-
 .Registration {
-    /* styles for the Registration container */
     background: url("../assets/wave.svg") no-repeat center bottom;
-    min-height: 100vh;
     background-size: cover;
 }
 
 .Imgbox {
     /* styles for the Assistant Interaction */
-    height: 400px;
-    width: 90%;
-    max-width: 600px;
+    max-height: 400px;
+    max-width: 90%;
     display: flex;
     flex-direction: column;
     margin: 0px auto 50px auto;
 }
 
 .Bubble {
-    margin-top: 50px;
+    margin-top: 5%;
     max-height: 150px;
 }
 
-.Create-Account {
-    /* styles for the Account Creation Container */
-    height: 300px;
-    width: 80%;
-    max-width: 600px;
-    margin: 0px auto 20px auto;
-    border-radius: 10px;
-    padding-top: 20px;
-    background-color: #F9F9F9;
-
-}
-  
-.Create-Account input[type="text"] {
-    /* styles for the text input elements within the Registration container */
-
-    width: 80%;
-    height: 40px;
-    margin: 20px auto 0px auto;
-    border: 0px;
-    border-radius: 10px;
-    padding-left: 10px;
-    display: flex;
-    align-items: center;
-    background-color: #354550;
-    color: #FFF;
-}
-
-.Create-Account button {
-    width: 50%;
-    height: 30px;
-    margin: 20px auto 0px auto;
-    border: 0px;
-    border-radius: 10px;
-    background-color: #F89;
-    color: #FFF;
-
-}
-
-.Create-Account button:active {
-    background-color: #F78;
+.SmallBubbleHeader {
+    font-weight: 700;
+    margin: 15px 0px;
 }

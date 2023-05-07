@@ -1,44 +1,90 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
 
 * {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.Login, .CreateGoal, .Registration {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.InputBubble {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 90vw;
+  max-width: 500px;
+  background: #EEE;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding:1%
+}
+
+.bubbleField {
+  width: 70%;
+  height: 10px;
+  border-radius: 10px;
+  background-color: #374350;
+  border: none;
   color: white;
+  padding: 20px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-family: 'Roboto';
+  margin: 2% 10%;
 }
 
-.App-link {
-  color: #61dafb;
+.bubbleButton {
+  width: 40%;
+  height: 35px;
+  margin-top: 5%;
+  background-color: #F48F9C;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 14px;
+  text-align: center;
+  color: #FFFFFF;
+  margin: 2% 30%;
+  max-width: 80%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.bubbleButton:hover {
+  background: #BA4352;
+}
+
+::placeholder {
+  color: white;
+  text-align: left;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 19px;
+  display: flex;
+}
+
+.CreateGoal .InputBubble {
+  height: 50vh;
+  margin: 0px 0px 30px 0px;
+}
+
+.Login .InputBubble {
+  height: 24vh;
+  margin: 0px 0px 10px 0px;
+}
+
+.Registration .InputBubble {
+  min-height: 36vh;
+  margin: 0px 0px 10px 0px;
+}
+
+.CreateGoal .bubbleField {
+  height: 50%;
+  resize: none;
 }
