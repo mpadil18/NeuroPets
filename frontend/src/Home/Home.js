@@ -5,7 +5,13 @@ import Pet from "../assets/pet.svg"
 function Home() {
     return (
         <div className = "Home">
+            <div className = "GoalBubble">
+                <p className = "BubbleText">Drink Water</p>
+            </div>
             <img className = "pet" src = {Pet} alt = "sample neuropet"/>
+            <div className = "GoalButton">
+                <p className = "GText">1/60 Days</p>
+            </div>
             <img className = "ProfessorText" src={ProfText} alt="Professor speech bubble"></img>
             <nav className = "navbar">
                 <ul className = "navlist">

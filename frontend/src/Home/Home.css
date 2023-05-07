@@ -7,17 +7,74 @@
     align-items: center;
     flex-direction: column;
 }
+.GoalBubble {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0px 0px -40px 0px;
+    width: 347px;
+    height: 160px;
+    background: #F9F9F9;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
-.pet { 
-    margin: 0px 0px 0px 0px; 
-    height: 270px;
+}
+.BubbleText{
+    position: inherit;
+    margin: 18px 0px px 0px;
+
+    font-family: 'Poppins';
+    font-style: italic;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 60px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
 }
 
+.pet { 
+    position: relative;
+    margin: 22px 48px 0px 0px; 
+    height: 320px;
+    
+}
+
+.GoalButton {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 156px;
+    height: 156px;
+    border-radius: 50%;
+
+    background: #F88B98;
+   
+}
+
+.GText {
+    position: inherit;
+    margin: 63px 63px; 
+
+    font-family: 'Syncopate';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 25px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    
+}
 .ProfessorText {
     max-height: 148px;
     width: 100%;
 }
-
 .navbar {
     background-color: #EEE;
     position: fixed;
@@ -42,15 +99,12 @@ li {
 .editGoalIcon {
     background: url("../assets/navbarIcons/pencil.svg") no-repeat 
 }
-
 .petHabitatIcon {
     background: url("../assets/navbarIcons/petHabitat.svg") no-repeat 
 }
-
 .homeIcon {
     background: url("../assets/navbarIcons/home.svg") no-repeat 
 }
-
 .shopIcon {
     background: url("../assets/navbarIcons/shop.svg") no-repeat 
 }
