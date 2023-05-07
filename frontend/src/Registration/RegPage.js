@@ -6,13 +6,14 @@ import BottomText from "../assets/lowerBubble.svg"
 import { useState } from 'react';
 import { auth } from '../firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import {createUserDb} from '../Backend/handleSubmit';
 
 function RegPage() {
   const navigate = useNavigate();
   const [username, setUsername] = useState(''); // defines username state variable and assogns the function setUsername to be handled when 'handleUsernameChange' is triggered
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
+  const [errorMsg, setErrorMsg] = useState('');
 
   // these are event handlers that trigger when any of the input fields are modified, i.e. a user typing in their information
   // called due to on change modifiers to the textbox divs below
@@ -30,24 +31,41 @@ function RegPage() {
 
 
   const createGoal = (e) => {
-    if (password !== confirmPassword) {
-      // display error message to user if passwords do not match
-      // ~~~ need to fill in still ~~~
+    if (username.length === 0|| password.length === 0 ||confirmPassword.length === 0 ){
+      setErrorMsg("Empty field detected")
+    }
+    else if (password !== confirmPassword ) {
+      setErrorMsg("Passwords not matching ")
+    }
+    else if (confirmPassword.length < 5){
+      setErrorMsg("Passwords not matching ")
     } else {
       // create new user account with Firebase Authentication
       createUserWithEmailAndPassword(auth, username, password)
         .then((userCredential) => {
-          // Signed in 
           var user = userCredential.user;
+          createUserDb(user.uid, user.email)
 
-          // navigates user to create goal page
           navigate('../CreateGoal');
 
         })
         .catch((error) => {
           var errorCode = error.code;
-          var errorMessage = error.message;
-          // code for errormessages and such things ...
+          console.log(errorCode)
+          
+          if (errorCode === 'auth/email-already-in-use') {
+            setErrorMsg("Email already in use");
+          } 
+          else if(errorCode === 'auth/invalid-email') {
+            setErrorMsg("Enter a valid email address");
+          }
+          else if (errorCode === 'auth/weak-password'){
+            setErrorMsg("Enter a stronger password");
+          }
+          else{
+            setErrorMsg("Please refresh your page");
+          }
+         
         });
     }
   }
@@ -63,6 +81,7 @@ function RegPage() {
           <TextBox placeholder="Email" onChange={handleUsernameChange} />
           <TextBox placeholder="Password" onChange={handlePasswordChange} />
           <TextBox placeholder="Confirm Password" onChange={handleConfirmPasswordChange} />
+          {errorMsg && <p> Error: {errorMsg}</p>}
         <button className="bubbleButton"
         onClick = {createGoal}  
         >Register</button> 
