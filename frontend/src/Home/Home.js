@@ -1,7 +1,8 @@
 import "./Home.css"
 import ProfText from "../assets/ProfTextB.svg"
 import Pet from "../assets/pet.svg"
-import GreenCheckmark from "../assets/GreenCheckmark.svg"mport { useNavigate } from "react-router-dom"
+import GreenCheckmark from "../assets/GreenCheckmark.svg"
+import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react";
 import { collection, getDocs, getDoc, doc} from "firebase/firestore"; 
 import { auth, firestore, db} from "../firebase.js";
