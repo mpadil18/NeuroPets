@@ -3,7 +3,7 @@ import React, { useState } from "react"
 import logo from "../assets/logo.svg"
 import { useNavigate } from "react-router-dom"
 import { signInWithEmailAndPassword } from "firebase/auth"
-import { auth } from "../firebase.js"
+import { auth } from "../Backend/firebaseSetup"
 
 function Login() {
     const [username, setUsername] = useState("");
