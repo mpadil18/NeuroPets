@@ -5,7 +5,7 @@ import GreenCheckmark from "../assets/GreenCheckmark.svg"
 //import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react";
 import { getDoc, doc} from "firebase/firestore"; 
-import { auth, db} from "../firebase.js";
+import { auth, db} from "../Backend/firebaseSetup";
 
 
 function Home() {

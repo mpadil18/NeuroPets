@@ -5,7 +5,7 @@ import TopText from "../assets/upperBubble.svg"
 import { useNavigate } from "react-router-dom"
 import BottomText from "../assets/lowerBubble.svg"
 import { useState } from 'react';
-import { auth } from '../firebase';
+import { auth } from "../Backend/firebaseSetup";
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import {createUserDb} from '../Backend/handleSubmit';
 
