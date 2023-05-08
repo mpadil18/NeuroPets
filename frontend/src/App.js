@@ -4,6 +4,7 @@ import RegPage from "./Registration/RegPage";
 import CreateGoal from "./CreateGoal/CreateGoal";
 import Home from "./Home/Home"
 import { BrowserRouter , Routes, Route } from 'react-router-dom';
+import ProtectedRoute from './ProtectedRoute'; // import the ProtectedRoute component
 
 
 
@@ -15,8 +16,8 @@ function App() {
         <Route path = "" element = {<Login/>} /> 
         <Route path = "/" element = {<Login/>} />
         <Route path = "/regPage" element = {<RegPage/>} />
-        <Route path = "/createGoal" element = {<CreateGoal />} />
-        <Route path = "/home" element = {<Home />} />
+        <ProtectedRoute path="/createGoal" element={<CreateGoal />} /> // wrap with ProtectedRoute
+        <ProtectedRoute path="/home" element={<Home />} /> // wrap with ProtectedRoute
       </Routes>
     </BrowserRouter>
 
