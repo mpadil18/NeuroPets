@@ -24,7 +24,7 @@
     font-weight: bold;
     line-height: 16px;
     text-align: center;
-    color: #38393C;
+    color: #374350;
 }
 
 .createAccountButton {
@@ -35,6 +35,6 @@
 	font: inherit;
 	cursor: pointer;
 	outline: inherit;
-    text-decoration: underline;
+    
     font-weight: bold;
 }
