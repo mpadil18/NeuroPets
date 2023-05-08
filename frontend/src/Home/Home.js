@@ -1,28 +1,17 @@
 import "./Home.css"
 import ProfText from "../assets/ProfTextB.svg"
 import Pet from "../assets/pet.svg"
-import GreenCheckmark from "../assets/GreenCheckmark.svg"
-<<<<<<< HEAD
-import { useNavigate } from "react-router-dom"
+import GreenCheckmark from "../assets/GreenCheckmark.svg"mport { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react";
 import { collection, getDocs, getDoc, doc} from "firebase/firestore"; 
 import { auth, firestore, db} from "../firebase.js";
 
 
 function Home() {
-    const navigate = useNavigate();
-=======
-//import { useNavigate } from "react-router-dom"
-import { useEffect, useState } from "react";
-import { getDoc, doc} from "firebase/firestore"; 
-import { auth, db} from "../Backend/firebaseSetup";
-
-
-function Home() {
     //const navigate = useNavigate();
->>>>>>> main
 
     const [goalComplete, setGoalComplete] = useState(false);
+    
 
     const completeGoal = (e) => {
         setGoalComplete(true);
@@ -51,7 +40,7 @@ function Home() {
     }
 
     const [userGoal, setUserGoal] = useState(null);
-
+    const [progressCounter, setProgressCount] = useState(null);
     useEffect(() => {
         const getAllData = async () => {
             const user = auth.currentUser;
@@ -62,8 +51,10 @@ function Home() {
                 if (docSnap.exists()) {
                     // Gets the user's goal and saves to state
                     let goal = docSnap.data().goal;
+                    let progressCounter = docSnap.data().progressCounter;
                     console.log("All user data: ", docSnap.data(), "Goal: ", goal);
                     setUserGoal(goal);
+                    setProgressCount(progressCounter);
                 }
             }
         }
