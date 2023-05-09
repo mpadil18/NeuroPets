@@ -4,18 +4,42 @@ import Pet from "../assets/pet.svg"
 import GreenCheckmark from "../assets/GreenCheckmark.svg"
 import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react";
-import { collection, getDocs, getDoc, doc} from "firebase/firestore"; 
-import { auth, firestore, db} from "../firebase.js";
+import { collection, getDocs, getDoc, doc, updateDoc} from "firebase/firestore"; 
+import { auth, firestore, db} from "../Backend/firebaseSetup.js";
+import { getDatabase } from "firebase/database";
 
 
 function Home() {
     //const navigate = useNavigate();
 
     const [goalComplete, setGoalComplete] = useState(false);
+    const [progressCounter, setProgressCount] = useState(0);
+
+    const updateCount = async () => {
+
+        const user = auth.currentUser; 
     
+        if(user){
+             const docRef = doc(db, "all_data", user.uid);
+
+             await updateDoc(docRef, {
+                progressCounter : progressCounter + 1
+            });
+            console.log("inside if");
+        }else{
+            console.log("if failed");
+        }
+        
+    }
 
     const completeGoal = (e) => {
         setGoalComplete(true);
+        setProgressCount(progressCounter + 1);
+        
+        updateCount();
+        
+        
+        //updateUserProgress(user);
     }
 
     function ProgressButton(){
@@ -25,7 +49,7 @@ function Home() {
                 <img className = "GreenCheck" src = {GreenCheckmark} alt = "green checkmark"/>
                 <div className = "CompleteGoal">
                     <p className = "CompleteGoalText1">+1</p>
-                    <p className = "CompleteGoalText1">2/60 Days</p>
+                    <p className = "CompleteGoalText1">{progressCounter}/60 Days</p>
                 </div>
             </div>
             );
@@ -33,7 +57,7 @@ function Home() {
         else {
             return (
                 <button className = "GoalButton" onClick = {completeGoal}>
-                    <p className = "G1Text">1/60 Days</p>
+                    <p className = "G1Text">{progressCounter}/60 Days</p>
                     <p className = "G2Text">Complete...?</p>
                 </button>
             );
@@ -41,7 +65,7 @@ function Home() {
     }
 
     const [userGoal, setUserGoal] = useState(null);
-    const [progressCounter, setProgressCount] = useState(null);
+    
     useEffect(() => {
         const getAllData = async () => {
             const user = auth.currentUser;
