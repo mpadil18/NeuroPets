@@ -1,9 +1,9 @@
 import "./CreateGoal.css"
 import ProfText from "../assets/ProfTextA.svg"
 import React, { useState } from "react"
-import { auth, db} from "../Backend/firebaseSetup";
-import { getDoc, doc, updateDoc} from "firebase/firestore"; 
+import { auth } from "../Backend/firebaseSetup";
 import { useNavigate } from "react-router-dom"
+import {updateUserInfo, getUserInfo} from '../Backend/handleSubmit';
 
 const babyPetCodes = [0, 3, 6];
 function CreateGoal() {
@@ -12,17 +12,30 @@ function CreateGoal() {
   const [errorMsg, setErrorMsg] = useState('');
 
   const navigate = useNavigate();
-  
-  const logState = () => {
-    console.log(goalText); 
-  }
 
   const assignRandomPet = () => {
     return babyPetCodes[Math.floor(Math.random()*babyPetCodes.length)];
   }
 
+  const onUpdateNavigate = async (newData) => {
+      // Retrieve most recent goal to error check.
+      // If update properly made, navigate user to Home
+      const user = auth.currentUser;
+      const docSnap = await getUserInfo(user.uid);
+      if (docSnap) {
+          const latestGoal = (docSnap.goal)[(docSnap.goal).length - 1];
+          if (latestGoal.goal === newData.goal && latestGoal.pet === newData.pet) {
+            navigate('../Home');
+          }
+          else {
+            console.log("ERROR- not updated properly")
+          }
+      }
+  }
+
   const updateGoal = async () => {
     // Get user info, assign the pet, get timestamp
+    // and save (goal, pet) as an object
     const user = auth.currentUser;
     const pet = assignRandomPet();
     const startDate = new Date();
@@ -30,27 +43,12 @@ function CreateGoal() {
     if (user) {
       // Update the user's goal array by getting old data
       // and pushing the new goal to the list
-      const docRef = doc(db, "all_data", user.uid);
-      let docSnap = await getDoc(docRef);
-      // get current array of tuples and push the new pair
-      let tempArr = docSnap.data().goal;
+      let docSnap = await getUserInfo(user.uid);
+      let tempArr = docSnap.goal;
       tempArr.push(goalTuple);
-      await updateDoc(docRef, {
-        goal: tempArr
-      });
-
-      // If update properly made, navigate user to Home
-      docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-          const latestGoal = (docSnap.data().goal)[(docSnap.data().goal).length - 1];
-          if (latestGoal.goal === goalText && latestGoal.pet === pet) {
-            navigate('../Home');
-          }
-          else {
-            console.log("ERROR- not updated properly")
-          }
-      }
-
+      updateUserInfo(user.uid, {goal: tempArr});
+      // If update properly made, navigate to home
+      onUpdateNavigate(goalTuple);
     }
   }
   
