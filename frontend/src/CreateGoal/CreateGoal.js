@@ -2,19 +2,26 @@ import "./CreateGoal.css"
 import ProfText from "../assets/ProfTextA.svg"
 import React, { useState } from "react"
 import handleSubmit from "../Backend/handleSubmit"
+import { auth } from "../Backend/firebaseSetup"
+import {setUserGoal} from "../Backend/handleSubmit"
+import { useNavigate } from "react-router-dom"
 
 function CreateGoal() {
 
   const [goalText, setGoalText] = useState("");
-  
+  const user = auth.currentUser;
+  const navigate = useNavigate();
+
   const logState = () => {
     console.log(goalText); 
   }
   
   const submithandler = (e) => {
     e.preventDefault()
-    handleSubmit(goalText)
+    console.log("setting goal for "+ user)
+    // setUserGoal(user.uid,goalText )
     setGoalText("")
+    navigate('../Home');
   }
     return (
       <div className="CreateGoal">
@@ -26,7 +33,7 @@ function CreateGoal() {
           onChange = {(e) => setGoalText(e.target.value)}
           />
 
-          <button className="bubbleButton"> 
+          <button className="bubbleButton" onClick = {submithandler}> 
             Save Goal
           </button>
         </div>

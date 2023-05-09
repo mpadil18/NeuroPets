@@ -1,6 +1,6 @@
 import {addDoc, collection} from 'firebase/firestore';
-import {firestore} from './firebaseSetup';
-import { doc, setDoc } from 'firebase/firestore'; 
+import {firestore, db} from './firebaseSetup';
+import { doc, setDoc, updateDoc } from 'firebase/firestore'; 
 
 const handleSubmit = (testdata) => {
     const ref = collection(firestore,"goals")
@@ -17,7 +17,7 @@ const handleSubmit = (testdata) => {
 
 // Creating a data object and intializes goal to null
 export async function createUserDb (userid,email) {
-    //const ref = collection(firestore,"all_data")
+    const ref = doc(firestore, "all_data", userid)
     let data = {
         userid: userid,
         useremail: email,
@@ -25,9 +25,21 @@ export async function createUserDb (userid,email) {
     }
 
     try {
-       // await setDoc(doc(db, "data", "one"), docData);
-        //addDoc(ref, data, userid)
-        await setDoc(doc(firestore, "all_data", userid), data); // if already existing will update
+        await setDoc(ref, data); // if already existing will update
+    } catch (err){
+        console.log(err)
+    }
+
+}
+
+// Creating a data object and intializes goal to null
+export async function setUserGoal (userid,goaltext) {
+    const docRef = doc(db, "all_data", userid)
+    
+    try {
+        await updateDoc( docRef, {
+            goal: goaltext
+        }); 
     } catch (err){
         console.log(err)
     }
