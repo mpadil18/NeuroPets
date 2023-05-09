@@ -1,7 +1,8 @@
 import "./App.css";
 import Login from "./Login/Login"
 import RegPage from "./Registration/RegPage";
-import CreateGoal from './CreateGoal/CreateGoal';
+import CreateGoal from "./CreateGoal/CreateGoal";
+import Home from "./Home/Home"
 import { BrowserRouter , Routes, Route } from 'react-router-dom';
 
 //add additional paths to different pages using same syntax <Route path = "..." element = {<.../>} />
@@ -13,7 +14,7 @@ function App() {
         <Route path = "/" element = {<Login/>} />
         <Route path = "/regPage" element = {<RegPage/>} />
         <Route path = "/createGoal" element = {<CreateGoal />} />
-        <Route path = "/createGoal" element = {<CreateGoal />} />
+        <Route path = "/home" element = {<Home />} />
       </Routes>
     </BrowserRouter>
 

@@ -18,15 +18,15 @@ function CreateGoal() {
   }
     return (
       <div className="CreateGoal">
-        <div className="CreateGoalBubble">
+        <div className="InputBubble">
           <p className="BubbleHeader">Create Goal</p>
-          <textarea className="GoalText" rows="5" cols="33"
+          <textarea className="bubbleField" rows="5" cols="33"
           placeholder="Example: Brush Teeth, Floss, Manage Addiction, Drink Water.."
           value={goalText}
           onChange = {(e) => setGoalText(e.target.value)}
           />
 
-          <button className="BubbleButton" onClick = {submithandler}> 
+          <button className="bubbleButton"> 
             Save Goal
           </button>
         </div>
