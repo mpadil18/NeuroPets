@@ -21,7 +21,7 @@ function RegPage() {
         <div className="Create-Account">
           Create Account <br></br>
           <label className="UserInfo">
-            <TextBox placeholder="Username" />
+            <TextBox placeholder="Email" />
           </label>
           <label className="UserInfo">
             <TextBox placeholder="Password" />
