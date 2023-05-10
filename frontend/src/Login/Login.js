@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 import { signInWithEmailAndPassword } from "firebase/auth"
 import { auth } from "../firebase.js"
 
-function Login() {
+function Login({ setIsSignedIn }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     
@@ -19,6 +19,7 @@ function Login() {
                 const user = userCredential.user;
                 //todo: navigate to next page
                 console.log(user);
+                setIsSignedIn(true)
                 navigate('../Home');
             })
             .catch((error) => {

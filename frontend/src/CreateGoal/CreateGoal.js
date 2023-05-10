@@ -1,6 +1,7 @@
 import "./CreateGoal.css"
 import ProfText from "../assets/ProfTextA.svg"
 function CreateGoal() {
+  console.log('Rendering CreateGoal component');
     return (
       <div className="CreateGoal">
         <div className="InputBubble">

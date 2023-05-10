@@ -9,7 +9,7 @@ import { auth } from '../firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import {createUserDb} from '../Backend/handleSubmit';
 
-function RegPage() {
+function RegPage({ setIsSignedIn }) {
   const navigate = useNavigate();
   const [username, setUsername] = useState(''); // defines username state variable and assogns the function setUsername to be handled when 'handleUsernameChange' is triggered
   const [password, setPassword] = useState('');
@@ -46,6 +46,8 @@ function RegPage() {
         .then((userCredential) => {
           var user = userCredential.user;
           createUserDb(user.uid, user.email)
+
+          setIsSignedIn(true)
 
           navigate('../CreateGoal');
 
