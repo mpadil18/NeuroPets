@@ -8,7 +8,8 @@ import { auth } from "../firebase.js"
 function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    
+    const [errorMsg, setErrorMsg] = useState('');
+
     const navigate = useNavigate();
 
     const login = (e) => {
@@ -18,12 +19,18 @@ function Login() {
             .then((userCredential) => {
                 const user = userCredential.user;
                 //todo: navigate to next page
-                console.log(user);
+                //console.log(user);
             })
             .catch((error) => {
                 const errorCode = error.code;
-                const errorMessage = error.errorMessage;
-                console.log(errorCode, errorMessage);
+                //console.log(errorCode);
+                if (errorCode === 'auth/user-not-found') {
+                    setErrorMsg("Email not found");
+                }
+                
+                else if (errorCode === 'auth/wrong-password') {
+                    setErrorMsg("Incorrect password");
+                }
             });
     }
 
@@ -40,6 +47,7 @@ function Login() {
                         <input className = "loginField" value = {password} onChange = {(e) => setPassword(e.target.value)} placeholder="Password" id = "Password" required />
                         <button className = "loginButton">Log In</button>
                     </form>
+                    {errorMsg && <p> Error: {errorMsg}</p>}
                 </div>
                 <div className = "createAccountRedirect">
                     <h3>Need an acccount? Create one <button  onClick = {createAccount}className = "createAccountButton">here</button> </h3>

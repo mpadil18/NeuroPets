@@ -19,5 +19,4 @@ const TextBox = ({ onChange, placeholder }) => {
       />
     );
 }
-
 export default TextBox;
