@@ -23,9 +23,14 @@ function Login() {
             })
             .catch((error) => {
                 const errorCode = error.code;
+                console.log(errorCode);
                 if (errorCode === 'auth/user-not-found') {
                     setErrorMsg("Email not found");
-                  } 
+                }
+                
+                else if (errorCode === 'auth/wrong-password') {
+                    setErrorMsg("Incorrect password");
+                }
             });
     }
 
