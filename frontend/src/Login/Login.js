@@ -19,11 +19,11 @@ function Login() {
             .then((userCredential) => {
                 const user = userCredential.user;
                 //todo: navigate to next page
-                console.log(user);
+                //console.log(user);
             })
             .catch((error) => {
                 const errorCode = error.code;
-                console.log(errorCode);
+                //console.log(errorCode);
                 if (errorCode === 'auth/user-not-found') {
                     setErrorMsg("Email not found");
                 }
