@@ -55,7 +55,7 @@ function CreateGoal() {
   const submithandler = (e) => {
     const user = auth.currentUser;
     e.preventDefault()
-    console.log(goalText, user.uid)
+    
     if (goalText.length === 0){
       setErrorMsg("Please fill in a goal");
     } else {

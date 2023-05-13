@@ -52,7 +52,6 @@ function RegPage() {
         })
         .catch((error) => {
           var errorCode = error.code;
-          console.log(errorCode)
           
           if (errorCode === 'auth/email-already-in-use') {
             setErrorMsg("Email already in use");
