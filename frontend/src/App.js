@@ -5,8 +5,6 @@ import CreateGoal from "./CreateGoal/CreateGoal";
 import Home from "./Home/Home"
 import { BrowserRouter , Routes, Route } from 'react-router-dom';
 
-
-
 //add additional paths to different pages using same syntax <Route path = "..." element = {<.../>} />
 function App() {
   return (

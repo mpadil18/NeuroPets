@@ -49,10 +49,9 @@ function Home() {
                 const docRef = doc(db, 'all_data', user.uid);
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
-                    // Gets the user's goal and saves to state
+                    // Gets the user's latest goal and saves to state
                     let goal = docSnap.data().goal;
-                    console.log("All user data: ", docSnap.data(), "Goal: ", goal);
-                    setUserGoal(goal);
+                    setUserGoal(goal[goal.length - 1].goal);
                 }
             }
         }
