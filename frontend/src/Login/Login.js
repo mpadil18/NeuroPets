@@ -8,7 +8,8 @@ import { auth } from "../Backend/firebaseSetup"
 function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    
+    const [errorMsg, setErrorMsg] = useState('');
+
     const navigate = useNavigate();
 
     const login = (e) => {
@@ -16,15 +17,18 @@ function Login() {
         //see https://firebase.google.com/docs/auth/web/password-auth for api details
         signInWithEmailAndPassword(auth, username, password)
             .then((userCredential) => {
-                const user = userCredential.user;
-                //todo: navigate to next page
-                console.log(user);
+                //const user = userCredential.user;
                 navigate('../Home');
             })
             .catch((error) => {
                 const errorCode = error.code;
-                const errorMessage = error.errorMessage;
-                console.log(errorCode, errorMessage);
+                if (errorCode === 'auth/user-not-found') {
+                    setErrorMsg("Email not found");
+                }
+                
+                else if (errorCode === 'auth/wrong-password') {
+                    setErrorMsg("Incorrect password");
+                }
             });
     }
 
@@ -41,6 +45,7 @@ function Login() {
                         <input className = "bubbleField" value = {password} onChange = {(e) => setPassword(e.target.value)} placeholder="Password" id = "Password" required />
                         <button className = "bubbleButton">Log In</button>
                     </form>
+                    {errorMsg && <p> Error: {errorMsg}</p>}
                 </div>
                 <div className = "createAccountRedirect">
                     <h3>Need an acccount? Create one <button  onClick = {createAccount}className = "createAccountButton">here</button> </h3>
