@@ -21,13 +21,14 @@
   max-width: 500px;
   background: #EEE;
   border-radius: 15px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  padding:1%
+  box-shadow: 4px 4px 1px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding:1%;
+  color: #374350;
 }
 
 .bubbleField {
   width: 70%;
-  height: 10px;
+  height: 1px;
   border-radius: 10px;
   background-color: #374350;
   border: none;

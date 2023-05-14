@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 import { signInWithEmailAndPassword } from "firebase/auth"
 import { auth } from "../Backend/firebaseSetup"
 
-function Login() {
+function Login({ setIsSignedIn }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [errorMsg, setErrorMsg] = useState('');
@@ -17,7 +17,8 @@ function Login() {
         //see https://firebase.google.com/docs/auth/web/password-auth for api details
         signInWithEmailAndPassword(auth, username, password)
             .then((userCredential) => {
-                //const user = userCredential.user;
+                const user = userCredential.user;
+                setIsSignedIn(true)
                 navigate('../Home');
             })
             .catch((error) => {
