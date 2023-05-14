@@ -1,12 +1,11 @@
 import "./Home.css"
-import ProfText from "../assets/ProfTextB.svg"
-import Pet from "../assets/pet.svg"
-import GreenCheckmark from "../assets/GreenCheckmark.svg"
+import ProfText from "../assets/branding/ProfTextB.svg"
+import Pet from "../assets/branding/pet.svg"
+import GreenCheckmark from "../assets/elements/GreenCheckmark.svg"
 import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react";
 import { getDoc, doc,} from "firebase/firestore"; 
 import { auth, db} from "../Backend/firebaseSetup.js";
-
 import { updateUserProgress } from "../Backend/handleSubmit";
 
 function Home() {
