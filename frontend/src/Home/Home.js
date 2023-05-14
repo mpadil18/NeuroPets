@@ -4,44 +4,27 @@ import Pet from "../assets/pet.svg"
 import GreenCheckmark from "../assets/GreenCheckmark.svg"
 import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react";
-import { collection, getDocs, getDoc, doc, updateDoc} from "firebase/firestore"; 
-import { auth, firestore, db} from "../Backend/firebaseSetup.js";
-import { getDatabase } from "firebase/database";
+import { getDoc, doc,} from "firebase/firestore"; 
+import { auth, db} from "../Backend/firebaseSetup.js";
 
+import { updateUserProgress } from "../Backend/handleSubmit";
 
 function Home() {
     //const navigate = useNavigate();
 
     const [goalComplete, setGoalComplete] = useState(false);
     const [progressCounter, setProgressCount] = useState(0);
+    const [userGoal, setUserGoal] = useState(null);
+    const user = auth.currentUser; 
 
-    const updateCount = async () => {
-
-        const user = auth.currentUser; 
-    
-        if(user){
-             const docRef = doc(db, "all_data", user.uid);
-
-             await updateDoc(docRef, {
-                progressCounter : progressCounter + 1
-            });
-            console.log("inside if");
-        }else{
-            console.log("if failed");
-        }
-        
-    }
 
     const completeGoal = (e) => {
         setGoalComplete(true);
         setProgressCount(progressCounter + 1);
-        
-        updateCount();
-        
-        
-        //updateUserProgress(user);
+        updateUserProgress(user.uid, progressCounter);
     }
 
+    // Conditionally displays progress button depending on if user has clicked or not
     function ProgressButton(){
         if (goalComplete) {
             return (
@@ -64,22 +47,18 @@ function Home() {
         }
     }
 
-    const [userGoal, setUserGoal] = useState(null);
     
     useEffect(() => {
+        // Gets the user's latest goal and saves to state
         const getAllData = async () => {
-            const user = auth.currentUser;
-            if (user) {
-                // Getting user data specific to the current user
+            if (user) { // Getting user specific data 
                 const docRef = doc(db, 'all_data', user.uid);
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
-                    // Gets the user's latest goal and saves to state
+                    
                     let goal = docSnap.data().goal;
-
                     let progressCounter = docSnap.data().progressCounter;
-                    console.log("All user data: ", docSnap.data(), "Goal: ", goal);
-                    //setUserGoal(goal);
+                    //console.log("All user data: ", docSnap.data(), "Goal: ", goal);
                     setUserGoal(goal[goal.length - 1].goal);
                     setProgressCount(progressCounter);
                 }

@@ -55,4 +55,17 @@ export async function createUserDb (userid,email) {
 
 }
 
+
+// Given a user id updates the user progress counter
+export async function updateUserProgress(userid , progressCounter){
+    if (userid){
+        const docRef = doc(db, "all_data", userid);
+
+        await updateDoc(docRef, {
+           progressCounter : progressCounter + 1
+       });
+    }
+
+}
+
 export default handleSubmit
