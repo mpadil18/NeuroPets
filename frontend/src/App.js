@@ -7,8 +7,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute'; // import the ProtectedRoute component
 import { useState } from 'react';
 
-
-
 //add additional paths to different pages using same syntax <Route path = "..." element = {<.../>} />
 function App() {
   const [isSignedIn, setIsSignedIn] = useState(false);

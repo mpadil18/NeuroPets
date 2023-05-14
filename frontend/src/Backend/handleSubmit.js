@@ -1,11 +1,11 @@
 import {addDoc, collection} from 'firebase/firestore';
-import {firestore} from './firebaseSetup';
-import { doc, setDoc } from 'firebase/firestore'; 
+import {firestore, db} from './firebaseSetup';
+import { doc, setDoc, updateDoc, getDoc } from 'firebase/firestore'; 
 
 const handleSubmit = (testdata) => {
-    const ref = collection(firestore,"test_data")
+    const ref = collection(firestore,"goals")
     let data = {
-        testData : testdata
+        user_goal : testdata
     }
     try {
         addDoc(ref, data)
@@ -15,19 +15,40 @@ const handleSubmit = (testdata) => {
 
 }
 
+// Retrieves all info from all_data pertaining to user
+export async function getUserInfo (userid) {
+    const docRef = doc(db, "all_data", userid);
+    let docSnap = await getDoc(docRef);
+    return docSnap.data()
+}
+
+// Takes userid and data, updates in the database
+export async function updateUserInfo (userid, data) {
+    if (userid) {
+        // Update the user's goal array by getting old data
+        // and pushing the new goal to the list
+        const docRef = doc(db, "all_data", userid);
+        try {
+            await updateDoc(docRef, data);
+        } catch (err) {
+            console.log(err)
+        }       
+    }
+}
+
 // Creating a data object and intializes goal to null
 export async function createUserDb (userid,email) {
-    //const ref = collection(firestore,"all_data")
+    const ref = doc(firestore, "all_data", userid)
     let data = {
         userid: userid,
         useremail: email,
-        goal: "No goal set" 
+        goal: [], 
+        progressCounter: 0
+
     }
 
     try {
-       // await setDoc(doc(db, "data", "one"), docData);
-        //addDoc(ref, data, userid)
-        await setDoc(doc(firestore, "all_data", userid), data); // if already existing will update
+        await setDoc(ref, data); // if already existing will update
     } catch (err){
         console.log(err)
     }

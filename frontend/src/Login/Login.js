@@ -3,12 +3,13 @@ import React, { useState } from "react"
 import logo from "../assets/logo.svg"
 import { useNavigate } from "react-router-dom"
 import { signInWithEmailAndPassword } from "firebase/auth"
-import { auth } from "../firebase.js"
+import { auth } from "../Backend/firebaseSetup"
 
 function Login({ setIsSignedIn }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    
+    const [errorMsg, setErrorMsg] = useState('');
+
     const navigate = useNavigate();
 
     const login = (e) => {
@@ -17,15 +18,18 @@ function Login({ setIsSignedIn }) {
         signInWithEmailAndPassword(auth, username, password)
             .then((userCredential) => {
                 const user = userCredential.user;
-                //todo: navigate to next page
-                console.log(user);
                 setIsSignedIn(true)
                 navigate('../Home');
             })
             .catch((error) => {
                 const errorCode = error.code;
-                const errorMessage = error.errorMessage;
-                console.log(errorCode, errorMessage);
+                if (errorCode === 'auth/user-not-found') {
+                    setErrorMsg("Email not found");
+                }
+                
+                else if (errorCode === 'auth/wrong-password') {
+                    setErrorMsg("Incorrect password");
+                }
             });
     }
 
@@ -42,6 +46,7 @@ function Login({ setIsSignedIn }) {
                         <input className = "bubbleField" value = {password} onChange = {(e) => setPassword(e.target.value)} placeholder="Password" id = "Password" required />
                         <button className = "bubbleButton">Log In</button>
                     </form>
+                    {errorMsg && <p> Error: {errorMsg}</p>}
                 </div>
                 <div className = "createAccountRedirect">
                     <h3>Need an acccount? Create one <button  onClick = {createAccount}className = "createAccountButton">here</button> </h3>

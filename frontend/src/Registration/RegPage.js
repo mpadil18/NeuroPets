@@ -5,7 +5,7 @@ import TopText from "../assets/upperBubble.svg"
 import { useNavigate } from "react-router-dom"
 import BottomText from "../assets/lowerBubble.svg"
 import { useState } from 'react';
-import { auth } from '../firebase';
+import { auth } from "../Backend/firebaseSetup";
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import {createUserDb} from '../Backend/handleSubmit';
 
@@ -48,13 +48,11 @@ function RegPage({ setIsSignedIn }) {
           createUserDb(user.uid, user.email)
 
           setIsSignedIn(true)
-
           navigate('../CreateGoal');
 
         })
         .catch((error) => {
           var errorCode = error.code;
-          console.log(errorCode)
           
           if (errorCode === 'auth/email-already-in-use') {
             setErrorMsg("Email already in use");
