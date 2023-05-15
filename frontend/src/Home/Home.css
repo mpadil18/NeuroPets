@@ -250,3 +250,9 @@
 
     color: #000000;
 }
+.Popup {
+    position: fixed;
+    width: 125%;
+    height: 125%;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
