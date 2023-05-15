@@ -12,6 +12,7 @@ const TextBox = ({ onChange, placeholder }) => {
   
     return (
       <input
+        className="bubbleField"
         type="text"
         value={text}
         onChange={handleChange}
