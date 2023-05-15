@@ -4,7 +4,7 @@
   font-family: "Roboto", sans-serif;
 }
 
-.Login, .CreateGoal, .Registration {
+.Login, .CreateGoal, .Registration, .Popup {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,6 +24,24 @@
   box-shadow: 4px 4px 1px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   padding:1%;
   color: #374350;
+}
+
+.Popup {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.Popup-Inner {
+  position: relative;
+  background-color: #FFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 .bubbleField {

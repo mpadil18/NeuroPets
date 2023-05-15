@@ -131,6 +131,31 @@
     list-style-type: none
 }
 
+
+.Home .bubbleField {
+    height: 25vh;
+    resize: none;
+}
+
+.Home .BubbleHeader {
+    margin: 0px 0px 20px 0px;
+}
+
+.Popup .InputBubble {
+    height: 50%;
+}
+
+.close-btn {
+    border: none;
+    border-radius: 10px;
+    right: 0px;
+    align-self: flex-end;
+}
+
+.close-btn:hover {
+    background-color: #D9D9D9;
+}
+
 .editGoalIcon {
     background: url("../assets/navbarIcons/pencil.svg") no-repeat 
 }
