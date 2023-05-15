@@ -25,11 +25,7 @@ function Home() {
              await updateDoc(docRef, {
                 progressCounter : progressCounter + 1
             });
-            console.log("inside if");
-        }else{
-            console.log("if failed");
-        }
-        
+        }      
     }
 
     const completeGoal = (e) => {
@@ -37,9 +33,6 @@ function Home() {
         setProgressCount(progressCounter + 1);
         
         updateCount();
-        
-        
-        //updateUserProgress(user);
     }
 
     function ProgressButton(){
@@ -67,10 +60,8 @@ function Home() {
     function SignOutButton(){
         const authUser = auth;
         signOut(authUser).then(() => {
-                console.log("user signed out...attempting navigate");
                 navigate("../");
         }).catch((error) => {
-                console.log("sign out failed lmao");
                 console.log(error);
         });
     }
@@ -99,7 +90,7 @@ function Home() {
                 }
             }
         }
-    getAllData();
+        getAllData();
     })
 
     return (
