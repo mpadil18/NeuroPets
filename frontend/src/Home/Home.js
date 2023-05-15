@@ -7,10 +7,10 @@ import { useEffect, useState } from "react";
 import { collection, getDocs, getDoc, doc, updateDoc} from "firebase/firestore"; 
 import { auth, firestore, db} from "../Backend/firebaseSetup.js";
 import { getDatabase } from "firebase/database";
-
+import { signOut } from "firebase/auth"
 
 function Home() {
-    //const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const [goalComplete, setGoalComplete] = useState(false);
     const [progressCounter, setProgressCount] = useState(0);
@@ -63,7 +63,23 @@ function Home() {
             );
         }
     }
-
+    const [isOpen, setIsOpen] = useState(false);
+    function SignOutButton(){
+        const authUser = auth;
+        signOut(authUser).then(() => {
+                console.log("user signed out...attempting navigate");
+                navigate("../");
+        }).catch((error) => {
+                console.log("sign out failed lmao");
+                console.log(error);
+        });
+    }
+    function setClosed() {
+        setIsOpen(false);
+    }
+    function setOpen(){
+        setIsOpen(true);
+    }
     const [userGoal, setUserGoal] = useState(null);
     
     useEffect(() => {
@@ -100,9 +116,22 @@ function Home() {
                     <li className = "petHabitatIcon"/>
                     <li className = "homeIcon"/>
                     <li className = "shopIcon"/>
-                    <li className = "settingsIcon"/>
+                    <li className = "settingsIcon" onClick = {setOpen}/>
                 </ul>
             </nav>
+           {isOpen && (
+               <div className = "SignOutPopup1">
+                   <div className = "SignOutPopup2" >
+                            <p className = "ConfirmSignOutText">Would you like to sign out?</p>
+                        <button className = "ConfirmSignOutButton" onClick = {SignOutButton}>
+                            <p className = "OkayText">Okay</p>
+                        </button>
+                        <button className = "CancelSignOutButton" onClick = {setClosed}>
+                            <p className = "CancelText">Cancel</p>
+                        </button>
+                   </div>
+               </div>
+           )}
         </div>
     );
 }
