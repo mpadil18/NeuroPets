@@ -4,9 +4,8 @@ import Pet from "../assets/pet.svg"
 import GreenCheckmark from "../assets/GreenCheckmark.svg"
 import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react";
-import { collection, getDocs, getDoc, doc, updateDoc} from "firebase/firestore"; 
-import { auth, firestore, db} from "../Backend/firebaseSetup.js";
-import { getDatabase } from "firebase/database";
+import { getDoc, doc, updateDoc} from "firebase/firestore"; 
+import { auth, db} from "../Backend/firebaseSetup.js";
 import { signOut } from "firebase/auth"
 
 function Home() {
