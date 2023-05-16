@@ -1,6 +1,5 @@
 import "./Home.css"
 import ProfText from "../assets/ProfTextB.svg"
-import Pet from "../assets/pet.svg"
 import GreenCheckmark from "../assets/GreenCheckmark.svg"
 import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react";
@@ -8,6 +7,7 @@ import { getDoc, doc,} from "firebase/firestore";
 import { auth, db} from "../Backend/firebaseSetup.js";
 
 import { updateUserProgress } from "../Backend/handleSubmit";
+import PetGallery from "../PetGallery/PetGallery";
 
 function Home() {
     //const navigate = useNavigate();
@@ -72,7 +72,8 @@ function Home() {
             <div className = "GoalBubble">
                 <p className = "BubbleText">{userGoal}</p>
             </div>
-            <img className = "pet" src = {Pet} alt = "sample neuropet"/>
+            <PetGallery/>
+
             <ProgressButton onClick = {completeGoal}></ProgressButton>
             {!goalComplete && <img className = "ProfessorText" src={ProfText} alt="Professor speech bubble"></img>}
             <nav className = "navbar">
