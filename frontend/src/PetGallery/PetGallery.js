@@ -19,7 +19,7 @@ import { getDoc, doc,} from "firebase/firestore";
 function PetGallery() {
 
     const user = auth.currentUser;
-    const [petID, setPetID] = useState(null);
+    const [petId, setPetId] = useState(10);
 
     useEffect(() => {
         console.log("In use effects")
@@ -29,8 +29,8 @@ function PetGallery() {
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
                     let goal = docSnap.data().goal;
-                    setPetID(goal[goal.length - 1].pet);
-                    console.log(petID);
+                    setPetId(goal[goal.length - 1].pet);
+                    console.log(petId);
                     //console.log("All user data: ", docSnap.data(), "Pet number: ", goal[goal.length - 1].pet);
                 }
             }
@@ -42,23 +42,49 @@ function PetGallery() {
  Logic 
  - Set pet as loading if you are trying to fetch the user infor
  - Implement code such that you are only load the data once 
- - Conditionally show pet dependent on value 
  
  */
+
+ function GetPet(){
+    // Need to add loading icon 
+    if (petId === 10){
+        return (<img className = "pet" src = {egg} alt= "stage 0 "/> )
+        }
+    if (petId === 0){
+        return ( <img className = "pet" src = {bunny1} alt= "bunny stage 1"/>)
+    }
+    if (petId === 1){
+        return ( <img className = "pet" src = {bunny2} alt= "bunny stage 2"/>)
+    }
+    if (petId === 2){
+        return ( <img className = "pet" src = {bunny3} alt= "bunny stage 3"/>)
+    }
+    if (petId === 3){
+        return ( <img className = "pet" src = {penguin1} alt= "penguin stage 1"/>)
+    }
+    if(petId === 4){
+        return ( <img className = "pet" src = {penguin2} alt= "penguin stage 2"/>)
+    }
+    if(petId === 5){
+        return (<img className = "pet" src = {penguin3} alt= "penguin stage 3"/>)
+    }
+    if (petId === 6){
+        return ( <img className = "pet" src = {frog1} alt= "frog stage 1"/>)
+    }
+    if (petId === 7){
+        return ( <img className = "pet" src = {frog2} alt= "frog stage 2"/>)
+    }
+    if (petId === 8){
+        return (<img className = "pet" src = {frog3} alt= "frog stage 3"/>)
+    }
+
+ }
     return (
      <div 
-     style={{backgroundColor: 'pink'}}>
-          <img className = "pet" src = {egg} alt= "stage 0 "/>
-          <img className = "pet" src = {bunny1} alt= "bunny stage 1"/>
-          <img className = "pet" src = {bunny2} alt= "bunny stage 1"/>
-          <img className = "pet" src = {bunny3} alt= "bunny stage 2"/>
-          <img className = "pet" src = {penguin1} alt= "penguin stage 1"/>
-          <img className = "pet" src = {penguin2} alt= "penguin stage 2"/>
-          <img className = "pet" src = {penguin3} alt= "penguin stage 3"/>
-          <img className = "pet" src = {frog1} alt= "bunny stage 1"/>
-          <img className = "pet" src = {frog2} alt= "bunny stage 1"/>
-          <img className = "pet" src = {frog3} alt= "bunny stage 2"/>
+     style={{backgroundColor: 'pink'}}> 
+        <GetPet></GetPet>
     </div>
+       
     );
 }
 
