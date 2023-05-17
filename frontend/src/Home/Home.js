@@ -8,11 +8,14 @@ import { getDoc, doc, updateDoc} from "firebase/firestore";
 import { auth, db} from "../Backend/firebaseSetup.js";
 import { signOut } from "firebase/auth"
 
+
 function Home() {
     const navigate = useNavigate();
 
     const [goalComplete, setGoalComplete] = useState(false);
     const [progressCounter, setProgressCount] = useState(0);
+    const [userGoal, setUserGoal] = useState(null);
+
 
     const updateCount = async () => {
 
@@ -20,10 +23,17 @@ function Home() {
     
         if(user){
              const docRef = doc(db, "all_data", user.uid);
-
-             await updateDoc(docRef, {
-                progressCounter : progressCounter + 1
-            });
+             const docSnap = await getDoc(docRef);
+             if (docSnap.exists()) {
+            
+                 var goals = docSnap.data().goal;
+                 let goalIndex = docSnap.data().activeGoal;
+                 let progressCount = goals[goalIndex].progressCounter + 1;
+                 goals[goalIndex].progressCounter = progressCount;
+                 await updateDoc(docRef, {
+                     goal : goals
+                 });
+            }
         }      
     }
 
@@ -70,7 +80,7 @@ function Home() {
     function setOpen(){
         setIsOpen(true);
     }
-    const [userGoal, setUserGoal] = useState(null);
+    
     
     useEffect(() => {
         const getAllData = async () => {
@@ -81,11 +91,12 @@ function Home() {
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
                     // Gets the user's goal and saves to state
-                    let goal = docSnap.data().goal;
-                    let progressCounter = docSnap.data().progressCounter;
-                    console.log("All user data: ", docSnap.data(), "Goal: ", goal);
-                    setUserGoal(goal[goal.length - 1].goal);
-                    setProgressCount(progressCounter);
+                    var goals = docSnap.data().goal;
+                    let goalIndex = docSnap.data().activeGoal;
+                    let progressCount = goals[goalIndex].progressCounter;
+                    console.log("All user data: ", docSnap.data(), "Goal: ", goals[goalIndex]);
+                    setUserGoal(goals[goalIndex].goal);
+                    setProgressCount(progressCount);
                 }
             }
         }
