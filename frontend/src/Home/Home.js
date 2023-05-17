@@ -84,7 +84,7 @@ function Home() {
                     let goal = docSnap.data().goal;
                     let progressCounter = docSnap.data().progressCounter;
                     console.log("All user data: ", docSnap.data(), "Goal: ", goal);
-                    setUserGoal(goal);
+                    setUserGoal(goal[goal.length - 1].goal);
                     setProgressCount(progressCounter);
                 }
             }
