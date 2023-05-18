@@ -28,6 +28,17 @@ function Home() {
                someDate.getFullYear() === today.getFullYear());
     }
 
+    const checkIfGoalComplete = (docSnap) => {
+        // When user first creates a goal, they don't have a 
+        // `lastProgressMade` attribute
+        if (docSnap.lastProgressMade === undefined) {
+            setGoalComplete(false);
+        }
+        else if (checkIfProgressMadeToday(docSnap.lastProgressMade.toDate())) {
+            setGoalComplete(true);
+        }
+    }
+
     // Logs the date of completion in `lastProgressMade` and updates progress counter.
     // Then function triggers the `Log Entry?` popup
     const completeGoal = () => {
@@ -71,14 +82,7 @@ function Home() {
             if (user) { // Getting user specific data
                 const docSnap = await getUserInfo(user.uid);
                 if (docSnap) {
-                    // When user first creates a goal, they don't have a 
-                    // `lastProgressMade` attribute
-                    if (docSnap.lastProgressMade === undefined) {
-                        setGoalComplete(false);
-                    }
-                    else if (checkIfProgressMadeToday(docSnap.lastProgressMade.toDate())) {
-                        setGoalComplete(true);
-                    }
+                    checkIfGoalComplete(docSnap);
                     let goal = docSnap.goal;
                     let progressCounter = docSnap.progressCounter;
                     setUserGoal(goal[goal.length - 1].goal);
