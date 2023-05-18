@@ -81,7 +81,27 @@ function Home() {
         setIsOpen(true);
     }
     
-    
+    function Logout(){
+        return (
+        <>
+        {isOpen && (
+            <div className = "Popup">
+                 <div className = "SignOutPopup1">
+                     <div className = "SignOutPopup2" >
+                                 <p className = "ConfirmSignOutText">Would you like to sign out?</p>
+                             <button className = "ConfirmSignOutButton" onClick = {SignOutButton}>
+                                 <p className = "OkayText">Okay</p>
+                             </button>
+                             <button className = "CancelSignOutButton" onClick = {setClosed}>
+                                 <p className = "CancelText">Cancel</p>
+                             </button>
+                     </div>
+                 </div>
+             </div>
+        )}
+        </>
+        );
+    }
     useEffect(() => {
         const getAllData = async () => {
             const user = auth.currentUser;
@@ -120,21 +140,7 @@ function Home() {
                     <li className = "settingsIcon" onClick = {setOpen}/>
                 </ul>
             </nav>
-           {isOpen && (
-               <div className = "Popup">
-                    <div className = "SignOutPopup1">
-                        <div className = "SignOutPopup2" >
-                                    <p className = "ConfirmSignOutText">Would you like to sign out?</p>
-                                <button className = "ConfirmSignOutButton" onClick = {SignOutButton}>
-                                    <p className = "OkayText">Okay</p>
-                                </button>
-                                <button className = "CancelSignOutButton" onClick = {setClosed}>
-                                    <p className = "CancelText">Cancel</p>
-                                </button>
-                        </div>
-                    </div>
-                </div>
-           )}
+           <Logout/>
         </div>
     );
 }
