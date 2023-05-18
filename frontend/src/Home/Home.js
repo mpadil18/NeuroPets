@@ -23,9 +23,9 @@ function Home() {
     // and returns `true` if today.
     const checkIfProgressMadeToday = (someDate) => {  
         const today = new Date();
-        return someDate.getDate() === today.getDate() &&
-            someDate.getMonth() === today.getMonth() &&
-            someDate.getFullYear() === today.getFullYear()
+        return (someDate.getDate() === today.getDate() &&
+               someDate.getMonth() === today.getMonth() &&
+               someDate.getFullYear() === today.getFullYear());
     }
 
     // Logs the date of completion in `lastProgressMade` and updates progress counter.
