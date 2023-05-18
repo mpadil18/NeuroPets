@@ -2,12 +2,12 @@ import "./Home.css"
 import ProfText from "../assets/branding/ProfTextB.svg"
 import Pet from "../assets/branding/pet.svg"
 import GreenCheckmark from "../assets/elements/GreenCheckmark.svg"
-import Close from "../assets/elements/Close.svg"
 import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"; 
 import { auth } from "../Backend/firebaseSetup.js";
 import { updateUserProgress } from "../Backend/handleSubmit";
 import {updateUserInfo, getUserInfo} from '../Backend/handleSubmit';
+import LogProgress from "../LogProgress/LogProgress"
 
 function Home() {
     //const navigate = useNavigate();
@@ -17,7 +17,6 @@ function Home() {
     const [userGoal, setUserGoal] = useState(null);
     const [popupDisplay, setPopupDisplay] = useState(false);
     const [currGoalId, setCurrGoalId] = useState(null);
-    const [loggedProgress, setLoggedProgress] = useState("");
     const user = auth.currentUser;
 
     // When called, gets `lastProgressMade` date in db
@@ -27,23 +26,6 @@ function Home() {
         return someDate.getDate() === today.getDate() &&
             someDate.getMonth() === today.getMonth() &&
             someDate.getFullYear() === today.getFullYear()
-    }
-
-    // If user submits an entry for manually logging progress
-    // then add to db and hide popup
-    const logOptionalProgress = async () => {
-        const logDate = new Date();
-        if (user) {
-            let docSnap = await getUserInfo(user.uid);
-            let tempArr = docSnap.goal;
-            tempArr[currGoalId].logs.push({"date": logDate, "log": loggedProgress});
-            updateUserInfo(user.uid, {goal: tempArr});
-            setPopupDisplay(false);
-        }
-    }
-
-    const closePopup = () => {
-        setPopupDisplay(false);
     }
 
     // Logs the date of completion in `lastProgressMade` and updates progress counter.
@@ -126,20 +108,7 @@ function Home() {
                 </ul>
             </nav>
             {popupDisplay &&
-            <div className="Popup">
-            <div className="InputBubble">
-                <button className="close-btn" onClick={closePopup}><img src={Close} alt="close popup button"/></button>
-                <p className="BubbleHeader">Journal Entry?</p>
-                <textarea className="bubbleField" rows="5" cols="33"
-                placeholder="Example: I read 5 pages of “The Four Agreements”, I jogged with my friend for 30 minutes..."
-                value={loggedProgress}
-                onChange = {(e) => setLoggedProgress(e.target.value)}
-                />
-                <button className="bubbleButton" onClick={logOptionalProgress}> 
-                    Log in Journal
-                </button>
-            </div>
-            </div>
+            <LogProgress user={user} currGoalId={currGoalId} setPopupDisplay={setPopupDisplay}/>
             }
         </div>
     );
