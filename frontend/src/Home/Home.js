@@ -2,15 +2,12 @@ import "./Home.css"
 import ProfText from "../assets/branding/ProfTextB.svg"
 import Pet from "../assets/branding/pet.svg"
 import GreenCheckmark from "../assets/elements/GreenCheckmark.svg"
-import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react";
 import { getDoc, doc, updateDoc} from "firebase/firestore"; 
 import { auth, db} from "../Backend/firebaseSetup.js";
-import { signOut } from "firebase/auth"
-
+import NavBar from "../Navbar/Navbar";
 
 function Home() {
-    const navigate = useNavigate();
 
     const [goalComplete, setGoalComplete] = useState(false);
     const [progressCounter, setProgressCount] = useState(0);
@@ -18,7 +15,6 @@ function Home() {
 
 
     const updateCount = async () => {
-
         const user = auth.currentUser; 
     
         if(user){
@@ -65,43 +61,8 @@ function Home() {
             );
         }
     }
-    const [isOpen, setIsOpen] = useState(false);
-    function SignOutButton(){
-        const authUser = auth;
-        signOut(authUser).then(() => {
-                navigate("../");
-        }).catch((error) => {
-                console.log(error);
-        });
-    }
-    function setClosed() {
-        setIsOpen(false);
-    }
-    function setOpen(){
-        setIsOpen(true);
-    }
+  
     
-    function Logout(){
-        return (
-        <>
-        {isOpen && (
-            <div className = "Popup">
-                 <div className = "SignOutPopup1">
-                     <div className = "SignOutPopup2" >
-                                 <p className = "ConfirmSignOutText">Would you like to sign out?</p>
-                             <button className = "ConfirmSignOutButton" onClick = {SignOutButton}>
-                                 <p className = "OkayText">Okay</p>
-                             </button>
-                             <button className = "CancelSignOutButton" onClick = {setClosed}>
-                                 <p className = "CancelText">Cancel</p>
-                             </button>
-                     </div>
-                 </div>
-             </div>
-        )}
-        </>
-        );
-    }
     useEffect(() => {
         const getAllData = async () => {
             const user = auth.currentUser;
@@ -131,16 +92,7 @@ function Home() {
             <img className = "pet" src = {Pet} alt = "sample neuropet"/>
             <ProgressButton onClick = {completeGoal}></ProgressButton>
             {!goalComplete && <img className = "ProfessorText" src={ProfText} alt="Professor speech bubble"></img>}
-            <nav className = "navbar">
-                <ul className = "navlist">
-                    <li className = "editGoalIcon"/>
-                    <li className = "petHabitatIcon"/>
-                    <li className = "homeIcon"/>
-                    <li className = "shopIcon"/>
-                    <li className = "settingsIcon" onClick = {setOpen}/>
-                </ul>
-            </nav>
-           <Logout/>
+            <NavBar/>
         </div>
     );
 }
