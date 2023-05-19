@@ -2,22 +2,41 @@ import "./Home.css"
 import ProfText from "../assets/branding/ProfTextB.svg"
 import Pet from "../assets/branding/pet.svg"
 import GreenCheckmark from "../assets/elements/GreenCheckmark.svg"
-import { useNavigate } from "react-router-dom"
-import { useEffect, useState } from "react"; 
-import { auth } from "../Backend/firebaseSetup.js";
-import { updateUserProgress } from "../Backend/handleSubmit";
-import {updateUserInfo, getUserInfo} from '../Backend/handleSubmit';
+import { useEffect, useState } from "react";
+import { getDoc, doc, updateDoc} from "firebase/firestore"; 
+import { updateUserInfo } from '../Backend/handleSubmit';
+import { auth, db} from "../Backend/firebaseSetup.js";
+import NavBar from "../Navbar/Navbar";
 import LogProgress from "../LogProgress/LogProgress"
 
+
 function Home() {
-    //const navigate = useNavigate();
 
     const [goalComplete, setGoalComplete] = useState(false);
     const [progressCounter, setProgressCount] = useState(0);
     const [userGoal, setUserGoal] = useState(null);
     const [popupDisplay, setPopupDisplay] = useState(false);
     const [currGoalId, setCurrGoalId] = useState(null);
-    const user = auth.currentUser;
+
+
+    const updateCount = async () => {
+        const user = auth.currentUser; 
+    
+        if(user){
+             const docRef = doc(db, "all_data", user.uid);
+             const docSnap = await getDoc(docRef);
+             if (docSnap.exists()) {
+            
+                 var goals = docSnap.data().goal;
+                 let goalIndex = docSnap.data().activeGoal;
+                 let progressCount = goals[goalIndex].progressCounter + 1;
+                 goals[goalIndex].progressCounter = progressCount;
+                 await updateDoc(docRef, {
+                     goal : goals
+                 });
+            }
+        }      
+    }
 
     // When called, gets `lastProgressMade` date in db
     // and returns `true` if today.
@@ -43,16 +62,16 @@ function Home() {
     // Then function triggers the `Log Entry?` popup
     const completeGoal = () => {
         const completedDate = new Date();
+        const user = auth.currentUser; 
         setGoalComplete(true);
         setProgressCount(progressCounter + 1);
-        updateUserProgress(user.uid, progressCounter);
         updateUserInfo(user.uid, {lastProgressMade: completedDate});
         setTimeout(function(){
             setPopupDisplay(true);
         }, 900);
+        updateCount();
     }
 
-    // Conditionally displays progress button depending on if user has clicked or not
     function ProgressButton(){
         if (goalComplete) {
             return (
@@ -74,24 +93,31 @@ function Home() {
             );
         }
     }
+  
     
     useEffect(() => {
-        // Gets the user's latest goal (indexing into last in array)
-        // and saves to state
         const getAllData = async () => {
-            if (user) { // Getting user specific data
-                const docSnap = await getUserInfo(user.uid);
-                if (docSnap) {
+            const user = auth.currentUser;
+            if (user) {
+                // Getting user data specific to the current user
+                const docRef = doc(db, 'all_data', user.uid);
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    // Sets the current state of whether the goal is complete
                     checkIfGoalComplete(docSnap.lastProgressMade);
-                    let goal = docSnap.goal;
-                    let progressCounter = docSnap.progressCounter;
-                    setUserGoal(goal[goal.length - 1].goal);
-                    setCurrGoalId(goal.length - 1);
-                    setProgressCount(progressCounter);
+                    
+                    // Gets the user's goal and saves to state
+                    var goals = docSnap.data().goal;
+                    let goalIndex = docSnap.data().activeGoal;
+                    let progressCount = goals[goalIndex].progressCounter;
+                    console.log("All user data: ", docSnap.data(), "Goal: ", goals[goalIndex]);
+                    setUserGoal(goals[goalIndex].goal);
+                    setCurrGoalId(goals.length - 1);
+                    setProgressCount(progressCount);
                 }
             }
         }
-    getAllData();
+        getAllData();
     })
 
     return (
@@ -102,18 +128,10 @@ function Home() {
             <img className = "pet" src = {Pet} alt = "sample neuropet"/>
             <ProgressButton onClick = {completeGoal}></ProgressButton>
             {!goalComplete && <img className = "ProfessorText" src={ProfText} alt="Professor speech bubble"></img>}
-            <nav className = "navbar">
-                <ul className = "navlist">
-                    <li className = "editGoalIcon"/>
-                    <li className = "petHabitatIcon"/>
-                    <li className = "homeIcon"/>
-                    <li className = "shopIcon"/>
-                    <li className = "settingsIcon"/>
-                </ul>
-            </nav>
             {popupDisplay &&
-            <LogProgress user={user} currGoalId={currGoalId} setPopupDisplay={setPopupDisplay}/>
+            <LogProgress currGoalId={currGoalId} setPopupDisplay={setPopupDisplay}/>
             }
+            <NavBar/>
         </div>
     );
 }

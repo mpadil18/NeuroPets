@@ -82,6 +82,7 @@
     height: 156px;
     border-radius: 50%;
     background: #F88B98;
+    border: none;
 }
 
 .G1Text {
@@ -120,54 +121,3 @@
     bottom: 0;
 }
 
-.navlist {
-    display: flex;
-    justify-content: space-evenly;
-    padding: 0;
-}
-  
-.navlist li {
-    padding: 25px;
-    list-style-type: none
-}
-
-
-.Home .bubbleField {
-    height: 25vh;
-    resize: none;
-}
-
-.Home .BubbleHeader {
-    margin: 0px 0px 20px 0px;
-}
-
-.Popup .InputBubble {
-    height: 50%;
-}
-
-.close-btn {
-    border: none;
-    border-radius: 10px;
-    right: 0px;
-    align-self: flex-end;
-}
-
-.close-btn:hover {
-    background-color: #D9D9D9;
-}
-
-.editGoalIcon {
-    background: url("../assets/navbarIcons/pencil.svg") no-repeat 
-}
-.petHabitatIcon {
-    background: url("../assets/navbarIcons/petHabitat.svg") no-repeat 
-}
-.homeIcon {
-    background: url("../assets/navbarIcons/home.svg") no-repeat 
-}
-.shopIcon {
-    background: url("../assets/navbarIcons/shop.svg") no-repeat 
-}
-.settingsIcon {
-    background: url("../assets/navbarIcons/settings.svg") no-repeat 
-}

@@ -1,8 +1,10 @@
 import Close from "../assets/elements/Close.svg"
 import {updateUserInfo, getUserInfo} from '../Backend/handleSubmit';
+import { auth } from "../Backend/firebaseSetup.js";
 import { useState } from "react";
 
 function LogProgress(props) {
+    const user = auth.currentUser; 
     // If user submits an entry for manually logging progress
     // then add to db and hide popup
     const [loggedProgress, setLoggedProgress] = useState("");
@@ -12,11 +14,11 @@ function LogProgress(props) {
     
     const logOptionalProgress = async () => {
         const logDate = new Date();
-        if (props.user) {
-            let docSnap = await getUserInfo(props.user.uid);
+        if (user) {
+            let docSnap = await getUserInfo(user.uid);
             let tempArr = docSnap.goal;
             tempArr[props.currGoalId].logs.push({"date": logDate, "log": loggedProgress});
-            updateUserInfo(props.user.uid, {goal: tempArr});
+            updateUserInfo(user.uid, {goal: tempArr});
             closePopup();
         }
     }   
