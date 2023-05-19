@@ -36,9 +36,11 @@ function PetGallery() {
                 console.log("Awaiting")
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
-                    let progressCounter = docSnap.data().progressCounter;
-                    let goal = docSnap.data().goal;
-                    let petNum = goal[goal.length - 1].pet; 
+                    let goalArray = docSnap.data().goal;
+                    let currGoal = goalArray[goalArray.length - 1];
+                    
+                    let petNum = currGoal.pet; 
+                    let progressCounter = currGoal.progressCounter;
 
                     if (progressCounter <= stage0){
                         setPetId(10);

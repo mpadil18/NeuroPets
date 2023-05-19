@@ -1,7 +1,6 @@
 import "./Home.css"
 import ProfText from "../assets/ProfTextB.svg"
 import GreenCheckmark from "../assets/GreenCheckmark.svg"
-import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react";
 import { getDoc, doc,} from "firebase/firestore"; 
 import { auth, db} from "../Backend/firebaseSetup.js";
@@ -56,10 +55,14 @@ function Home() {
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
                     
-                    let goal = docSnap.data().goal;
-                    let progressCounter = docSnap.data().progressCounter;
-                    //console.log("All user data: ", docSnap.data(), "Goal: ", goal);
-                    setUserGoal(goal[goal.length - 1].goal);
+                    let goalArray = docSnap.data().goal;
+                    let currGoal = goalArray[goalArray.length - 1].goal; // Accessing most recent goal
+                    let progressCounter = goalArray[goalArray.length - 1].progressCounter;
+                    
+                    console.log("All user data: ", docSnap.data(), "Goal: ", currGoal);
+                    console.log("Progress Counter", progressCounter);
+                    
+                    setUserGoal(currGoal);
                     setProgressCount(progressCounter);
                 }
             }

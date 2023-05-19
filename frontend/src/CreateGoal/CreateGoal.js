@@ -39,7 +39,7 @@ function CreateGoal() {
     const user = auth.currentUser;
     const pet = assignRandomPet();
     const startDate = new Date();
-    const goalTuple = {goal: goalText, pet: pet, curr_date: startDate};
+    const goalTuple = {goal: goalText, pet: pet, curr_date: startDate, progressCounter: 0};
     if (user) {
       // Update the user's goal array by getting old data
       // and pushing the new goal to the list
@@ -53,7 +53,6 @@ function CreateGoal() {
   }
   
   const submithandler = (e) => {
-    const user = auth.currentUser;
     e.preventDefault()
     
     if (goalText.length === 0){
