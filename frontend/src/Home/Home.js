@@ -2,17 +2,15 @@ import "./Home.css"
 import ProfText from "../assets/branding/ProfTextB.svg"
 import Pet from "../assets/branding/pet.svg"
 import GreenCheckmark from "../assets/elements/GreenCheckmark.svg"
-//import { DeleteGoal } from "../DeleteGoal/DeleteGoal";
+import { DeleteGoal } from "../DeleteGoal/DeleteGoal";
 import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react";
-import { getDoc, updateDoc, doc, deleteField, arrayRemove} from "firebase/firestore"; 
+import { getDoc, doc } from "firebase/firestore"; 
 import { auth, db} from "../Backend/firebaseSetup.js";
 import { updateUserProgress } from "../Backend/handleSubmit";
-import firebase from 'firebase/compat/app'
-import 'firebase/compat/firestore';
 
 function Home() {
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
 
     const [goalComplete, setGoalComplete] = useState(false);
     const [progressCounter, setProgressCount] = useState(0);
@@ -28,35 +26,7 @@ function Home() {
     }
 
     const openDeleteGoal = (e) => {
-        console.log("clicked!");
-        //console.log(firebase.firestore);
-        //console.log(Object.keys(firebase.firestore));
         setIsDeleteGoalOpen(true);
-    }
-
-    const closeDeleteGoal = (e) => {
-        setIsDeleteGoalOpen(false);
-    }
-
-    const deleteCurrentGoal = (e) => {
-        console.log("delete goal");
-            const getAllData = async () => {
-                if (user) { 
-                    const docRef = doc(db, 'all_data', user.uid);
-                    const docSnap = await getDoc(docRef);
-                    //let currGoalIndex = goal.length - 1;
-                    //console.log(currGoalIndex); [currGoalIndex]
-                    let goal = docSnap.data().goal;
-                    let currGoal = goal[goal.length - 1];
-                    console.log(currGoal);
-                    
-                    await updateDoc(docRef, {
-                        "goal": firebase.firestore.FieldValue.arrayRemove(currGoal)
-                    });
-                }
-            }
-        getAllData();
-        navigate('../CreateGoal');
     }
 
 
@@ -121,20 +91,7 @@ function Home() {
                 </ul>
             </nav>
             {isDeleteGoalOpen &&
-            <div className = "Popup">
-                <div className = "DeleteGoal">
-                    <div className = "InputBubble">
-                        <div className = "bubbleHeader">
-                            <p>Would you like to delete your current goal and create a new one?</p>
-                            <p>This action will delete your current progress!</p>
-                        </div>
-                        <div className = "deleteGoalButtons">
-                            <button onClick = {deleteCurrentGoal} className = "bubbleButton"> Yes </button>
-                            <button onClick = {closeDeleteGoal} className = "bubbleButton"> No </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                <DeleteGoal user={user} setIsDeleteGoalOpen={setIsDeleteGoalOpen}/>
             }
         </div>
     );
