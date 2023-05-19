@@ -10,7 +10,7 @@ import {updateUserInfo, getUserInfo} from '../Backend/handleSubmit';
 import LogProgress from "../LogProgress/LogProgress"
 
 function Home() {
-    //const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const [goalComplete, setGoalComplete] = useState(false);
     const [progressCounter, setProgressCount] = useState(0);
@@ -50,6 +50,10 @@ function Home() {
         setTimeout(function(){
             setPopupDisplay(true);
         }, 900);
+    }
+
+    const takeMeAway = () => {
+        navigate("../PetGallery");
     }
 
     // Conditionally displays progress button depending on if user has clicked or not
@@ -105,7 +109,7 @@ function Home() {
             <nav className = "navbar">
                 <ul className = "navlist">
                     <li className = "editGoalIcon"/>
-                    <li className = "petHabitatIcon"/>
+                    <li className = "petHabitatIcon" onClick={takeMeAway}/>
                     <li className = "homeIcon"/>
                     <li className = "shopIcon"/>
                     <li className = "settingsIcon"/>

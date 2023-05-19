@@ -3,6 +3,7 @@ import Login from "./Login/Login"
 import RegPage from "./Registration/RegPage";
 import CreateGoal from "./CreateGoal/CreateGoal";
 import Home from "./Home/Home"
+import PetGallery from "./PetGallery/PetGallery"
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute'; // import the ProtectedRoute component
 import { useState } from 'react';
@@ -19,6 +20,7 @@ function App() {
         <Route path = "/regPage" element = {<RegPage setIsSignedIn={setIsSignedIn} />} />
         <Route path= "/createGoal" element={<ProtectedRoute isSignedIn={isSignedIn}><CreateGoal /></ProtectedRoute>} />
         <Route path= "/home" element={<ProtectedRoute isSignedIn={isSignedIn}><Home /></ProtectedRoute>} />
+        <Route path= "/petGallery" element={<ProtectedRoute isSignedIn={isSignedIn}><PetGallery /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
 
