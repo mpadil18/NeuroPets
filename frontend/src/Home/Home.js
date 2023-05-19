@@ -24,12 +24,12 @@ function Home() {
              const docSnap = await getDoc(docRef);
              if (docSnap.exists()) {
             
-                 var goalArray = docSnap.data().goal;
-                 let goalIndex = docSnap.data().activeGoal;
+                 var goalArray = docSnap.data().goalArray;
+                 let goalIndex = goalArray.length - 1
                  let progressCount = goalArray[goalIndex].progressCounter + 1;
                  goalArray[goalIndex].progressCounter = progressCount;
                  await updateDoc(docRef, {
-                     goal : goalArray
+                     goalArray: goalArray
                  });
             }
         }      
@@ -72,15 +72,14 @@ function Home() {
                 const docRef = doc(db, 'all_data', user.uid);
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
-                    let goalArray = docSnap.data().goal;
-                    let currGoal = goalArray[goalArray.length - 1].goal; // Accessing most recent goal
-                    let progressCounter = goalArray[goalArray.length - 1].progressCounter;
-                    
-                    console.log("All user data: ", docSnap.data(), "Goal: ", currGoal);
-                    console.log("Progress Counter", progressCounter);
-                    
-                    setUserGoal(currGoal);
-                    setProgressCount(progressCounter);
+
+                    // Gets the user's goal and saves to state
+                    var goalArray = docSnap.data().goalArray;
+                    let goalIndex = goalArray.length - 1;
+                    let progressCount = goalArray[goalIndex].progressCounter;
+                    console.log("All user data: ", docSnap.data(), "Goal: ", goalArray[goalIndex]);
+                    setUserGoal(goalArray[goalIndex].goal);
+                    setProgressCount(progressCount);
 
                 }
             }
