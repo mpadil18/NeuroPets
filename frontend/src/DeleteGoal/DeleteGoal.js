@@ -40,8 +40,8 @@ function DeleteGoal(props) {
                         <p>This action will delete your current progress!</p>
                     </div>
                     <div className = "deleteGoalButtons">
-                        <button onClick = {deleteCurrentGoal} className = "bubbleButton"> Yes </button>
-                        <button onClick = {closeDeleteGoal} className = "bubbleButton"> No </button>
+                        <button onClick = {deleteCurrentGoal} className = "deleteBubbleButton"> Yes </button>
+                        <button onClick = {closeDeleteGoal} className = "deleteBubbleButton"> No </button>
                     </div>
                 </div>
             </div>

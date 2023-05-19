@@ -19,10 +19,20 @@
     color: #000000;
 }
 
-.bubbleButton {
+.deleteBubbleButton {
     padding-left: 50px;
     padding-right: 50px;
     margin: 15px;
+    width: 40%;
+    height: 35px;
+    margin-top: 5%;
+    background-color: #F48F9C;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 14px;
+    text-align: center;
+    color: #FFFFFF;
 }
 
 .Popup {

@@ -136,43 +136,6 @@
     resize: none;
 }
 
-.Home .BubbleHeader {
-    margin: 0px 0px 20px 0px;
-}
-
-.DeleteGoal {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.InputBubble {
-    position: relative;
-    margin: 30px;
-    margin-top: 200px;
-    height: 423px;
-    width: 90%;
-}
-
-.bubbleHeader {
-    font-size: 24px;
-    line-height: 36px;
-    text-align: center;
-    color: #000000;
-}
-
-.bubbleButton {
-    padding-left: 50px;
-    padding-right: 50px;
-    margin: 15px;
-}
-
-.Popup {
-    position: fixed;
-    width: 100%;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.2);
-}
 
 .editGoalIcon {
     background: url("../assets/navbarIcons/pencil.svg") no-repeat 
