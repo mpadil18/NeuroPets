@@ -28,7 +28,7 @@ function Home() {
                  if (docSnap.exists()) {
                 
                      var goalArray = docSnap.data().goal;
-                     let goalIndex = docSnap.data().activeGoal;
+                     let goalIndex = goalArray.length - 1
                      let progressCount = goalArray[goalIndex].progressCounter + 1;
                      goalArray[goalIndex].progressCounter = progressCount;
                      await updateDoc(docRef, {
@@ -48,6 +48,7 @@ function Home() {
         return (someDate.getDate() === today.getDate() &&
                someDate.getMonth() === today.getMonth() &&
                someDate.getFullYear() === today.getFullYear());
+
     }
 
     // Logs the date of completion in `lastProgressMade` and updates progress counter.
@@ -99,25 +100,20 @@ function Home() {
             }
         }
         const getAllData = async () => {
-            try {
-                const user = auth.currentUser;
-                if (user) {
-                    // Getting user data specific to the current user
-                    const docRef = doc(db, 'all_data', user.uid);
-                    const docSnap = await getDoc(docRef);
-                    if (docSnap.exists()) {
-                        // Sets the current state of whether the goal is complete
-                        checkIfGoalComplete(docSnap.lastProgressMade);
-                        
-                        // Gets the user's goal and saves to state
-                        var goals = docSnap.data().goal;
-                        let goalIndex = docSnap.data().activeGoal;
-                        let progressCount = goals[goalIndex].progressCounter;
-                        console.log("All user data: ", docSnap.data(), "Goal: ", goals[goalIndex]);
-                        setUserGoal(goals[goalIndex].goal);
-                        setCurrGoalId(goals.length - 1);
-                        setProgressCount(progressCount);
-                    }
+
+            const user = auth.currentUser;
+            if (user) {
+                // Getting user data specific to the current user
+                const docRef = doc(db, 'all_data', user.uid);
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    // Gets the user's goal and saves to state
+                    var goalArray = docSnap.data().goalArray;
+                    let goalIndex = goalArray.length - 1;
+                    let progressCount = goalArray[goalIndex].progressCounter;
+                    console.log("All user data: ", docSnap.data(), "Goal: ", goalArray[goalIndex]);
+                    setUserGoal(goalArray[goalIndex].goal);
+                    setProgressCount(progressCount);
                 }
             } catch (error) {
                 console.log("ERROR GETTING ALL DATA");
