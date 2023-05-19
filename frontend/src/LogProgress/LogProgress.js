@@ -1,3 +1,4 @@
+import "./LogProgress.css"
 import Close from "../assets/elements/Close.svg"
 import {updateUserInfo, getUserInfo} from '../Backend/handleSubmit';
 import { auth } from "../Backend/firebaseSetup.js";
