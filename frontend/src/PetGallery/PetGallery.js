@@ -1,33 +1,30 @@
 import "./PetGallery.css"
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import {getUserInfo} from '../Backend/handleSubmit';
 import { auth } from "../Backend/firebaseSetup.js";
 import BigBunny from "../assets/elements/BigBunny.png"
 function PetGallery() {
-    const [goalPetList, setGoalPetList] = useState([])
-    const user = auth.currentUser;
-    const getPets = async () => {
-        if (user) {
-            let tempArr = [];
-            const docSnap = await getUserInfo(user.uid);
-            if (docSnap && (docSnap.goal.length > 0)) {
-                let goalList = docSnap.goal;
-                goalList.forEach(element => tempArr.push({goal: element.goal, pet: element.pet}));
-                setGoalPetList(goalList);
-            }
-        }
-    }
-    const isInitialMount = useRef(true);
-
+    const [goalPetList, setGoalPetList] = useState([]);
 
     useEffect(() => {
-        if (isInitialMount.current) {
-            isInitialMount.current = false;
-        } 
-         else {
-            getPets();
+        const getPets = async () => {
+            try {
+                const user = auth.currentUser;
+                if (user) {
+                    let tempArr = [];
+                    const docSnap = await getUserInfo(user.uid);
+                    if (docSnap && (docSnap.goal.length > 0)) {
+                        let goalList = docSnap.goal;
+                        goalList.forEach(element => tempArr.push({goal: element.goal, pet: element.pet}));
+                        setGoalPetList(goalList);
+                    }
+                }
+            } catch (error) {
+                console.log("error trying to get pets")
+            }
         }
-    })
+        getPets();
+    }, [])
 
     return (
         <div className="PetGallery">
