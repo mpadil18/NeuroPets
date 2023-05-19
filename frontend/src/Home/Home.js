@@ -26,12 +26,12 @@ function Home() {
              const docSnap = await getDoc(docRef);
              if (docSnap.exists()) {
             
-                 var goals = docSnap.data().goal;
+                 var goalArray = docSnap.data().goal;
                  let goalIndex = docSnap.data().activeGoal;
-                 let progressCount = goals[goalIndex].progressCounter + 1;
-                 goals[goalIndex].progressCounter = progressCount;
+                 let progressCount = goalArray[goalIndex].progressCounter + 1;
+                 goalArray[goalIndex].progressCounter = progressCount;
                  await updateDoc(docRef, {
-                     goal : goals
+                     goal : goalArray
                  });
             }
         }      
@@ -40,7 +40,6 @@ function Home() {
     const completeGoal = (e) => {
         setGoalComplete(true);
         setProgressCount(progressCounter + 1);
-        
         updateCount();
     }
 
