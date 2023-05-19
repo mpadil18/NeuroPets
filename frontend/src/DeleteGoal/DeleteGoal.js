@@ -7,6 +7,7 @@ import 'firebase/compat/firestore';
 
 function DeleteGoal(props) {
     let user = props.user;
+    let isDeleteGoalOpen = props.isDeleteGoalOpen;
 
     const navigate = useNavigate();
 
@@ -19,8 +20,8 @@ function DeleteGoal(props) {
                 if (user) { 
                     const docRef = doc(db, 'all_data', user.uid);
                     const docSnap = await getDoc(docRef);
-                    let goal = docSnap.data().goal;
-                    let currGoal = goal[goal.length - 1];
+                    let goals = docSnap.data().goal;
+                    let currGoal = goals[goals.length - 1];
             
                     await updateDoc(docRef, {
                         "goal": firebase.firestore.FieldValue.arrayRemove(currGoal)
@@ -32,20 +33,24 @@ function DeleteGoal(props) {
     }
 
     return (
-        <div className = "Popup">
-            <div className = "DeleteGoal">
-                <div className = "InputBubble">
-                    <div className = "bubbleHeader">
-                        <p>Would you like to delete your current goal and create a new one?</p>
-                        <p>This action will delete your current progress!</p>
-                    </div>
-                    <div className = "deleteGoalButtons">
-                        <button onClick = {deleteCurrentGoal} className = "deleteBubbleButton"> Yes </button>
-                        <button onClick = {closeDeleteGoal} className = "deleteBubbleButton"> No </button>
+        <>
+        {isDeleteGoalOpen && (
+            <div className = "Popup">
+                <div className = "DeleteGoal">
+                    <div className = "InputBubble">
+                        <div className = "bubbleHeader">
+                            <p>Would you like to delete your current goal and create a new one?</p>
+                            <p>This action will delete your current progress!</p>
+                        </div>
+                        <div className = "deleteGoalButtons">
+                            <button onClick = {deleteCurrentGoal} className = "deleteGoalButton"> Yes </button>
+                            <button onClick = {closeDeleteGoal} className = "deleteGoalButton"> No </button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        )}
+        </>
     );
 }
 

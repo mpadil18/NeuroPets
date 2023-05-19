@@ -2,35 +2,43 @@ import "./Home.css"
 import ProfText from "../assets/branding/ProfTextB.svg"
 import Pet from "../assets/branding/pet.svg"
 import GreenCheckmark from "../assets/elements/GreenCheckmark.svg"
-import { DeleteGoal } from "../DeleteGoal/DeleteGoal";
-import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react";
-import { getDoc, doc } from "firebase/firestore"; 
+import { getDoc, doc, updateDoc} from "firebase/firestore"; 
 import { auth, db} from "../Backend/firebaseSetup.js";
-import { updateUserProgress } from "../Backend/handleSubmit";
+import NavBar from "../Navbar/Navbar";
 
 function Home() {
-    //const navigate = useNavigate();
 
     const [goalComplete, setGoalComplete] = useState(false);
     const [progressCounter, setProgressCount] = useState(0);
     const [userGoal, setUserGoal] = useState(null);
-    const [isDeleteGoalOpen, setIsDeleteGoalOpen] = useState(false);
-    const user = auth.currentUser; 
 
+
+    const updateCount = async () => {
+        const user = auth.currentUser; 
+    
+        if(user){
+             const docRef = doc(db, "all_data", user.uid);
+             const docSnap = await getDoc(docRef);
+             if (docSnap.exists()) {
+            
+                 var goalArray = docSnap.data().goal;
+                 let goalIndex = docSnap.data().activeGoal;
+                 let progressCount = goalArray[goalIndex].progressCounter + 1;
+                 goalArray[goalIndex].progressCounter = progressCount;
+                 await updateDoc(docRef, {
+                     goal : goalArray
+                 });
+            }
+        }      
+    }
 
     const completeGoal = (e) => {
         setGoalComplete(true);
         setProgressCount(progressCounter + 1);
-        updateUserProgress(user.uid, progressCounter);
+        updateCount();
     }
 
-    const openDeleteGoal = (e) => {
-        setIsDeleteGoalOpen(true);
-    }
-
-
-    // Conditionally displays progress button depending on if user has clicked or not
     function ProgressButton(){
         if (goalComplete) {
             return (
@@ -52,25 +60,27 @@ function Home() {
             );
         }
     }
-
+  
     
     useEffect(() => {
-        // Gets the user's latest goal and saves to state
         const getAllData = async () => {
-            if (user) { // Getting user specific data 
+            const user = auth.currentUser;
+            if (user) {
+                // Getting user data specific to the current user
                 const docRef = doc(db, 'all_data', user.uid);
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
-                    
-                    let goal = docSnap.data().goal;
-                    let progressCounter = docSnap.data().progressCounter;
-                    //console.log("All user data: ", docSnap.data(), "Goal: ", goal);
-                    setUserGoal(goal[goal.length - 1].goal);
-                    setProgressCount(progressCounter);
+                    // Gets the user's goal and saves to state
+                    var goals = docSnap.data().goal;
+                    let goalIndex = docSnap.data().activeGoal;
+                    let progressCount = goals[goalIndex].progressCounter;
+                    console.log("All user data: ", docSnap.data(), "Goal: ", goals[goalIndex]);
+                    setUserGoal(goals[goalIndex].goal);
+                    setProgressCount(progressCount);
                 }
             }
         }
-    getAllData();
+        getAllData();
     })
 
     return (
@@ -81,18 +91,7 @@ function Home() {
             <img className = "pet" src = {Pet} alt = "sample neuropet"/>
             <ProgressButton onClick = {completeGoal}></ProgressButton>
             {!goalComplete && <img className = "ProfessorText" src={ProfText} alt="Professor speech bubble"></img>}
-            <nav className = "navbar">
-                <ul className = "navlist">
-                    <li onClick = {openDeleteGoal} className = "editGoalIcon"/>
-                    <li className = "petHabitatIcon"/>
-                    <li className = "homeIcon"/>
-                    <li className = "shopIcon"/>
-                    <li className = "settingsIcon"/>
-                </ul>
-            </nav>
-            {isDeleteGoalOpen &&
-                <DeleteGoal user={user} setIsDeleteGoalOpen={setIsDeleteGoalOpen}/>
-            }
+            <NavBar/>
         </div>
     );
 }
