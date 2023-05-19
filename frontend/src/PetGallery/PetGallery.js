@@ -1,5 +1,5 @@
 import "./PetGallery.css"
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {getUserInfo} from '../Backend/handleSubmit';
 import { auth } from "../Backend/firebaseSetup.js";
 import BigBunny from "../assets/elements/BigBunny.png"
@@ -17,9 +17,16 @@ function PetGallery() {
             }
         }
     }
+    const isInitialMount = useRef(true);
+
 
     useEffect(() => {
-        getPets();
+        if (isInitialMount.current) {
+            isInitialMount.current = false;
+        } 
+         else {
+            getPets();
+        }
     })
 
     return (
