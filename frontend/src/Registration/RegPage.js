@@ -1,13 +1,13 @@
 // Page code
 import './RegPage.css';
 import TextBox from "./textBox";
-import TopText from "../assets/upperBubble.svg"
 import { useNavigate } from "react-router-dom"
-import BottomText from "../assets/lowerBubble.svg"
 import { useState } from 'react';
 import { auth } from "../Backend/firebaseSetup";
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import {createUserDb} from '../Backend/handleSubmit';
+import TopText from "../assets/elements/upperBubble.svg"
+import BottomText from "../assets/elements/lowerBubble.svg"
 
 function RegPage({ setIsSignedIn }) {
   const navigate = useNavigate();

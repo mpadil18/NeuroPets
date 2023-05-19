@@ -60,7 +60,7 @@ export async function updateUserProgress(userid , progressCounter){
         const docRef = doc(db, "all_data", userid);
 
         await updateDoc(docRef, {
-           progressCounter : progressCounter + 1
+           "goal[activeIndex].progressCounter" : progressCounter + 1
        });
     }
 

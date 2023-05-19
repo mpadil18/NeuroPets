@@ -1,9 +1,9 @@
 import "./CreateGoal.css"
-import ProfText from "../assets/ProfTextA.svg"
 import React, { useState } from "react"
 import { auth } from "../Backend/firebaseSetup";
 import { useNavigate } from "react-router-dom"
 import {updateUserInfo, getUserInfo} from '../Backend/handleSubmit';
+import ProfText from "../assets/branding/ProfTextA.svg"; 
 
 const babyPetCodes = [0, 3, 6];
 function CreateGoal() {

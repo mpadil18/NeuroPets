@@ -1,9 +1,9 @@
 import "./Login.css"
 import React, { useState } from "react"
-import logo from "../assets/logo.svg"
 import { useNavigate } from "react-router-dom"
 import { signInWithEmailAndPassword } from "firebase/auth"
 import { auth } from "../Backend/firebaseSetup"
+import logo from "../assets/branding/logo.svg"
 
 function Login({ setIsSignedIn }) {
     const [username, setUsername] = useState("");
@@ -17,7 +17,7 @@ function Login({ setIsSignedIn }) {
         //see https://firebase.google.com/docs/auth/web/password-auth for api details
         signInWithEmailAndPassword(auth, username, password)
             .then((userCredential) => {
-                const user = userCredential.user;
+                //const user = userCredential.user;
                 setIsSignedIn(true)
                 navigate('../Home');
             })
