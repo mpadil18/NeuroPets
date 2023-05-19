@@ -14,12 +14,17 @@ function LogProgress(props) {
     
     const logOptionalProgress = async () => {
         const logDate = new Date();
-        if (user) {
-            let docSnap = await getUserInfo(user.uid);
-            let tempArr = docSnap.goal;
-            tempArr[props.currGoalId].logs.push({"date": logDate, "log": loggedProgress});
-            updateUserInfo(user.uid, {goal: tempArr});
-            closePopup();
+        try {
+            if (user) {
+                let docSnap = await getUserInfo(user.uid);
+                let tempArr = docSnap.goal;
+                tempArr[props.currGoalId].logs.push({"date": logDate, "log": loggedProgress});
+                updateUserInfo(user.uid, {goal: tempArr});
+                closePopup();
+            }
+
+        } catch (error) {
+            console.log("ERROR LOGGING PROGRESS");
         }
     }   
     return (

@@ -20,22 +20,25 @@ function Home() {
 
 
     const updateCount = async () => {
-        const user = auth.currentUser; 
-    
-        if(user){
-             const docRef = doc(db, "all_data", user.uid);
-             const docSnap = await getDoc(docRef);
-             if (docSnap.exists()) {
-            
-                 var goals = docSnap.data().goal;
-                 let goalIndex = docSnap.data().activeGoal;
-                 let progressCount = goals[goalIndex].progressCounter + 1;
-                 goals[goalIndex].progressCounter = progressCount;
-                 await updateDoc(docRef, {
-                     goal : goals
-                 });
-            }
-        }      
+        try {
+            const user = auth.currentUser;
+            if(user){
+                 const docRef = doc(db, "all_data", user.uid);
+                 const docSnap = await getDoc(docRef);
+                 if (docSnap.exists()) {
+                
+                     var goals = docSnap.data().goal;
+                     let goalIndex = docSnap.data().activeGoal;
+                     let progressCount = goals[goalIndex].progressCounter + 1;
+                     goals[goalIndex].progressCounter = progressCount;
+                     await updateDoc(docRef, {
+                         goal : goals
+                     });
+                }
+            }     
+        } catch (error) {
+            console.log("ERROR ON UPDATE COUNT");
+        } 
     }
 
     // When called, gets `lastProgressMade` date in db
@@ -45,17 +48,6 @@ function Home() {
         return (someDate.getDate() === today.getDate() &&
                someDate.getMonth() === today.getMonth() &&
                someDate.getFullYear() === today.getFullYear());
-    }
-
-    const checkIfGoalComplete = (lastProgressDate) => {
-        // When user first creates a goal, they don't have a 
-        // `lastProgressMade` attribute
-        if (lastProgressDate === undefined) {
-            setGoalComplete(false);
-        }
-        else if (checkIfProgressMadeToday(lastProgressDate.toDate())) {
-            setGoalComplete(true);
-        }
     }
 
     // Logs the date of completion in `lastProgressMade` and updates progress counter.
@@ -96,29 +88,43 @@ function Home() {
   
     
     useEffect(() => {
+        const checkIfGoalComplete = (lastProgressDate) => {
+            // When user first creates a goal, they don't have a 
+            // `lastProgressMade` attribute
+            if (lastProgressDate === undefined) {
+                setGoalComplete(false);
+            }
+            else if (checkIfProgressMadeToday(lastProgressDate.toDate())) {
+                setGoalComplete(true);
+            }
+        }
         const getAllData = async () => {
-            const user = auth.currentUser;
-            if (user) {
-                // Getting user data specific to the current user
-                const docRef = doc(db, 'all_data', user.uid);
-                const docSnap = await getDoc(docRef);
-                if (docSnap.exists()) {
-                    // Sets the current state of whether the goal is complete
-                    checkIfGoalComplete(docSnap.lastProgressMade);
-                    
-                    // Gets the user's goal and saves to state
-                    var goals = docSnap.data().goal;
-                    let goalIndex = docSnap.data().activeGoal;
-                    let progressCount = goals[goalIndex].progressCounter;
-                    console.log("All user data: ", docSnap.data(), "Goal: ", goals[goalIndex]);
-                    setUserGoal(goals[goalIndex].goal);
-                    setCurrGoalId(goals.length - 1);
-                    setProgressCount(progressCount);
+            try {
+                const user = auth.currentUser;
+                if (user) {
+                    // Getting user data specific to the current user
+                    const docRef = doc(db, 'all_data', user.uid);
+                    const docSnap = await getDoc(docRef);
+                    if (docSnap.exists()) {
+                        // Sets the current state of whether the goal is complete
+                        checkIfGoalComplete(docSnap.lastProgressMade);
+                        
+                        // Gets the user's goal and saves to state
+                        var goals = docSnap.data().goal;
+                        let goalIndex = docSnap.data().activeGoal;
+                        let progressCount = goals[goalIndex].progressCounter;
+                        console.log("All user data: ", docSnap.data(), "Goal: ", goals[goalIndex]);
+                        setUserGoal(goals[goalIndex].goal);
+                        setCurrGoalId(goals.length - 1);
+                        setProgressCount(progressCount);
+                    }
                 }
+            } catch (error) {
+                console.log("ERROR GETTING ALL DATA");
             }
         }
         getAllData();
-    })
+    }, []);
 
     return (
         <div className = "Home">
