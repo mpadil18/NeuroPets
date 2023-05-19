@@ -1,14 +1,12 @@
 import "./Home.css"
 
 import ProfText from "../assets/branding/ProfTextB.svg"
-import Pet from "../assets/branding/pet.svg"
 import GreenCheckmark from "../assets/elements/GreenCheckmark.svg"
 
 import { useEffect, useState } from "react";
 import { getDoc, doc, updateDoc} from "firebase/firestore"; 
 import { auth, db} from "../Backend/firebaseSetup.js";
-import { updateUserProgress } from "../Backend/handleSubmit";
-import PetGallery from "../PetGallery/PetGallery";
+import DisplayPet from "./DisplayPet";
 import NavBar from "../Navbar/Navbar";
 
 function Home() {
@@ -95,7 +93,7 @@ function Home() {
             <div className = "GoalBubble">
                 <p className = "BubbleText">{userGoal}</p>
             </div>
-            <PetGallery/>
+            <DisplayPet/>
 
             <ProgressButton onClick = {completeGoal}></ProgressButton>
             {!goalComplete && <img className = "ProfessorText" src={ProfText} alt="Professor speech bubble"></img>}
