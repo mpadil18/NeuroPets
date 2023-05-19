@@ -100,20 +100,21 @@ function Home() {
             }
         }
         const getAllData = async () => {
-
-            const user = auth.currentUser;
-            if (user) {
-                // Getting user data specific to the current user
-                const docRef = doc(db, 'all_data', user.uid);
-                const docSnap = await getDoc(docRef);
-                if (docSnap.exists()) {
-                    // Gets the user's goal and saves to state
-                    var goalArray = docSnap.data().goalArray;
-                    let goalIndex = goalArray.length - 1;
-                    let progressCount = goalArray[goalIndex].progressCounter;
-                    console.log("All user data: ", docSnap.data(), "Goal: ", goalArray[goalIndex]);
-                    setUserGoal(goalArray[goalIndex].goal);
-                    setProgressCount(progressCount);
+            try {
+                const user = auth.currentUser;
+                if (user) {
+                    // Getting user data specific to the current user
+                    const docRef = doc(db, 'all_data', user.uid);
+                    const docSnap = await getDoc(docRef);
+                    if (docSnap.exists()) {
+                        // Gets the user's goal and saves to state
+                        var goalArray = docSnap.data().goalArray;
+                        let goalIndex = goalArray.length - 1;
+                        let progressCount = goalArray[goalIndex].progressCounter;
+                        console.log("All user data: ", docSnap.data(), "Goal: ", goalArray[goalIndex]);
+                        setUserGoal(goalArray[goalIndex].goal);
+                        setProgressCount(progressCount);
+                    }
                 }
             } catch (error) {
                 console.log("ERROR GETTING ALL DATA");
