@@ -43,7 +43,7 @@ export async function createUserDb (userid,email) {
         userid: userid,
         useremail: email,
         goal: [], 
-        progressCounter: 0
+        activeGoal: 0
 
     }
 
@@ -62,7 +62,7 @@ export async function updateUserProgress(userid , progressCounter){
         const docRef = doc(db, "all_data", userid);
 
         await updateDoc(docRef, {
-           progressCounter : progressCounter + 1
+           "goal[activeIndex].progressCounter" : progressCounter + 1
        });
     }
 
