@@ -23,7 +23,7 @@ function CreateGoal() {
       const user = auth.currentUser;
       const docSnap = await getUserInfo(user.uid);
       if (docSnap) {
-          const latestGoal = (docSnap.goal)[(docSnap.goal).length - 1];
+          const latestGoal = (docSnap.goalArray)[(docSnap.goalArray).length - 1];
           if (latestGoal.goal === newData.goal && latestGoal.pet === newData.pet) {
             navigate('../Home');
           }
