@@ -20,11 +20,11 @@ function DeleteGoal(props) {
                 if (user) { 
                     const docRef = doc(db, 'all_data', user.uid);
                     const docSnap = await getDoc(docRef);
-                    let goals = docSnap.data().goal;
-                    let currGoal = goals[goals.length - 1];
+                    let goalArray = docSnap.data().goalArray;
+                    let currGoal = goalArray[goalArray.length - 1];
             
                     await updateDoc(docRef, {
-                        "goal": firebase.firestore.FieldValue.arrayRemove(currGoal)
+                        "goalArray": firebase.firestore.FieldValue.arrayRemove(currGoal)
                     });
                 }
             }

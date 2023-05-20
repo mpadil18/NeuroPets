@@ -16,22 +16,21 @@ function Home() {
 
     const updateCount = async () => {
         const user = auth.currentUser; 
-    
         if(user){
-             const docRef = doc(db, "all_data", user.uid);
-             const docSnap = await getDoc(docRef);
-             if (docSnap.exists()) {
-            
-                 var goalArray = docSnap.data().goal;
-                 let goalIndex = docSnap.data().activeGoal;
-                 let progressCount = goalArray[goalIndex].progressCounter + 1;
-                 goalArray[goalIndex].progressCounter = progressCount;
-                 await updateDoc(docRef, {
-                     goal : goalArray
-                 });
-            }
-        }      
-    }
+            const docRef = doc(db, "all_data", user.uid);
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+           
+                var goalArray = docSnap.data().goalArray;
+                let goalIndex = goalArray.length - 1;
+                let progressCount = goalArray[goalIndex].progressCounter + 1;
+                goalArray[goalIndex].progressCounter = progressCount;
+                await updateDoc(docRef, {
+                   goalArray: goalArray
+                });
+           }
+       }      
+   }
 
     const completeGoal = (e) => {
         setGoalComplete(true);
@@ -70,18 +69,23 @@ function Home() {
                 const docRef = doc(db, 'all_data', user.uid);
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
-                    // Gets the user's goal and saves to state
-                    var goals = docSnap.data().goal;
-                    let goalIndex = docSnap.data().activeGoal;
-                    let progressCount = goals[goalIndex].progressCounter;
-                    console.log("All user data: ", docSnap.data(), "Goal: ", goals[goalIndex]);
-                    setUserGoal(goals[goalIndex].goal);
-                    setProgressCount(progressCount);
+                    let goalArray = docSnap.data().goalArray;
+                    let goalIndex = goalArray.length - 1;
+                    let currGoal = goalArray[goalIndex].goal;
+                    let progressCounter = goalArray[goalIndex].progressCounter;
+                    
+                    
+                    console.log("All user data: ", docSnap.data(), "Goal: ", currGoal);
+                    console.log("Progress Counter", progressCounter);
+                    
+                    setUserGoal(currGoal);
+                    setProgressCount(progressCounter);
+
                 }
             }
         }
         getAllData();
-    })
+    }, []);
 
     return (
         <div className = "Home">
