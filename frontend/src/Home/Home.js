@@ -1,10 +1,12 @@
 import "./Home.css"
+
 import ProfText from "../assets/branding/ProfTextB.svg"
-import Pet from "../assets/branding/pet.svg"
 import GreenCheckmark from "../assets/elements/GreenCheckmark.svg"
+
 import { useEffect, useState } from "react";
 import { getDoc, doc, updateDoc} from "firebase/firestore"; 
 import { auth, db} from "../Backend/firebaseSetup.js";
+import DisplayPet from "./DisplayPet";
 import NavBar from "../Navbar/Navbar";
 
 function Home() {
@@ -17,20 +19,20 @@ function Home() {
     const updateCount = async () => {
         const user = auth.currentUser; 
         if(user){
-            const docRef = doc(db, "all_data", user.uid);
-            const docSnap = await getDoc(docRef);
-            if (docSnap.exists()) {
-           
-                var goalArray = docSnap.data().goalArray;
-                let goalIndex = goalArray.length - 1;
-                let progressCount = goalArray[goalIndex].progressCounter + 1;
-                goalArray[goalIndex].progressCounter = progressCount;
-                await updateDoc(docRef, {
-                   goalArray: goalArray
-                });
-           }
-       }      
-   }
+             const docRef = doc(db, "all_data", user.uid);
+             const docSnap = await getDoc(docRef);
+             if (docSnap.exists()) {
+            
+                 var goalArray = docSnap.data().goalArray;
+                 let goalIndex = goalArray.length - 1;
+                 let progressCount = goalArray[goalIndex].progressCounter + 1;
+                 goalArray[goalIndex].progressCounter = progressCount;
+                 await updateDoc(docRef, {
+                    goalArray: goalArray
+                 });
+            }
+        }      
+    }
 
     const completeGoal = (e) => {
         setGoalComplete(true);
@@ -92,7 +94,8 @@ function Home() {
             <div className = "GoalBubble">
                 <p className = "BubbleText">{userGoal}</p>
             </div>
-            <img className = "pet" src = {Pet} alt = "sample neuropet"/>
+            <DisplayPet/>
+
             <ProgressButton onClick = {completeGoal}></ProgressButton>
             {!goalComplete && <img className = "ProfessorText" src={ProfText} alt="Professor speech bubble"></img>}
             <NavBar/>
