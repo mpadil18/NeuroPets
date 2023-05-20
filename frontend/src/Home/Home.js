@@ -1,11 +1,13 @@
 import "./Home.css"
+
 import ProfText from "../assets/branding/ProfTextB.svg"
-import Pet from "../assets/branding/pet.svg"
 import GreenCheckmark from "../assets/elements/GreenCheckmark.svg"
+
 import { useEffect, useState } from "react";
 import { getDoc, doc, updateDoc} from "firebase/firestore"; 
 import { updateUserInfo } from '../Backend/handleSubmit';
 import { auth, db} from "../Backend/firebaseSetup.js";
+import DisplayPet from "./DisplayPet";
 import NavBar from "../Navbar/Navbar";
 import LogProgress from "../LogProgress/LogProgress"
 
@@ -26,7 +28,6 @@ function Home() {
                  const docRef = doc(db, "all_data", user.uid);
                  const docSnap = await getDoc(docRef);
                  if (docSnap.exists()) {
-                
                      var goalArray = docSnap.data().goalArray;
                      let goalIndex = goalArray.length - 1;
                      let progressCount = goalArray[goalIndex].progressCounter + 1;
@@ -107,16 +108,18 @@ function Home() {
                     const docSnap = await getDoc(docRef);
                     if (docSnap.exists()) {
                         // Sets the current state of whether the goal is complete
-                        checkIfGoalComplete(docSnap.lastProgressMade);
+                        checkIfGoalComplete(docSnap.data().lastProgressMade);
                         
                         // Gets the user's goal and saves to state
-                        var goalArray = docSnap.data().goalArray;
+                        let goalArray = docSnap.data().goalArray;
                         let goalIndex = goalArray.length - 1;
-                        let progressCount = goalArray[goalIndex].progressCounter;
-                        // Test: console.log("All user data: ", docSnap.data(), "Goal: ", goalArray[goalIndex]);
-                        setUserGoal(goalArray[goalIndex].goal);
+                        let currGoal = goalArray[goalIndex].goal;
+                        let progressCounter = goalArray[goalIndex].progressCounter;
+                        // TEST: console.log("All user data: ", docSnap.data(), "Goal: ", currGoal);
+                        // TEST: console.log("Progress Counter", progressCounter);
+                        setUserGoal(currGoal);
                         setCurrGoalId(goalArray.length - 1);
-                        setProgressCount(progressCount);
+                        setProgressCount(progressCounter);
                     }
                 }
             } catch (error) {
@@ -131,7 +134,8 @@ function Home() {
             <div className = "GoalBubble">
                 <p className = "BubbleText">{userGoal}</p>
             </div>
-            <img className = "pet" src = {Pet} alt = "sample neuropet"/>
+            <DisplayPet/>
+
             <ProgressButton onClick = {completeGoal}></ProgressButton>
             {!goalComplete && <img className = "ProfessorText" src={ProfText} alt="Professor speech bubble"></img>}
             {popupDisplay &&
