@@ -36,8 +36,9 @@ function DisplayPet() {
                 console.log("Awaiting")
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
-                    let goalArray = docSnap.data().goal;
-                    let currGoal = goalArray[goalArray.length - 1];
+                    let goalArray = docSnap.data().goalArray;
+                    let goalIndex = goalArray.length - 1;
+                    let currGoal = goalArray[goalIndex];
                     
                     let petNum = currGoal.pet; 
                     let progressCounter = currGoal.progressCounter;
