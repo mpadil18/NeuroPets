@@ -88,7 +88,7 @@ function Home() {
             }
         }
         getAllData();
-    })
+    }, []);
 
     return (
         <div className = "Home">
