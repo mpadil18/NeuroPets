@@ -22,6 +22,7 @@ function Home() {
 
 
     const updateCount = async () => {
+
         try {
             const user = auth.currentUser;
             if(user){

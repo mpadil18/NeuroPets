@@ -3,11 +3,13 @@ import { useNavigate } from "react-router-dom"
 import { auth} from "../Backend/firebaseSetup.js";
 import { signOut } from "firebase/auth";
 import { useState } from "react";
+import { DeleteGoal } from "../DeleteGoal/DeleteGoal";
 
 function NavBar(){
-    
+    const user = auth.currentUser;
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
+    const [isDeleteGoalOpen, setIsDeleteGoalOpen] = useState(false);
 
     function SignOutButton(){
         const authUser = auth;
@@ -24,6 +26,10 @@ function NavBar(){
 
     function setOpen(){
         setIsOpen(true);
+    }
+
+    function openDeleteGoal () {
+        setIsDeleteGoalOpen(true);
     }
 
     function Logout(){
@@ -53,7 +59,7 @@ function NavBar(){
     <>
         <nav className = "navbar">
             <ul className = "navlist">
-                <li className = "editGoalIcon"/>
+                <li onClick = {openDeleteGoal} className = "editGoalIcon"/>
                 <li className = "petHabitatIcon"/>
                 <li className = "homeIcon"/>
                 <li className = "shopIcon"/>
@@ -61,6 +67,7 @@ function NavBar(){
             </ul>
         </nav>
         <Logout/>
+        <DeleteGoal user={user} isDeleteGoalOpen={isDeleteGoalOpen} setIsDeleteGoalOpen={setIsDeleteGoalOpen}/>
     </>
     )
 }
