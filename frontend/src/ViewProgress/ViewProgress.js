@@ -20,7 +20,7 @@ function ViewProgress() {
         setPopupDisplay(false);
     }
 
-    const imageClick = (logIndex) => {
+    const checkMarkClick = (logIndex) => {
         let dateObj = new Date((listOfLogs[logIndex].date).seconds * 1000);
         let selectedMo = dateObj.getMonth();
         let selectedDay = dateObj.getDate();
@@ -57,7 +57,9 @@ function ViewProgress() {
                 <div className="gridContents">
                     { (listOfLogs.length > 0) ?
                     listOfLogs.map((logDatePair, index) => (
-                        (logDatePair.log.length > 0 ? <img id={index} src={GoldProgress} style={{"width":40, "margin":"8px 3px"}} alt="Journal Entry available" onClick={() => imageClick(index)} /> : <img src={GreenProgress} style={{"width":40,"margin":"8px 3px"}} alt="No journal entry available"/>)
+                        (logDatePair.log.length > 0 ? 
+                        <img id={index} src={GoldProgress} style={{"width":40, "margin":"8px 3px"}} alt="Journal Entry available" onClick={() => checkMarkClick(index)} />
+                        : <img src={GreenProgress} style={{"width":40,"margin":"8px 3px"}} alt="No journal entry available"/>)
                     )) : null
                     }
                 </div>

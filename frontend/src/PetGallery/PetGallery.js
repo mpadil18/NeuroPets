@@ -10,13 +10,15 @@ function PetGallery() {
     const [logsPerGoal, setLogsPerGoal] = useState([]);
     const navigate = useNavigate();
 
+    // Indexes into the proper logs associated with the goal and
+    // passes them to the ViewProgress component to render
     const navToViewProgress = (goalID) => {
-        console.log(goalID, goalPetList[goalID].goal)
+        // Only allow user to navigate if they have logs for this goal
         if (logsPerGoal[goalID].length > 0) {
             navigate('/ViewProgress',{state:{logs:logsPerGoal[goalID], goal:goalPetList[goalID].goal}});
         }
         else {
-            console.log("No logs yet")
+            console.log("No logs yet");
         }
     }
     useEffect(() => {
@@ -43,6 +45,7 @@ function PetGallery() {
         getPets();
     }, [])
 
+    //To do: modify styling to show you can't click on button if no logs exist
     return (
         <div className="PetGallery">
                 <p className = "HeaderBubble">My Pets</p>
@@ -53,8 +56,7 @@ function PetGallery() {
                             <p className="PetName">Null</p>
                             <p className="CardGoalText">{goalPet.goal}</p>
                             <img src={BigBunny} style={{"width":125}} alt="Your pet"></img>
-                            <button className="newBubbleButton" id={index} onClick={(e) => navToViewProgress(e.target.id)}>Null's Progress Logs</button>
-                            
+                            <button className="newBubbleButton" id={index} onClick={(e) => navToViewProgress(e.target.id)}>Progress Logs</button>
                         </div>
                     )) : null
                 }
