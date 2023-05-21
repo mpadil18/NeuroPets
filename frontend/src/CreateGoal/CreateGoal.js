@@ -59,6 +59,11 @@ function CreateGoal() {
   const setPresetFunc = (id) => {
     console.log(presetGoals[Number(id)])
     setGoalText(presetGoals[Number(id)]);
+    const listOfButts = document.getElementsByClassName("presetbtn");
+    for (let i = 0; i < listOfButts.length; i++) {
+      listOfButts[i].style.backgroundColor = "#374350";
+    }
+    document.getElementById(id).style.backgroundColor = "#152130";
   }
   
   const submithandler = (e) => {
@@ -92,6 +97,10 @@ function CreateGoal() {
         document.getElementById("presetGoalDrop").style.display = "inline-block";
       }
     }
+    const listOfButts = document.getElementsByClassName("presetbtn");
+    for (let i = 0; i < listOfButts.length; i++) {
+      listOfButts[i].style.backgroundColor = "#374350";
+    }
     setGoalText("");
 } 
     return (
@@ -112,25 +121,25 @@ function CreateGoal() {
             Preset Goal
           </button>
           <div className="presets" id="presetGoalDrop">
-            <button id="0" className="bubbleButton" onClick = {(e) => setPresetFunc(e.target.id)}> 
+            <button id="0" className="bubbleButton presetbtn" onClick = {(e) => setPresetFunc(e.target.id)}> 
             Eat Healthier
             </button>
-            <button id="1" className="bubbleButton" onClick = {(e) => setPresetFunc(e.target.id)}> 
+            <button id="1" className="bubbleButton presetbtn" onClick = {(e) => setPresetFunc(e.target.id)}> 
             Be More Active
             </button>
-            <button id="2" className="bubbleButton" onClick = {(e) => setPresetFunc(e.target.id)}> 
+            <button id="2" className="bubbleButton presetbtn" onClick = {(e) => setPresetFunc(e.target.id)}> 
             Improve Mental Health
             </button>
-            <button id="3" className="bubbleButton" onClick = {(e) => setPresetFunc(e.target.id)}> 
+            <button id="3" className="bubbleButton presetbtn" onClick = {(e) => setPresetFunc(e.target.id)}> 
             Focus on Relationships
             </button>
-            <button id="4" className="bubbleButton" onClick = {(e) => setPresetFunc(e.target.id)}> 
+            <button id="4" className="bubbleButton presetbtn" onClick = {(e) => setPresetFunc(e.target.id)}> 
             Dedicate Time to a Hobby
             </button>
-            <button id="5" className="bubbleButton" onClick = {(e) => setPresetFunc(e.target.id)}> 
+            <button id="5" className="bubbleButton presetbtn" onClick = {(e) => setPresetFunc(e.target.id)}> 
             Learn an Instrument
             </button>
-            <button id="6" className="bubbleButton" onClick = {(e) => setPresetFunc(e.target.id)}> 
+            <button id="6" className="bubbleButton presetbtn" onClick = {(e) => setPresetFunc(e.target.id)}> 
             Be More Tidy
             </button>
           </div>
