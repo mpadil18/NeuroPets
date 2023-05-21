@@ -1,13 +1,15 @@
-import "./Home.css";
-import ProfText from "../assets/branding/ProfTextB.svg";
-import Pet from "../assets/branding/pet.svg";
-import GreenCheckmark from "../assets/elements/GreenCheckmark.svg";
+import "./Home.css"
+import ProfText from "../assets/branding/ProfTextB.svg"
+import GreenCheckmark from "../assets/elements/GreenCheckmark.svg"
+
 import { useEffect, useState } from "react";
 import { getDoc, doc, updateDoc} from "firebase/firestore"; 
 import { auth, db} from "../Backend/firebaseSetup.js";
+import DisplayPet from "./DisplayPet";
+import NavBar from "../Navbar/Navbar";
+
 
 function Home() {
-    //const navigate = useNavigate();
 
     const [goalComplete, setGoalComplete] = useState(false);
     const [progressCounter, setProgressCount] = useState(0);
@@ -39,7 +41,6 @@ function Home() {
         updateCount();
     }
 
-    // Conditionally displays progress button depending on if user has clicked or not
     function ProgressButton(){
         if (goalComplete) {
             return (
@@ -61,7 +62,7 @@ function Home() {
             );
         }
     }
-
+  
     
     useEffect(() => {
         const getAllData = async () => {
@@ -75,10 +76,6 @@ function Home() {
                     let goalIndex = goalArray.length - 1;
                     let currGoal = goalArray[goalIndex].goal;
                     let progressCounter = goalArray[goalIndex].progressCounter;
-                    
-                    console.log("All user data: ", docSnap.data(), "Goal: ", currGoal);
-                    console.log("Progress Counter", progressCounter);
-                    
                     setUserGoal(currGoal);
                     setProgressCount(progressCounter);
 
@@ -88,24 +85,16 @@ function Home() {
         getAllData();
     }, []);
 
-
     return (
         <div className = "Home">
             <div className = "GoalBubble">
                 <p className = "BubbleText">{userGoal}</p>
             </div>
-            <img className = "pet" src = {Pet} alt = "sample neuropet"/>
+            <DisplayPet/>
+
             <ProgressButton onClick = {completeGoal}></ProgressButton>
             {!goalComplete && <img className = "ProfessorText" src={ProfText} alt="Professor speech bubble"></img>}
-            <nav className = "navbar">
-                <ul className = "navlist">
-                    <li className = "editGoalIcon"/>
-                    <li className = "petHabitatIcon"/>
-                    <li className = "homeIcon"/>
-                    <li className = "shopIcon"/>
-                    <li className = "settingsIcon"/>
-                </ul>
-            </nav>
+            <NavBar/>
         </div>
     );
 }

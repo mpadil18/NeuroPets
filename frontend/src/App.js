@@ -15,6 +15,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+
         <Route path = "" element = {<Login setIsSignedIn={setIsSignedIn} />} /> 
         <Route path = "/" element = {<Login setIsSignedIn={setIsSignedIn} />} />
         <Route path = "/regPage" element = {<RegPage setIsSignedIn={setIsSignedIn} />} />
