@@ -4,6 +4,7 @@ import RegPage from "./Registration/RegPage";
 import CreateGoal from "./CreateGoal/CreateGoal";
 import Home from "./Home/Home"
 import PetGallery from "./PetGallery/PetGallery"
+import DocIntro from "./DoctorIntro/DocIntro";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute'; // import the ProtectedRoute component
 import { useState } from 'react';
@@ -15,11 +16,13 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+
         <Route path = "" element = {<Login setIsSignedIn={setIsSignedIn} />} /> 
         <Route path = "/" element = {<Login setIsSignedIn={setIsSignedIn} />} />
         <Route path = "/regPage" element = {<RegPage setIsSignedIn={setIsSignedIn} />} />
-        <Route path= "/createGoal" element={<ProtectedRoute isSignedIn={isSignedIn}><CreateGoal /></ProtectedRoute>} />
-        <Route path= "/home" element={<ProtectedRoute isSignedIn={isSignedIn}><Home /></ProtectedRoute>} />
+        <Route path = "/createGoal" element={<ProtectedRoute isSignedIn={isSignedIn}><CreateGoal /></ProtectedRoute>} />
+        <Route path = "/home" element={<ProtectedRoute isSignedIn={isSignedIn}><Home /></ProtectedRoute>} />
+        <Route path = "/doctorIntro" element={<ProtectedRoute isSignedIn={isSignedIn}><DocIntro /></ProtectedRoute>} />
         <Route path= "/petGallery" element={<ProtectedRoute isSignedIn={isSignedIn}><PetGallery /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>

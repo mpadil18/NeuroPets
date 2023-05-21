@@ -1,23 +1,47 @@
 import "./Home.css"
 import ProfText from "../assets/branding/ProfTextB.svg"
-import Pet from "../assets/branding/pet.svg"
 import GreenCheckmark from "../assets/elements/GreenCheckmark.svg"
+
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
-import { useEffect, useState } from "react"; 
-import { auth } from "../Backend/firebaseSetup.js";
-import { updateUserProgress } from "../Backend/handleSubmit";
-import {updateUserInfo, getUserInfo} from '../Backend/handleSubmit';
+import { getDoc, doc, updateDoc} from "firebase/firestore"; 
+import { updateUserInfo } from '../Backend/handleSubmit';
+import { auth, db} from "../Backend/firebaseSetup.js";
+import DisplayPet from "./DisplayPet";
+import NavBar from "../Navbar/Navbar";
 import LogProgress from "../LogProgress/LogProgress"
 
+
+
 function Home() {
-    const navigate = useNavigate();
 
     const [goalComplete, setGoalComplete] = useState(false);
     const [progressCounter, setProgressCount] = useState(0);
     const [userGoal, setUserGoal] = useState(null);
     const [popupDisplay, setPopupDisplay] = useState(false);
     const [currGoalId, setCurrGoalId] = useState(null);
-    const user = auth.currentUser;
+
+
+    const updateCount = async () => {
+        try {
+            const user = auth.currentUser;
+            if(user){
+                 const docRef = doc(db, "all_data", user.uid);
+                 const docSnap = await getDoc(docRef);
+                 if (docSnap.exists()) {
+                     var goalArray = docSnap.data().goalArray;
+                     let goalIndex = goalArray.length - 1;
+                     let progressCount = goalArray[goalIndex].progressCounter + 1;
+                     goalArray[goalIndex].progressCounter = progressCount;
+                     await updateDoc(docRef, {
+                        goalArray : goalArray
+                     });
+                }
+            }     
+        } catch (error) {
+            console.log("ERROR ON UPDATE COUNT");
+        } 
+    }
 
     // When called, gets `lastProgressMade` date in db
     // and returns `true` if today.
@@ -28,32 +52,18 @@ function Home() {
                someDate.getFullYear() === today.getFullYear());
     }
 
-    const checkIfGoalComplete = (lastProgressDate) => {
-        // When user first creates a goal, they don't have a 
-        // `lastProgressMade` attribute
-        if (lastProgressDate === undefined) {
-            setGoalComplete(false);
-        }
-        else if (checkIfProgressMadeToday(lastProgressDate.toDate())) {
-            setGoalComplete(true);
-        }
-    }
-
     // Logs the date of completion in `lastProgressMade` and updates progress counter.
     // Then function triggers the `Log Entry?` popup
     const completeGoal = () => {
         const completedDate = new Date();
+        const user = auth.currentUser; 
         setGoalComplete(true);
         setProgressCount(progressCounter + 1);
-        updateUserProgress(user.uid, progressCounter);
         updateUserInfo(user.uid, {lastProgressMade: completedDate});
         setTimeout(function(){
             setPopupDisplay(true);
         }, 900);
-    }
-
-    const takeMeAway = () => {
-        navigate("../PetGallery");
+        updateCount();
     }
 
     // Conditionally displays progress button depending on if user has clicked or not
@@ -78,46 +88,64 @@ function Home() {
             );
         }
     }
+  
     
     useEffect(() => {
-        // Gets the user's latest goal (indexing into last in array)
-        // and saves to state
-        const getAllData = async () => {
-            if (user) { // Getting user specific data
-                const docSnap = await getUserInfo(user.uid);
-                if (docSnap) {
-                    checkIfGoalComplete(docSnap.lastProgressMade);
-                    let goal = docSnap.goal;
-                    let progressCounter = docSnap.progressCounter;
-                    setUserGoal(goal[goal.length - 1].goal);
-                    setCurrGoalId(goal.length - 1);
-                    setProgressCount(progressCounter);
-                }
+        const checkIfGoalComplete = (lastProgressDate) => {
+            // When user first creates a goal, they don't have a 
+            // `lastProgressMade` attribute
+            if (lastProgressDate === undefined) {
+                setGoalComplete(false);
+            }
+            else if (checkIfProgressMadeToday(lastProgressDate.toDate())) {
+                setGoalComplete(true);
             }
         }
-    getAllData();
-    })
+        const getAllData = async () => {
+
+            try {
+                const user = auth.currentUser;
+                if (user) {
+                    // Getting user data specific to the current user
+                    const docRef = doc(db, 'all_data', user.uid);
+                    const docSnap = await getDoc(docRef);
+                    if (docSnap.exists()) {
+                        // Sets the current state of whether the goal is complete
+                        checkIfGoalComplete(docSnap.data().lastProgressMade);
+                        
+                        // Gets the user's goal and saves to state
+                        let goalArray = docSnap.data().goalArray;
+                        let goalIndex = goalArray.length - 1;
+                        let currGoal = goalArray[goalIndex].goal;
+                        let progressCounter = goalArray[goalIndex].progressCounter;
+                        // TEST: console.log("All user data: ", docSnap.data(), "Goal: ", currGoal);
+                        // TEST: console.log("Progress Counter", progressCounter);
+                        setUserGoal(currGoal);
+                        setCurrGoalId(goalArray.length - 1);
+                        setProgressCount(progressCounter);
+                    }
+
+                }
+            } catch (error) {
+                console.log("ERROR GETTING ALL DATA");
+            }
+        }
+        getAllData();
+    }, []);
 
     return (
         <div className = "Home">
             <div className = "GoalBubble">
                 <p className = "BubbleText">{userGoal}</p>
             </div>
-            <img className = "pet" src = {Pet} alt = "sample neuropet"/>
+            <DisplayPet/>
+
             <ProgressButton onClick = {completeGoal}></ProgressButton>
             {!goalComplete && <img className = "ProfessorText" src={ProfText} alt="Professor speech bubble"></img>}
-            <nav className = "navbar">
-                <ul className = "navlist">
-                    <li className = "editGoalIcon"/>
-                    <li className = "petHabitatIcon" onClick={takeMeAway}/>
-                    <li className = "homeIcon"/>
-                    <li className = "shopIcon"/>
-                    <li className = "settingsIcon"/>
-                </ul>
-            </nav>
             {popupDisplay &&
-            <LogProgress user={user} currGoalId={currGoalId} setPopupDisplay={setPopupDisplay}/>
+            <LogProgress currGoalId={currGoalId} setPopupDisplay={setPopupDisplay}/>
             }
+            <NavBar/>
         </div>
     );
 }

@@ -13,8 +13,8 @@ function PetGallery() {
                 if (user) {
                     let tempArr = [];
                     const docSnap = await getUserInfo(user.uid);
-                    if (docSnap && (docSnap.goal.length > 0)) {
-                        let goalList = docSnap.goal;
+                    if (docSnap && (docSnap.goalArray.length > 0)) {
+                        let goalList = docSnap.goalArray;
                         goalList.forEach(element => tempArr.push({goal: element.goal, pet: element.pet}));
                         setGoalPetList(goalList);
                     }

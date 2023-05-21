@@ -3,20 +3,18 @@
     min-height: 100vh;
     background-size: cover;
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
 }
 
 .GoalBubble {
-    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin: 0px 0px -40px 0px;
-    width: 347px;
-    height: 160px;
+    margin: 5% 0px 0px 0px;
+    width: 90%;
+    height: 20vh;
     background: #F9F9F9;
     border-radius: 15px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -60,11 +58,9 @@
     text-align: center;
 }
 
-.pet { 
-    position: relative;
-    margin: 22px 48px 0px 0px; 
-    height: 320px;
-    
+.pet {
+    margin: 10% 0px;
+    height: 25vh;
 }
 
 .GreenCheck {
@@ -78,10 +74,11 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 156px;
-    height: 156px;
+    width: 20vh;
+    height: 20vh;
     border-radius: 50%;
     background: #F88B98;
+    border: none;
 }
 
 .G1Text {
@@ -106,68 +103,20 @@
     display: flex;
     align-items: center;
     text-align: center;
+    font-size: 12px;
 }
 
-.ProfessorText {
-    max-height: 148px;
+.Home .ProfessorText {
+    max-height: 20vh;
     width: 100%;
+    margin-top: -40px;
+    min-width: 90vw;
 }
 
 .navbar {
     background-color: #EEE;
     width: 100%;
-    margin-top: 10px;
+    position: absolute;
     bottom: 0;
 }
 
-.navlist {
-    display: flex;
-    justify-content: space-evenly;
-    padding: 0;
-}
-  
-.navlist li {
-    padding: 25px;
-    list-style-type: none
-}
-
-
-.Home .bubbleField {
-    height: 25vh;
-    resize: none;
-}
-
-.Home .BubbleHeader {
-    margin: 0px 0px 20px 0px;
-}
-
-.Popup .InputBubble {
-    height: 50%;
-}
-
-.close-btn {
-    border: none;
-    border-radius: 10px;
-    right: 0px;
-    align-self: flex-end;
-}
-
-.close-btn:hover {
-    background-color: #D9D9D9;
-}
-
-.editGoalIcon {
-    background: url("../assets/navbarIcons/pencil.svg") no-repeat 
-}
-.petHabitatIcon {
-    background: url("../assets/navbarIcons/petHabitat.svg") no-repeat 
-}
-.homeIcon {
-    background: url("../assets/navbarIcons/home.svg") no-repeat 
-}
-.shopIcon {
-    background: url("../assets/navbarIcons/shop.svg") no-repeat 
-}
-.settingsIcon {
-    background: url("../assets/navbarIcons/settings.svg") no-repeat 
-}
