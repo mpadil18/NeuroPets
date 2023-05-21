@@ -3,8 +3,10 @@ import Close from "../assets/elements/Close.svg"
 import {updateUserInfo, getUserInfo} from '../Backend/handleSubmit';
 import { auth } from "../Backend/firebaseSetup.js";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"
 
 function LogProgress(props) {
+    const navigate = useNavigate();
     const user = auth.currentUser; 
     // If user submits an entry for manually logging progress
     // then add to db and hide popup
@@ -12,6 +14,12 @@ function LogProgress(props) {
     const [errorMsg, setErrorMsg] = useState(false);
     const closePopup = () => {
         props.setPopupDisplay(false);
+        // if progressCount reaches 60 days, navigate to the congrats screen
+        let progressCount = props.progressCounter;
+        if (progressCount == 60) {
+            console.log("congrats!");
+            navigate('/goalCompleted');
+        }
     }
     
     const logUserProgress = async () => {

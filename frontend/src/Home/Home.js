@@ -142,7 +142,7 @@ function Home() {
             <ProgressButton onClick = {completeGoal}></ProgressButton>
             {!goalComplete && <img className = "ProfessorText" src={ProfText} alt="Professor speech bubble"></img>}
             {popupDisplay &&
-            <LogProgress currGoalId={currGoalId} setPopupDisplay={setPopupDisplay}/>
+            <LogProgress currGoalId={currGoalId} setPopupDisplay={setPopupDisplay} progressCounter={progressCounter}/>
             }
             <NavBar/>
         </div>
