@@ -3,7 +3,6 @@ import ProfText from "../assets/branding/ProfTextB.svg"
 import GreenCheckmark from "../assets/elements/GreenCheckmark.svg"
 
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"
 import { getDoc, doc, updateDoc} from "firebase/firestore"; 
 import { updateUserInfo } from '../Backend/handleSubmit';
 import { auth, db} from "../Backend/firebaseSetup.js";
