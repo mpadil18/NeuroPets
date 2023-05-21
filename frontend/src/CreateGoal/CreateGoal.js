@@ -10,8 +10,8 @@ function CreateGoal() {
 
   const [goalText, setGoalText] = useState("");
   const [errorMsg, setErrorMsg] = useState('');
-  const [presetGoals] = useState(["Eat Healthy", "Be Active", "Improve Mental Health", "Focus on Relationships", 
-  "Dedicate Time to a Hobby", "Learn an Instrument", "Maintain a Tidied Space"])
+  const [presetGoals] = useState(["Eat Healthier", "Be More Active", "Improve Mental Health", "Focus on Relationships", 
+  "Dedicate Time to a Hobby", "Learn an Instrument", "Be More Tidy"])
 
   const navigate = useNavigate();
 
@@ -113,10 +113,10 @@ function CreateGoal() {
           </button>
           <div className="presets" id="presetGoalDrop">
             <button id="0" className="bubbleButton" onClick = {(e) => setPresetFunc(e.target.id)}> 
-            Eat Healthy
+            Eat Healthier
             </button>
             <button id="1" className="bubbleButton" onClick = {(e) => setPresetFunc(e.target.id)}> 
-            Be Active
+            Be More Active
             </button>
             <button id="2" className="bubbleButton" onClick = {(e) => setPresetFunc(e.target.id)}> 
             Improve Mental Health
@@ -131,7 +131,7 @@ function CreateGoal() {
             Learn an Instrument
             </button>
             <button id="6" className="bubbleButton" onClick = {(e) => setPresetFunc(e.target.id)}> 
-            Maintain a Tidied Space
+            Be More Tidy
             </button>
           </div>
 
