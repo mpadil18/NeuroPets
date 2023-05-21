@@ -1,5 +1,4 @@
 import "./Home.css"
-
 import ProfText from "../assets/branding/ProfTextB.svg"
 import GreenCheckmark from "../assets/elements/GreenCheckmark.svg"
 
@@ -10,6 +9,7 @@ import { auth, db} from "../Backend/firebaseSetup.js";
 import DisplayPet from "./DisplayPet";
 import NavBar from "../Navbar/Navbar";
 import LogProgress from "../LogProgress/LogProgress"
+
 
 
 function Home() {
@@ -100,6 +100,7 @@ function Home() {
             }
         }
         const getAllData = async () => {
+
             try {
                 const user = auth.currentUser;
                 if (user) {
@@ -121,6 +122,7 @@ function Home() {
                         setCurrGoalId(goalArray.length - 1);
                         setProgressCount(progressCounter);
                     }
+
                 }
             } catch (error) {
                 console.log("ERROR GETTING ALL DATA");
