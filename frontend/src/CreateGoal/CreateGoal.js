@@ -23,7 +23,8 @@ function CreateGoal() {
       const user = auth.currentUser;
       const docSnap = await getUserInfo(user.uid);
       if (docSnap) {
-          const latestGoal = (docSnap.goal)[(docSnap.goal).length - 1];
+        const latestGoal = (docSnap.goalArray)[(docSnap.goalArray).length - 1];
+        console.log(latestGoal)
           if (latestGoal.goal === newData.goal && latestGoal.pet === newData.pet) {
             navigate('../Home');
           }
@@ -39,14 +40,14 @@ function CreateGoal() {
     const user = auth.currentUser;
     const pet = assignRandomPet();
     const startDate = new Date();
-    const goalTuple = {goal: goalText, pet: pet, curr_date: startDate};
+    const goalTuple = {goal: goalText, pet: pet, curr_date: startDate, progressCounter: 0};
     if (user) {
       // Update the user's goal array by getting old data
       // and pushing the new goal to the list
       let docSnap = await getUserInfo(user.uid);
-      let tempArr = docSnap.goal;
+      let tempArr = docSnap.goalArray;
       tempArr.push(goalTuple);
-      updateUserInfo(user.uid, {goal: tempArr});
+      updateUserInfo(user.uid, {goalArray: tempArr});
       // If update properly made, navigate to home
       onUpdateNavigate(goalTuple);
     }

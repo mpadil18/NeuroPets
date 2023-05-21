@@ -1,12 +1,10 @@
-import "./Home.css"
-import ProfText from "../assets/branding/ProfTextB.svg"
-import Pet from "../assets/branding/pet.svg"
-import GreenCheckmark from "../assets/elements/GreenCheckmark.svg"
-import { useNavigate } from "react-router-dom"
+import "./Home.css";
+import ProfText from "../assets/branding/ProfTextB.svg";
+import Pet from "../assets/branding/pet.svg";
+import GreenCheckmark from "../assets/elements/GreenCheckmark.svg";
 import { useEffect, useState } from "react";
-import { getDoc, doc,} from "firebase/firestore"; 
+import { getDoc, doc, updateDoc} from "firebase/firestore"; 
 import { auth, db} from "../Backend/firebaseSetup.js";
-import { updateUserProgress } from "../Backend/handleSubmit";
 
 function Home() {
     //const navigate = useNavigate();
@@ -14,13 +12,31 @@ function Home() {
     const [goalComplete, setGoalComplete] = useState(false);
     const [progressCounter, setProgressCount] = useState(0);
     const [userGoal, setUserGoal] = useState(null);
-    const user = auth.currentUser; 
 
+
+    const updateCount = async () => {
+        const user = auth.currentUser; 
+    
+        if(user){
+             const docRef = doc(db, "all_data", user.uid);
+             const docSnap = await getDoc(docRef);
+             if (docSnap.exists()) {
+            
+                 var goalArray = docSnap.data().goalArray;
+                 let goalIndex = goalArray.length - 1;
+                 let progressCount = goalArray[goalIndex].progressCounter + 1;
+                 goalArray[goalIndex].progressCounter = progressCount;
+                 await updateDoc(docRef, {
+                    goalArray: goalArray
+                 });
+            }
+        }      
+    }
 
     const completeGoal = (e) => {
         setGoalComplete(true);
         setProgressCount(progressCounter + 1);
-        updateUserProgress(user.uid, progressCounter);
+        updateCount();
     }
 
     // Conditionally displays progress button depending on if user has clicked or not
@@ -48,23 +64,30 @@ function Home() {
 
     
     useEffect(() => {
-        // Gets the user's latest goal and saves to state
         const getAllData = async () => {
-            if (user) { // Getting user specific data 
+            const user = auth.currentUser;
+            if (user) {
+                // Getting user data specific to the current user
                 const docRef = doc(db, 'all_data', user.uid);
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
+                    let goalArray = docSnap.data().goalArray;
+                    let goalIndex = goalArray.length - 1;
+                    let currGoal = goalArray[goalIndex].goal;
+                    let progressCounter = goalArray[goalIndex].progressCounter;
                     
-                    let goal = docSnap.data().goal;
-                    let progressCounter = docSnap.data().progressCounter;
-                    //console.log("All user data: ", docSnap.data(), "Goal: ", goal);
-                    setUserGoal(goal[goal.length - 1].goal);
+                    console.log("All user data: ", docSnap.data(), "Goal: ", currGoal);
+                    console.log("Progress Counter", progressCounter);
+                    
+                    setUserGoal(currGoal);
                     setProgressCount(progressCounter);
+
                 }
             }
         }
-    getAllData();
-    })
+        getAllData();
+    }, []);
+
 
     return (
         <div className = "Home">
