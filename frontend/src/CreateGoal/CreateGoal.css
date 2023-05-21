@@ -12,3 +12,37 @@
     max-height: 148px;
     width: 100%;
 }
+
+.presets, .CreateGoal .bubbleField {
+    display: none;
+    overflow: hidden;
+}
+
+.presets .bubbleButton {
+    height: 20px;
+    font-size: 10px;
+    margin: 0% 30%;
+    border-radius: 5px;
+    background-color: #374350;
+}
+
+.presets .bubbleButton:active {
+    background-color: #152130;
+}
+
+.CreateGoal .InputBubble {
+    height: auto;
+}
+
+.presets {
+    width: 150%;
+}
+
+.submission {
+    height: 20px;
+    width: 30%;
+}
+
+.accordion {
+    width: 70%;
+}
