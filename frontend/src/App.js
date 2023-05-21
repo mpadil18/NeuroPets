@@ -11,7 +11,7 @@ import { useState } from 'react';
 //add additional paths to different pages using same syntax <Route path = "..." element = {<.../>} />
 function App() {
   const [isSignedIn, setIsSignedIn] = useState(false);
-  console.log('isSignedIn:', isSignedIn);
+
   return (
     <BrowserRouter>
       <Routes>

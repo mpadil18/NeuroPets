@@ -29,11 +29,10 @@ function DisplayPet() {
 
 
     useEffect(() => {
-        console.log("In use effects")
+
         const getUserData = async () => {
             if (user) { // Getting user specific data 
                 const docRef = doc(db, 'all_data', user.uid);
-                console.log("Awaiting")
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
                     let goalArray = docSnap.data().goalArray;
@@ -55,9 +54,6 @@ function DisplayPet() {
                     else if  (progressCounter <= stage3){
                         setPetId(petNum + 2);
                     }
-
-                    console.log(petId);
-                    //console.log("All user data: ", docSnap.data(), "Pet number: ", goal[goal.length - 1].pet);
                 }
             }
         }
