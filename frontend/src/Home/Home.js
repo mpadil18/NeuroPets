@@ -1,5 +1,4 @@
 import "./Home.css"
-
 import ProfText from "../assets/branding/ProfTextB.svg"
 import GreenCheckmark from "../assets/elements/GreenCheckmark.svg"
 
@@ -8,6 +7,7 @@ import { getDoc, doc, updateDoc} from "firebase/firestore";
 import { auth, db} from "../Backend/firebaseSetup.js";
 import DisplayPet from "./DisplayPet";
 import NavBar from "../Navbar/Navbar";
+
 
 function Home() {
 
@@ -76,11 +76,6 @@ function Home() {
                     let goalIndex = goalArray.length - 1;
                     let currGoal = goalArray[goalIndex].goal;
                     let progressCounter = goalArray[goalIndex].progressCounter;
-                    
-                    
-                    console.log("All user data: ", docSnap.data(), "Goal: ", currGoal);
-                    console.log("Progress Counter", progressCounter);
-                    
                     setUserGoal(currGoal);
                     setProgressCount(progressCounter);
 
