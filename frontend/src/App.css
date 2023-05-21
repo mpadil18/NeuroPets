@@ -75,7 +75,7 @@
   max-width: 80%;
 }
 
-.bubbleButton:hover {
+.bubbleButton:active {
   background: #BA4352;
 }
 
