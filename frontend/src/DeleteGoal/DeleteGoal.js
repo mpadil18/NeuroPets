@@ -4,7 +4,6 @@ import { getDoc, updateDoc, doc} from "firebase/firestore";
 import { db } from "../Backend/firebaseSetup.js";
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/firestore';
-import { updateUserInfo } from "../Backend/handleSubmit";
 
 function DeleteGoal(props) {
     let user = props.user;
@@ -37,7 +36,7 @@ function DeleteGoal(props) {
     return (
         <>
         {isDeleteGoalOpen && (
-            <div className = "Popup">
+            <div className = "DeleteGoalPopup">
                 <div className = "DeleteGoal">
                     <div className = "InputBubble">
                         <div className = "bubbleHeader">
