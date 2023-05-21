@@ -19,9 +19,8 @@
 }
 
 .presets .bubbleButton {
-    height: 20px;
-    font-size: 10px;
-    margin: 0% 30%;
+    font-size: 12px;
+    margin: .5% 30%;
     border-radius: 5px;
     background-color: #374350;
 }
@@ -39,7 +38,7 @@
 }
 
 .submission {
-    height: 20px;
+    height: 30px;
     width: 30%;
 }
 

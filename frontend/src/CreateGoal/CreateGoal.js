@@ -102,7 +102,7 @@ function CreateGoal() {
           <button id="customGoal" className="bubbleButton accordion" onClick = {(e) => accordionClick(e.target.id)}> 
             Custom Goal
           </button>
-          <textarea id="customGoalDrop" className="bubbleField" rows="5" cols="33"
+          <textarea id="customGoalDrop" className="bubbleField" rows="12" cols="33"
           placeholder="Example: Brush Teeth, Floss, Manage Addiction, Drink Water.."
           value={goalText}
           onChange = {(e) => setGoalText(e.target.value)}
