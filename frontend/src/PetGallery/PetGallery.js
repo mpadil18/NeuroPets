@@ -45,7 +45,6 @@ function PetGallery() {
         getPets();
     }, [])
 
-    //To do: modify styling to show you can't click on button if no logs exist
     return (
         <div className="PetGallery">
                 <p className = "HeaderBubble">My Pets</p>
@@ -56,7 +55,11 @@ function PetGallery() {
                             <p className="PetName">Null</p>
                             <p className="CardGoalText">{goalPet.goal}</p>
                             <img src={BigBunny} style={{"width":125}} alt="Your pet"></img>
-                            <button className="newBubbleButton" id={index} onClick={(e) => navToViewProgress(e.target.id)}>Progress Logs</button>
+                            {(logsPerGoal[index].length > 0) ?
+                                <button className="newBubbleButton" id={index} onClick={(e) => navToViewProgress(e.target.id)}>Progress Logs</button>
+                                :
+                                <button className="disabledBubbleButton" style={{"disabled":true}} id={index}>Progress Logs</button>
+                            }
                         </div>
                     )) : null
                 }
