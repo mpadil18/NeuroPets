@@ -58,8 +58,8 @@ function ViewProgress() {
                     { (listOfLogs.length > 0) ?
                     listOfLogs.map((logDatePair, index) => (
                         (logDatePair.log.length > 0 ? 
-                        <img id={index} src={GoldProgress} style={{"width":40, "margin":"8px 3px"}} alt="Journal Entry available" onClick={() => checkMarkClick(index)} />
-                        : <img src={GreenProgress} style={{"width":40,"margin":"8px 3px"}} alt="No journal entry available"/>)
+                        <img id={index} key={index} src={GoldProgress} style={{"width":40, "margin":"8px 3px"}} alt="Journal Entry available" onClick={() => checkMarkClick(index)} />
+                        : <img id={index} key={index} src={GreenProgress} style={{"width":40,"margin":"8px 3px"}} alt="No journal entry available"/>)
                     )) : null
                     }
                 </div>

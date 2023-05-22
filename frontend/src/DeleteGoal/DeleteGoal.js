@@ -22,9 +22,10 @@ function DeleteGoal(props) {
                     const docSnap = await getDoc(docRef);
                     let goalArray = docSnap.data().goalArray;
                     let currGoal = goalArray[goalArray.length - 1];
-            
+                    let timeStamp = docSnap.data().lastProgressMade;
                     await updateDoc(docRef, {
-                        "goalArray": firebase.firestore.FieldValue.arrayRemove(currGoal)
+                        "goalArray": firebase.firestore.FieldValue.arrayRemove(currGoal),
+                        "lastProgressMade" : firebase.firestore.FieldValue.delete(timeStamp)
                     });
                 }
             }
@@ -35,7 +36,7 @@ function DeleteGoal(props) {
     return (
         <>
         {isDeleteGoalOpen && (
-            <div className = "Popup">
+            <div className = "DeleteGoalPopup">
                 <div className = "DeleteGoal">
                     <div className = "InputBubble">
                         <div className = "bubbleHeader">
