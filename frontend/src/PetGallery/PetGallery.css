@@ -58,10 +58,11 @@
 
 .CardGoalText {
     margin: 0px 0px 15px 0px;
+    text-align: center;
 }
 
 .PetPic { 
-    width: 100px;
+    height: 100px;
 }
 
 .disabledBubbleButton {

@@ -36,6 +36,23 @@ function PetGallery() {
             console.log("No logs yet");
         }
     }
+
+    const displayProperPet = (petID, progressCounter) => {
+        //Egg Stage
+        if (progressCounter <= 7) {
+            return egg;
+        } else if (progressCounter <= 28) {
+            return petImgsByCode[petID];
+        } else if (progressCounter <= 50) {
+            return petImgsByCode[petID + 1];
+        } else {
+            return petImgsByCode[petID + 2];
+        }
+        //Stage 1
+        //Stage 2
+        //Stage 3
+    }
+
     useEffect(() => {
         const getPets = async () => {
             try {
@@ -69,7 +86,7 @@ function PetGallery() {
                         <div className="PetCard" key={index}>
                             <p className="PetName">Null</p>
                             <p className="CardGoalText">{goalPet.goal}</p>
-                            <img src={(goalPet.progressCounter < 8) ? egg : petImgsByCode[goalPet.pet]} style={{"width":100}} alt="Your pet"></img>
+                            <img src={displayProperPet(goalPet.pet, goalPet.progressCounter)} style={{"height":100}} alt="Your pet"></img>
                             {(logsPerGoal[index].length > 0) ?
                                 <button className="newBubbleButton" id={index} onClick={(e) => navToViewProgress(e.target.id)}>Progress Logs</button>
                                 :
