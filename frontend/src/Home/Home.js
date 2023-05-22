@@ -22,7 +22,6 @@ function Home() {
 
 
     const updateCount = async () => {
-
         try {
             const user = auth.currentUser;
             if(user){
@@ -66,6 +65,7 @@ function Home() {
         updateCount();
     }
 
+    // Conditionally displays progress button depending on if user has clicked or not
     function ProgressButton(){
         if (goalComplete) {
             return (
