@@ -57,11 +57,11 @@
 }
 
 .CardGoalText {
-    margin: 0px;
+    margin: 0px 0px 15px 0px;
 }
 
 .PetPic { 
-    height: 125px;
+    width: 100px;
 }
 
 .disabledBubbleButton {
