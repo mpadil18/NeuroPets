@@ -69,7 +69,7 @@ function PetGallery() {
                         <div className="PetCard" key={index}>
                             <p className="PetName">Null</p>
                             <p className="CardGoalText">{goalPet.goal}</p>
-                            <img src={(goalPet.progressCounter < 7) ? egg : petImgsByCode[goalPet.pet]} style={{"width":100}} alt="Your pet"></img>
+                            <img src={(goalPet.progressCounter < 8) ? egg : petImgsByCode[goalPet.pet]} style={{"width":100}} alt="Your pet"></img>
                             {(logsPerGoal[index].length > 0) ?
                                 <button className="newBubbleButton" id={index} onClick={(e) => navToViewProgress(e.target.id)}>Progress Logs</button>
                                 :
