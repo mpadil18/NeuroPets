@@ -51,6 +51,10 @@ function CreateGoal() {
       tempArr.push(goalTuple);
 
       updateUserInfo(user.uid, {goalArray: tempArr});
+
+      // sets the activeGoal field to true to indicate that there is now an active goal
+      updateUserInfo(user.uid, {activeGoal: 1});
+
       // If update properly made, navigate to home
       onUpdateNavigate(goalTuple);
     }

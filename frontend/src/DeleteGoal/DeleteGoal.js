@@ -23,9 +23,11 @@ function DeleteGoal(props) {
                     let goalArray = docSnap.data().goalArray;
                     let currGoal = goalArray[goalArray.length - 1];
                     let timeStamp = docSnap.data().lastProgressMade;
+                    // deletes the current goal, deletes last progress made, and sets activeGoal as false
                     await updateDoc(docRef, {
                         "goalArray": firebase.firestore.FieldValue.arrayRemove(currGoal),
-                        "lastProgressMade" : firebase.firestore.FieldValue.delete(timeStamp)
+                        "lastProgressMade" : firebase.firestore.FieldValue.delete(timeStamp),
+                        "activeGoal": 0
                     });
                 }
             }

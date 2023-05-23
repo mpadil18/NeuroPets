@@ -42,8 +42,7 @@ export async function createUserDb (userid,email) {
     let data = {
         userid: userid,
         useremail: email,
-        goalArray:[],
-        activeGoal: 0
+        goalArray:[]
     }
 
     try {
