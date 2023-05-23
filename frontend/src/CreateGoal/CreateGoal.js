@@ -36,7 +36,7 @@ function CreateGoal() {
       }
   }
 
-  const updateGoal = async () => {
+  const createNewGoal = async () => {
     // Get user info, assign the pet, get timestamp
     // and save (goal, pet) as an object
     const user = auth.currentUser;
@@ -57,7 +57,7 @@ function CreateGoal() {
   }
 
   const setPresetFunc = (id) => {
-    console.log(presetGoals[Number(id)])
+    // Function used for all preset goals 
     setGoalText(presetGoals[Number(id)]);
     const listOfButts = document.getElementsByClassName("presetbtn");
     for (let i = 0; i < listOfButts.length; i++) {
@@ -68,18 +68,18 @@ function CreateGoal() {
   
   const submithandler = (e) => {
     e.preventDefault()
-    console.log("I GOT CALLED");
     
     if (goalText.length === 0){
       setErrorMsg("Please fill in a goal");
     } else {
-      updateGoal();
+      createNewGoal();
     }
   }
 
 
   const accordionClick = (accId) => {
-    if (accId === "customGoal") {
+    // Conditionally displaying an accordian based on the user choice - 
+    if (accId === "customGoal") { 
       document.getElementById("presetGoalDrop").style.display = "none";
       if (document.getElementById("customGoalDrop").style.display === "inline-block") {
         document.getElementById("customGoalDrop").style.display = "none";
@@ -88,7 +88,7 @@ function CreateGoal() {
         document.getElementById("customGoalDrop").style.display = "inline-block";
       }
     } 
-    else {
+    else { // Otherwise display presetGoal dropdown
       document.getElementById("customGoalDrop").style.display = "none";
       if (document.getElementById("presetGoalDrop").style.display === "inline-block") {
         document.getElementById("presetGoalDrop").style.display = "none";
@@ -103,6 +103,7 @@ function CreateGoal() {
     }
     setGoalText("");
 } 
+
     return (
       <div className="CreateGoal">
         <div className="InputBubble">

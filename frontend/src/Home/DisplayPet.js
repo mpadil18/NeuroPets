@@ -22,6 +22,7 @@ function DisplayPet() {
     const user = auth.currentUser;
     const [petId, setPetId] = useState(-1);
 
+    // Assigning constants for pet transformation
     const stage0 = 7;
     const stage1 = 28;
     const stage2 = 49;
@@ -41,7 +42,8 @@ function DisplayPet() {
                     
                     let petNum = currGoal.pet; 
                     let progressCounter = currGoal.progressCounter;
-
+                    
+                    // Accessing the progress Counter for the current pet 
                     if (progressCounter <= stage0){
                         setPetId(10);
                     }
@@ -49,7 +51,7 @@ function DisplayPet() {
                         setPetId(petNum);
                     }
                     else if (progressCounter <= stage2){
-                        setPetId( petNum + 1);
+                        setPetId(petNum + 1);
                     }
                     else if  (progressCounter <= stage3){
                         setPetId(petNum + 2);
@@ -62,7 +64,7 @@ function DisplayPet() {
     })
 
  function GetPet(){
-    // Need to add loading icon 
+    //Displays the pet stage based on the progressCounter 
     if (petId === -1){
         return (<img className = "pet" src = {loading} alt= "loading"/> )
         }
