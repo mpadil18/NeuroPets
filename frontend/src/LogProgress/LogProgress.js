@@ -16,7 +16,8 @@ function LogProgress(props) {
         props.setPopupDisplay(false);
         // if progressCount reaches 60 days, navigate to the congrats screen
         let progressCount = props.progressCounter;
-        if (progressCount == 60) {
+        const desiredProgressDays = 60;
+        if (progressCount == desiredProgressDays) {
             console.log("congrats!");
             navigate('/goalCompleted');
         }

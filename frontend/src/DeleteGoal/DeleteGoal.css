@@ -4,12 +4,23 @@
     align-items: center;
 }
 
-.InputBubble {
+.DeleteGoalInputBubble {
     position: relative;
     margin: 30px;
     margin-top: 200px;
     height: 423px;
     width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 90vw;
+    max-width: 500px;
+    background: #EEE;
+    border-radius: 15px;
+    box-shadow: 4px 4px 1px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding:1%;
+    color: #374350;
 }
 
 .bubbleHeader {

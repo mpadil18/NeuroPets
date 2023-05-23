@@ -1,0 +1,43 @@
+.GoalComplete {
+    background: url("../assets/branding/wave.svg") no-repeat center bottom;
+    background-size: cover;
+}
+
+.GoalCompleteInputBubble {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    max-width: 500px;
+    background: #EEE;
+    border-radius: 15px;
+    box-shadow: 4px 4px 1px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding:1%;
+    color: #374350;
+    position: relative;
+    margin: 30px;
+    height: 350px;
+    width: 90%;
+}
+
+.GoalCompleteBubbleHeader {
+    font-size: 24px;
+    line-height: 36px;
+    text-align: center;
+    color: #000000;
+    font-style: normal;
+}
+
+.GoalCompleteBubbleButton {
+    padding-left: 60px;
+    padding-right: 60px;
+    margin: 15px;
+    height: 45px;
+    background-color: #F48F9C;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 14px;
+    text-align: center;
+    color: #FFFFFF;
+}
