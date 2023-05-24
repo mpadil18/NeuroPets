@@ -48,7 +48,7 @@ function RegPage({ setIsSignedIn }) {
           createUserDb(user.uid, user.email)
 
           setIsSignedIn(true)
-          navigate('../CreateGoal');
+          navigate('../DoctorIntro');
 
         })
         .catch((error) => {

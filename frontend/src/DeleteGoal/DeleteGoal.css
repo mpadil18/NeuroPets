@@ -1,0 +1,45 @@
+.DeleteGoal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.DeleteGoal .InputBubble {
+    position: relative;
+    margin: 30px;
+    margin-top: 200px;
+    height: 423px;
+    width: 90%;
+}
+
+.bubbleHeader {
+    font-size: 24px;
+    line-height: 36px;
+    text-align: center;
+    color: #000000;
+}
+
+.deleteGoalButtons {
+    margin-top: 40px;
+}
+
+.deleteGoalButton {
+    padding-left: 60px;
+    padding-right: 60px;
+    margin: 15px;
+    height: 45px;
+    background-color: #F48F9C;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 14px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.DeleteGoalPopup {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.2);
+}
