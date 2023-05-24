@@ -35,7 +35,7 @@ function LogProgress(props) {
     return (
    <div className="Popup">
         <div className="InputBubble">
-            <button className="close-btn" onClick={logUserProgress}><img src={Close} alt="close popup button"/></button>
+            <button className="close-btn" onClick={closePopup}><img src={Close} alt="close popup button"/></button>
             <p className="BubbleHeader">Journal Entry?</p>
             <textarea className="bubbleField" rows="5" cols="33"
             placeholder="Example: I read 5 pages of “The Four Agreements”, I jogged with my friend for 30 minutes..."
