@@ -17,6 +17,9 @@ import { useEffect, useState } from "react";
 import { auth, db} from "../Backend/firebaseSetup.js";
 import { getDoc, doc,} from "firebase/firestore"; 
 
+
+
+
 function DisplayPet() {
 
     const user = auth.currentUser;
@@ -65,10 +68,10 @@ function DisplayPet() {
     // Need to add loading icon 
     if (petId === -1){
         return (<img className = "pet" src = {loading} alt= "loading"/> )
-        }
+    }
     if (petId === 10){
-        return (<img className = "pet" src = {egg} alt= "stage 0 "/> )
-        }
+        return (<img className = "pet" src = {egg} alt= "stage 0 " /> )
+    }
     if (petId === 0){ // Bunny 
         return ( <img className = "pet" src = {bunny1} alt= "bunny stage 1"/>)
     }

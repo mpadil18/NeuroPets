@@ -10,10 +10,45 @@ import DisplayPet from "./DisplayPet";
 import NavBar from "../Navbar/Navbar";
 import LogProgress from "../LogProgress/LogProgress"
 
+//Animation antics:
+import { useAutoAnimate } from '@formkit/auto-animate/react'
+
+
+import { motion } from "framer-motion";
 
 
 function Home() {
 
+
+    //Animation contents   ~~~~~~~~
+    const [animationParent] = useAutoAnimate()
+
+    const [shouldShake, setShouldShake] = useState(false);
+
+    const hopAnimation = {
+        y: [0, -10, 0],
+        transition: {
+            duration: 1.5,
+            repeat: Infinity,
+            y: {
+                type: "spring",
+                stiffness: 20,
+                damping: 2,
+            },
+        },
+    };
+
+    const shakeAnimation = shouldShake
+        ? {
+            x: [0, 10, -10, 10, -10, 0],
+            transition: { duration: 1.0 },
+        }
+        : {};
+
+    
+
+    //End of animation data ~~~~~~~
+      
     const [goalComplete, setGoalComplete] = useState(false);
     const [progressCounter, setProgressCount] = useState(0);
     const [userGoal, setUserGoal] = useState(null);
@@ -63,6 +98,7 @@ function Home() {
             setPopupDisplay(true);
         }, 900);
         updateCount();
+        setShouldShake(true)
     }
 
     // Conditionally displays progress button depending on if user has clicked or not
@@ -87,9 +123,9 @@ function Home() {
             );
         }
     }
-  
-    
+
     useEffect(() => {
+        
         const checkIfGoalComplete = (lastProgressDate) => {
             // When user first creates a goal, they don't have a 
             // `lastProgressMade` attribute
@@ -133,18 +169,23 @@ function Home() {
     }, []);
 
     return (
-        <div className = "Home">
-            <div className = "GoalBubble">
-                <p className = "BubbleText">{userGoal}</p>
+        <div className="Home" ref={animationParent}>
+            <div className="GoalBubble">
+                <p className="BubbleText">{userGoal}</p>
             </div>
-            <DisplayPet/>
 
-            <ProgressButton onClick = {completeGoal}></ProgressButton>
-            {!goalComplete && <img className = "ProfessorText" src={ProfText} alt="Professor speech bubble"></img>}
+
+            <motion.div animate={{ ...shakeAnimation, ...hopAnimation }}>
+                <DisplayPet />
+            </motion.div>
+
+
+            <ProgressButton onClick={completeGoal} />
+            {!goalComplete && <img className="ProfessorText" src={ProfText} alt="Professor speech bubble"></img>}
             {popupDisplay &&
-            <LogProgress currGoalId={currGoalId} setPopupDisplay={setPopupDisplay}/>
+                <LogProgress currGoalId={currGoalId} setPopupDisplay={setPopupDisplay} />
             }
-            <NavBar/>
+            <NavBar />
         </div>
     );
 }
