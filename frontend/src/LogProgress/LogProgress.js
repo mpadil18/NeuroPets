@@ -15,12 +15,15 @@ function LogProgress(props) {
     }
     
     const logUserProgress = async () => {
-        const logDate = new Date();
         try {
             if (user) {
                 let docSnap = await getUserInfo(user.uid);
                 let tempArr = docSnap.goalArray;
-                tempArr[props.currGoalId].logs.push({"date": logDate, "log": loggedProgress});
+                // Remove the previously set log to replace with the new one.
+                if (tempArr.length > 0) {
+                    tempArr[props.currGoalId].logs.pop();
+                }
+                tempArr[props.currGoalId].logs.push({"date": props.progressTimestamp, "log": loggedProgress});
                 updateUserInfo(user.uid, {goalArray: tempArr});
                 closePopup();
             }
@@ -28,11 +31,11 @@ function LogProgress(props) {
         } catch (error) {
             setErrorMsg(true);
         }
-    }   
+    }
     return (
    <div className="Popup">
         <div className="InputBubble">
-            <button className="close-btn" onClick={logUserProgress}><img src={Close} alt="close popup button"/></button>
+            <button className="close-btn" onClick={closePopup}><img src={Close} alt="close popup button"/></button>
             <p className="BubbleHeader">Journal Entry?</p>
             <textarea className="bubbleField" rows="5" cols="33"
             placeholder="Example: I read 5 pages of “The Four Agreements”, I jogged with my friend for 30 minutes..."

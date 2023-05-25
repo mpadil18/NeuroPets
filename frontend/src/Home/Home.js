@@ -19,9 +19,10 @@ function Home() {
     const [userGoal, setUserGoal] = useState(null);
     const [popupDisplay, setPopupDisplay] = useState(false);
     const [currGoalId, setCurrGoalId] = useState(null);
+    const [progressTimestamp, setProgressTimestamp] = useState(null);
 
 
-    const updateCount = async () => {
+    const updateCountAndProgressLogs = async (dateDone) => {
         try {
             const user = auth.currentUser;
             if(user){
@@ -32,6 +33,8 @@ function Home() {
                      let goalIndex = goalArray.length - 1;
                      let progressCount = goalArray[goalIndex].progressCounter + 1;
                      goalArray[goalIndex].progressCounter = progressCount;
+                     // Initializes the progress log to be empty upon completion
+                     goalArray[goalIndex].logs.push({"date": dateDone, "log": ""});
                      await updateDoc(docRef, {
                         goalArray : goalArray
                      });
@@ -55,14 +58,15 @@ function Home() {
     // Then function triggers the `Log Entry?` popup
     const completeGoal = () => {
         const completedDate = new Date();
+        setProgressTimestamp(completedDate);
         const user = auth.currentUser; 
         setGoalComplete(true);
         setProgressCount(progressCounter + 1);
         updateUserInfo(user.uid, {lastProgressMade: completedDate});
+        updateCountAndProgressLogs(completedDate);
         setTimeout(function(){
             setPopupDisplay(true);
         }, 900);
-        updateCount();
     }
 
     // Conditionally displays progress button depending on if user has clicked or not
@@ -142,7 +146,7 @@ function Home() {
             <ProgressButton onClick = {completeGoal}></ProgressButton>
             {!goalComplete && <img className = "ProfessorText" src={ProfText} alt="Professor speech bubble"></img>}
             {popupDisplay &&
-            <LogProgress currGoalId={currGoalId} setPopupDisplay={setPopupDisplay}/>
+            <LogProgress currGoalId={currGoalId} setPopupDisplay={setPopupDisplay} progressTimestamp={progressTimestamp}/>
             }
             <NavBar/>
         </div>
