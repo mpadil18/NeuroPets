@@ -20,6 +20,7 @@ function Home() {
     const [popupDisplay, setPopupDisplay] = useState(false);
     const [currGoalId, setCurrGoalId] = useState(null);
     const [progressTimestamp, setProgressTimestamp] = useState(null);
+    const [goalArray, setGoalArray] = useState([])
 
 
     const updateCountAndProgressLogs = async (dateDone) => {
@@ -126,6 +127,7 @@ function Home() {
                         setUserGoal(currGoal);
                         setCurrGoalId(goalArray.length - 1);
                         setProgressCount(progressCounter);
+                        setGoalArray(goalArray);
                     }
 
                 }
@@ -148,7 +150,9 @@ function Home() {
             {popupDisplay &&
             <LogProgress currGoalId={currGoalId} setPopupDisplay={setPopupDisplay} progressTimestamp={progressTimestamp}/>
             }
-            <NavBar/>
+            
+            {/* Pass goalPetList to navbar, to emulate caching */}
+            <NavBar goalArray={goalArray}/>
         </div>
     );
 }
