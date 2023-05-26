@@ -3,24 +3,15 @@ import ProfText from "../assets/branding/ProfTextB.svg"
 import GreenCheckmark from "../assets/elements/GreenCheckmark.svg"
 
 import { useEffect, useState } from "react";
-import { getDoc, doc, updateDoc, increment} from "firebase/firestore"; 
+import { getDoc, doc, updateDoc } from "firebase/firestore"; 
 import { updateUserInfo } from '../Backend/handleSubmit';
 import { auth, db} from "../Backend/firebaseSetup.js";
-import { useSpring, animated } from "react-spring";
 import DisplayPet from "./DisplayPet";
 import NavBar from "../Navbar/Navbar";
 import LogProgress from "../LogProgress/LogProgress"
 
 
-function AnimateNum({n, incrementValue}) {
-    const { number } = useSpring({
-        from: {number: n},
-        number: n + incrementValue,
-        delay: 200,
-        config: { mass: 1, tension: 20, friction: 10},
-    });
-    return <animated.div>{number.to((n) => n.toFixed(0))}</animated.div>;
-}
+
 
 
 function Home() {
@@ -45,11 +36,12 @@ function Home() {
                      let progressCount = goalArray[goalIndex].progressCounter + 1;
                      
                      goalArray[goalIndex].progressCounter = progressCount;
+                     goalArray[goalIndex].petPoints += 5;
                      // Initializes the progress log to be empty upon completion
                      goalArray[goalIndex].logs.push({"date": dateDone, "log": ""});
                      await updateDoc(docRef, {
                         goalArray : goalArray,
-                        petPoints : petPoints + 5
+                        
                      });
                 }
             }     
