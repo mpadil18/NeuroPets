@@ -18,8 +18,6 @@ import { auth, db} from "../Backend/firebaseSetup.js";
 import { getDoc, doc,} from "firebase/firestore"; 
 
 
-
-
 function DisplayPet() {
 
     const user = auth.currentUser;
