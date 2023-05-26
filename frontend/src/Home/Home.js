@@ -4,11 +4,12 @@ import GreenCheckmark from "../assets/elements/GreenCheckmark.svg"
 
 import { useEffect, useState } from "react";
 import { getDoc, doc, updateDoc} from "firebase/firestore"; 
-import { updateUserInfo } from '../Backend/handleSubmit';
-import { auth, db} from "../Backend/firebaseSetup.js";
+import { updateUserInfo, getUserInfo } from '../Backend/handleSubmit';
+import { auth, db } from "../Backend/firebaseSetup.js";
 import DisplayPet from "./DisplayPet";
 import NavBar from "../Navbar/Navbar";
 import LogProgress from "../LogProgress/LogProgress"
+import NoActiveGoal from "../NoActiveGoal/NoActiveGoal";
 
 
 
@@ -19,7 +20,18 @@ function Home() {
     const [userGoal, setUserGoal] = useState(null);
     const [popupDisplay, setPopupDisplay] = useState(false);
     const [currGoalId, setCurrGoalId] = useState(null);
-
+    const [activeGoal, setActiveGoalExists] = useState(false);
+    /*
+    async function checkIfActiveGoalExists () {
+        const user = auth.currentUser; 
+        const docRef = doc(db, 'all_data', user.uid);
+        const docSnap = await getDoc(docRef);
+        let activeGoalExists = docSnap.data().activeGoal;
+        return activeGoalExists;
+    }
+    let activeGoal = checkIfActiveGoalExists();
+    console.log(activeGoal);
+    */
 
     const updateCount = async () => {
 
@@ -109,6 +121,10 @@ function Home() {
                     const docRef = doc(db, 'all_data', user.uid);
                     const docSnap = await getDoc(docRef);
                     if (docSnap.exists()) {
+                        // Sets the state to whether there are active goals or not
+                        // the !! is used to convert the retrieved value from 0/1 to true/false
+                        setActiveGoalExists(!!(docSnap.data().activeGoal));
+                        
                         // Sets the current state of whether the goal is complete
                         checkIfGoalComplete(docSnap.data().lastProgressMade);
                         
@@ -134,15 +150,22 @@ function Home() {
 
     return (
         <div className = "Home">
-            <div className = "GoalBubble">
-                <p className = "BubbleText">{userGoal}</p>
+            {activeGoal &&
+            <div className = "Home">
+                <div className = "GoalBubble">
+                    <p className = "BubbleText">{userGoal}</p>
+                </div>
+                <DisplayPet/>
+                <ProgressButton onClick = {completeGoal}></ProgressButton>
+                {!goalComplete && <img className = "ProfessorText" src={ProfText} alt="Professor speech bubble"></img>}
+                {popupDisplay &&
+                <LogProgress currGoalId={currGoalId} setPopupDisplay={setPopupDisplay} progressCounter={progressCounter}/>
+                }
             </div>
-            <DisplayPet/>
-
-            <ProgressButton onClick = {completeGoal}></ProgressButton>
-            {!goalComplete && <img className = "ProfessorText" src={ProfText} alt="Professor speech bubble"></img>}
-            {popupDisplay &&
-            <LogProgress currGoalId={currGoalId} setPopupDisplay={setPopupDisplay} progressCounter={progressCounter}/>
+            }
+            
+            {!activeGoal &&
+            <NoActiveGoal/>
             }
             <NavBar/>
         </div>

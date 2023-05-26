@@ -1,15 +1,25 @@
 import "./GoalCompleted.css"
 import DisplayPet from "../Home/DisplayPet";
-import {updateUserInfo} from '../Backend/handleSubmit';
+import { updateUserInfo, getUserInfo } from '../Backend/handleSubmit';
 import { auth } from "../Backend/firebaseSetup.js";
 import { useNavigate } from "react-router-dom"
+import firebase from 'firebase/compat/app'
+import 'firebase/compat/firestore';
 
 function GoalCompleted () {
     const navigate = useNavigate();
     const endCurrentGoalCycle = () => {
         const user = auth.currentUser; 
         // set active goal to false to indicate that there are no active goals now that the current one is complete
-        updateUserInfo(user.uid, {activeGoal: 0});
+        let timeStamp = (getUserInfo(user.uid)).lastProgressMade;
+        updateUserInfo(user.uid, {activeGoal: 0, lastProgressMade : firebase.firestore.FieldValue.delete(timeStamp) });
+        /*
+        await updateDoc(docRef, {
+            "goalArray": firebase.firestore.FieldValue.arrayRemove(currGoal),
+            "lastProgressMade" : firebase.firestore.FieldValue.delete(timeStamp),
+            "activeGoal": 0
+        });
+        */
         // navigate back to home page
         navigate('../Home');
     }
