@@ -15,7 +15,6 @@ function App() {
   const [isSignedIn, setIsSignedIn] = useState(false);
 
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Routes>
 
         <Route path = "" element = {<Login setIsSignedIn={setIsSignedIn} />} /> 
@@ -27,7 +26,6 @@ function App() {
         <Route path = "/petGallery" element={<ProtectedRoute isSignedIn={isSignedIn}><PetGallery /></ProtectedRoute>} />
         <Route path = "/viewProgress" element={<ProtectedRoute isSignedIn={isSignedIn}><ViewProgress /></ProtectedRoute>} />
       </Routes>
-    </BrowserRouter>
 
   );
 }
