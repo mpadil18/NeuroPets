@@ -4,7 +4,7 @@ import GreenCheckmark from "../assets/elements/GreenCheckmark.svg"
 
 import { useEffect, useState } from "react";
 import { getDoc, doc, updateDoc} from "firebase/firestore"; 
-import { updateUserInfo, getUserInfo } from '../Backend/handleSubmit';
+import { updateUserInfo } from '../Backend/handleSubmit';
 import { auth, db } from "../Backend/firebaseSetup.js";
 import DisplayPet from "./DisplayPet";
 import NavBar from "../Navbar/Navbar";
@@ -21,17 +21,6 @@ function Home() {
     const [popupDisplay, setPopupDisplay] = useState(false);
     const [currGoalId, setCurrGoalId] = useState(null);
     const [activeGoal, setActiveGoalExists] = useState(false);
-    /*
-    async function checkIfActiveGoalExists () {
-        const user = auth.currentUser; 
-        const docRef = doc(db, 'all_data', user.uid);
-        const docSnap = await getDoc(docRef);
-        let activeGoalExists = docSnap.data().activeGoal;
-        return activeGoalExists;
-    }
-    let activeGoal = checkIfActiveGoalExists();
-    console.log(activeGoal);
-    */
 
     const updateCount = async () => {
 
@@ -151,7 +140,7 @@ function Home() {
     return (
         <div className = "Home">
             {activeGoal &&
-            <div className = "Home">
+            <div className = "ActiveGoal">
                 <div className = "GoalBubble">
                     <p className = "BubbleText">{userGoal}</p>
                 </div>

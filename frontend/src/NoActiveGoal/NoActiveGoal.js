@@ -3,9 +3,8 @@ import { useNavigate } from "react-router-dom"
 
 function NoActiveGoal () {
     const navigate = useNavigate();
-    
+
     const createGoal = () => {
-        console.log("here");
         navigate('../createGoal');
     }
 

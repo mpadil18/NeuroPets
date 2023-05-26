@@ -1,4 +1,4 @@
-.Home {
+.Home, .ActiveGoal {
     background: url("../assets/branding/wave.svg") no-repeat center bottom;
     min-height: 100vh;
     background-size: cover;
