@@ -48,6 +48,7 @@ export async function createUserDb (userid,email) {
         useremail: email,
         goalArray:[],
         activeGoal: 0
+        
     }
 
     try {

@@ -3,12 +3,14 @@ import ProfText from "../assets/branding/ProfTextB.svg"
 import GreenCheckmark from "../assets/elements/GreenCheckmark.svg"
 
 import { useEffect, useState } from "react";
-import { getDoc, doc, updateDoc} from "firebase/firestore"; 
+import { getDoc, doc, updateDoc } from "firebase/firestore"; 
 import { updateUserInfo } from '../Backend/handleSubmit';
 import { auth, db} from "../Backend/firebaseSetup.js";
 import DisplayPet from "./DisplayPet";
 import NavBar from "../Navbar/Navbar";
 import LogProgress from "../LogProgress/LogProgress"
+
+
 
 
 
@@ -20,7 +22,7 @@ function Home() {
     const [popupDisplay, setPopupDisplay] = useState(false);
     const [currGoalId, setCurrGoalId] = useState(null);
     const [progressTimestamp, setProgressTimestamp] = useState(null);
-
+    const [petPoints, setPetPoints] = useState(0);
 
     const updateCountAndProgressLogs = async (dateDone) => {
         try {
@@ -32,11 +34,14 @@ function Home() {
                      var goalArray = docSnap.data().goalArray;
                      let goalIndex = goalArray.length - 1;
                      let progressCount = goalArray[goalIndex].progressCounter + 1;
+                     
                      goalArray[goalIndex].progressCounter = progressCount;
+                     goalArray[goalIndex].petPoints += 5;
                      // Initializes the progress log to be empty upon completion
                      goalArray[goalIndex].logs.push({"date": dateDone, "log": ""});
                      await updateDoc(docRef, {
-                        goalArray : goalArray
+                        goalArray : goalArray,
+                        
                      });
                 }
             }     
@@ -76,8 +81,8 @@ function Home() {
             <div>
                 <img className = "GreenCheck" src = {GreenCheckmark} alt = "green checkmark"/>
                 <div className = "CompleteGoal">
-                    <p className = "CompleteGoalText1">+1</p>
-                    <p className = "CompleteGoalText1">{progressCounter}/60 Days</p>
+                    <p className = "CompleteGoalText1">{progressCounter}/60</p>
+                    <p className = "ProgCountAndPetPointSubText">Days</p>
                 </div>
             </div>
             );
@@ -123,9 +128,13 @@ function Home() {
                         let progressCounter = goalArray[goalIndex].progressCounter;
                         // TEST: console.log("All user data: ", docSnap.data(), "Goal: ", currGoal);
                         // TEST: console.log("Progress Counter", progressCounter);
+
+                        let petPoints = docSnap.data().petPoints;
+
                         setUserGoal(currGoal);
                         setCurrGoalId(goalArray.length - 1);
                         setProgressCount(progressCounter);
+                        setPetPoints(petPoints);
                     }
 
                 }

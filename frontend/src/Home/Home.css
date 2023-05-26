@@ -58,6 +58,19 @@
     text-align: center;
 }
 
+.ProgCountAndPetPointSubText{
+    position: inherit;
+    margin: 0px 63px;
+    font-family: 'Syncopate';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 25px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
 .pet {
     margin: 10% 0px;
     height: 25vh;
