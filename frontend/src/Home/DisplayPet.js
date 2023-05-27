@@ -2,9 +2,6 @@ import bunny1 from "../assets/sprites/bunny1.png";
 import bunny2 from "../assets/sprites/bunny2.png";
 import bunny3 from "../assets/sprites/bunny3.png";
 
-import egg from "../assets/sprites/egg.png";
-import loading from "../assets/sprites/loading.png";
-
 import penguin1 from "../assets/sprites/penguin1.png";
 import penguin2 from "../assets/sprites/penguin2.png";
 import penguin3 from "../assets/sprites/penguin3.png";
@@ -13,30 +10,32 @@ import frog1 from "../assets/sprites/frog1.png";
 import frog2 from "../assets/sprites/frog2.png";
 import frog3 from "../assets/sprites/frog3.png";
 
+import egg from "../assets/sprites/egg.png";
+import loading from "../assets/sprites/loading.png";
+
 import { useEffect, useState } from "react";
 
-
+// Props to be passed - Current user gola
 function DisplayPet(props) {
-
     console.log(props); 
 
-    const [petId, setPetId] = useState(-1);
+    const [petId, setPetId] = useState(10);
+    const [petImgsByCode] = useState([bunny1, bunny2, bunny3, penguin1, penguin2, penguin3, frog1, frog2, frog3,egg, loading]);
 
     // Assigning constants for pet transformation
     const stage0 = 7;
     const stage1 = 28;
     const stage2 = 49;
     const stage3 = 60;
+    const eggIndex = 9; 
 
-
-    useEffect(() => {
-           
-        if (props.currGoal !== null){
+    useEffect(() => {     
+        if (props.currGoal !== null){ // When curr goal is 
             let petNum = props.currGoal.pet; 
             let progressCounter = props.currGoal.progressCounter;
             
-            if (progressCounter <= stage0){
-                setPetId(10);
+            if (progressCounter <= stage0){  // Egg stage 
+                setPetId(eggIndex); 
             }
             else if(progressCounter <= stage1){
                 setPetId(petNum);
@@ -50,48 +49,14 @@ function DisplayPet(props) {
         }
     })
 
- function GetPet(){
-    //Displays the pet stage based on the progressCounter 
-    if (petId === -1){
-        return (<img className = "pet" src = {loading} alt= "loading"/> )
-        }
-    if (petId === 10){
-        return (<img className = "pet" src = {egg} alt= "stage 0 "/> )
-        }
-    if (petId === 0){ // Bunny 
-        return ( <img className = "pet" src = {bunny1} alt= "bunny stage 1"/>)
-    }
-    if (petId === 1){
-        return ( <img className = "pet" src = {bunny2} alt= "bunny stage 2"/>)
-    }
-    if (petId === 2){
-        return ( <img className = "pet" src = {bunny3} alt= "bunny stage 3"/>)
-    }
-    if (petId === 3){ // Penguin
-        return ( <img className = "pet" src = {penguin1} alt= "penguin stage 1"/>)
-    }
-    if(petId === 4){
-        return ( <img className = "pet" src = {penguin2} alt= "penguin stage 2"/>)
-    }
-    if(petId === 5){
-        return (<img className = "pet" src = {penguin3} alt= "penguin stage 3"/>)
-    }
-    if (petId === 6){ // Frog
-        return ( <img className = "pet" src = {frog1} alt= "frog stage 1"/>)
-    }
-    if (petId === 7){
-        return ( <img className = "pet" src = {frog2} alt= "frog stage 2"/>)
-    }
-    if (petId === 8){
-        return (<img className = "pet" src = {frog3} alt= "frog stage 3"/>)
+    function GetPet(){
+        return (<img className ="pet" src = {petImgsByCode[petId]} alt = "pet stage"/>)
     }
 
- }
     return (
      <div> 
         <GetPet></GetPet>
-    </div>
-       
+    </div>    
     );
 }
 
