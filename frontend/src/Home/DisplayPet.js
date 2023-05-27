@@ -14,12 +14,12 @@ import frog2 from "../assets/sprites/frog2.png";
 import frog3 from "../assets/sprites/frog3.png";
 
 import { useEffect, useState } from "react";
-import { auth, db} from "../Backend/firebaseSetup.js";
-import { getDoc, doc,} from "firebase/firestore"; 
 
-function DisplayPet() {
 
-    const user = auth.currentUser;
+function DisplayPet(props) {
+
+    console.log(props); 
+
     const [petId, setPetId] = useState(-1);
 
     // Assigning constants for pet transformation
@@ -30,37 +30,24 @@ function DisplayPet() {
 
 
     useEffect(() => {
-
-        const getUserData = async () => {
-            if (user) { // Getting user specific data 
-                const docRef = doc(db, 'all_data', user.uid);
-                const docSnap = await getDoc(docRef);
-                if (docSnap.exists()) {
-                    let goalArray = docSnap.data().goalArray;
-                    let goalIndex = goalArray.length - 1;
-                    let currGoal = goalArray[goalIndex];
-                    
-                    let petNum = currGoal.pet; 
-                    let progressCounter = currGoal.progressCounter;
-                    
-                    // Accessing the progress Counter for the current pet 
-                    if (progressCounter <= stage0){
-                        setPetId(10);
-                    }
-                    else if(progressCounter <= stage1){
-                        setPetId(petNum);
-                    }
-                    else if (progressCounter <= stage2){
-                        setPetId(petNum + 1);
-                    }
-                    else if  (progressCounter <= stage3){
-                        setPetId(petNum + 2);
-                    }
-                }
+           
+        if (props.currGoal !== null){
+            let petNum = props.currGoal.pet; 
+            let progressCounter = props.currGoal.progressCounter;
+            
+            if (progressCounter <= stage0){
+                setPetId(10);
+            }
+            else if(progressCounter <= stage1){
+                setPetId(petNum);
+            }
+            else if (progressCounter <= stage2){
+                setPetId(petNum + 1);
+            }
+            else if  (progressCounter <= stage3){
+                setPetId(petNum + 2);
             }
         }
-    getUserData();
-
     })
 
  function GetPet(){

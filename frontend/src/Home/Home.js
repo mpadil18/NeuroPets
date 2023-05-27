@@ -19,6 +19,7 @@ function Home() {
     const [goalComplete, setGoalComplete] = useState(false);
     const [progressCounter, setProgressCount] = useState(0);
     const [userGoal, setUserGoal] = useState(null);
+    const [currGoal, setCurrGoal] = useState(null);
     const [popupDisplay, setPopupDisplay] = useState(false);
     const [currGoalId, setCurrGoalId] = useState(null);
     const [progressTimestamp, setProgressTimestamp] = useState(null);
@@ -126,11 +127,10 @@ function Home() {
                         let goalIndex = goalArray.length - 1;
                         let currGoal = goalArray[goalIndex].goal;
                         let progressCounter = goalArray[goalIndex].progressCounter;
-                        // TEST: console.log("All user data: ", docSnap.data(), "Goal: ", currGoal);
-                        // TEST: console.log("Progress Counter", progressCounter);
 
                         let petPoints = docSnap.data().petPoints;
-
+                        
+                        setCurrGoal(goalArray[goalIndex]);
                         setUserGoal(currGoal);
                         setCurrGoalId(goalArray.length - 1);
                         setProgressCount(progressCounter);
@@ -150,7 +150,7 @@ function Home() {
             <div className = "GoalBubble">
                 <p className = "BubbleText">{userGoal}</p>
             </div>
-            <DisplayPet/>
+            <DisplayPet currGoal = {currGoal} />
 
             <ProgressButton onClick = {completeGoal}></ProgressButton>
             {!goalComplete && <img className = "ProfessorText" src={ProfText} alt="Professor speech bubble"></img>}
