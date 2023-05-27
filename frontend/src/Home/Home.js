@@ -12,8 +12,6 @@ import LogProgress from "../LogProgress/LogProgress"
 
 
 
-
-
 function Home() {
 
     const [goalComplete, setGoalComplete] = useState(false);

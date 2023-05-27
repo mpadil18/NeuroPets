@@ -3,26 +3,12 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"
 import {getUserInfo} from '../Backend/handleSubmit';
 import { auth } from "../Backend/firebaseSetup.js";
-import bunny1 from "../assets/sprites/bunny1.png";
-import bunny2 from "../assets/sprites/bunny2.png";
-import bunny3 from "../assets/sprites/bunny3.png";
-
-import egg from "../assets/sprites/egg.png";
-import loading from "../assets/sprites/loading.png";
-
-import penguin1 from "../assets/sprites/penguin1.png";
-import penguin2 from "../assets/sprites/penguin2.png";
-import penguin3 from "../assets/sprites/penguin3.png";
-
-import frog1 from "../assets/sprites/frog1.png";
-import frog2 from "../assets/sprites/frog2.png";
-import frog3 from "../assets/sprites/frog3.png";
 import NavBar from "../Navbar/Navbar";
+import DisplayPet from "../Home/DisplayPet";
 
 function PetGallery() {
     const [goalPetList, setGoalPetList] = useState([]);
     const [logsPerGoal, setLogsPerGoal] = useState([]);
-    const [petImgsByCode] = useState([bunny1, bunny2, bunny3, penguin1, penguin2, penguin3, frog1, frog2, frog3])
     const navigate = useNavigate();
 
     // Indexes into the proper logs associated with the goal and
@@ -35,22 +21,6 @@ function PetGallery() {
         else {
             console.log("No logs yet");
         }
-    }
-
-    const displayProperPet = (petID, progressCounter) => {
-        //Egg Stage
-        if (progressCounter <= 7) {
-            return egg;
-        } else if (progressCounter <= 28) {
-            return petImgsByCode[petID];
-        } else if (progressCounter <= 50) {
-            return petImgsByCode[petID + 1];
-        } else {
-            return petImgsByCode[petID + 2];
-        }
-        //Stage 1
-        //Stage 2
-        //Stage 3
     }
 
     useEffect(() => {
@@ -86,7 +56,7 @@ function PetGallery() {
                         <div className="PetCard" key={index}>
                             <p className="PetName">Null</p>
                             <p className="CardGoalText">{goalPet.goal}</p>
-                            <img src={displayProperPet(goalPet.pet, goalPet.progressCounter)} style={{"height":100}} alt="Your pet"></img>
+                            <DisplayPet currGoal = {goalPet} style={{"height":100}} />
                             {(logsPerGoal[index].length > 0) ?
                                 <button className="newBubbleButton" id={index} onClick={(e) => navToViewProgress(e.target.id)}>Progress Logs</button>
                                 :
