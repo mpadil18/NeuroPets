@@ -43,6 +43,9 @@ function Home() {
                         goalArray : goalArray,
                         
                      });
+                     
+                     // Updates goal array, to ensure update is made in Pet Gallery/View Progress
+                     setGoalArray(goalArray);
                 }
             }     
         } catch (error) {
@@ -156,7 +159,7 @@ function Home() {
             <ProgressButton onClick = {completeGoal}></ProgressButton>
             {!goalComplete && <img className = "ProfessorText" src={ProfText} alt="Professor speech bubble"></img>}
             {popupDisplay &&
-            <LogProgress currGoalId={currGoalId} setPopupDisplay={setPopupDisplay} progressTimestamp={progressTimestamp}/>
+            <LogProgress currGoalId={currGoalId} setPopupDisplay={setPopupDisplay} progressTimestamp={progressTimestamp} setGoalArray={setGoalArray}/>
             }
             
             {/* Pass goalPetList to navbar, to emulate caching */}

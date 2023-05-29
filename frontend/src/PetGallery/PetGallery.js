@@ -19,14 +19,13 @@ function PetGallery() {
     // we store all goals in a list, and all log data in a list
     const [goalPetList, setGoalPetList] = useState([]);
     const [logsPerGoal, setLogsPerGoal] = useState([]);
-    const navigate = useNavigate();
 
     // Indexes into the proper logs associated with the goalID and
     // passes them to the ViewProgress component to render
     const navToViewProgress = (goalID) => {
         // Only allow user to navigate if they have logs for this goal
         if (logsPerGoal[goalID].length > 0) {
-            navigate('/ViewProgress',{state:{logs:logsPerGoal[goalID], goal:goalPetList[goalID].goal, goalArray:goalPetList}});
+            navigate('/ViewProgress',{state:{goal:goalPetList[goalID].goal, goalArray:goalPetList, goalId: goalID}});
         }
         else {
             console.log("No logs yet");
@@ -61,6 +60,7 @@ function PetGallery() {
                     let logList = [];
                     cachedGoalArray.forEach(element => logList.push(element.logs));
                     setGoalPetList(cachedGoalArray);
+                    console.log(cachedGoalArray, logList)
                     setLogsPerGoal(logList);
                 } 
                 // No cached data (ex: the user doesn't access Pet Gallery 

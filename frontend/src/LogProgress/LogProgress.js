@@ -29,6 +29,7 @@ function LogProgress(props) {
                 }
                 tempArr[props.currGoalId].logs.push({"date": props.progressTimestamp, "log": loggedProgress});
                 updateUserInfo(user.uid, {goalArray: tempArr});
+                props.setGoalArray(tempArr);
                 closePopup();
             }
 
