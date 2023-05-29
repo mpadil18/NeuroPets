@@ -2,18 +2,6 @@ import {addDoc, collection} from 'firebase/firestore';
 import {firestore, db} from './firebaseSetup';
 import { doc, setDoc, updateDoc, getDoc } from 'firebase/firestore'; 
 
-const handleSubmit = (testdata) => {
-    const ref = collection(firestore,"goals")
-    let data = {
-        user_goal : testdata
-    }
-    try {
-        addDoc(ref, data)
-    } catch (err){
-        console.log(err)
-    }
-
-}
 
 // Retrieves all info from all_data pertaining to user
 export async function getUserInfo (userid) {
@@ -48,7 +36,6 @@ export async function createUserDb (userid,email) {
         useremail: email,
         goalArray:[],
         activeGoal: 0
-        
     }
 
     try {
@@ -58,18 +45,3 @@ export async function createUserDb (userid,email) {
     }
 
 }
-
-
-// Given a user id updates the user progress counter
-export async function updateUserProgress(userid , progressCounter){
-    if (userid){
-        const docRef = doc(db, "all_data", userid);
-
-        await updateDoc(docRef, {
-           "goal[activeIndex].progressCounter" : progressCounter + 1
-       });
-    }
-
-}
-
-export default handleSubmit
