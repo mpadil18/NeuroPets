@@ -29,7 +29,7 @@ export async function updateUserInfo (userid, data) {
 }
 
 // Creating a data object and intializes goal to null
-export async function createUserDb (userid,email) {
+export async function createUserDb (userid, email) {
     const ref = doc(firestore, "all_data", userid)
     let data = {
         userid: userid,
@@ -44,4 +44,33 @@ export async function createUserDb (userid,email) {
         console.log(err)
     }
 
+}
+
+
+
+//Given a userid appends to the goalArray
+export async function createNewGoal(userid, goalText){
+
+    const babyPetCodes = [0, 3, 6];
+    
+    const assignRandomPet = () => {
+    return babyPetCodes[Math.floor(Math.random()*babyPetCodes.length)];
+    }
+
+    const pet = assignRandomPet();
+    const startDate = new Date();
+    const goalTuple = {goal: goalText, pet: pet, petName: "",
+                       currDate: startDate, progressCounter: 0, 
+                       petPoints: 0, logs:[]};
+
+      // Update the user's goal array by getting old data
+      // and pushing the new goal to the list
+    try {
+        let docSnap = await getUserInfo(userid);
+        let tempArr = docSnap.goalArray;
+        tempArr.push(goalTuple);
+        updateUserInfo(userid, {goalArray: tempArr});    
+    } catch (err){
+        console.log(err)
+    }
 }

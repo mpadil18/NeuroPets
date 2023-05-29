@@ -2,10 +2,9 @@ import "./CreateGoal.css"
 import React, { useState } from "react"
 import { auth } from "../Backend/firebaseSetup";
 import { useNavigate } from "react-router-dom"
-import {updateUserInfo, getUserInfo} from '../Backend/handleSubmit';
 import ProfText from "../assets/branding/ProfTextA.svg"; 
+import { createNewGoal } from "../Backend/handleSubmit";
 
-const babyPetCodes = [0, 3, 6];
 function CreateGoal() {
 
   const [goalText, setGoalText] = useState("");
@@ -14,10 +13,8 @@ function CreateGoal() {
   "Dedicate Time to a Hobby", "Learn an Instrument", "Be More Tidy"])
 
   const navigate = useNavigate();
+  const user = auth.currentUser;
 
-  const assignRandomPet = () => {
-    return babyPetCodes[Math.floor(Math.random()*babyPetCodes.length)];
-  }
 
   // This code probably doesn't work well on mobile...
   // const onUpdateNavigate = async (newData) => {
@@ -37,32 +34,6 @@ function CreateGoal() {
   //     }
   // }
 
-  const createNewGoal = async () => {
-    // Get user info, assign the pet, get timestamp
-    // and save (goal, pet) as an object
-    try {
-      const user = auth.currentUser;
-      const pet = assignRandomPet();
-      const startDate = new Date();
-      const goalTuple = {goal: goalText, pet: pet, petName: "",
-                         currDate: startDate, progressCounter: 0, 
-                         petPoints: 0, logs:[]};
-      if (user) {
-        // Update the user's goal array by getting old data
-        // and pushing the new goal to the list
-        let docSnap = await getUserInfo(user.uid);
-        let tempArr = docSnap.goalArray;
-        tempArr.push(goalTuple);
-  
-        updateUserInfo(user.uid, {goalArray: tempArr});
-        // If update properly made, navigate to home
-        navigate('../Home');      
-      }
-    } catch (err) {
-      console.log("Error on create goal")
-    }
-  }
-
   const setPresetFunc = (id) => {
     // Function used for all preset goals 
     setGoalText(presetGoals[Number(id)]);
@@ -79,7 +50,8 @@ function CreateGoal() {
     if (goalText.length === 0){
       setErrorMsg("Please fill in a goal");
     } else {
-      createNewGoal();
+      createNewGoal(user.uid, goalText);
+      navigate('../Home'); 
     }
   }
 
