@@ -44,8 +44,8 @@ function CreateGoal() {
       const user = auth.currentUser;
       const pet = assignRandomPet();
       const startDate = new Date();
-      const goalTuple = {goal: goalText, pet: pet, 
-                         curr_date: startDate, progressCounter: 0, 
+      const goalTuple = {goal: goalText, pet: pet, petName: "",
+                         currDate: startDate, progressCounter: 0, 
                          petPoints: 0, logs:[]};
       if (user) {
         // Update the user's goal array by getting old data
