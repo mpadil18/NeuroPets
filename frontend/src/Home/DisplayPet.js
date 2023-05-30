@@ -17,7 +17,6 @@ import { useEffect, useState } from "react";
 
 // Props to be passed - Current user gola
 function DisplayPet(props) {
-    console.log(props); 
 
     const [petId, setPetId] = useState(10);
     const [petImgsByCode] = useState([bunny1, bunny2, bunny3, penguin1, penguin2, penguin3, frog1, frog2, frog3,egg, loading]);
