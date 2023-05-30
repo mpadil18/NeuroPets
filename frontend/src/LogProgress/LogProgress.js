@@ -10,10 +10,14 @@ function LogProgress(props) {
     // then add to db and hide popup
     const [loggedProgress, setLoggedProgress] = useState("");
     const [errorMsg, setErrorMsg] = useState(false);
+
+    // Close popup without updating with a journal entry
     const closePopup = () => {
         props.setPopupDisplay(false);
     }
-    
+
+    // Gets user data, removes the previously set empty log from the array
+    // and updates with the newly filled log
     const logUserProgress = async () => {
         try {
             if (user) {
@@ -25,6 +29,7 @@ function LogProgress(props) {
                 }
                 tempArr[props.currGoalId].logs.push({"date": props.progressTimestamp, "log": loggedProgress});
                 updateUserInfo(user.uid, {goalArray: tempArr});
+                props.setGoalArray(tempArr);
                 closePopup();
             }
 

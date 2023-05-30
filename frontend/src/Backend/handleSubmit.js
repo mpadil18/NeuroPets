@@ -2,18 +2,6 @@ import {addDoc, collection} from 'firebase/firestore';
 import {firestore, db} from './firebaseSetup';
 import { doc, setDoc, updateDoc, getDoc } from 'firebase/firestore'; 
 
-const handleSubmit = (testdata) => {
-    const ref = collection(firestore,"goals")
-    let data = {
-        user_goal : testdata
-    }
-    try {
-        addDoc(ref, data)
-    } catch (err){
-        console.log(err)
-    }
-
-}
 
 // Retrieves all info from all_data pertaining to user
 export async function getUserInfo (userid) {
@@ -41,7 +29,7 @@ export async function updateUserInfo (userid, data) {
 }
 
 // Creating a data object and intializes goal to null
-export async function createUserDb (userid,email) {
+export async function createUserDb (userid, email) {
     const ref = doc(firestore, "all_data", userid)
     let data = {
         userid: userid,
@@ -60,16 +48,30 @@ export async function createUserDb (userid,email) {
 }
 
 
-// Given a user id updates the user progress counter
-export async function updateUserProgress(userid , progressCounter){
-    if (userid){
-        const docRef = doc(db, "all_data", userid);
 
-        await updateDoc(docRef, {
-           "goal[activeIndex].progressCounter" : progressCounter + 1
-       });
+//Given a userid appends to the goalArray
+export async function createNewGoal(userid, goalText){
+
+    const babyPetCodes = [0, 3, 6];
+    
+    const assignRandomPet = () => {
+    return babyPetCodes[Math.floor(Math.random()*babyPetCodes.length)];
     }
 
-}
+    const pet = assignRandomPet();
+    const startDate = new Date();
+    const goalTuple = {goal: goalText, pet: pet, petName: "",
+                       currDate: startDate, progressCounter: 0, 
+                       petPoints: 0, logs:[]};
 
-export default handleSubmit
+      // Update the user's goal array by getting old data
+      // and pushing the new goal to the list
+    try {
+        let docSnap = await getUserInfo(userid);
+        let tempArr = docSnap.goalArray;
+        tempArr.push(goalTuple);
+        updateUserInfo(userid, {goalArray: tempArr});    
+    } catch (err){
+        console.log(err)
+    }
+}

@@ -19,11 +19,12 @@ function Home() {
     const [goalComplete, setGoalComplete] = useState(false);
     const [progressCounter, setProgressCount] = useState(0);
     const [userGoal, setUserGoal] = useState(null);
-    const [petPoints, setPetPoints] = useState(0);
+    const [currGoal, setCurrGoal] = useState(null);
     const [popupDisplay, setPopupDisplay] = useState(false);
     const [currGoalId, setCurrGoalId] = useState(null);
     const [progressTimestamp, setProgressTimestamp] = useState(null);
-    const [goalArray, setGoalArray] = useState([]);
+    const [goalArray, setGoalArray] = useState([])
+    const [petPoints, setPetPoints] = useState(0);
 
     const updateCountAndProgressLogs = async (dateDone) => {
         try {
@@ -38,13 +39,15 @@ function Home() {
                      
                      goalArray[goalIndex].progressCounter = progressCount;
                      goalArray[goalIndex].petPoints += 5;
-
                      // Initializes the progress log to be empty upon completion
                      goalArray[goalIndex].logs.push({"date": dateDone, "log": ""});
                      await updateDoc(docRef, {
                         goalArray : goalArray,
                         
                      });
+                     
+                     // Updates goal array, to ensure update is made in Pet Gallery/View Progress
+                     setGoalArray(goalArray);
                 }
             }     
         } catch (error) {
@@ -83,7 +86,11 @@ function Home() {
             return (
             <div>
                 <img className = "GreenCheck" src = {GreenCheckmark} alt = "green checkmark"/>
-                
+
+                <div className = "CompleteGoal">
+                    <p className = "CompleteGoalText1">{progressCounter}/60</p>
+                    <p className = "ProgCountAndPetPointSubText">Days</p>
+                </div>
             </div>
             );
         }
@@ -127,18 +134,16 @@ function Home() {
                         let currGoal = goalArray[goalIndex].goal;
 
                         let progressCounter = goalArray[goalIndex].progressCounter;
-                        let petPoints = goalArray[goalIndex].petPoints;
 
-                        // TEST: console.log("All user data: ", docSnap.data(), "Goal: ", currGoal);
-                        // TEST: console.log("Progress Counter", progressCounter);
+                        let petPoints = docSnap.data().petPoints;
                         
+                        setCurrGoal(goalArray[goalIndex]);
+
                         setUserGoal(currGoal);
-                        setCurrGoalId(goalArray.length - 1);
-                        
+                        setCurrGoalId(goalArray.length - 1);              
                         setProgressCount(progressCounter);
-                        setPetPoints(petPoints);
-                        
                         setGoalArray(goalArray);
+                        setPetPoints(petPoints);
                     }
 
                 }
@@ -155,6 +160,7 @@ function Home() {
             <div className = "GoalBubble">
                 <p className = "BubbleText">{userGoal}</p>
             </div>
+
 
             <div className = "PetEnvironmentHeader">
                
@@ -182,11 +188,12 @@ function Home() {
             <ProgressButton onClick = {completeGoal}></ProgressButton>
             {!goalComplete && <img className = "ProfessorText" src={ProfText} alt="Professor speech bubble"></img>}
             {popupDisplay &&
-            <LogProgress currGoalId={currGoalId} setPopupDisplay={setPopupDisplay} progressTimestamp={progressTimestamp}/>
+            <LogProgress currGoalId={currGoalId} setPopupDisplay={setPopupDisplay} progressTimestamp={progressTimestamp} setGoalArray={setGoalArray}/>
             }
-            <NavBar goalArray ={goalArray}/>
-            
-            
+
+         
+            {/* Pass goalPetList to navbar, to emulate caching */}
+            <NavBar goalArray={goalArray}/>
         </div>
     );
 }

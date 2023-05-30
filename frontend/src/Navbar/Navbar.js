@@ -5,7 +5,7 @@ import { signOut } from "firebase/auth";
 import { useState } from "react";
 import { DeleteGoal } from "../DeleteGoal/DeleteGoal";
 
-function NavBar(){
+function NavBar(props){
     const user = auth.currentUser;
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
@@ -32,8 +32,9 @@ function NavBar(){
         setIsDeleteGoalOpen(true);
     }
 
+    // Pass goalArray to navbar, to emulate caching
     const navToPetGallery = () => {
-        navigate("../PetGallery");
+        navigate("../PetGallery", {state:{goalArray: props.goalArray}});
     }
     
     const navToHome = () => {
