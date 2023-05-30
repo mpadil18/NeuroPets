@@ -16,7 +16,6 @@ function App() {
   const [isSignedIn, setIsSignedIn] = useState(false);
 
   return (
-    <BrowserRouter>
       <Routes>
 
         <Route path = "" element = {<Login setIsSignedIn={setIsSignedIn} />} /> 
@@ -30,7 +29,6 @@ function App() {
         <Route path = "/goalCompleted" element={<ProtectedRoute isSignedIn={isSignedIn}><GoalCompleted /></ProtectedRoute>} />
 
       </Routes>
-    </BrowserRouter>
 
   );
 }

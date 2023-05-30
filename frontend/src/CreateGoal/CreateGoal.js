@@ -2,10 +2,9 @@ import "./CreateGoal.css"
 import React, { useState } from "react"
 import { auth } from "../Backend/firebaseSetup";
 import { useNavigate } from "react-router-dom"
-import {updateUserInfo, getUserInfo} from '../Backend/handleSubmit';
 import ProfText from "../assets/branding/ProfTextA.svg"; 
+import { createNewGoal } from "../Backend/handleSubmit";
 
-const babyPetCodes = [0, 3, 6];
 function CreateGoal() {
 
   const [goalText, setGoalText] = useState("");
@@ -14,54 +13,29 @@ function CreateGoal() {
   "Dedicate Time to a Hobby", "Learn an Instrument", "Be More Tidy"])
 
   const navigate = useNavigate();
+  const user = auth.currentUser;
 
-  const assignRandomPet = () => {
-    return babyPetCodes[Math.floor(Math.random()*babyPetCodes.length)];
-  }
 
-  const onUpdateNavigate = async (newData) => {
-      // Retrieve most recent goal to error check.
-      // If update properly made, navigate user to Home
-      const user = auth.currentUser;
-      const docSnap = await getUserInfo(user.uid);
-      if (docSnap) {
-        const latestGoal = (docSnap.goalArray)[(docSnap.goalArray).length - 1];
+  // This code probably doesn't work well on mobile...
+  // const onUpdateNavigate = async (newData) => {
+  //     // Retrieve most recent goal to error check.
+  //     // If update properly made, navigate user to Home
+  //     const user = auth.currentUser;
+  //     const docSnap = await getUserInfo(user.uid);
+  //     if (docSnap) {
+  //       const latestGoal = (docSnap.goalArray)[(docSnap.goalArray).length - 1];
 
-          if (latestGoal.goal === newData.goal && latestGoal.pet === newData.pet) {
-            navigate('../Home');
-          }
-          else {
-            console.log("ERROR- not updated properly")
-          }
-      }
-  }
-
-  const updateGoal = async () => {
-    // Get user info, assign the pet, get timestamp
-    // and save (goal, pet) as an object
-    const user = auth.currentUser;
-    const pet = assignRandomPet();
-    const startDate = new Date();
-    const goalTuple = {goal: goalText, pet: pet, curr_date: startDate, progressCounter: 0, logs:[]};
-    if (user) {
-      // Update the user's goal array by getting old data
-      // and pushing the new goal to the list
-      let docSnap = await getUserInfo(user.uid);
-      let tempArr = docSnap.goalArray;
-      tempArr.push(goalTuple);
-
-      updateUserInfo(user.uid, {goalArray: tempArr});
-
-      // sets the activeGoal field to true to indicate that there is now an active goal
-      updateUserInfo(user.uid, {activeGoal: 1});
-
-      // If update properly made, navigate to home
-      onUpdateNavigate(goalTuple);
-    }
-  }
+  //         if (latestGoal.goal === newData.goal && latestGoal.pet === newData.pet) {
+  //           navigate('../Home');
+  //         }
+  //         else {
+  //           console.log("ERROR- not updated properly")
+  //         }
+  //     }
+  // }
 
   const setPresetFunc = (id) => {
-    console.log(presetGoals[Number(id)])
+    // Function used for all preset goals 
     setGoalText(presetGoals[Number(id)]);
     const listOfButts = document.getElementsByClassName("presetbtn");
     for (let i = 0; i < listOfButts.length; i++) {
@@ -72,18 +46,19 @@ function CreateGoal() {
   
   const submithandler = (e) => {
     e.preventDefault()
-    console.log("I GOT CALLED");
     
     if (goalText.length === 0){
       setErrorMsg("Please fill in a goal");
     } else {
-      updateGoal();
+      createNewGoal(user.uid, goalText);
+      navigate('../Home'); 
     }
   }
 
 
   const accordionClick = (accId) => {
-    if (accId === "customGoal") {
+    // Conditionally displaying an accordian based on the user choice - 
+    if (accId === "customGoal") { 
       document.getElementById("presetGoalDrop").style.display = "none";
       if (document.getElementById("customGoalDrop").style.display === "inline-block") {
         document.getElementById("customGoalDrop").style.display = "none";
@@ -92,7 +67,7 @@ function CreateGoal() {
         document.getElementById("customGoalDrop").style.display = "inline-block";
       }
     } 
-    else {
+    else { // Otherwise display presetGoal dropdown
       document.getElementById("customGoalDrop").style.display = "none";
       if (document.getElementById("presetGoalDrop").style.display === "inline-block") {
         document.getElementById("presetGoalDrop").style.display = "none";
@@ -107,6 +82,7 @@ function CreateGoal() {
     }
     setGoalText("");
 } 
+
     return (
       <div className="CreateGoal">
         <div className="InputBubble">
