@@ -18,8 +18,12 @@ const handleSubmit = (testdata) => {
 // Retrieves all info from all_data pertaining to user
 export async function getUserInfo (userid) {
     const docRef = doc(db, "all_data", userid);
-    let docSnap = await getDoc(docRef);
-    return docSnap.data()
+    try {
+        let docSnap = await getDoc(docRef);
+        return docSnap.data()
+    } catch (err) {
+        console.log("Error on getUserInfo: ", err);
+    }
 }
 
 // Takes userid and data, updates in the database

@@ -1,0 +1,80 @@
+.PetGallery {
+    background: url("../assets/branding/wave.svg") no-repeat center bottom;
+    min-height: 100vh;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.PetCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #EEEEEE;
+    box-shadow: 4px 4px 1px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 180px;
+    height: 260px;
+    margin: 5px;
+    border-radius: 10px;
+}
+
+.Gallery {
+    display: flex;
+    justify-content: space-between;
+}
+
+.HeaderBubble {
+    width: 90%;
+    background: #F9F9F9;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    font-family: 'Poppins';
+    font-style: italic;
+    font-size: 40px;
+    text-align: center;
+    padding: 10px 0px;
+}
+
+.newBubbleButton {
+    width: 130px;
+    height: 37px;
+    background-color: #F48F9C;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 14px;
+    text-align: center;
+    color: #FFFFFF;
+    margin-top: auto;
+    margin-bottom: 10px;
+}
+
+.PetName {
+    margin: 15px 0px;
+    font-weight: bold;
+}
+
+.CardGoalText {
+    margin: 0px;
+}
+
+.PetPic { 
+    height: 125px;
+}
+
+.disabledBubbleButton {
+    width: 130px;
+    height: 37px;
+    background-color: #F48F9C;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 14px;
+    text-align: center;
+    color: #FFFFFF;
+    margin-top: auto;
+    margin-bottom: 10px;
+    background-color: #BE747D;
+}

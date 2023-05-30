@@ -32,6 +32,14 @@ function NavBar(){
         setIsDeleteGoalOpen(true);
     }
 
+    const navToPetGallery = () => {
+        navigate("../PetGallery");
+    }
+    
+    const navToHome = () => {
+        navigate("../Home");
+    }
+    
     function Logout(){
         return (
         <>
@@ -60,8 +68,8 @@ function NavBar(){
         <nav className = "navbar">
             <ul className = "navlist">
                 <li onClick = {openDeleteGoal} className = "editGoalIcon"/>
-                <li className = "petHabitatIcon"/>
-                <li className = "homeIcon"/>
+                <li className = "petHabitatIcon" onClick={navToPetGallery}/>
+                <li className = "homeIcon" onClick={navToHome}/>
                 <li className = "shopIcon"/>
                 <li className = "settingsIcon" onClick = {setOpen}/>
             </ul>
