@@ -165,7 +165,7 @@ function Home() {
             <div className = "PetEnvironmentHeader">
                
                 <div className = "PetHeader">
-                    <DisplayPet/>
+                    <DisplayPet currGoal={currGoal}/>
                 </div>
                 
                 <div className = "WindowTextBox1">
