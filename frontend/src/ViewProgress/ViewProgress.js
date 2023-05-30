@@ -14,7 +14,7 @@ function ViewProgress() {
     // In this case, we get the list of all goals (used for caching in the PetGallery),
     // the current goal, and the list of logs associated with the current goal
     const [goalArray] = useState(location.state.goalArray);
-    const [listOfLogs] = useState(location.state.logs);
+    const [listOfLogs] = useState(location.state.goalArray[location.state.goalId].logs);
     const [currGoal] = useState(location.state.goal);
 
     /* VARIABLE DEFINITIONS:
@@ -45,6 +45,11 @@ function ViewProgress() {
     // sets the displayedDateLog with the converted date, and the associated log.
     const checkMarkClick = (logIndex) => {
         let dateObj = new Date((listOfLogs[logIndex].date).seconds * 1000);
+        // Edge case check: if object is result of recent cache, it's a JS date object
+        // Otherwise, it's a firebase timestamp
+        if (isNaN(dateObj)) {
+            dateObj = listOfLogs[logIndex].date;
+        }
         let selectedMo = dateObj.getMonth();
         let selectedDay = dateObj.getDate();
         let selectedYr = dateObj.getFullYear() % 100;
@@ -59,14 +64,24 @@ function ViewProgress() {
         // by getting the first and last items in the list of logs, 
         // and converting the Mo/Yr timestamp into a readable string
         const setHeaderDateForGoal = () => {
+            console.log(listOfLogs)
             if (listOfLogs.length > 0) {
-                let dateObj = new Date((listOfLogs[0].date).seconds * 1000);
-                let firstMonth = dateObj.getMonth();
-                let firstYear = dateObj.getFullYear();
-                dateObj = new Date((listOfLogs[listOfLogs.length-1].date).seconds * 1000);
-                let secondMonth = dateObj.getMonth();
-                let secondYear = dateObj.getFullYear();
+                // If these date conversions are successful, then it means they were Firebase timestamps
+                let firstDateObj = new Date((listOfLogs[0].date).seconds * 1000);
+                let secondDateObj = new Date((listOfLogs[listOfLogs.length-1].date).seconds * 1000);
 
+                /* If User accesses viewprogress RIGHT AFTER making progress on Home,
+                then the current timestamp is a JS one, and should be converted as such */
+                if (isNaN(firstDateObj)) {
+                    firstDateObj = listOfLogs[0].date
+                }
+                if (isNaN(secondDateObj)) {
+                    secondDateObj = listOfLogs[listOfLogs.length-1].date;
+                }
+                let firstMonth = firstDateObj.getMonth()
+                let firstYear = firstDateObj.getYear()
+                let secondMonth = secondDateObj.getMonth()
+                let secondYear = secondDateObj.getFullYear()
                 setMonths([allMonths[firstMonth], allMonths[secondMonth]]);
                 setYears([(firstYear % 100), (secondYear % 100)]);
             }
