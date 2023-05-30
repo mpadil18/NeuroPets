@@ -17,11 +17,17 @@ function LogProgress(props) {
     const closePopup = () => {
         props.setPopupDisplay(false);
         // if progressCount reaches 60 days, navigate to the congrats screen
+        console.log("here");
         let progressCount = props.progressCounter;
+        console.log(progressCount);
         const desiredProgressDays = 60;
         if (progressCount == desiredProgressDays) {
             console.log("congrats!");
-            navigate('/goalCompleted');
+            // sending currGoal as a prop to the goalCompleted screen so that
+            // goalCompleted has the currGoal data to be able to give to the DisplayPet component
+            let goal = props.currGoal;
+            console.log(goal);
+            navigate('/goalCompleted', {state: {currGoal : goal}} );
         }
     }
 

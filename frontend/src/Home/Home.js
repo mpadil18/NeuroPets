@@ -24,7 +24,7 @@ function Home() {
     const [progressTimestamp, setProgressTimestamp] = useState(null);
     const [goalArray, setGoalArray] = useState([])
     const [petPoints, setPetPoints] = useState(0);
-    const [activeGoal, setActiveGoalExists] = useState(true);
+    const [activeGoal, setActiveGoalExists] = useState(false);
     const updateCountAndProgressLogs = async (dateDone) => {
         try {
             const user = auth.currentUser;
@@ -124,7 +124,8 @@ function Home() {
                     if (docSnap.exists()) {
                         // Sets the state to whether there are active goals or not
                         // the !! is used to convert the retrieved value from 0/1 to true/false
-                        setActiveGoalExists(!!(docSnap.data().activeGoal));
+                        setActiveGoalExists((docSnap.data().activeGoal));
+                        console.log(docSnap.data().activeGoal);
                         
                         // Sets the current state of whether the goal is complete
                         checkIfGoalComplete(docSnap.data().lastProgressMade);
@@ -165,7 +166,7 @@ function Home() {
                 <ProgressButton onClick = {completeGoal}></ProgressButton>
                 {!goalComplete && <img className = "ProfessorText" src={ProfText} alt="Professor speech bubble"></img>}
                 {popupDisplay &&
-                <LogProgress currGoalId={currGoalId} setPopupDisplay={setPopupDisplay} progressTimestamp={progressTimestamp} setGoalArray={setGoalArray}/>
+                <LogProgress currGoal = {currGoal} currGoalId={currGoalId} setPopupDisplay={setPopupDisplay} progressCounter={progressCounter} progressTimestamp={progressTimestamp} setGoalArray={setGoalArray}/>
                 }
             </div>
             }
