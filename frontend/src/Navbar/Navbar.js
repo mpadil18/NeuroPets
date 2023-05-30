@@ -64,7 +64,7 @@ function NavBar(){
 
 
     return(
-    <>
+    <div className = "Footer">
         <nav className = "navbar">
             <ul className = "navlist">
                 <li onClick = {openDeleteGoal} className = "editGoalIcon"/>
@@ -76,7 +76,7 @@ function NavBar(){
         </nav>
         <Logout/>
         <DeleteGoal user={user} isDeleteGoalOpen={isDeleteGoalOpen} setIsDeleteGoalOpen={setIsDeleteGoalOpen}/>
-    </>
+    </div>
     )
 }
 

@@ -34,9 +34,10 @@ function Home() {
                      var goalArray = docSnap.data().goalArray;
                      let goalIndex = goalArray.length - 1;
                      let progressCount = goalArray[goalIndex].progressCounter + 1;
-                     
+                     let petPoints = goalArray[goalIndex].petPoints + 5;
+
                      goalArray[goalIndex].progressCounter = progressCount;
-                     goalArray[goalIndex].petPoints += 5;
+                     goalArray[goalIndex].petPoints = petPoints;
                      // Initializes the progress log to be empty upon completion
                      goalArray[goalIndex].logs.push({"date": dateDone, "log": ""});
                      await updateDoc(docRef, {
@@ -67,6 +68,7 @@ function Home() {
         const user = auth.currentUser; 
         setGoalComplete(true);
         setProgressCount(progressCounter + 1);
+        setPetPoints(petPoints + 5);
         updateUserInfo(user.uid, {lastProgressMade: completedDate});
         updateCountAndProgressLogs(completedDate);
         setTimeout(function(){
@@ -80,10 +82,7 @@ function Home() {
             return (
             <div>
                 <img className = "GreenCheck" src = {GreenCheckmark} alt = "green checkmark"/>
-                <div className = "CompleteGoal">
-                    <p className = "CompleteGoalText1">{progressCounter}/60</p>
-                    <p className = "ProgCountAndPetPointSubText">Days</p>
-                </div>
+                
             </div>
             );
         }
@@ -126,10 +125,11 @@ function Home() {
                         let goalIndex = goalArray.length - 1;
                         let currGoal = goalArray[goalIndex].goal;
                         let progressCounter = goalArray[goalIndex].progressCounter;
+                        let petPoints = goalArray[goalIndex].petPoints;
                         // TEST: console.log("All user data: ", docSnap.data(), "Goal: ", currGoal);
                         // TEST: console.log("Progress Counter", progressCounter);
 
-                        let petPoints = docSnap.data().petPoints;
+                        
 
                         setUserGoal(currGoal);
                         setCurrGoalId(goalArray.length - 1);
@@ -150,7 +150,25 @@ function Home() {
             <div className = "GoalBubble">
                 <p className = "BubbleText">{userGoal}</p>
             </div>
-            <DisplayPet/>
+            <div className = "PetEnvironmentHeader">
+                <p className = "PetHeader">
+                    <DisplayPet/>
+                </p>
+                
+                <div className = "WindowTextBox1">
+                        <p className = "WindowText">Day</p>
+                        <p className = "WindowText">{progressCounter}</p>
+                </div>
+
+                <div className = "WindowTextBox2">
+                        <p className = "WindowText">Points</p>
+                       
+                </div>
+                <div className = "WindowTextBox3">
+                    <p className = "WindowText">{petPoints}</p>
+                </div>    
+            </div>
+           
 
             <ProgressButton onClick = {completeGoal}></ProgressButton>
             {!goalComplete && <img className = "ProfessorText" src={ProfText} alt="Professor speech bubble"></img>}
@@ -158,6 +176,8 @@ function Home() {
             <LogProgress currGoalId={currGoalId} setPopupDisplay={setPopupDisplay} progressTimestamp={progressTimestamp}/>
             }
             <NavBar/>
+            
+            
         </div>
     );
 }
