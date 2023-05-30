@@ -87,19 +87,15 @@ function Home() {
             <div>
                 <img className = "GreenCheck" src = {GreenCheckmark} alt = "green checkmark"/>
 
-                <div className = "CompleteGoal">
-                    <p className = "CompleteGoalText1">{progressCounter}/60</p>
-                    <p className = "ProgCountAndPetPointSubText">Days</p>
-                </div>
             </div>
             );
         }
         else {
             return (
-                <div className = "CompleteGoal">
+                <button className = "GoalButton" onClick = {completeGoal}>
                     <p className = "G1Text">{progressCounter}/60 Days</p>
                     <p className = "G2Text">Complete...?</p>
-                </div>
+                </button>
             );
         }
     }
