@@ -156,16 +156,23 @@ function Home() {
 
     return (
         <div className = "Home">
-            <div className = "GoalBubble">
-                <p className = "BubbleText">{userGoal}</p>
+            {activeGoal &&
+            <div className = "ActiveGoal">
+                <div className = "GoalBubble">
+                    <p className = "BubbleText">{userGoal}</p>
+                </div>
+                <DisplayPet currGoal = {currGoal} />
+                <ProgressButton onClick = {completeGoal}></ProgressButton>
+                {!goalComplete && <img className = "ProfessorText" src={ProfText} alt="Professor speech bubble"></img>}
+                {popupDisplay &&
+                <LogProgress currGoalId={currGoalId} setPopupDisplay={setPopupDisplay} progressTimestamp={progressTimestamp} setGoalArray={setGoalArray}/>
+                }
             </div>
-            <DisplayPet currGoal = {currGoal} />
-
-            <ProgressButton onClick = {completeGoal}></ProgressButton>
-            {!goalComplete && <img className = "ProfessorText" src={ProfText} alt="Professor speech bubble"></img>}
-            {popupDisplay &&
-            <LogProgress currGoalId={currGoalId} setPopupDisplay={setPopupDisplay} progressTimestamp={progressTimestamp} setGoalArray={setGoalArray}/>
             }
+            
+            {!activeGoal &&
+            <NoActiveGoal/>
+            }   
             
             {/* Pass goalPetList to navbar, to emulate caching */}
             <NavBar goalArray={goalArray}/>

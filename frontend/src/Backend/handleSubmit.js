@@ -66,6 +66,8 @@ export async function createNewGoal(userid, goalText){
       // and pushing the new goal to the list
     try {
         let docSnap = await getUserInfo(userid);
+        // sets the activeGoal field to true to indicate that there is now an active goal
+        updateUserInfo(userid, {activeGoal: 1});
         let tempArr = docSnap.goalArray;
         tempArr.push(goalTuple);
         updateUserInfo(userid, {goalArray: tempArr});    
