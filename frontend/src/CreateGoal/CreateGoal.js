@@ -44,7 +44,7 @@ function CreateGoal() {
       const user = auth.currentUser;
       const pet = assignRandomPet();
       const startDate = new Date();
-      const goalTuple = {goal: goalText, pet: pet, 
+      const goalTuple = {goal: goalText, pet: pet, petName: "",
                          curr_date: startDate, progressCounter: 0, 
                          petPoints: 0, logs:[]};
       if (user) {

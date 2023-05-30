@@ -19,10 +19,11 @@ function Home() {
     const [goalComplete, setGoalComplete] = useState(false);
     const [progressCounter, setProgressCount] = useState(0);
     const [userGoal, setUserGoal] = useState(null);
+    const [petPoints, setPetPoints] = useState(0);
     const [popupDisplay, setPopupDisplay] = useState(false);
     const [currGoalId, setCurrGoalId] = useState(null);
     const [progressTimestamp, setProgressTimestamp] = useState(null);
-    const [petPoints, setPetPoints] = useState(0);
+    const [goalArray, setGoalArray] = useState([]);
 
     const updateCountAndProgressLogs = async (dateDone) => {
         try {
@@ -33,11 +34,10 @@ function Home() {
                  if (docSnap.exists()) {
                      var goalArray = docSnap.data().goalArray;
                      let goalIndex = goalArray.length - 1;
-                     let progressCount = goalArray[goalIndex].progressCounter + 1;
-                     let petPoints = goalArray[goalIndex].petPoints + 5;
+                     //let progressCounter = goalArray[goalIndex].progressCounter + 1;
+                     goalArray[goalIndex].progressCounter += 1;
+                     goalArray[goalIndex].petPoints += 5
 
-                     goalArray[goalIndex].progressCounter = progressCount;
-                     goalArray[goalIndex].petPoints = petPoints;
                      // Initializes the progress log to be empty upon completion
                      goalArray[goalIndex].logs.push({"date": dateDone, "log": ""});
                      await updateDoc(docRef, {
@@ -88,10 +88,10 @@ function Home() {
         }
         else {
             return (
-                <button className = "GoalButton" onClick = {completeGoal}>
+                <div className = "CompleteGoal">
                     <p className = "G1Text">{progressCounter}/60 Days</p>
                     <p className = "G2Text">Complete...?</p>
-                </button>
+                </div>
             );
         }
     }
@@ -124,17 +124,20 @@ function Home() {
                         let goalArray = docSnap.data().goalArray;
                         let goalIndex = goalArray.length - 1;
                         let currGoal = goalArray[goalIndex].goal;
+
                         let progressCounter = goalArray[goalIndex].progressCounter;
                         let petPoints = goalArray[goalIndex].petPoints;
+
                         // TEST: console.log("All user data: ", docSnap.data(), "Goal: ", currGoal);
                         // TEST: console.log("Progress Counter", progressCounter);
-
                         
-
                         setUserGoal(currGoal);
                         setCurrGoalId(goalArray.length - 1);
+                        
                         setProgressCount(progressCounter);
                         setPetPoints(petPoints);
+                        
+                        setGoalArray(goalArray);
                     }
 
                 }
@@ -171,7 +174,7 @@ function Home() {
                 <div className = "WindowTextBox3">
                     <p className = "WindowText">{petPoints}</p>
                 </div>    
-                
+
             </div>
            
 
@@ -180,7 +183,7 @@ function Home() {
             {popupDisplay &&
             <LogProgress currGoalId={currGoalId} setPopupDisplay={setPopupDisplay} progressTimestamp={progressTimestamp}/>
             }
-            <NavBar/>
+            <NavBar goalArray ={goalArray}/>
             
             
         </div>
