@@ -24,7 +24,6 @@ function Home() {
     const [currGoalId, setCurrGoalId] = useState(null);
     const [progressTimestamp, setProgressTimestamp] = useState(null);
     const [goalArray, setGoalArray] = useState([]);
-    const [petPoints, setPetPoints] = useState(0);
 
     const updateCountAndProgressLogs = async (dateDone) => {
         try {
@@ -35,8 +34,9 @@ function Home() {
                  if (docSnap.exists()) {
                      var goalArray = docSnap.data().goalArray;
                      let goalIndex = goalArray.length - 1;
-                     let progressCounter = goalArray[goalIndex].progressCounter + 1;
-                     goalArray[goalIndex].progressCounter = progressCounter;
+                     let progressCount = goalArray[goalIndex].progressCounter + 1;
+                     
+                     goalArray[goalIndex].progressCounter = progressCount;
                      goalArray[goalIndex].petPoints += 5;
 
                      // Initializes the progress log to be empty upon completion
@@ -84,8 +84,6 @@ function Home() {
             <div>
                 <img className = "GreenCheck" src = {GreenCheckmark} alt = "green checkmark"/>
                 
-                
-
             </div>
             );
         }
