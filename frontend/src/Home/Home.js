@@ -20,7 +20,7 @@ function Home() {
     const [userGoal, setUserGoal] = useState(null);
     const [popupDisplay, setPopupDisplay] = useState(false);
     const [currGoalId, setCurrGoalId] = useState(null);
-    const [activeGoal, setActiveGoalExists] = useState(false);
+    const [activeGoal, setActiveGoalExists] = useState(true);
 
     const updateCount = async () => {
         try {
