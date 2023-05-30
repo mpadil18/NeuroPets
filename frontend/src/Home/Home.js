@@ -147,26 +147,31 @@ function Home() {
 
     return (
         <div className = "Home">
+           
             <div className = "GoalBubble">
                 <p className = "BubbleText">{userGoal}</p>
             </div>
+
             <div className = "PetEnvironmentHeader">
-                <p className = "PetHeader">
+               
+                <div className = "PetHeader">
                     <DisplayPet/>
-                </p>
+                </div>
                 
                 <div className = "WindowTextBox1">
-                        <p className = "WindowText">Day</p>
-                        <p className = "WindowText">{progressCounter}</p>
+                    <p className = "WindowText">Day</p>
+                    <p className = "WindowText">{progressCounter}</p>
                 </div>
 
                 <div className = "WindowTextBox2">
-                        <p className = "WindowText">Points</p>
+                    <p className = "WindowText">Points</p>
                        
                 </div>
+
                 <div className = "WindowTextBox3">
                     <p className = "WindowText">{petPoints}</p>
                 </div>    
+                
             </div>
            
 
