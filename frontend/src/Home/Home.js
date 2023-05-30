@@ -51,6 +51,7 @@ function Home() {
                 }
             }     
         } catch (error) {
+            
             console.log("ERROR ON UPDATE COUNT");
         } 
     }
@@ -129,6 +130,7 @@ function Home() {
                         let goalIndex = goalArray.length - 1;
                         let currGoal = goalArray[goalIndex].goal;
 
+                        
                         let progressCounter = goalArray[goalIndex].progressCounter;
                         let petPoints = goalArray[goalIndex].petPoints;
                         
@@ -142,6 +144,7 @@ function Home() {
 
                 }
             } catch (error) {
+                console.log(error);
                 console.log("ERROR GETTING ALL DATA");
             }
         }
