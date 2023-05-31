@@ -34,6 +34,7 @@ function CreateGoal() {
   //     }
   // }
 
+
   const setPresetFunc = (id) => {
     // Function used for all preset goals 
     setGoalText(presetGoals[Number(id)]);
@@ -51,7 +52,10 @@ function CreateGoal() {
       setErrorMsg("Please fill in a goal");
     } else {
       createNewGoal(user.uid, goalText);
-      navigate('../Home'); 
+      setTimeout(function(){
+        navigate('../Home');
+      }, 500);
+      
     }
   }
 
