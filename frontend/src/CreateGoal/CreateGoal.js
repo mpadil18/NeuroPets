@@ -3,11 +3,10 @@ import React, { useState } from "react"
 import { auth } from "../Backend/firebaseSetup";
 import { useNavigate } from "react-router-dom"
 import ProfText from "../assets/branding/ProfTextA.svg"; 
-import { createNewGoal } from "../Backend/handleSubmit";
-import PetContract from "./petContract";
+import { useHistory } from 'react-router-dom';
 
 function CreateGoal() {
-
+  const history = useHistory();
   const [goalText, setGoalText] = useState("");
   const [errorMsg, setErrorMsg] = useState('');
   const [presetGoals] = useState(["Eat Healthier", "Be More Active", "Improve Mental Health", "Focus on Relationships", 
@@ -15,26 +14,6 @@ function CreateGoal() {
 
   const navigate = useNavigate();
   const user = auth.currentUser;
-
-
-  // This code probably doesn't work well on mobile...
-  // const onUpdateNavigate = async (newData) => {
-  //     // Retrieve most recent goal to error check.
-  //     // If update properly made, navigate user to Home
-  //     const user = auth.currentUser;
-  //     const docSnap = await getUserInfo(user.uid);
-  //     if (docSnap) {
-  //       const latestGoal = (docSnap.goalArray)[(docSnap.goalArray).length - 1];
-
-  //         if (latestGoal.goal === newData.goal && latestGoal.pet === newData.pet) {
-  //           navigate('../Home');
-  //         }
-  //         else {
-  //           console.log("ERROR- not updated properly")
-  //         }
-  //     }
-  // }
-
 
   const setPresetFunc = (id) => {
     // Function used for all preset goals 
@@ -53,11 +32,7 @@ function CreateGoal() {
     if (goalText.length === 0){
       setErrorMsg("Please fill in a goal");
     } else {
-     // createNewGoal(user.uid, goalText); // Call this function in the petContract instead
-      setTimeout(function(){
-        navigate('../Home');
-      }, 500);
-      
+      history.push('/petContract', { goalText: goalText });
     }
   }
 
