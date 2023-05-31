@@ -15,26 +15,6 @@ function CreateGoal() {
   const navigate = useNavigate();
   const user = auth.currentUser;
 
-
-  // This code probably doesn't work well on mobile...
-  // const onUpdateNavigate = async (newData) => {
-  //     // Retrieve most recent goal to error check.
-  //     // If update properly made, navigate user to Home
-  //     const user = auth.currentUser;
-  //     const docSnap = await getUserInfo(user.uid);
-  //     if (docSnap) {
-  //       const latestGoal = (docSnap.goalArray)[(docSnap.goalArray).length - 1];
-
-  //         if (latestGoal.goal === newData.goal && latestGoal.pet === newData.pet) {
-  //           navigate('../Home');
-  //         }
-  //         else {
-  //           console.log("ERROR- not updated properly")
-  //         }
-  //     }
-  // }
-
-
   const setPresetFunc = (id) => {
     // Function used for all preset goals 
     setGoalText(presetGoals[Number(id)]);
