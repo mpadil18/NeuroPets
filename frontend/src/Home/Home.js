@@ -130,9 +130,7 @@ function Home() {
                         let petPoints = docSnap.data().petPoints;
                         let goalIndex = goalArray.length - 1;
                         let currGoal = goalArray[goalIndex].goal;
-
-                        let progressCounter = goalArray[goalIndex].progressCounter; 
-                        
+                        let progressCounter = goalArray[goalIndex].progressCounter;        
                         setCurrGoal(goalArray[goalIndex]);
                         setUserGoal(currGoal);
                         setCurrGoalId(goalArray.length - 1);              
