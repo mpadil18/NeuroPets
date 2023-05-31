@@ -13,6 +13,8 @@ import NoActiveGoal from "../NoActiveGoal/NoActiveGoal";
 
 
 
+
+
 function Home() {
 
     const [goalComplete, setGoalComplete] = useState(false);
@@ -24,7 +26,8 @@ function Home() {
     const [progressTimestamp, setProgressTimestamp] = useState(null);
     const [goalArray, setGoalArray] = useState([])
     const [petPoints, setPetPoints] = useState(0);
-    const [activeGoal, setActiveGoalExists] = useState(false);
+    const [activeGoal, setActiveGoalExists] = useState(true);
+
     const updateCountAndProgressLogs = async (dateDone) => {
         try {
             const user = auth.currentUser;
@@ -50,6 +53,7 @@ function Home() {
                 }
             }     
         } catch (error) {
+            
             console.log("ERROR ON UPDATE COUNT");
         } 
     }
@@ -71,6 +75,7 @@ function Home() {
         const user = auth.currentUser; 
         setGoalComplete(true);
         setProgressCount(progressCounter + 1);
+        setPetPoints(petPoints + 5);
         updateUserInfo(user.uid, {lastProgressMade: completedDate});
         updateCountAndProgressLogs(completedDate);
         setTimeout(function(){
@@ -84,10 +89,7 @@ function Home() {
             return (
             <div>
                 <img className = "GreenCheck" src = {GreenCheckmark} alt = "green checkmark"/>
-                <div className = "CompleteGoal">
-                    <p className = "CompleteGoalText1">{progressCounter}/60</p>
-                    <p className = "ProgCountAndPetPointSubText">Days</p>
-                </div>
+
             </div>
             );
         }
@@ -124,7 +126,7 @@ function Home() {
                     if (docSnap.exists()) {
                         // Sets the state to whether there are active goals or not
                         // the !! is used to convert the retrieved value from 0/1 to true/false
-                        setActiveGoalExists((docSnap.data().activeGoal));
+                        setActiveGoalExists(!!(docSnap.data().activeGoal));
                         console.log(docSnap.data().activeGoal);
                         
                         // Sets the current state of whether the goal is complete
@@ -134,21 +136,22 @@ function Home() {
                         let goalArray = docSnap.data().goalArray;
                         let goalIndex = goalArray.length - 1;
                         let currGoal = goalArray[goalIndex].goal;
-                        let progressCounter = goalArray[goalIndex].progressCounter;
 
-                        let petPoints = docSnap.data().petPoints;
+                        
+                        let progressCounter = goalArray[goalIndex].progressCounter;
+                        let petPoints = goalArray[goalIndex].petPoints;
                         
                         setCurrGoal(goalArray[goalIndex]);
                         setUserGoal(currGoal);
-                        setCurrGoalId(goalArray.length - 1);
+                        setCurrGoalId(goalArray.length - 1);              
                         setProgressCount(progressCounter);
                         setGoalArray(goalArray);
                         setPetPoints(petPoints);
-
                     }
 
                 }
             } catch (error) {
+                console.log(error);
                 console.log("ERROR GETTING ALL DATA");
             }
         }
@@ -159,10 +162,34 @@ function Home() {
         <div className = "Home">
             {activeGoal &&
             <div className = "ActiveGoal">
-                <div className = "GoalBubble">
+               
+            <div className = "GoalBubble">
                     <p className = "BubbleText">{userGoal}</p>
                 </div>
-                <DisplayPet currGoal = {currGoal} />
+    
+
+            <div className = "PetEnvironmentHeader">
+               
+                <div className = "PetHeader">
+                    <DisplayPet currGoal={currGoal}/>
+                </div>
+                
+                <div className = "WindowTextBox1">
+                    <p className = "WindowText">Day</p>
+                    <p className = "WindowText">{progressCounter}</p>
+                </div>
+
+                <div className = "WindowTextBox2">
+                    <p className = "WindowText">Points</p>
+                       
+                </div>
+
+                <div className = "WindowTextBox3">
+                    <p className = "WindowText">{petPoints}</p>
+                </div>    
+
+            </div>
+           
                 <ProgressButton onClick = {completeGoal}></ProgressButton>
                 {!goalComplete && <img className = "ProfessorText" src={ProfText} alt="Professor speech bubble"></img>}
                 {popupDisplay &&
@@ -174,7 +201,8 @@ function Home() {
             {!activeGoal &&
             <NoActiveGoal/>
             }   
-            
+
+         
             {/* Pass goalPetList to navbar, to emulate caching */}
             <NavBar goalArray={goalArray}/>
         </div>
