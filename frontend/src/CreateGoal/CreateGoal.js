@@ -4,6 +4,7 @@ import { auth } from "../Backend/firebaseSetup";
 import { useNavigate } from "react-router-dom"
 import ProfText from "../assets/branding/ProfTextA.svg"; 
 import { createNewGoal } from "../Backend/handleSubmit";
+import PetContract from "./petContract";
 
 function CreateGoal() {
 
@@ -45,13 +46,14 @@ function CreateGoal() {
     document.getElementById(id).style.backgroundColor = "#152130";
   }
   
+
   const submithandler = (e) => {
     e.preventDefault()
     
     if (goalText.length === 0){
       setErrorMsg("Please fill in a goal");
     } else {
-      createNewGoal(user.uid, goalText);
+     // createNewGoal(user.uid, goalText); // Call this function in the petContract instead
       setTimeout(function(){
         navigate('../Home');
       }, 500);
