@@ -11,10 +11,6 @@ import NavBar from "../Navbar/Navbar";
 import LogProgress from "../LogProgress/LogProgress"
 import NoActiveGoal from "../NoActiveGoal/NoActiveGoal";
 
-
-
-
-
 function Home() {
 
     const [goalComplete, setGoalComplete] = useState(false);
