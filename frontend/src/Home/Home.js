@@ -38,12 +38,12 @@ function Home() {
                      let progressCount = goalArray[goalIndex].progressCounter + 1;
                      
                      goalArray[goalIndex].progressCounter = progressCount;
-                     goalArray[goalIndex].petPoints += 5;
+                     
                      // Initializes the progress log to be empty upon completion
                      goalArray[goalIndex].logs.push({"date": dateDone, "log": ""});
                      await updateDoc(docRef, {
                         goalArray : goalArray,
-                        
+                        petPoints : petPoints + 5
                      });
                      
                      // Updates goal array, to ensure update is made in Pet Gallery/View Progress
@@ -127,13 +127,10 @@ function Home() {
                         
                         // Gets the user's goal and saves to state
                         let goalArray = docSnap.data().goalArray;
+                        let petPoints = docSnap.data().petPoints;
                         let goalIndex = goalArray.length - 1;
                         let currGoal = goalArray[goalIndex].goal;
-
-                        
-                        let progressCounter = goalArray[goalIndex].progressCounter;
-                        let petPoints = goalArray[goalIndex].petPoints;
-                        
+                        let progressCounter = goalArray[goalIndex].progressCounter;        
                         setCurrGoal(goalArray[goalIndex]);
                         setUserGoal(currGoal);
                         setCurrGoalId(goalArray.length - 1);              
