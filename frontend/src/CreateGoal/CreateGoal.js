@@ -1,19 +1,15 @@
 import "./CreateGoal.css"
 import React, { useState } from "react"
-import { auth } from "../Backend/firebaseSetup";
 import { useNavigate } from "react-router-dom"
 import ProfText from "../assets/branding/ProfTextA.svg"; 
-import { useHistory } from 'react-router-dom';
 
 function CreateGoal() {
-  const history = useHistory();
   const [goalText, setGoalText] = useState("");
   const [errorMsg, setErrorMsg] = useState('');
   const [presetGoals] = useState(["Eat Healthier", "Be More Active", "Improve Mental Health", "Focus on Relationships", 
   "Dedicate Time to a Hobby", "Learn an Instrument", "Be More Tidy"])
 
   const navigate = useNavigate();
-  const user = auth.currentUser;
 
   const setPresetFunc = (id) => {
     // Function used for all preset goals 
@@ -32,7 +28,8 @@ function CreateGoal() {
     if (goalText.length === 0){
       setErrorMsg("Please fill in a goal");
     } else {
-      history.push('/petContract', { goalText: goalText });
+      console.log(goalText + "in create goal");
+      navigate('/petContract', { state:{goalText: goalText || {} }});
     }
   }
 
@@ -108,7 +105,7 @@ function CreateGoal() {
           {errorMsg && <p style={{margin: 0}}> Error: {errorMsg}</p>}
 
           <button className="bubbleButton submission" onClick = {submithandler}> 
-            Save Goal
+            Continue
           </button>
         </div>
 
