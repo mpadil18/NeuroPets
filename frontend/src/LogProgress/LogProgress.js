@@ -21,7 +21,7 @@ function LogProgress(props) {
         let progressCount = props.progressCounter;
         console.log(progressCount);
         const desiredProgressDays = 60;
-        if (progressCount == desiredProgressDays) {
+        if (progressCount === desiredProgressDays) {
             console.log("congrats!");
             // sending currGoal as a prop to the goalCompleted screen so that
             // goalCompleted has the currGoal data to be able to give to the DisplayPet component

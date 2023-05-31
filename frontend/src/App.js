@@ -7,7 +7,7 @@ import PetGallery from "./PetGallery/PetGallery"
 import DocIntro from "./DoctorIntro/DocIntro";
 import ViewProgress from "./ViewProgress/ViewProgress";
 import GoalCompleted from "./GoalCompleted/GoalCompleted";
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute'; // import the ProtectedRoute component
 import { useState } from 'react';
 

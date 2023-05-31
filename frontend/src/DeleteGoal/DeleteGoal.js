@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom"
 import { getDoc, updateDoc, doc} from "firebase/firestore"; 
 import { db } from "../Backend/firebaseSetup.js";
-import { getUserInfo } from "../Backend/handleSubmit";
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/firestore';
 
