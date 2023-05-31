@@ -41,13 +41,15 @@ function DeleteGoal(props) {
             <div className = "DeleteGoalPopup">
                 <div className = "DeleteGoal">
                     <div className = "DeleteGoalInputBubble">
-                        <div className = "bubbleHeader">
-                            <p>Would you like to delete your current goal and create a new one?</p>
-                            <p>This action will delete your current progress!</p>
-                        </div>
-                        <div className = "deleteGoalButtons">
-                            <button onClick = {deleteCurrentGoal} className = "deleteGoalButton"> Yes </button>
-                            <button onClick = {closeDeleteGoal} className = "deleteGoalButton"> No </button>
+                        <div className = "ActiveGoalExists">
+                            <div className = "bubbleHeader">
+                                <p>Would you like to delete your current goal and create a new one?</p>
+                                <p>This action will delete your current progress!</p>
+                            </div>
+                            <div className = "deleteGoalButtons">
+                                <button onClick = {deleteCurrentGoal} className = "deleteGoalButton"> Yes </button>
+                                <button onClick = {closeDeleteGoal} className = "deleteGoalButton"> No </button>
+                            </div>
                         </div>
                     </div>
                 </div>
