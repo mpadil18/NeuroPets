@@ -5,14 +5,11 @@ import GreenCheckmark from "../assets/elements/GreenCheckmark.svg"
 import { useEffect, useState } from "react";
 import { getDoc, doc, updateDoc } from "firebase/firestore"; 
 import { updateUserInfo } from '../Backend/handleSubmit';
-import { auth, db} from "../Backend/firebaseSetup.js";
+import { auth, db } from "../Backend/firebaseSetup.js";
 import DisplayPet from "./DisplayPet";
 import NavBar from "../Navbar/Navbar";
 import LogProgress from "../LogProgress/LogProgress"
-
-
-
-
+import NoActiveGoal from "../NoActiveGoal/NoActiveGoal";
 
 function Home() {
 
@@ -25,6 +22,7 @@ function Home() {
     const [progressTimestamp, setProgressTimestamp] = useState(null);
     const [goalArray, setGoalArray] = useState([])
     const [petPoints, setPetPoints] = useState(0);
+    const [activeGoal, setActiveGoalExists] = useState(true);
 
     const updateCountAndProgressLogs = async (dateDone) => {
         try {
@@ -122,6 +120,11 @@ function Home() {
                     const docRef = doc(db, 'all_data', user.uid);
                     const docSnap = await getDoc(docRef);
                     if (docSnap.exists()) {
+                        // Sets the state to whether there are active goals or not
+                        // the !! is used to convert the retrieved value from 0/1 to true/false
+                        setActiveGoalExists(!!(docSnap.data().activeGoal));
+                        console.log(docSnap.data().activeGoal);
+                        
                         // Sets the current state of whether the goal is complete
                         checkIfGoalComplete(docSnap.data().lastProgressMade);
                         
@@ -150,11 +153,13 @@ function Home() {
 
     return (
         <div className = "Home">
-           
+            {activeGoal &&
+            <div className = "ActiveGoal">
+               
             <div className = "GoalBubble">
-                <p className = "BubbleText">{userGoal}</p>
-            </div>
-
+                    <p className = "BubbleText">{userGoal}</p>
+                </div>
+    
 
             <div className = "PetEnvironmentHeader">
                
@@ -178,12 +183,17 @@ function Home() {
 
             </div>
            
-
-            <ProgressButton onClick = {completeGoal}></ProgressButton>
-            {!goalComplete && <img className = "ProfessorText" src={ProfText} alt="Professor speech bubble"></img>}
-            {popupDisplay &&
-            <LogProgress currGoalId={currGoalId} setPopupDisplay={setPopupDisplay} progressTimestamp={progressTimestamp} setGoalArray={setGoalArray}/>
+                <ProgressButton onClick = {completeGoal}></ProgressButton>
+                {!goalComplete && <img className = "ProfessorText" src={ProfText} alt="Professor speech bubble"></img>}
+                {popupDisplay &&
+                <LogProgress currGoal = {currGoal} currGoalId={currGoalId} setPopupDisplay={setPopupDisplay} progressCounter={progressCounter} progressTimestamp={progressTimestamp} setGoalArray={setGoalArray}/>
+                }
+            </div>
             }
+            
+            {!activeGoal &&
+            <NoActiveGoal/>
+            }   
 
          
             {/* Pass goalPetList to navbar, to emulate caching */}
