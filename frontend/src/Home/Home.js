@@ -112,7 +112,6 @@ function Home() {
         setTimeout(function(){
             setPopupDisplay(true);
         }, 900);
-        updateCount();
         setShouldShake(true)
 
     }
