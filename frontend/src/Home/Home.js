@@ -10,6 +10,7 @@ import DisplayPet from "./DisplayPet";
 import NavBar from "../Navbar/Navbar";
 import LogProgress from "../LogProgress/LogProgress"
 import NoActiveGoal from "../NoActiveGoal/NoActiveGoal";
+import { presetGoals, goalData } from "../Backend/presetData.js";
 
 function Home() {
 
@@ -61,6 +62,16 @@ function Home() {
         return (someDate.getDate() === today.getDate() &&
                someDate.getMonth() === today.getMonth() &&
                someDate.getFullYear() === today.getFullYear());
+    }
+
+    // When called, checks if the CurrGoal in the goalArray
+    // is a presetGoal and returns the associated goals if true.
+    const isPresetGoal = (someGoal) => {
+        for (let i = 0; i < presetGoals.length; i++) {
+            if (presetGoals[i] === someGoal)
+                return i;
+        }
+        return false;
     }
 
     // Logs the date of completion in `lastProgressMade` and updates progress counter.
@@ -135,7 +146,12 @@ function Home() {
                         let currGoal = goalArray[goalIndex].goal;
                         let progressCounter = goalArray[goalIndex].progressCounter;        
                         setCurrGoal(goalArray[goalIndex]);
-                        setUserGoal(currGoal);
+                        if (isPresetGoal(currGoal) === false) {
+                            setUserGoal(currGoal);
+                        }
+                        else {
+                            setUserGoal(goalData[isPresetGoal(currGoal)][((new Date().getDate())*3)%10]);
+                        }
                         setCurrGoalId(goalArray.length - 1);              
                         setProgressCount(progressCounter);
                         setGoalArray(goalArray);

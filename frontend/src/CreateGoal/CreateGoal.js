@@ -4,13 +4,11 @@ import { auth } from "../Backend/firebaseSetup";
 import { useNavigate } from "react-router-dom"
 import ProfText from "../assets/branding/ProfTextA.svg"; 
 import { createNewGoal } from "../Backend/handleSubmit";
-
+import { presetGoals } from "../Backend/presetData.js";
 function CreateGoal() {
 
   const [goalText, setGoalText] = useState("");
   const [errorMsg, setErrorMsg] = useState('');
-  const [presetGoals] = useState(["Eat Healthier", "Be More Active", "Improve Mental Health", "Focus on Relationships", 
-  "Dedicate Time to a Hobby", "Learn an Instrument", "Be More Tidy"])
 
   const navigate = useNavigate();
   const user = auth.currentUser;
