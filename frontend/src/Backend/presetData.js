@@ -29,7 +29,7 @@ const goalData =  ([
     "Share progress of your hobby online", "Collaborate with someone on a new piece"],
 
     ["Record your practice and listen for improvment", "Practice on a challenging techinque or piece", 
-    "Practice your scales and fundamentals", "Analyze a song outside your taste or time",
+    "Practice your scales and fundamentals", "Analyze a song outside of your taste or time",
     "Practice with friends or a group", "Improvise over an existing piece", "Practice your instrument for 1 hour", 
     "Practice reading sheet music", "Transcribe and learn a song you enjoy", "Learn a new chord or progession"],
     

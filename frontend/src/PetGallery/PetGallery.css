@@ -57,13 +57,28 @@
 }
 
 .CardGoalText {
-    margin: 0px;
+    margin: 0px 0px 15px 0px;
+    text-align: center;
 }
 
-.PetPic { 
-    height: 125px;
+.PetGallery .pet {
+    height: 100px;
 }
 
+.disabledBubbleButton {
+    width: 130px;
+    height: 37px;
+    background-color: #F48F9C;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 14px;
+    text-align: center;
+    color: #FFFFFF;
+    margin-top: auto;
+    margin-bottom: 10px;
+    background-color: #BE747D;
+}
 .disabledBubbleButton {
     width: 130px;
     height: 37px;

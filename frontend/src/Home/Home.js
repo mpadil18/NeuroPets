@@ -5,24 +5,27 @@ import GreenCheckmark from "../assets/elements/GreenCheckmark.svg"
 import { useEffect, useState } from "react";
 import { getDoc, doc, updateDoc } from "firebase/firestore"; 
 import { updateUserInfo } from '../Backend/handleSubmit';
-import { auth, db} from "../Backend/firebaseSetup.js";
+import { auth, db } from "../Backend/firebaseSetup.js";
 import DisplayPet from "./DisplayPet";
 import NavBar from "../Navbar/Navbar";
-import LogProgress from "../LogProgress/LogProgress";
+import LogProgress from "../LogProgress/LogProgress"
+import NoActiveGoal from "../NoActiveGoal/NoActiveGoal";
 import { presetGoals, goalData } from "../Backend/presetData.js";
-
-
 
 function Home() {
 
     const [goalComplete, setGoalComplete] = useState(false);
     const [progressCounter, setProgressCount] = useState(0);
     const [userGoal, setUserGoal] = useState(null);
+    const [currGoal, setCurrGoal] = useState(null);
     const [popupDisplay, setPopupDisplay] = useState(false);
     const [currGoalId, setCurrGoalId] = useState(null);
+    const [progressTimestamp, setProgressTimestamp] = useState(null);
+    const [goalArray, setGoalArray] = useState([])
+    const [petPoints, setPetPoints] = useState(0);
+    const [activeGoal, setActiveGoalExists] = useState(true);
 
-
-    const updateCount = async () => {
+    const updateCountAndProgressLogs = async (dateDone) => {
         try {
             const user = auth.currentUser;
             if(user){
@@ -32,13 +35,22 @@ function Home() {
                      var goalArray = docSnap.data().goalArray;
                      let goalIndex = goalArray.length - 1;
                      let progressCount = goalArray[goalIndex].progressCounter + 1;
+                     
                      goalArray[goalIndex].progressCounter = progressCount;
+                     
+                     // Initializes the progress log to be empty upon completion
+                     goalArray[goalIndex].logs.push({"date": dateDone, "log": ""});
                      await updateDoc(docRef, {
-                        goalArray : goalArray
+                        goalArray : goalArray,
+                        petPoints : petPoints + 5
                      });
+                     
+                     // Updates goal array, to ensure update is made in Pet Gallery/View Progress
+                     setGoalArray(goalArray);
                 }
             }     
         } catch (error) {
+            
             console.log("ERROR ON UPDATE COUNT");
         } 
     }
@@ -66,14 +78,16 @@ function Home() {
     // Then function triggers the `Log Entry?` popup
     const completeGoal = () => {
         const completedDate = new Date();
+        setProgressTimestamp(completedDate);
         const user = auth.currentUser; 
         setGoalComplete(true);
         setProgressCount(progressCounter + 1);
+        setPetPoints(petPoints + 5);
         updateUserInfo(user.uid, {lastProgressMade: completedDate});
+        updateCountAndProgressLogs(completedDate);
         setTimeout(function(){
             setPopupDisplay(true);
         }, 900);
-        updateCount();
     }
 
     // Conditionally displays progress button depending on if user has clicked or not
@@ -82,10 +96,7 @@ function Home() {
             return (
             <div>
                 <img className = "GreenCheck" src = {GreenCheckmark} alt = "green checkmark"/>
-                <div className = "CompleteGoal">
-                    <p className = "CompleteGoalText1">+1</p>
-                    <p className = "CompleteGoalText1">{progressCounter}/60 Days</p>
-                </div>
+
             </div>
             );
         }
@@ -120,28 +131,36 @@ function Home() {
                     const docRef = doc(db, 'all_data', user.uid);
                     const docSnap = await getDoc(docRef);
                     if (docSnap.exists()) {
+                        // Sets the state to whether there are active goals or not
+                        // the !! is used to convert the retrieved value from 0/1 to true/false
+                        setActiveGoalExists(!!(docSnap.data().activeGoal));
+                        console.log(docSnap.data().activeGoal);
+                        
                         // Sets the current state of whether the goal is complete
                         checkIfGoalComplete(docSnap.data().lastProgressMade);
                         
                         // Gets the user's goal and saves to state
                         let goalArray = docSnap.data().goalArray;
+                        let petPoints = docSnap.data().petPoints;
                         let goalIndex = goalArray.length - 1;
                         let currGoal = goalArray[goalIndex].goal;
-                        let progressCounter = goalArray[goalIndex].progressCounter;
-                        // TEST: console.log("All user data: ", docSnap.data(), "Goal: ", currGoal);
-                        // TEST: console.log("Progress Counter", progressCounter);
+                        let progressCounter = goalArray[goalIndex].progressCounter;        
+                        setCurrGoal(goalArray[goalIndex]);
                         if (isPresetGoal(currGoal) === false) {
                             setUserGoal(currGoal);
                         }
                         else {
                             setUserGoal(goalData[isPresetGoal(currGoal)][((new Date().getDate())*3)%10]);
                         }
-                        setCurrGoalId(goalArray.length - 1);
+                        setCurrGoalId(goalArray.length - 1);              
                         setProgressCount(progressCounter);
+                        setGoalArray(goalArray);
+                        setPetPoints(petPoints);
                     }
 
                 }
             } catch (error) {
+                console.log(error);
                 console.log("ERROR GETTING ALL DATA");
             }
         }
@@ -150,17 +169,51 @@ function Home() {
 
     return (
         <div className = "Home">
+            {activeGoal &&
+            <div className = "ActiveGoal">
+               
             <div className = "GoalBubble">
-                <p className = "BubbleText">{userGoal}</p>
-            </div>
-            <DisplayPet/>
+                    <p className = "BubbleText">{userGoal}</p>
+                </div>
+    
 
-            <ProgressButton onClick = {completeGoal}></ProgressButton>
-            {!goalComplete && <img className = "ProfessorText" src={ProfText} alt="Professor speech bubble"></img>}
-            {popupDisplay &&
-            <LogProgress currGoalId={currGoalId} setPopupDisplay={setPopupDisplay}/>
+            <div className = "PetEnvironmentHeader">
+               
+                <div className = "PetHeader">
+                    <DisplayPet currGoal={currGoal}/>
+                </div>
+                
+                <div className = "WindowTextBox1">
+                    <p className = "WindowText">Day</p>
+                    <p className = "WindowText">{progressCounter}</p>
+                </div>
+
+                <div className = "WindowTextBox2">
+                    <p className = "WindowText">Points</p>
+                       
+                </div>
+
+                <div className = "WindowTextBox3">
+                    <p className = "WindowText">{petPoints}</p>
+                </div>    
+
+            </div>
+           
+                <ProgressButton onClick = {completeGoal}></ProgressButton>
+                {!goalComplete && <img className = "ProfessorText" src={ProfText} alt="Professor speech bubble"></img>}
+                {popupDisplay &&
+                <LogProgress currGoal = {currGoal} currGoalId={currGoalId} setPopupDisplay={setPopupDisplay} progressCounter={progressCounter} progressTimestamp={progressTimestamp} setGoalArray={setGoalArray}/>
+                }
+            </div>
             }
-            <NavBar/>
+            
+            {!activeGoal &&
+            <NoActiveGoal/>
+            }   
+
+         
+            {/* Pass goalPetList to navbar, to emulate caching */}
+            <NavBar goalArray={goalArray}/>
         </div>
     );
 }
