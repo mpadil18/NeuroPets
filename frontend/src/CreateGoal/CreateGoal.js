@@ -3,15 +3,14 @@ import React, { useState } from "react"
 import { auth } from "../Backend/firebaseSetup";
 import { useNavigate } from "react-router-dom"
 import {updateUserInfo, getUserInfo} from '../Backend/handleSubmit';
-import ProfText from "../assets/branding/ProfTextA.svg"; 
+import { presetGoals } from "../Backend/presetData.js";
+import ProfText from "../assets/branding/ProfTextA.svg";
 
 const babyPetCodes = [0, 3, 6];
 function CreateGoal() {
 
   const [goalText, setGoalText] = useState("");
   const [errorMsg, setErrorMsg] = useState('');
-  const [presetGoals] = useState(["Eat Healthier", "Be More Active", "Improve Mental Health", "Focus on Relationships", 
-  "Dedicate Time to a Hobby", "Learn an Instrument", "Be More Tidy"])
 
   const navigate = useNavigate();
 

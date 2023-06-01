@@ -3,12 +3,13 @@ import ProfText from "../assets/branding/ProfTextB.svg"
 import GreenCheckmark from "../assets/elements/GreenCheckmark.svg"
 
 import { useEffect, useState } from "react";
-import { getDoc, doc, updateDoc} from "firebase/firestore"; 
+import { getDoc, doc, updateDoc } from "firebase/firestore"; 
 import { updateUserInfo } from '../Backend/handleSubmit';
 import { auth, db} from "../Backend/firebaseSetup.js";
 import DisplayPet from "./DisplayPet";
 import NavBar from "../Navbar/Navbar";
-import LogProgress from "../LogProgress/LogProgress"
+import LogProgress from "../LogProgress/LogProgress";
+import { presetGoals, goalData } from "../Backend/presetData.js";
 
 
 
@@ -49,6 +50,16 @@ function Home() {
         return (someDate.getDate() === today.getDate() &&
                someDate.getMonth() === today.getMonth() &&
                someDate.getFullYear() === today.getFullYear());
+    }
+
+    // When called, checks if the CurrGoal in the goalArray
+    // is a presetGoal and returns the associated goals if true.
+    const isPresetGoal = (someGoal) => {
+        for (let i = 0; i < presetGoals.length; i++) {
+            if (presetGoals[i] === someGoal)
+                return i;
+        }
+        return false;
     }
 
     // Logs the date of completion in `lastProgressMade` and updates progress counter.
@@ -119,7 +130,12 @@ function Home() {
                         let progressCounter = goalArray[goalIndex].progressCounter;
                         // TEST: console.log("All user data: ", docSnap.data(), "Goal: ", currGoal);
                         // TEST: console.log("Progress Counter", progressCounter);
-                        setUserGoal(currGoal);
+                        if (isPresetGoal(currGoal) === false) {
+                            setUserGoal(currGoal);
+                        }
+                        else {
+                            setUserGoal(goalData[isPresetGoal(currGoal)][((new Date().getDate())*3)%10]);
+                        }
                         setCurrGoalId(goalArray.length - 1);
                         setProgressCount(progressCounter);
                     }
