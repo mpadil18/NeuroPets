@@ -1,4 +1,5 @@
-
+import "./petContract.css"
+import "../App.css";
 import React from "react"
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -39,28 +40,41 @@ function PetContract(){
 
     return(
       <div className="PetContract">
-
         <div>
-        NeuroPet Adoption Form & Contract to Myself
+
+          <div className ="contractHeader">NeuroPet Adoption Form & Contract to Myself </div>
+
+          <div className="contractBox">
+          
+          I <input placeholder="Name" className="InputBubble"/> vow to look after my NeuroPet
+
+          <input placeholder="Enter Pet Name" className="InputBubble"
+          value = {petName} onChange = {(e) => setPetName(e.target.value)}></input>
+          by working towards  everyday for 60 days. 
+
+          I understand that my pet’s growth depends on my dedication to my goal.
+
+          I will change, and achieve my goal, by signing up for it one day at a time, in a row.
+          </div>
         
-        I <input placeholder="Name"></input> vow to look after my NeuroPet
-
-        <input placeholder="Enter Pet Name" value = {petName} onChange = {(e) => setPetName(e.target.value)}></input>
-        by working towards  everyday for 60 days. 
-
-        I understand that my pet’s growth depends on my dedication to my goal.
-
-        I will change, and achieve my goal, by signing up for it one day at a time, in a row.
+        
+        <div className="contractFooter">
+          Date Here 
+          Wintess : {petName}
+        </div>
 
         </div>
 
-        <button onClick = {submithandler}> 
+        <button onClick = {submithandler} className="bubbleButton"> 
             Submit Contract Here 
         </button>
 
         {errorMsg && <p> Error: {errorMsg}</p>}
       </div>  
     )
+
+    // need to display the today's date 
+    // And also Nuropets Name as witness 
 }
 
 export default PetContract; 
