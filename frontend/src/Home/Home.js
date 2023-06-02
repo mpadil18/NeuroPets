@@ -192,7 +192,7 @@ function Home() {
 
         <div className = "Home">
             {activeGoal &&
-            <div className = "ActiveGoal">
+            <div className = "ActiveGoal" ref = {animationParent}>
                
             <div className = "GoalBubble">
                     <p className = "BubbleText">{userGoal}</p>
@@ -226,7 +226,7 @@ function Home() {
                 <ProgressButton onClick = {completeGoal}></ProgressButton>
                 {!goalComplete && <img className = "ProfessorText" src={ProfText} alt="Professor speech bubble"></img>}
                 {popupDisplay &&
-                <LogProgress currGoal = {currGoal} currGoalId={currGoalId} setPopupDisplay={setPopupDisplay} progressCounter={progressCounter} progressTimestamp={progressTimestamp} setGoalArray={setGoalArray}/>
+                <LogProgress ref = {animationParent} currGoal = {currGoal} currGoalId={currGoalId} setPopupDisplay={setPopupDisplay} progressCounter={progressCounter} progressTimestamp={progressTimestamp} setGoalArray={setGoalArray}/>
                 }
             </div>
             }
