@@ -12,8 +12,43 @@ import LogProgress from "../LogProgress/LogProgress"
 import NoActiveGoal from "../NoActiveGoal/NoActiveGoal";
 import { presetGoals, goalData } from "../Backend/presetData.js";
 
+//Animation antics:
+import { useAutoAnimate } from '@formkit/auto-animate/react'
+import { motion } from "framer-motion";
+
+
 function Home() {
 
+
+    //Animation contents   ~~~~~~~~
+    const [animationParent] = useAutoAnimate()
+
+    const [shouldShake, setShouldShake] = useState(false);
+
+    const hopAnimation = {
+        y: [0, -10, 0],
+        transition: {
+            duration: 1.5,
+            repeat: Infinity,
+            y: {
+                type: "spring",
+                stiffness: 20,
+                damping: 2,
+            },
+        },
+    };
+
+    const shakeAnimation = shouldShake
+        ? {
+            x: [0, 10, -10, 10, -10, 0],
+            transition: { duration: 1.0 },
+        }
+        : {};
+
+    
+
+    //End of animation data ~~~~~~~
+      
     const [goalComplete, setGoalComplete] = useState(false);
     const [progressCounter, setProgressCount] = useState(0);
     const [userGoal, setUserGoal] = useState(null);
@@ -88,6 +123,8 @@ function Home() {
         setTimeout(function(){
             setPopupDisplay(true);
         }, 900);
+        setShouldShake(true)
+
     }
 
     // Conditionally displays progress button depending on if user has clicked or not
@@ -109,9 +146,9 @@ function Home() {
             );
         }
     }
-  
-    
+
     useEffect(() => {
+        
         const checkIfGoalComplete = (lastProgressDate) => {
             // When user first creates a goal, they don't have a 
             // `lastProgressMade` attribute
@@ -168,9 +205,10 @@ function Home() {
     }, []);
 
     return (
+
         <div className = "Home">
             {activeGoal &&
-            <div className = "ActiveGoal">
+            <div className = "ActiveGoal" ref = {animationParent}>
                
             <div className = "GoalBubble">
                     <p className = "BubbleText">{userGoal}</p>
@@ -180,7 +218,9 @@ function Home() {
             <div className = "PetEnvironmentHeader">
                
                 <div className = "PetHeader">
+                   <motion.div animate={{ ...shakeAnimation, ...hopAnimation }}>
                     <DisplayPet currGoal={currGoal}/>
+                     </motion.div>
                 </div>
                 
                 <div className = "WindowTextBox1">
@@ -202,7 +242,7 @@ function Home() {
                 <ProgressButton onClick = {completeGoal}></ProgressButton>
                 {!goalComplete && <img className = "ProfessorText" src={ProfText} alt="Professor speech bubble"></img>}
                 {popupDisplay &&
-                <LogProgress currGoal = {currGoal} currGoalId={currGoalId} setPopupDisplay={setPopupDisplay} progressCounter={progressCounter} progressTimestamp={progressTimestamp} setGoalArray={setGoalArray}/>
+                <LogProgress ref = {animationParent} currGoal = {currGoal} currGoalId={currGoalId} setPopupDisplay={setPopupDisplay} progressCounter={progressCounter} progressTimestamp={progressTimestamp} setGoalArray={setGoalArray}/>
                 }
             </div>
             }
@@ -214,6 +254,7 @@ function Home() {
          
             {/* Pass goalPetList to navbar, to emulate caching */}
             <NavBar goalArray={goalArray}/>
+
         </div>
     );
 }
