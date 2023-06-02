@@ -53,9 +53,9 @@ function DisplayPet(props) {
     }
 
     return (
-     <div> 
+     <> 
         <GetPet></GetPet>
-    </div>    
+    </>    
     );
 }
 
