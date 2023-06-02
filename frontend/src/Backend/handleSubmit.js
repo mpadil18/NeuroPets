@@ -1,4 +1,3 @@
-import {addDoc, collection} from 'firebase/firestore';
 import {firestore, db} from './firebaseSetup';
 import { doc, setDoc, updateDoc, getDoc } from 'firebase/firestore'; 
 
@@ -36,6 +35,7 @@ export async function createUserDb (userid, email) {
         useremail: email,
         goalArray:[],
         activeGoal: 0,
+        petPoints: 0, 
         unlockedAccessories: [false, false, false, false, false, false, false, false, false]
     }
 
@@ -62,12 +62,14 @@ export async function createNewGoal(userid, goalText){
     const startDate = new Date();
     const goalTuple = {goal: goalText, pet: pet, petName: "",
                        currDate: startDate, progressCounter: 0, 
-                       petPoints: 0, logs:[], wearingAccessories:{headgear: "", neckwear: "", bodypaint: ""}};
+                    logs:[], wearingAccessories:{headgear: "", neckwear: "", bodypaint: ""}};
 
       // Update the user's goal array by getting old data
       // and pushing the new goal to the list
     try {
         let docSnap = await getUserInfo(userid);
+        // sets the activeGoal field to true to indicate that there is now an active goal
+        updateUserInfo(userid, {activeGoal: 1});
         let tempArr = docSnap.goalArray;
         tempArr.push(goalTuple);
         updateUserInfo(userid, {goalArray: tempArr});    

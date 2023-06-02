@@ -43,7 +43,7 @@ function NavBar(props){
 
     // Pass goalArray to navbar, to emulate caching
     const navToPetStore = () => {
-        navigate("../PetStore", {state:{goalArray: props.goalArray}});
+        navigate("../PetStore", {state:{goalArray: props.goalArray, petPoints: props.petPoints}});
     }
     
     function Logout(){

@@ -4,7 +4,7 @@
   font-family: "Roboto", sans-serif;
 }
 
-.Login, .CreateGoal, .Registration, .Popup {
+.Login, .CreateGoal, .Registration, .GoalComplete, .Popup {
   display: flex;
   justify-content: center;
   align-items: center;

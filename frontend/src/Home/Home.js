@@ -5,14 +5,12 @@ import GreenCheckmark from "../assets/elements/GreenCheckmark.svg"
 import { useEffect, useState } from "react";
 import { getDoc, doc, updateDoc } from "firebase/firestore"; 
 import { updateUserInfo } from '../Backend/handleSubmit';
-import { auth, db} from "../Backend/firebaseSetup.js";
+import { auth, db } from "../Backend/firebaseSetup.js";
 import DisplayPet from "./DisplayPet";
 import NavBar from "../Navbar/Navbar";
 import LogProgress from "../LogProgress/LogProgress"
-
-
-
-
+import NoActiveGoal from "../NoActiveGoal/NoActiveGoal";
+import { presetGoals, goalData } from "../Backend/presetData.js";
 
 function Home() {
 
@@ -25,6 +23,7 @@ function Home() {
     const [progressTimestamp, setProgressTimestamp] = useState(null);
     const [goalArray, setGoalArray] = useState([])
     const [petPoints, setPetPoints] = useState(0);
+    const [activeGoal, setActiveGoalExists] = useState(true);
 
     const updateCountAndProgressLogs = async (dateDone) => {
         try {
@@ -38,12 +37,12 @@ function Home() {
                      let progressCount = goalArray[goalIndex].progressCounter + 1;
                      
                      goalArray[goalIndex].progressCounter = progressCount;
-                     goalArray[goalIndex].petPoints += 5;
+                     
                      // Initializes the progress log to be empty upon completion
                      goalArray[goalIndex].logs.push({"date": dateDone, "log": ""});
                      await updateDoc(docRef, {
                         goalArray : goalArray,
-                        
+                        petPoints : petPoints + 5
                      });
                      
                      // Updates goal array, to ensure update is made in Pet Gallery/View Progress
@@ -63,6 +62,16 @@ function Home() {
         return (someDate.getDate() === today.getDate() &&
                someDate.getMonth() === today.getMonth() &&
                someDate.getFullYear() === today.getFullYear());
+    }
+
+    // When called, checks if the CurrGoal in the goalArray
+    // is a presetGoal and returns the associated goals if true.
+    const isPresetGoal = (someGoal) => {
+        for (let i = 0; i < presetGoals.length; i++) {
+            if (presetGoals[i] === someGoal)
+                return i;
+        }
+        return false;
     }
 
     // Logs the date of completion in `lastProgressMade` and updates progress counter.
@@ -122,20 +131,27 @@ function Home() {
                     const docRef = doc(db, 'all_data', user.uid);
                     const docSnap = await getDoc(docRef);
                     if (docSnap.exists()) {
+                        // Sets the state to whether there are active goals or not
+                        // the !! is used to convert the retrieved value from 0/1 to true/false
+                        setActiveGoalExists(!!(docSnap.data().activeGoal));
+                        console.log(docSnap.data().activeGoal);
+                        
                         // Sets the current state of whether the goal is complete
                         checkIfGoalComplete(docSnap.data().lastProgressMade);
                         
                         // Gets the user's goal and saves to state
                         let goalArray = docSnap.data().goalArray;
+                        let petPoints = docSnap.data().petPoints;
                         let goalIndex = goalArray.length - 1;
                         let currGoal = goalArray[goalIndex].goal;
-
-                        
-                        let progressCounter = goalArray[goalIndex].progressCounter;
-                        let petPoints = goalArray[goalIndex].petPoints;
-                        
+                        let progressCounter = goalArray[goalIndex].progressCounter;        
                         setCurrGoal(goalArray[goalIndex]);
-                        setUserGoal(currGoal);
+                        if (isPresetGoal(currGoal) === false) {
+                            setUserGoal(currGoal);
+                        }
+                        else {
+                            setUserGoal(goalData[isPresetGoal(currGoal)][((new Date().getDate())*3)%10]);
+                        }
                         setCurrGoalId(goalArray.length - 1);              
                         setProgressCount(progressCounter);
                         setGoalArray(goalArray);
@@ -153,11 +169,13 @@ function Home() {
 
     return (
         <div className = "Home">
-           
+            {activeGoal &&
+            <div className = "ActiveGoal">
+               
             <div className = "GoalBubble">
-                <p className = "BubbleText">{userGoal}</p>
-            </div>
-
+                    <p className = "BubbleText">{userGoal}</p>
+                </div>
+    
 
             <div className = "PetEnvironmentHeader">
                
@@ -181,16 +199,21 @@ function Home() {
 
             </div>
            
-
-            <ProgressButton onClick = {completeGoal}></ProgressButton>
-            {!goalComplete && <img className = "ProfessorText" src={ProfText} alt="Professor speech bubble"></img>}
-            {popupDisplay &&
-            <LogProgress currGoalId={currGoalId} setPopupDisplay={setPopupDisplay} progressTimestamp={progressTimestamp} setGoalArray={setGoalArray}/>
+                <ProgressButton onClick = {completeGoal}></ProgressButton>
+                {!goalComplete && <img className = "ProfessorText" src={ProfText} alt="Professor speech bubble"></img>}
+                {popupDisplay &&
+                <LogProgress currGoal = {currGoal} currGoalId={currGoalId} setPopupDisplay={setPopupDisplay} progressCounter={progressCounter} progressTimestamp={progressTimestamp} setGoalArray={setGoalArray}/>
+                }
+            </div>
             }
+            
+            {!activeGoal &&
+            <NoActiveGoal/>
+            }   
 
          
             {/* Pass goalPetList to navbar, to emulate caching */}
-            <NavBar goalArray={goalArray}/>
+            <NavBar goalArray={goalArray} petPoints={petPoints}/>
         </div>
     );
 }

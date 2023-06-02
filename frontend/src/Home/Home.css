@@ -11,6 +11,13 @@
     padding-bottom: 60px;
 }
 
+.ActiveGoal {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
 .GoalBubble {
     
 

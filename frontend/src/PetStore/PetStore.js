@@ -158,7 +158,7 @@ function PetStore() {
     // If the last item of displayed < 8, then display front arrow
     // that changes the indexes by factor of 4 (ex: next is 1, 4)
     const [displayedAccessoryRange, setDisplayedAccessoryRange] = useState([0, 4])
-    const [userPetPoints, setUserPetPoints] = useState((location.state) ? (location.state.goalArray) : []);
+    const [userPetPoints, setUserPetPoints] = useState((location.state) ? (location.state.petPoints) : 0);
     const [selectedAccessory, setSelectedAccessory] = useState(null);
     const [popupDisplay, setPopupDisplay] = useState(false);
     const user = auth.currentUser;
@@ -197,7 +197,7 @@ function PetStore() {
         backLimit={4} frwdLimit={9} 
         backFunc={changeStoreViewBkwd}
         frwdFunc={changeStoreViewFrwd}
-        middleComponent={<p className="petPointsDisplay">{(userPetPoints[userPetPoints.length - 1]).petPoints} pts</p>}/>
+        middleComponent={<p className="petPointsDisplay">{(userPetPoints)} pts</p>}/>
     {popupDisplay && <DressUp goalArray={test} selectedAccessory={selectedAccessory} popupDisplay={popupDisplay} setPopupDisplay={setPopupDisplay}/>}
     <NavBar goalArray={userPetPoints}/>
    </div>
