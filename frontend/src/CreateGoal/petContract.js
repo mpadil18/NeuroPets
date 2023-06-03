@@ -15,14 +15,16 @@ function PetContract(){
     const user = auth.currentUser;
     const {goalText} = location.state || {};
 
+
+    const today = new Date();
+    const formattedDate = today.toLocaleDateString();
+
     const [errorMsg, setErrorMsg] = useState('');
     const [petName, setPetName] = useState('');
 
-    console.log(goalText + "in petContract");
 
     const submithandler = (e) => {
       e.preventDefault()
-      console.log(goalText + "in petContract");
       console.log(location.state);
       if (petName.length === 0){
         setErrorMsg("Please fill in a goal");
@@ -40,31 +42,30 @@ function PetContract(){
 
     return(
       <div className="PetContract">
-        <div>
 
-          <div className ="contractHeader">NeuroPet Adoption Form & Contract to Myself </div>
+        <div className ="contractHeader">NeuroPet Adoption Form & Contract to Myself </div>
 
           <div className="contractBox">
           
-          I <input placeholder="Name" className="InputBubble"/> vow to look after my NeuroPet
+            <div className = "contractText">
+              I <input placeholder="Name" className="InputBubble"/> vow to look after my NeuroPet
 
-          <input placeholder="Enter Pet Name" className="InputBubble"
-          value = {petName} onChange = {(e) => setPetName(e.target.value)}></input>
-          by working towards  everyday for 60 days. 
+              <input placeholder="Enter Pet Name" className="InputBubble"
+              value = {petName} onChange = {(e) => setPetName(e.target.value)}></input>
+              by working towards  everyday for 60 days. 
 
-          I understand that my pet’s growth depends on my dedication to my goal.
+              I understand that my pet’s growth depends on my dedication to my goal.
 
-          I will change, and achieve my goal, by signing up for it one day at a time, in a row.
+              I will change, and achieve my goal, by signing up for it one day at a time, in a row.
+            </div>
+
+          <div className="contractFooter">
+            Date Here   {formattedDate}
+            Witness : {petName}
           </div>
-        
-        
-        <div className="contractFooter">
-          Date Here 
-          Wintess : {petName}
-        </div>
 
         </div>
-
+      
         <button onClick = {submithandler} className="bubbleButton"> 
             Submit Contract Here 
         </button>
@@ -72,9 +73,6 @@ function PetContract(){
         {errorMsg && <p> Error: {errorMsg}</p>}
       </div>  
     )
-
-    // need to display the today's date 
-    // And also Nuropets Name as witness 
 }
 
 export default PetContract; 
