@@ -43,7 +43,7 @@ function PetContract(){
     return(
       <div className="PetContract">
 
-        <div className ="contractHeader">NeuroPet Adoption Form & Contract to Myself </div>
+        <div className ="bubbleHeader">NeuroPet Adoption Form & Contract to Myself </div>
 
           <div className="contractBox">
           
@@ -60,8 +60,9 @@ function PetContract(){
             </div>
 
           <div className="contractFooter">
-            Date Here   {formattedDate}
-            Witness : {petName}
+
+          <div className = "WindowTextBox1"> {formattedDate} <br/> Date </div>
+          <div className = "WindowTextBox2"> {petName} <br/> Witness   </div>
           </div>
 
         </div>
