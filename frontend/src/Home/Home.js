@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { getDoc, doc, updateDoc } from "firebase/firestore"; 
 import { updateUserInfo } from '../Backend/handleSubmit';
 import { auth, db } from "../Backend/firebaseSetup.js";
-import DisplayPet from "./DisplayPet";
+import FindPet from "./FindPet";
 import NavBar from "../Navbar/Navbar";
 import LogProgress from "../LogProgress/LogProgress"
 import NoActiveGoal from "../NoActiveGoal/NoActiveGoal";
@@ -181,7 +181,8 @@ function Home() {
                         let petPoints = docSnap.data().petPoints;
                         let goalIndex = goalArray.length - 1;
                         let currGoal = goalArray[goalIndex].goal;
-                        let progressCounter = goalArray[goalIndex].progressCounter;        
+                        let progressCounter = goalArray[goalIndex].progressCounter; 
+                        let accessories = goalArray[goalIndex].wearingAccessories;       
                         setCurrGoal(goalArray[goalIndex]);
                         if (isPresetGoal(currGoal) === false) {
                             setUserGoal(currGoal);
@@ -212,43 +213,56 @@ function Home() {
                
             <div className = "GoalBubble">
                     <p className = "BubbleText">{userGoal}</p>
-                </div>
+            </div>
     
 
             <div className = "PetEnvironmentHeader">
                
                 <div className = "PetHeader">
+
                    <motion.div animate={{ ...shakeAnimation, ...hopAnimation }}>
-                    <DisplayPet currGoal={currGoal}/>
-                     </motion.div>
+
+                    <FindPet currGoal={currGoal}/>
+                    
+                    </motion.div>
+                    
                 </div>
-                
+
+
                 <div className = "WindowTextBox1">
+
                     <p className = "WindowText">Day</p>
                     <p className = "WindowText">{progressCounter}</p>
+
                 </div>
 
                 <div className = "WindowTextBox2">
+
                     <p className = "WindowText">Points</p>
-                       
+                    
                 </div>
 
                 <div className = "WindowTextBox3">
+
                     <p className = "WindowText">{petPoints}</p>
+
                 </div>    
 
             </div>
-           
+            
                 <ProgressButton onClick = {completeGoal}></ProgressButton>
                 {!goalComplete && <img className = "ProfessorText" src={ProfText} alt="Professor speech bubble"></img>}
                 {popupDisplay &&
                 <LogProgress ref = {animationParent} currGoal = {currGoal} currGoalId={currGoalId} setPopupDisplay={setPopupDisplay} progressCounter={progressCounter} progressTimestamp={progressTimestamp} setGoalArray={setGoalArray}/>
                 }
+            
             </div>
             }
-            
+
             {!activeGoal &&
+
             <NoActiveGoal/>
+            
             }   
 
          
