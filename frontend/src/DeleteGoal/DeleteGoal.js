@@ -51,29 +51,15 @@ function DeleteGoal(props) {
         {isDeleteGoalOpen && (
             <div className = "Popup">
                 <div className = "DeleteGoal">
-                    <div className = "DeleteGoalInputBubble">
-                        {activeGoal &&
-                        <div className = "ActiveGoalExists">
-                            <div className = "bubbleHeader">
-                                <p>Would you like to delete your current goal and create a new one?</p>
-                                <p>This action will delete your current progress!</p>
-                            </div>
-                            <div className = "deleteGoalButtons">
-                                <button onClick = {deleteCurrentGoal} className = "deleteGoalButton"> Yes </button>
-                                <button onClick = {closeDeleteGoal} className = "deleteGoalButton"> No </button>
-                            </div>
+                    <div className = "InputBubble">
+                        <div className = "bubbleHeader">
+                            <p>Would you like to delete your current goal and create a new one?</p>
+                            <p>This action will delete your current progress!</p>
                         </div>
-                        }
-                        {!activeGoal &&
-                        <div className = "NoActiveGoalExists">
-                                <div className = "bubbleHeader">
-                                    <p>You have no active goals so you can't delete any goals!</p>
-                                    <div className = "deleteGoalButtons">
-                                    <button onClick = {closeDeleteGoal} className = "deleteGoalButton"> Ok </button>
-                                </div>
-                            </div>
+                        <div className = "BinaryBubbleButtons">
+                            <button onClick = {deleteCurrentGoal} className = "BinaryBubbleButton"> Yes </button>
+                            <button onClick = {closeDeleteGoal} className = "BinaryBubbleButton"> No </button>
                         </div>
-                        }
                     </div>
                 </div>
             </div>
