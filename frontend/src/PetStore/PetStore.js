@@ -41,7 +41,7 @@ function PetStore() {
     // that changes the indexes by factor of 4 (ex: next is 1, 4)
     const [displayedAccessoryRange, setDisplayedAccessoryRange] = useState([0, 4])
     const [userPetPoints, setUserPetPoints] = useState(location.state.petPoints);
-    const [selectedAccessory, setSelectedAccessory] = useState(null);
+    const [selectedAccessory, setSelectedAccessory] = useState(0);
     const [popupDisplay, setPopupDisplay] = useState(false);
     const user = auth.currentUser;
 
@@ -53,6 +53,8 @@ function PetStore() {
         setDisplayedAccessoryRange([displayedAccessoryRange[0] - 4, displayedAccessoryRange[1] - 4]);
     }
 
+    //Sets the selectedAccessory by accessing the accessories array,
+    //and reveals the dressup popup
     const dressUpPet = (accessoryId) => {
         setSelectedAccessory(accessories[Number(accessoryId)]);
         setPopupDisplay(true);
@@ -69,7 +71,7 @@ function PetStore() {
                 <p className="CardAccessoryText">{itemAndPrice[3]}</p>
                 <img src={itemAndPrice[0]} style={{"height":100}} alt="anItem"/>
                 {/* This dressUpPet function should be called on the dress up button instead, but it's being tested as a plain button for now */}
-                <button className="newBubbleButton" id={index + displayedAccessoryRange[0]} onClick={(e) => dressUpPet(e.target.id)}><img src={Key} alt="key"/><span className="priceTag" id={index + displayedAccessoryRange[0]}>{itemAndPrice[1]} pts</span></button>
+                <button className="newBubbleButton" id={Number(index + displayedAccessoryRange[0])} onClick={(e) => dressUpPet(e.target.id)}><img src={Key} alt="key" id={Number(index + displayedAccessoryRange[0])}/><span className="priceTag" id={Number(index + displayedAccessoryRange[0])}>{itemAndPrice[1]} pts</span></button>
             </div>
         ))}
         </div>

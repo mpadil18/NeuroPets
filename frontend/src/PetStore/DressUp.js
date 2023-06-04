@@ -2,14 +2,22 @@ import "./PetStore.css"
 import Close from "../assets/elements/Close.svg"
 import ActiveIcon from "../assets/elements/ActiveIcon.png"
 import { useState, useEffect } from "react";
-import {updateUserInfo, getUserInfo} from '../Backend/handleSubmit';
+import { updateUserInfo } from '../Backend/handleSubmit';
 import { auth } from "../Backend/firebaseSetup.js";
 
 import DisplayPet from "../Home/DisplayPet";
 import NavigationArrows from "./NavigationArrows";
 
 function DressUp(props) {
-    const user = auth.currentUser; 
+    const user = auth.currentUser;
+    /* VARIABLES for DressUp Feature
+       petArray: The array of pets the user can dress up
+       displayedPetsRange: indicates which pets from the petArray to currently display when the user has the pet menu open (for the navigation arrows)
+       selectedPet: the index of the pet (in the petArray) the user selects to dress up
+       accessoryToUse: the list of info regarding the accessory the user picks (passed from the Pet Store)
+       accessoriesByGearType: separates each accessory by its geartype, so we know where to place the accessory in the pet's `wearingAccessories` array
+       displayNextPopup: changes the view to ask the user if they want to remove the selected accessory, if the pet's already wearing the selected one
+    */
     const [petArray] = useState(props.goalArray);
     const [displayedPetsRange, setDisplayedPetsRange] = useState([0, 5]);
     const [selectedPet, setSelectedPet] = useState(null);
@@ -17,23 +25,25 @@ function DressUp(props) {
     const accessoriesByGearType = [["Blue Cap", "Orange Cap", "Red Cap", "Cowboy Hat", "Blue Party Hat", "Green Party Hat", "Pink Party Hat"], ["Blue Bandana", "Red Bandana"]]
     const [displayNextPopup, setDisplayNextPopup] = useState(false);
 
+    /* tryDressPet functionality:
+       Take the selectedPetId, access the goal array at that index,
+       access the `wearingAccessoriesArray` at the apparel code.
+       IF pet has the same exact accessory, display popup text asking if it's ok to remove the apparel.
+       ELSE: just make the update in the array, and push to firebase, and close this popup. */
     const tryDressPet = () => {
-        // Take the selectedPetId, access the goal array at that index,
-        // access the `wearingAccessoriesArray` at the apparel code.
-        // if pet has the same exact accessory, display popup text asking if it's ok to remove the apparel.
-        // else: just make the update in the array, and push to firebase, and close this popup.
-        console.log("Try and dress up!");
-        console.log("Pet to dress: ", selectedPet)
-        console.log("Accessory to use: ", accessoryToUse)
-        console.log("All pets", petArray)
-        // Reverse the pet array to get the one we want to access
+        // Reverse the pet array to get the correct pet to access
         let petArrayToUpdate = (petArray.reverse())
         const petToDress = (petArray.reverse())[selectedPet]
+        // Get the string of the accessory we want to use
         const accessoryStr = accessoryToUse[2]
+        // Iterate over the accessoriesByGearType to find a match, and
+        // determine where the accessory belongs in the pet's `wearingAccessories` array
         for (let gearType = 0; gearType < accessoriesByGearType.length; gearType++) {
+            // If we find a match in the list for the accessory, we know what type it is
             if (accessoriesByGearType[gearType].includes(accessoryStr)) {
                 if (gearType === 0) {
-                    // check if pet is wearing the accessory already
+                    // check if pet is wearing the accessory already. If so, display next popup
+                    // else: update the pet's string, and update the `wearingAccessories` in Firebase
                     if (petToDress.wearingAccessories.headgear === accessoryStr) {
                         setDisplayNextPopup(true);
                         return 0;
@@ -132,13 +142,13 @@ function DressUp(props) {
                 <>
                 <p className="BubbleHeader">Who to dress up in the<br/><span style={{"font-weight": "bold"}}>{accessoryToUse !== undefined ? accessoryToUse[2] : ""}</span>?</p>
                 <div className="gridContents">
-                    {/* Reverse order of petArray to show from latest to oldest */}
+                    {/* Reverse order of petArray to show from LATEST to OLDEST */}
                     {(petArray.length > 0) ?
                         ((petArray.reverse()).slice(displayedPetsRange[0], displayedPetsRange[1])).map((pet, index) => (
                             <div className="petOption" id={index + displayedPetsRange[0]} key={index + displayedPetsRange[0]} onClick={() => setSelectedPet(index + displayedPetsRange[0])}>
                             <DisplayPet currGoal = {pet} />
-                            {console.log(pet)}
                             <p className="petsName">Null</p>
+                            {/* Adds the active icon to show which pet is currently active */}
                             {index + displayedPetsRange[0] === (0) ? <img className="activeIcon" src={ActiveIcon} alt="active pet" /> : null}
                             <p className="daysOld">{pet.progressCounter}/60d</p>
                             </div>
