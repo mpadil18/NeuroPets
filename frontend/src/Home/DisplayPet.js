@@ -29,6 +29,7 @@ function DisplayPet(props) {
     const eggIndex = 9; 
 
     useEffect(() => {     
+        console.log(props.currGoal)
         if (props.currGoal !== null){ // When curr goal is 
             let petNum = props.currGoal.pet; 
             let progressCounter = props.currGoal.progressCounter;
@@ -46,7 +47,7 @@ function DisplayPet(props) {
                 setPetId(petNum + 2);
             }
         }
-    })
+    }, [setPetId, props.currGoal])
 
     function GetPet(){
         return (<img className ="pet" src = {petImgsByCode[petId]} alt = "pet stage"/>)

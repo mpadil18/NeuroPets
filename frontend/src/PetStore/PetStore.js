@@ -29,136 +29,18 @@ import { useLocation } from "react-router-dom"
 
 function PetStore() {
     const location = useLocation();
-    const test = [{
-        "goal": "Learn an Instrument",
-        "petName": "",
-        "progressCounter": 0,
-        "pet": 3,
-        "wearingAccessories": [
-            "",
-            "",
-            ""
-        ],
-        "logs": [],
-        "currDate": {
-            "seconds": 1685575297,
-            "nanoseconds": 205000000
-        },
-        "petPoints": 0
-    },
-    {
-        "goal": "Learn an Instrument",
-        "petName": "",
-        "progressCounter": 0,
-        "pet": 3,
-        "wearingAccessories": [
-            "",
-            "",
-            ""
-        ],
-        "logs": [],
-        "currDate": {
-            "seconds": 1685575297,
-            "nanoseconds": 205000000
-        },
-        "petPoints": 0
-    },
-    {
-        "goal": "Learn an Instrument",
-        "petName": "",
-        "progressCounter": 0,
-        "pet": 3,
-        "wearingAccessories": [
-            "",
-            "",
-            ""
-        ],
-        "logs": [],
-        "currDate": {
-            "seconds": 1685575297,
-            "nanoseconds": 205000000
-        },
-        "petPoints": 0
-    },
-    {
-        "goal": "Learn an Instrument",
-        "petName": "",
-        "progressCounter": 0,
-        "pet": 3,
-        "wearingAccessories": [
-            "",
-            "",
-            ""
-        ],
-        "logs": [],
-        "currDate": {
-            "seconds": 1685575297,
-            "nanoseconds": 205000000
-        },
-        "petPoints": 0
-    },
-    {
-        "goal": "Learn an Instrument",
-        "petName": "",
-        "progressCounter": 0,
-        "pet": 3,
-        "wearingAccessories": [
-            "",
-            "",
-            ""
-        ],
-        "logs": [],
-        "currDate": {
-            "seconds": 1685575297,
-            "nanoseconds": 205000000
-        },
-        "petPoints": 0
-    },
-    {
-        "goal": "Learn an Instrument",
-        "petName": "",
-        "progressCounter": 0,
-        "pet": 3,
-        "wearingAccessories": [
-            "",
-            "",
-            ""
-        ],
-        "logs": [],
-        "currDate": {
-            "seconds": 1685575297,
-            "nanoseconds": 205000000
-        },
-        "petPoints": 0
-    },
-    {
-        "goal": "Learn an Instrument",
-        "petName": "",
-        "progressCounter": 0,
-        "pet": 3,
-        "wearingAccessories": [
-            "",
-            "",
-            ""
-        ],
-        "logs": [],
-        "currDate": {
-            "seconds": 1685575297,
-            "nanoseconds": 205000000
-        },
-        "petPoints": 0
-    }]
+    const [petArray] = useState((location.state) ? location.state.goalArray : []);
     //We map the type of accessory to the appropriate ranges provided in the pet store
     // (Ex: all elements from indexes 0-6 are headgear, all from indexes 7-8 are neckwear)
-    const accessoriesByGearType = [{headgear: [0, 6]}, {neckwear: [7, 8]}]
     // Each pair is the accessory with the price
     const accessories = [[capBlue, 25, "Blue Cap", "Your pet will feel fly in this!"], [capOrange, 25, "Orange Cap", "Your pet will feel fly in this!"], [capRed, 25, "Red Cap", "Your pet will feel fly in this!"], [cowboyhat, 50, "Cowboy Hat", "Your pet will feel fly in this!"], [partyhatBlue, 35, "Blue Party Hat", "Your pet will feel fly in this!"], [partyhatGreen, 35, "Green Party Hat", "Your pet will feel fly in this!"], [partyhatPink, 35, "Pink Party Hat", "Your pet will feel fly in this!"], [bandanaBlue, 20, "Blue Bandana", "Your pet will feel fly in this!"], [bandanaRed, 20, "Red Bandana", "Your pet will feel fly in this!"]]
+
 
     //Last accessory = item 9.
     // If the last item of displayed < 8, then display front arrow
     // that changes the indexes by factor of 4 (ex: next is 1, 4)
     const [displayedAccessoryRange, setDisplayedAccessoryRange] = useState([0, 4])
-    const [userPetPoints, setUserPetPoints] = useState((location.state) ? (location.state.petPoints) : 0);
+    const [userPetPoints, setUserPetPoints] = useState(location.state.petPoints);
     const [selectedAccessory, setSelectedAccessory] = useState(null);
     const [popupDisplay, setPopupDisplay] = useState(false);
     const user = auth.currentUser;
@@ -172,7 +54,7 @@ function PetStore() {
     }
 
     const dressUpPet = (accessoryId) => {
-        setSelectedAccessory(accessories[accessoryId]);
+        setSelectedAccessory(accessories[Number(accessoryId)]);
         setPopupDisplay(true);
     }
 
@@ -198,8 +80,8 @@ function PetStore() {
         backFunc={changeStoreViewBkwd}
         frwdFunc={changeStoreViewFrwd}
         middleComponent={<p className="petPointsDisplay">{(userPetPoints)} pts</p>}/>
-    {popupDisplay && <DressUp goalArray={test} selectedAccessory={selectedAccessory} popupDisplay={popupDisplay} setPopupDisplay={setPopupDisplay}/>}
-    <NavBar goalArray={userPetPoints}/>
+    {popupDisplay && <DressUp goalArray={petArray} selectedAccessory={selectedAccessory} popupDisplay={popupDisplay} setPopupDisplay={setPopupDisplay}/>}
+    <NavBar goalArray={petArray} petPoints={userPetPoints}/>
    </div>
    );
 }

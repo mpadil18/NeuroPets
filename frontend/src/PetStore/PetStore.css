@@ -140,3 +140,14 @@
     text-align: center;
     width: 90%;
 }
+
+.DressUp .Popup .spotlightPet .pet {
+    height: 200px;
+}
+
+.rowOfButtons {
+    margin: 30px;
+    display: inline-flex;
+    justify-content: space-between;
+    width: 70%;
+}
