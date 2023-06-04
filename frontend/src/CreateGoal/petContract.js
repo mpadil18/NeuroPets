@@ -45,12 +45,12 @@ function PetContract(){
 
         <div className ="bubbleHeader">NeuroPet Adoption Form & Contract to Myself </div>
 
-          <div className="contractBox">
+          <div className="InputBubble">
           
             <div className = "contractText">
-              I <input placeholder="Name" className="InputBubble"/> vow to look after my NeuroPet
+              I <input placeholder="Name" className="bubbleField"/> vow to look after my NeuroPet
 
-              <input placeholder="Enter Pet Name" className="InputBubble"
+              <input placeholder="Enter Pet Name" className="bubbleField"
               value = {petName} onChange = {(e) => setPetName(e.target.value)}></input>
               by working towards  everyday for 60 days. 
 
@@ -60,11 +60,9 @@ function PetContract(){
             </div>
 
           <div className="contractFooter">
-
-          <div className = "WindowTextBox1"> {formattedDate} <br/> Date </div>
-          <div className = "WindowTextBox2"> {petName} <br/> Witness   </div>
+            <div className = "TextBox1"> {formattedDate} <br/> Date </div>
+            <div className = "TextBox2"> {petName} <br/> Witness   </div>
           </div>
-
         </div>
       
         <button onClick = {submithandler} className="bubbleButton"> 

@@ -1,63 +1,30 @@
-.PetContract {
-   
+.PetContract { 
     background: url("../assets/branding/wave.svg") no-repeat center;
-
-    min-height: 100vh;
     background-size: cover;
     display: flex;
     align-items: center;
     flex-direction: column;
-   
-    padding-bottom: 60px;
-}
-
-.contractHeader{
-    font-size: 28px;
-    font-weight: 400;
-    text-align: center;
-    line-height: 40px;
-    margin-top: 10%;
 }
 
 
 .PetContract .InputBubble{
-    width: 150px;
-    height: 25px;
-    float:none;
-    /*Need to have display flex removed from App.css*/
-}
-
- .contractBox{
-    width: 300px;
-    height: 500px;
-    background: #D9D9D9;
-    border-radius: 15px;
-
+    display: float;
     margin-top: 20px;
     margin-bottom: 40px;
-    position: relative;
-    
-    width: 80%;
-    height: 60vh;
-    top: 25px;
+    height: 70%;
 }
+
 
 .contractText{
     margin:10%;
 }
 
 
-.WindowTextBox1{
+.PetContract  .TextBox1{
 
-    position: absolute;
-    top: 80%;
-    left: 5%;
-  
+
 }
 
-.WindowTextBox2{
+.PetContract  .TextBox2{
 
-    position: absolute;
-    top: 80%;
-    left: 80%;
 }
