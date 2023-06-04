@@ -48,7 +48,7 @@ function PetContract(){
           <div className="InputBubble">
           
             <div className = "contractText">
-              I <input placeholder="Name" className="bubbleField"/> vow to look after my NeuroPet
+             I  <input placeholder="Name" className="bubbleField"/> vow to look after my NeuroPet
 
               <input placeholder="Enter Pet Name" className="bubbleField"
               value = {petName} onChange = {(e) => setPetName(e.target.value)}></input>
