@@ -50,12 +50,14 @@ function NavBar(props){
                  <div className = "SignOutPopup1">
                      <div className = "SignOutPopup2" >
                                  <p className = "ConfirmSignOutText">Would you like to sign out?</p>
-                             <button className = "ConfirmSignOutButton" onClick = {SignOutButton}>
-                                 <p className = "OkayText">Okay</p>
-                             </button>
-                             <button className = "CancelSignOutButton" onClick = {setClosed}>
-                                 <p className = "CancelText">Cancel</p>
-                             </button>
+                         
+                                <button className = "bubbleButton" onClick = {SignOutButton}>
+                                    Okay
+                                </button>
+                                <button className = "bubbleButton" onClick = {setClosed}>
+                                    Cancel
+                                </button>
+                           
                      </div>
                  </div>
              </div>

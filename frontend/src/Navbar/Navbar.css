@@ -23,7 +23,7 @@
     background: url("../assets/navbarIcons/shop.svg") no-repeat 
 }
 .settingsIcon {
-    background: url("../assets/navbarIcons/user.svg") no-repeat 
+    background: url("../assets/navbarIcons/signOut.svg") no-repeat 
 }
 
 .SignOutPopup1 {
@@ -46,70 +46,23 @@
 .SignOutPopup2 {
     box-sizing: border-box;
     position: inherit;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    flex-direction: row;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     height: 80%;
     width: 90%;
-    background: #F9F9F9;
+    background: #EEE;
     border-radius: 15px;
-}
-.ConfirmSignOutButton {
-    position: inherit;
-    width: 105px;
-    height: 34px;
-    left: 10%;
-    top: 60%;
-    max-width: 105px;
-    background: #F88B98;
-    border-radius: 20px;
-    border: none;
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
 }
 
-.CancelSignOutButton {
-    position: inherit;
-    width: 105px;
-    height: 34px;
-    left: 55%;
-    top: 60%;
-    max-width: 105px;
-    background: #F88B98;
-    border-radius: 20px;
-    border: none;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    
-}
-.OkayText {
-    position: inherit;
-
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 18px;
-
-    color: #F9F9F9;
-}
-.CancelText {
-    position: inherit;
-
-    
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 18px;
-
-    color: #F9F9F9;
-
+.SignOutPopup2 .bubbleButton{
+    min-width: 40%;
+    margin: 5% 5%;
 }
 
 .ConfirmSignOutText {
@@ -124,9 +77,6 @@
     font-weight: bolder;
     font-size: 16px;
     line-height: 24px;
-    display: flex;
-    align-items: center;
-    text-align: center;
 
     color: #000000;
 }
