@@ -11,12 +11,15 @@ import { Routes, Route } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute'; // import the ProtectedRoute component
 import { useState } from 'react';
 
+import PetContract from "./CreateGoal/petContract";
+
 //add additional paths to different pages using same syntax <Route path = "..." element = {<.../>} />
 function App() {
   const [isSignedIn, setIsSignedIn] = useState(false);
 
   return (
       <Routes>
+        <Route path = "/petContract" element={<ProtectedRoute isSignedIn={isSignedIn}><PetContract /></ProtectedRoute>}  />
 
         <Route path = "" element = {<Login setIsSignedIn={setIsSignedIn} />} /> 
         <Route path = "/" element = {<Login setIsSignedIn={setIsSignedIn} />} />

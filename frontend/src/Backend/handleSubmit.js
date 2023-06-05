@@ -49,7 +49,7 @@ export async function createUserDb (userid, email) {
 
 
 //Given a userid appends to the goalArray
-export async function createNewGoal(userid, goalText){
+export async function createNewGoal(userid, goalText, petName){
 
     const babyPetCodes = [0, 3, 6];
     
@@ -59,7 +59,7 @@ export async function createNewGoal(userid, goalText){
 
     const pet = assignRandomPet();
     const startDate = new Date();
-    const goalTuple = {goal: goalText, pet: pet, petName: "",
+    const goalTuple = {goal: goalText, pet: pet, petName: petName,
                        currDate: startDate, progressCounter: 0, 
                     logs:[]};
 
