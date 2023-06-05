@@ -6,8 +6,12 @@ import { auth } from "../Backend/firebaseSetup.js";
 import NavBar from "../Navbar/Navbar";
 import DisplayPet from "../Home/DisplayPet";
 
+import { useAutoAnimate } from '@formkit/auto-animate/react'
+
 function PetGallery() {
     const navigate = useNavigate();
+
+    const [animationParent] = useAutoAnimate()
 
     // If PetGallery is navigated to from another page (ex: Navbar)
     // then we get the data that the other page passed by using location
@@ -76,9 +80,9 @@ function PetGallery() {
     }, [cachedGoalArray])
 
     return (
-        <div className="PetGallery">
+        <div className="PetGallery" >
                 <p className = "HeaderBubble">My Pets</p>
-                <div className="Gallery">
+                <div className="Gallery" ref = {animationParent}>
                 {/* If the user has goals, then render PetCards for each goal/pet. Else, render nothing */}
                 { (goalPetList.length > 0) ? 
                     goalPetList.map((goalPet, index) => (

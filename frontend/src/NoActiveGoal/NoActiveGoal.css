@@ -1,0 +1,10 @@
+.NoActiveGoal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.InputBubble {
+    height: 230px;
+    margin-top: 40px;
+}
