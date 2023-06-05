@@ -9,13 +9,13 @@
 
 .PetContract .bubbleHeader{
     max-width: 80%;
-    margin-top: 8%;
+    margin-top: 5%;
 }
 
 .PetContract .InputBubble{
     margin-top: 20px;
-    margin-bottom: 40px;
-    height: 72vh;
+    margin-bottom: 35px;
+    height: 68vh;
     width:80%;
 }
 
@@ -26,9 +26,11 @@
 
 
 .contractText{
-    margin:7%;
+    margin-top: 0%;
+    margin-left:7%;
+    margin-right: 7%;
     font-size: 20px;
-    line-height: 1.7;
+    line-height: 1.5;
 }
 
 .contractFooter{

@@ -21,20 +21,24 @@ function PetContract(){
 
     const [errorMsg, setErrorMsg] = useState('');
     const [petName, setPetName] = useState('');
+    const [userName, setUserName] = useState('');
 
 
     const submithandler = (e) => {
       e.preventDefault()
       console.log(location.state);
       if (petName.length === 0){
-        setErrorMsg("Please fill in a goal");
-      } else {
+        setErrorMsg("Please enter in petname");
+      } 
+      else if (userName.length === 0) {
+        setErrorMsg("Please enter in your name");
+      }
+      else {
         createNewGoal(user.uid, goalText, petName); 
-
-        // Data Race Occurs here. 
-        // setTimeout(function(){
-        //   navigate('../Home');
-        // }, 800);
+        
+        setTimeout(function(){
+          navigate('../Home');
+        }, 800);
         
       }
     }
@@ -49,7 +53,8 @@ function PetContract(){
           
             <div className = "contractText">
               <p>
-             I  <input placeholder="Name" className="bubbleField"/> vow to look after my NeuroPet
+             I  <input placeholder="Name" className="bubbleField"
+              value = {userName} onChange = {(e) => setUserName(e.target.value)}/> vow to look after my NeuroPet
               <input placeholder="Enter Pet Name" className="bubbleField"
               value = {petName} onChange = {(e) => setPetName(e.target.value)}></input>
               by working towards  everyday for 60 days. 
