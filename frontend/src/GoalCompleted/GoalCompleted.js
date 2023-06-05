@@ -8,35 +8,44 @@ import firebase from 'firebase/compat/app'
 import 'firebase/compat/firestore';
 
 function GoalCompleted () {
+
     const navigate = useNavigate();
     const location = useLocation();
     const props = location.state;
+
     console.log(props);
+
     const endCurrentGoalCycle = () => {
+
         const user = auth.currentUser; 
+
         // set active goal to false to indicate that there are no active goals now that the current one is complete
         let timeStamp = (getUserInfo(user.uid)).lastProgressMade;
+
         updateUserInfo(user.uid, {activeGoal: 0, lastProgressMade : firebase.firestore.FieldValue.delete(timeStamp) });
-        /*
-        await updateDoc(docRef, {
-            "goalArray": firebase.firestore.FieldValue.arrayRemove(currGoal),
-            "lastProgressMade" : firebase.firestore.FieldValue.delete(timeStamp),
-            "activeGoal": 0
-        });
-        */
+
         // navigate back to home page
         navigate('../Home');
     }
     return (
+
         <div className = "GoalComplete">
+
             <div className = "GoalCompleteInputBubble">
+
                 <div className = "GoalCompleteBubbleHeader">
+
                     <h1>Congratulations!</h1>
                     <p>You’ve worked towards your goal for 60 days. That’s an incredible accomplishment!</p>
+
                 </div>
+
             </div>
+
             <DisplayPet currGoal = {props.currGoal} />
+
             <button onClick = {endCurrentGoalCycle} className = "GoalCompleteBubbleButton">Continue</button>
+            
         </div>
     );
 }

@@ -25,14 +25,20 @@ function Home() {
     const [shouldShake, setShouldShake] = useState(false);
 
     const hopAnimation = {
+
         y: [0, -10, 0],
+
         transition: {
+
             duration: 1.5,
             repeat: Infinity,
+
             y: {
+
                 type: "spring",
                 stiffness: 20,
                 damping: 2,
+
             },
         },
     };
@@ -270,9 +276,15 @@ function Home() {
             </div>
             
                 <ProgressButton onClick = {completeGoal}></ProgressButton>
+
                 {!goalComplete && <img className = "ProfessorText" src={ProfText} alt="Professor speech bubble"></img>}
+
                 {popupDisplay &&
-                <LogProgress ref = {animationParent} currGoal = {currGoal} currGoalId={goalIndex} setPopupDisplay={setPopupDisplay} progressCounter={progressCounter} progressTimestamp={progressTimestamp} setGoalArray={setGoalArray}/>
+
+                <LogProgress ref = {animationParent} currGoal = {currGoal} currGoalId={goalIndex} setPopupDisplay={setPopupDisplay} 
+                                                     progressCounter={progressCounter} progressTimestamp={progressTimestamp} 
+                                                     setGoalArray={setGoalArray}/>
+
                 }
             
             </div>
