@@ -18,7 +18,7 @@ function UnlockItem (props) {
         const docSnap = await getDoc(docRef);
 
         // decrement the user's pet points
-        let userPoints = props.userPetPoints[props.userPetPoints.length - 1].petPoints
+        let userPoints = props.userPetPoints;
         let newUserPoints = userPoints - itemPrice;
 
         // retrieve the unlocked accessories array from the database
@@ -29,11 +29,15 @@ function UnlockItem (props) {
 
         // update the database with the new pet point value and updated unlocked accessories array
         await updateDoc(docRef, {
-            "unlockedAccessories": accessories
+            "unlockedAccessories": accessories,
+            "petPoints": newUserPoints
         });
 
         // set the isUnlocked state with the updated accessories array
         props.setIsUnlocked(accessories);
+
+        // Update the user points for the pet store frontend
+        props.setUserPetPoints(newUserPoints);
 
         // close the popup
         props.setUnlockItemPopup(false);

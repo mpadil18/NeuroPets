@@ -11,6 +11,7 @@ function NavBar(props){
     const [isOpen, setIsOpen] = useState(false);
     const [isDeleteGoalOpen, setIsDeleteGoalOpen] = useState(false);
 
+
     function SignOutButton(){
         const authUser = auth;
         signOut(authUser).then(() => {

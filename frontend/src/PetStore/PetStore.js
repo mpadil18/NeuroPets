@@ -72,7 +72,7 @@ function PetStore() {
     const openUnlockItem = (item) => {
         // only open the unlock item popup if the user has enough pets points to purchase the item
         let pointsToUnlock = item[1];
-        let userPoints = userPetPoints[userPetPoints.length - 1].petPoints
+        let userPoints = userPetPoints;
         if (userPoints >= pointsToUnlock){
             setItemData(item);
             setUnlockItemPopup(true);
@@ -114,7 +114,7 @@ function PetStore() {
                 {!isUnlocked[itemAndPrice[4]] &&
                 <button onClick = {() => openUnlockItem(itemAndPrice)} className="newBubbleButton" id={index}><img src={Key} alt="key"/><span className="priceTag">{itemAndPrice[1]} pts</span></button>
                 }
-                <UnlockItem unlockItemPopup={unlockItemPopup} setUnlockItemPopup={setUnlockItemPopup} setIsUnlocked={setIsUnlocked} itemData={itemData} user={user} userPetPoints={userPetPoints}/>
+                <UnlockItem unlockItemPopup={unlockItemPopup} setUnlockItemPopup={setUnlockItemPopup} setIsUnlocked={setIsUnlocked} itemData={itemData} user={user} userPetPoints={userPetPoints} setUserPetPoints={setUserPetPoints}/>
                 
             </div>
         ))}

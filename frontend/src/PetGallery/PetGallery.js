@@ -76,7 +76,7 @@ function PetGallery() {
     }, [cachedGoalArray])
 
     return (
-        <div className="PetGallery">
+        <div className="PetGallery" >
                 <p className = "HeaderBubble">My Pets</p>
                 <div className="Gallery">
                 {/* If the user has goals, then render PetCards for each goal/pet. Else, render nothing */}

@@ -25,11 +25,11 @@ function App() {
         <Route path = "/createGoal" element={<ProtectedRoute isSignedIn={isSignedIn}><CreateGoal /></ProtectedRoute>} />
         <Route path = "/home" element={<ProtectedRoute isSignedIn={isSignedIn}><Home /></ProtectedRoute>} />
         <Route path = "/doctorIntro" element={<ProtectedRoute isSignedIn={isSignedIn}><DocIntro /></ProtectedRoute>} />
+
         <Route path= "/petGallery" element={<ProtectedRoute isSignedIn={isSignedIn}><PetGallery /></ProtectedRoute>} />
         <Route path= "/viewProgress" element={<ProtectedRoute isSignedIn={isSignedIn}><ViewProgress /></ProtectedRoute>} />
         <Route path= "/petStore" element={<ProtectedRoute isSignedIn={isSignedIn}><PetStore /></ProtectedRoute>} />
         <Route path = "/goalCompleted" element={<ProtectedRoute isSignedIn={isSignedIn}><GoalCompleted /></ProtectedRoute>} />
-
       </Routes>
 
   );
