@@ -17,7 +17,7 @@ import partyhatGreen from "../assets/PetStoreItems/partyhatGreen.png";
 import partyhatPink from "../assets/PetStoreItems/partyhatPink.png";
 
 import Key from "../assets/elements/Key.png";
-import Shirt from "../assets/elements/Shirt.svg"
+import Shirt from "../assets/elements/Shirt.png"
 
 import DressUp from "./DressUp.js"
 import NavigationArrows from "./NavigationArrows"
@@ -112,7 +112,9 @@ function PetStore() {
                 <button className="newBubbleButton" id={Number(index + displayedAccessoryRange[0])} onClick={(e) => dressUpPet(e.target.id)}><img src={Shirt} id={Number(index + displayedAccessoryRange[0])}/>Dress a pet</button>
                 }
                 {!isUnlocked[itemAndPrice[4]] &&
-                <button onClick = {() => openUnlockItem(itemAndPrice)} className="newBubbleButton" id={index}><img src={Key} alt="key"/><span className="priceTag">{itemAndPrice[1]} pts</span></button>
+                    ((itemAndPrice[1] <= userPetPoints) ? 
+                        <button onClick = {() => openUnlockItem(itemAndPrice)} className="newBubbleButton" id={index}><img src={Key} alt="key"/><span className="priceTag">{itemAndPrice[1]} pts</span></button>
+                        : <button className="disabledBubbleButton" id={index}><img src={Key} alt="key"/><span className="priceTag">{itemAndPrice[1]} pts</span></button>)
                 }
                 <UnlockItem unlockItemPopup={unlockItemPopup} setUnlockItemPopup={setUnlockItemPopup} setIsUnlocked={setIsUnlocked} itemData={itemData} user={user} userPetPoints={userPetPoints} setUserPetPoints={setUserPetPoints}/>
                 

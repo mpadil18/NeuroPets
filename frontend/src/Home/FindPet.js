@@ -1,3 +1,4 @@
+import loading from "../assets/sprites/loading.png";
 import { useEffect, useState } from "react";
 
 function FindPet(props){
@@ -125,8 +126,11 @@ function FindPet(props){
 
     function DisplayPet(){
         console.log(fileExt);
-        return (<img src = {fileExt} alt = "pet image" />)
-
+        if (fileExt === "") {
+            return (<img className ="pet" src = {loading} alt = "loading pet" />)
+        } else {
+            return (<img className ="pet" src = {fileExt} alt = "retrieved pet" />)
+        }
     }
 
 
