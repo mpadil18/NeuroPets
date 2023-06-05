@@ -34,6 +34,7 @@ import { db } from "../Backend/firebaseSetup.js";
 function PetStore() {
     const location = useLocation();
     const [petArray] = useState((location.state) ? location.state.goalArray : []);
+
     //We map the type of accessory to the appropriate ranges provided in the pet store
     // (Ex: all elements from indexes 0-6 are headgear, all from indexes 7-8 are neckwear)
     // Each pair is the accessory with the price
@@ -48,11 +49,19 @@ function PetStore() {
     [bandanaBlue, 20, "Blue Bandana", "Your pet will feel fly in this!", 7], 
     [bandanaRed, 20, "Red Bandana", "Your pet will feel fly in this!", 8]]
 
-
-    //Last accessory = item 9.
-    // If the last item of displayed < 8, then display front arrow
-    // that changes the indexes by factor of 4 (ex: next is 1, 4)
+    /* displayedAccessoryRange: the items from accessories to currently display (changed with Navigation Arrows)
+    Last accessory = item 9.
+    If the last item of displayed < 8, then display front arrow
+    that changes the indexes by factor of 4 (ex: next is 1, 4) */
     const [displayedAccessoryRange, setDisplayedAccessoryRange] = useState([0, 4])
+
+    /* VARIABLES:
+        userPetPoints: the user's pet points available (updated after purchasing an item)
+        selectedAccessory: the selected item from the list of accessories
+        popupDisplay: on true, displays the dressup menu.
+        unlockItemPopup: on true, displays the popup asking user if they want to spend their points
+        itemData: used to access information about accessory in `UnlockItem.js`
+        isUnlocked: the array of data indicating whether the user has an item unlocked or not. This affects which buttons are rendered */
     const [userPetPoints, setUserPetPoints] = useState(location.state.petPoints);
     const [selectedAccessory, setSelectedAccessory] = useState(0);
     const [popupDisplay, setPopupDisplay] = useState(false);
