@@ -34,8 +34,9 @@ export async function createUserDb (userid, email) {
         userid: userid,
         useremail: email,
         goalArray:[],
-        activeGoal: 0, 
-        petPoints: 0
+        activeGoal: 0,
+        petPoints: 0, 
+        unlockedAccessories: [false, false, false, false, false, false, false, false, false]
     }
 
     try {
@@ -61,7 +62,7 @@ export async function createNewGoal(userid, goalText, petName){
     const startDate = new Date();
     const goalTuple = {goal: goalText, pet: pet, petName: petName,
                        currDate: startDate, progressCounter: 0, 
-                    logs:[]};
+                    logs:[], wearingAccessories:{headgear: "", neckwear: "", bodypaint: ""}};
 
       // Update the user's goal array by getting old data
       // and pushing the new goal to the list

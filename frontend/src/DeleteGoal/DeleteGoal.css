@@ -29,11 +29,7 @@
     color: #000000;
 }
 
-.deleteGoalButtons {
-    margin-top: 40px;
-}
-
-.deleteGoalButton {
+.BinaryBubbleButton {
     padding-left: 60px;
     padding-right: 60px;
     margin: 15px;

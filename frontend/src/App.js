@@ -6,6 +6,7 @@ import Home from "./Home/Home"
 import PetGallery from "./PetGallery/PetGallery"
 import DocIntro from "./DoctorIntro/DocIntro";
 import ViewProgress from "./ViewProgress/ViewProgress";
+import PetStore from "./PetStore/PetStore";
 import GoalCompleted from "./GoalCompleted/GoalCompleted";
 import { Routes, Route } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute'; // import the ProtectedRoute component
@@ -30,6 +31,7 @@ function App() {
 
         <Route path= "/petGallery" element={<ProtectedRoute isSignedIn={isSignedIn}><PetGallery /></ProtectedRoute>} />
         <Route path= "/viewProgress" element={<ProtectedRoute isSignedIn={isSignedIn}><ViewProgress /></ProtectedRoute>} />
+        <Route path= "/petStore" element={<ProtectedRoute isSignedIn={isSignedIn}><PetStore /></ProtectedRoute>} />
         <Route path = "/goalCompleted" element={<ProtectedRoute isSignedIn={isSignedIn}><GoalCompleted /></ProtectedRoute>} />
       </Routes>
 
