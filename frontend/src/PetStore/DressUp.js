@@ -147,7 +147,7 @@ function DressUp(props) {
                         ((petArray.reverse()).slice(displayedPetsRange[0], displayedPetsRange[1])).map((pet, index) => (
                             <div className="petOption" id={index + displayedPetsRange[0]} key={index + displayedPetsRange[0]} onClick={() => setSelectedPet(index + displayedPetsRange[0])}>
                             <DisplayPet currGoal = {pet} />
-                            <p className="petsName">Null</p>
+                            <p className="petsName">{pet.petName}</p>
                             {/* Adds the active icon to show which pet is currently active */}
                             {index + displayedPetsRange[0] === (0) ? <img className="activeIcon" src={ActiveIcon} alt="active pet" /> : null}
                             <p className="daysOld">{pet.progressCounter}/60d</p>
