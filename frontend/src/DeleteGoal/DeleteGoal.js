@@ -71,7 +71,7 @@ function DeleteGoal(props) {
 
                 <div className = "DeleteGoal">
 
-                    <div className = "InputBubble">
+                    <div className = "DeleteGoalInputBubble">
          
                         <div className = "bubbleHeader">
          
