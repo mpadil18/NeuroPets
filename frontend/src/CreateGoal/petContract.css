@@ -1,0 +1,41 @@
+.PetContract { 
+    background: url("../assets/branding/wave.svg") no-repeat center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.PetContract .bubbleHeader{
+    max-width: 80%;
+    margin-top: 5%;
+}
+
+.PetContract .InputBubble{
+    margin-top: 20px;
+    margin-bottom: 35px;
+    height: 68vh;
+    width:80%;
+}
+
+.PetContract .bubbleField{
+    margin: 2% 2%;
+    width: 55%;
+}
+
+
+.contractText{
+    margin-top: 0%;
+    margin-left:7%;
+    margin-right: 7%;
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+.contractFooter{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 4%;
+}

@@ -1,12 +1,10 @@
 import "./CreateGoal.css"
 import React, { useState } from "react"
-import { auth } from "../Backend/firebaseSetup";
 import { useNavigate } from "react-router-dom"
 import ProfText from "../assets/branding/ProfTextA.svg"; 
-import { createNewGoal } from "../Backend/handleSubmit";
 import { presetGoals } from "../Backend/presetData.js";
-function CreateGoal() {
 
+function CreateGoal() {
   const [goalText, setGoalText] = useState("");
   const [errorMsg, setErrorMsg] = useState('');
 
@@ -23,17 +21,15 @@ function CreateGoal() {
     document.getElementById(id).style.backgroundColor = "#152130";
   }
   
+
   const submithandler = (e) => {
     e.preventDefault()
     
     if (goalText.length === 0){
       setErrorMsg("Please fill in a goal");
     } else {
-      createNewGoal(user.uid, goalText);
-      setTimeout(function(){
-        navigate('../Home');
-      }, 500);
-      
+      console.log(goalText + "in create goal");
+      navigate('/petContract', { state:{goalText: goalText || {} }});
     }
   }
 
@@ -109,7 +105,7 @@ function CreateGoal() {
           {errorMsg && <p style={{margin: 0}}> Error: {errorMsg}</p>}
 
           <button className="bubbleButton submission" onClick = {submithandler}> 
-            Save Goal
+            Continue
           </button>
         </div>
 

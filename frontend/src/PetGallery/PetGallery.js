@@ -86,7 +86,7 @@ function PetGallery() {
                 { (goalPetList.length > 0) ? 
                     goalPetList.map((goalPet, index) => (
                         <div className="PetCard" key={index}>
-                            <p className="PetName">Null</p>
+                            <p className="PetName">{goalPet.petName}</p>
                             <p className="CardGoalText">{goalPet.goal}</p>
 
                             <FindPet currGoal={goalPet} style={{"height":100}}/>
