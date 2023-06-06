@@ -15,7 +15,8 @@ function DeleteGoal(props) {
     const navigate = useNavigate();
 
     // user should not be able to delete a goal if they have no active goals
-    // so display different text if there are no active goals
+    // so retrieve the active goal attribute in order to display different text to the user
+    // if they click on the delete goal tab while they do not have any active goals
     const getActiveGoal = async () => {
 
         const docRef = doc(db, "all_data", user.uid);
@@ -28,13 +29,13 @@ function DeleteGoal(props) {
 
     getActiveGoal();
 
-    const closeDeleteGoal = (e) => {
+    const closeDeleteGoal = () => {
 
         props.setIsDeleteGoalOpen(false);
 
     }
 
-    const deleteCurrentGoal = (e) => {
+    const deleteCurrentGoal = () => {
 
             const getAllData = async () => {
 
@@ -72,22 +73,48 @@ function DeleteGoal(props) {
                 <div className = "DeleteGoal">
 
                     <div className = "DeleteGoalInputBubble">
-        
-                        <div className = "bubbleHeader">
-         
-                            <p>Would you like to delete your current goal and create a new one?</p>
-         
-                            <p>This action will delete your current progress!</p>
-         
-                        </div>
-         
-                        <div className = "BinaryBubbleButtons">
-         
-                            <button onClick = {deleteCurrentGoal} className = "BinaryBubbleButton"> Yes </button>
-      
-                            <button onClick = {closeDeleteGoal} className = "BinaryBubbleButton"> No </button>
 
-                        </div>
+                        {activeGoal &&
+
+                            <div className = "ActiveGoalExists">
+
+                                <div className = "bubbleHeader">
+                
+                                    <p>Would you like to delete your current goal and create a new one?</p>
+                
+                                    <p>This action will delete your current progress!</p>
+                
+                                </div>
+                
+                                <div className = "BinaryBubbleButtons">
+                
+                                    <button onClick = {deleteCurrentGoal} className = "BinaryBubbleButton"> Yes </button>
+            
+                                    <button onClick = {closeDeleteGoal} className = "BinaryBubbleButton"> No </button>
+
+                                </div>
+
+                            </div>
+                        }
+
+                        {!activeGoal && 
+
+                            <div className = "NoActiveGoalExists">
+
+                                <div className = "bubbleHeader">
+
+                                    <p>You have no active goals so you can't delete any goals!</p>
+
+                                    <div>
+
+                                        <button onClick = {closeDeleteGoal} className = "bubbleButton"> Okay </button>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        }
 
                     </div>
 
@@ -96,7 +123,6 @@ function DeleteGoal(props) {
             </div>
 
         )}
-
         </>
         
     );
