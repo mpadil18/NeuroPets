@@ -16,7 +16,7 @@ function FindPet(props){
     const stage3 = 60;
 
     useEffect(() => {
-        if(props.currGoal != null){
+        if(props.currGoal !== null){
 
             let progressCounter = (props.currGoal.progressCounter);
             let petNumber = (props.currGoal.pet);

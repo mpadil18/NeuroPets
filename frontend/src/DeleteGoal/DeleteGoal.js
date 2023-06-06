@@ -72,7 +72,7 @@ function DeleteGoal(props) {
                 <div className = "DeleteGoal">
 
                     <div className = "DeleteGoalInputBubble">
-         
+        
                         <div className = "bubbleHeader">
          
                             <p>Would you like to delete your current goal and create a new one?</p>
