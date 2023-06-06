@@ -47,12 +47,11 @@ function DisplayPet(props) {
                 setPetId(petNum + 2);
             }
         }
-    })
+    }, [props.currGoal])
 
 
     function GetPet(){
         return (<img className ="pet" src = {petImgsByCode[petId]} alt = "pet stage"/>)
-
     }
 
     return (

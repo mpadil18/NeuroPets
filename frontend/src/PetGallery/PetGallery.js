@@ -133,8 +133,8 @@ function PetGallery() {
 
                         <div className="PetCard" key={index}>
 
-                            <p className="PetName">Null</p>
-                            
+                            <p className="PetName">{goalPet.petName}</p>
+
                             <p className="CardGoalText">{goalPet.goal}</p>
 
                             <DisplayPet currGoal = {goalPet} style={{"height":100}} />
