@@ -25,15 +25,25 @@ function PetContract(){
 
 
     const submithandler = (e) => {
+
       e.preventDefault()
+
       console.log(location.state);
+
       if (petName.length === 0){
+
         setErrorMsg("Please enter in petname");
+
       } 
+
       else if (userName.length === 0) {
+
         setErrorMsg("Please enter in your name");
+
       }
+
       else {
+        
         createNewGoal(user.uid, goalText, petName); 
         
         setTimeout(function(){
@@ -53,21 +63,26 @@ function PetContract(){
           
             <div className = "contractText">
               <p>
+
              I  <input placeholder="Name" className="bubbleField"
               value = {userName} onChange = {(e) => setUserName(e.target.value)}/> vow to look after my NeuroPet
               <input placeholder="Enter Pet Name" className="bubbleField"
               value = {petName} onChange = {(e) => setPetName(e.target.value)}></input>
               by working towards  everyday for 60 days. 
+
               </p>
               
               <p>I understand that my pet’s growth depends on my dedication to my goal.</p>
 
               <p>I will change, and achieve my goal, by signing up for it one day at a time, in a row.</p>
+
             </div>
 
           <div className="contractFooter">
+
             <div className = "TextBox1"> {formattedDate} <br/> Date </div>
             <div className = "TextBox2"> {petName} <br/> Witness   </div>
+
           </div>
         </div>
       
@@ -76,6 +91,7 @@ function PetContract(){
         </button>
 
         {errorMsg && <p> Error: {errorMsg}</p>}
+        
       </div>  
     )
 }
