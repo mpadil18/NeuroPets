@@ -106,14 +106,14 @@ function PetStore() {
     }
 
     return (
-   <div className="PetStore">
+   <div className="CardDisplay">
     <p className="HeaderBubble">Pet Store</p>
     <div className="Gallery">
         <div className="galleryContents">
         {(accessories.slice(displayedAccessoryRange[0], displayedAccessoryRange[1])).map((itemAndPrice, index) => (
-            <div className="AccessoryCard" key={index + displayedAccessoryRange[0]}>
-                <p className="AccessoryName">{itemAndPrice[2]}</p>
-                <p className="CardAccessoryText">{itemAndPrice[3]}</p>
+            <div className="ItemCard" key={index + displayedAccessoryRange[0]}>
+                <p className="ItemName">{itemAndPrice[2]}</p>
+                <p className="ItemTextDesc">{itemAndPrice[3]}</p>
                 <img src={itemAndPrice[0]} style={{"height":100}} alt="anItem"/>
                 {/* This dressUpPet function should be called on the dress up button instead, but it's being tested as a plain button for now */}
             

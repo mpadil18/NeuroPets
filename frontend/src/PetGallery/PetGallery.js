@@ -5,6 +5,7 @@ import {getUserInfo} from '../Backend/handleSubmit';
 import { auth } from "../Backend/firebaseSetup.js";
 import NavBar from "../Navbar/Navbar";
 import FindPet from "../Home/FindPet";
+import NavigationArrows from "../PetStore/NavigationArrows"
 
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 
@@ -18,11 +19,15 @@ function PetGallery() {
     // In this case, we get the list of goals passed from the Navbar
     const location = useLocation();
     const [cachedGoalArray] = useState((location.state) ? location.state.goalArray : []);
-    
+    const [userPetPoints] = useState(location.state.petPoints);
+
     // To easily pass goal and log data to the ViewPage, 
     // we store all goals in a list, and all log data in a list
     const [goalPetList, setGoalPetList] = useState([]);
     const [logsPerGoal, setLogsPerGoal] = useState([]);
+
+
+    const [displayedAccessoryRange, setDisplayedAccessoryRange] = useState([0, 4])
 
     // Indexes into the proper logs associated with the goalID and
     // passes them to the ViewProgress component to render
@@ -90,7 +95,7 @@ function PetGallery() {
                     let logList = [];
 
                     cachedGoalArray.forEach(element => logList.push(element.logs));
-
+                    
                     setGoalPetList(cachedGoalArray);
 
                     console.log(cachedGoalArray, logList)
@@ -118,34 +123,44 @@ function PetGallery() {
 
     }, [cachedGoalArray])
 
+    const changeStoreViewFrwd = () => {
+        setDisplayedAccessoryRange([displayedAccessoryRange[0] + 4, displayedAccessoryRange[1] + 4]);
+    }
+
+    const changeStoreViewBkwd = () => {
+        setDisplayedAccessoryRange([displayedAccessoryRange[0] - 4, displayedAccessoryRange[1] - 4]);
+    }
+
     return (
 
-        <div className="PetGallery" >
+        <div className="CardDisplay" >
 
                 <p className = "HeaderBubble">My Pets</p>
 
                 <div className="Gallery" ref = {animationParent}>
+                
+                <div className="galleryContents">
 
                 {/* If the user has goals, then render PetCards for each goal/pet. Else, render nothing */}
                 { (goalPetList.length > 0) ? 
 
-                    goalPetList.map((goalPet, index) => (
+                    (goalPetList.slice(displayedAccessoryRange[0], displayedAccessoryRange[1])).map((goalPet, index) => (
 
-                        <div className="PetCard" key={index}>
+                        <div className="ItemCard" key={index + displayedAccessoryRange[0]}>
 
-                            <p className="PetName">{goalPet.petName}</p>
+                            <p className="ItemName">{goalPet.petName}</p>
 
-                            <p className="CardGoalText">{goalPet.goal}</p>
+                            <p className="ItemTextDesc">{goalPet.goal}</p>
 
                             <FindPet currGoal={goalPet} style={{"height":100}}/>
 
-                            {(logsPerGoal[index].length > 0) ?
+                            {(logsPerGoal[index + displayedAccessoryRange[0]].length > 0) ?
 
-                                <button className="newBubbleButton" id={index} onClick={(e) => navToViewProgress(e.target.id)}>Progress Logs</button>
+                                <button className="newBubbleButton" id={index + displayedAccessoryRange[0]} onClick={(e) => navToViewProgress(e.target.id)}>Progress Logs</button>
                                 
                                 :
 
-                                <button className="disabledBubbleButton" style={{"disabled":true}} id={index}>Progress Logs</button>
+                                <button className="disabledBubbleButton" style={{"disabled":true}} id={index + displayedAccessoryRange[0]}>Progress Logs</button>
 
                             }
 
@@ -153,11 +168,18 @@ function PetGallery() {
 
                     )) : null
                 }
+
+                </div>
                 
                 </div>
-            
+                <NavigationArrows 
+                    displayedRange={displayedAccessoryRange} 
+                    backLimit={4} frwdLimit={goalPetList.length > 0 ? goalPetList.length : 0} 
+                    backFunc={changeStoreViewBkwd}
+                    frwdFunc={changeStoreViewFrwd}
+                    middleComponent={null}/>
             {/* Pass goalPetList to navbar, to emulate caching */}
-            <NavBar goalArray={goalPetList}/>
+            <NavBar goalArray={goalPetList} petPoints={userPetPoints}/>
 
         </div>
         

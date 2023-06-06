@@ -1,11 +1,11 @@
-.PetStore {
+.CardDisplay {
     display: flex;
     align-items: center;
     flex-direction: column;
     min-height: 100vh;
 }
 
-.PetStore {
+.CardDisplay {
     background: url("../assets/branding/wave.svg") no-repeat center bottom;
     min-height: 100vh;
     background-size: cover;
@@ -14,7 +14,7 @@
     flex-direction: column;
 }
 
-.PetStore .Gallery {
+.CardDisplay .Gallery {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -27,7 +27,7 @@
     justify-content: center;
 }
 
-.AccessoryCard {
+.ItemCard {
     display: inline-block;
     margin: 10px;
     flex-grow: 1;
@@ -53,11 +53,11 @@
     width: 100px;
 }
 
-.PetStore .HeaderBubble {
+.CardDisplay .HeaderBubble {
     margin: 20px;
 }
 
-.PetStore .newBubbleButton {
+.CardDisplay .newBubbleButton {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -78,13 +78,13 @@
     padding: 5px;
 }
 
-.AccessoryName {
+.ItemName {
     font-size: 20px;
     font-weight: bold;
     margin: 10px 0px 10px 0px;
 }
 
-.CardAccessoryText {
+.ItemTextDesc {
     margin: 0px 0px 10px 0px;
 }
 
