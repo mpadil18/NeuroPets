@@ -9,7 +9,6 @@ function CreateGoal() {
   const [errorMsg, setErrorMsg] = useState('');
 
   const navigate = useNavigate();
-  const user = auth.currentUser;
 
   const setPresetFunc = (id) => {
     // Function used for all preset goals 
