@@ -15,7 +15,6 @@ import loading from "../assets/sprites/loading.png";
 
 import { useEffect, useState } from "react";
 
-
 // Props to be passed - Current user gola
 function DisplayPet(props) {
 
@@ -30,6 +29,7 @@ function DisplayPet(props) {
     const eggIndex = 9; 
 
     useEffect(() => {     
+        console.log(props.currGoal)
         if (props.currGoal !== null){ // When curr goal is 
             let petNum = props.currGoal.pet; 
             let progressCounter = props.currGoal.progressCounter;
@@ -47,17 +47,16 @@ function DisplayPet(props) {
                 setPetId(petNum + 2);
             }
         }
-    }, [props.currGoal])
-
+    }, [setPetId, props.currGoal])
 
     function GetPet(){
         return (<img className ="pet" src = {petImgsByCode[petId]} alt = "pet stage"/>)
     }
 
     return (
-     <div> 
+     <> 
         <GetPet></GetPet>
-    </div>    
+    </>    
     );
 }
 

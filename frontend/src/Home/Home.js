@@ -15,7 +15,6 @@ import { presetGoals, goalData } from "../Backend/presetData.js";
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 import { motion } from "framer-motion";
 
-
 function Home() {
 
 
@@ -53,7 +52,6 @@ function Home() {
     
 
     //End of animation data ~~~~~~~
-    
     
     //States to contain user data
     //
@@ -124,6 +122,7 @@ function Home() {
                                   petPoints : petPoints + 5});
         setGoalArray(_goalArray);
 
+
         setTimeout(function(){
             setPopupDisplay(true);
         }, 900);
@@ -183,6 +182,7 @@ function Home() {
                 if (user) {
                     
                     // Getting user data specific to the current user
+
                     const userData =  await getUserInfo(user.uid);
 
                     if (userData !== null) {
@@ -205,6 +205,7 @@ function Home() {
 
                         if (isPresetGoal(currGoalName) === false) {
                             setUserGoalName(currGoalName);
+
                         }
                         else {
                             setUserGoalName(goalData[isPresetGoal(currGoalName)][((new Date().getDate())*3)%10]);
@@ -297,9 +298,7 @@ function Home() {
             }   
 
          
-            {/* Pass goalPetList to navbar, to emulate caching */}
-            <NavBar goalArray={goalArray}/>
-
+            <NavBar goalArray={goalArray} petPoints={petPoints}/>
         </div>
     );
 }

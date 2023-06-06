@@ -59,6 +59,11 @@ function NavBar(props){
         navigate("../Home");
 
     }
+
+    // Pass goalArray to navbar, to emulate caching
+    const navToPetStore = () => {
+        navigate("../PetStore", {state:{goalArray: props.goalArray, petPoints: props.petPoints}});
+    }
     
     function Logout(){
 
@@ -109,7 +114,7 @@ function NavBar(props){
 
                 <li className = "homeIcon" onClick={navToHome}/>
 
-                <li className = "shopIcon"/>
+                <li className = "shopIcon" onClick={navToPetStore}/>
 
                 <li className = "settingsIcon" onClick = {setOpen}/>
 

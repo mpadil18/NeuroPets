@@ -4,7 +4,7 @@ import {useLocation, useNavigate } from "react-router-dom"
 import {getUserInfo} from '../Backend/handleSubmit';
 import { auth } from "../Backend/firebaseSetup.js";
 import NavBar from "../Navbar/Navbar";
-import DisplayPet from "../Home/DisplayPet";
+import FindPet from "../Home/FindPet";
 
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 
@@ -137,7 +137,7 @@ function PetGallery() {
 
                             <p className="CardGoalText">{goalPet.goal}</p>
 
-                            <DisplayPet currGoal = {goalPet} style={{"height":100}} />
+                            <FindPet currGoal={goalPet} style={{"height":100}}/>
 
                             {(logsPerGoal[index].length > 0) ?
 
