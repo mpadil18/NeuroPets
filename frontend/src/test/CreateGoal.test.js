@@ -31,7 +31,7 @@ describe('Create Goal tests', () => {
                     <Route path = "*" element = {<CreateGoal/>} />
                 </Routes>
             </BrowserRouter>);
-        const button = screen.getByRole('button', {name: 'Save Goal'});
+        const button = screen.getByRole('button', {name: 'Continue'});
         expect(button).toBeInTheDocument();
 
         fireEvent.click(button)
