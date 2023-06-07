@@ -38,7 +38,8 @@ function PetGallery() {
         if (logsPerGoal[goalID].length > 0) {
 
             navigate('/ViewProgress',{state:{goal:goalPetList[goalID].goal,
-                                      goalArray:goalPetList, goalId: goalID}});
+                                      goalArray:goalPetList, goalId: goalID,
+                                      petPoints: userPetPoints}});
 
         }
         else {

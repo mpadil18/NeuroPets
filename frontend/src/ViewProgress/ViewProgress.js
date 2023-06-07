@@ -17,6 +17,9 @@ function ViewProgress() {
     const [listOfLogs] = useState(location.state.goalArray[location.state.goalId].logs);
     const [currGoal] = useState(location.state.goal);
 
+    // For caching and sending to navbar
+    const [petPoints] = useState(location.state.petPoints);
+
     /* VARIABLE DEFINITIONS:
        allMonths: Defined list of all month possibilities
        months: Initialized 2 element list of empty strings, 
@@ -182,7 +185,7 @@ function ViewProgress() {
 
             {/* Pass goalPetList to navbar, to emulate caching */}
 
-            <NavBar goalArray={goalArray}/>
+            <NavBar goalArray={goalArray} petPoints={petPoints}/>
             
         </div>
    );

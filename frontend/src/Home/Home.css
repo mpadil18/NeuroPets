@@ -46,6 +46,10 @@
 
 }
 
+.Home .ActiveGoal .GoalBubble .BubbleText {
+    text-align: center;
+}
+
 .CompleteGoal {
     position: relative;
     display: flex;

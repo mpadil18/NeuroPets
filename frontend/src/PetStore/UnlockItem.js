@@ -65,14 +65,14 @@ function UnlockItem (props) {
 
                     <div className="InputBubble">
 
-                        <p className="UnlockItemText">Are you sure you want to unlock the 
+                        <p className="UnlockItemText">Are you sure you want to unlock the&nbsp;
                             <span className="BoldedItemData">{itemName}
                             
-                            </span> for 
+                            </span> for
                             
-                            <span className="BoldedItemData">{itemPrice}
+                            <span className="BoldedItemData">&nbsp;{itemPrice}&nbsp;
                             
-                            </span> points?
+                            </span>points?
 
                         </p>
 

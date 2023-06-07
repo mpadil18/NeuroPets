@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { updateUserInfo } from '../Backend/handleSubmit';
 import { auth } from "../Backend/firebaseSetup.js";
 
-import DisplayPet from "../Home/DisplayPet";
+import FindPet from "../Home/FindPet";
 import NavigationArrows from "./NavigationArrows";
 
 function DressUp(props) {
@@ -13,14 +13,14 @@ function DressUp(props) {
     const user = auth.currentUser;
 
     /* VARIABLES for DressUp Feature
-       petArray: The array of pets the user can dress up
+       petArray: The array of pets the user can dress up. Reversed to display most recent to least pets to user
        displayedPetsRange: indicates which pets from the petArray to currently display when the user has the pet menu open (for the navigation arrows)
        selectedPet: the index of the pet (in the petArray) the user selects to dress up
        accessoryToUse: the list of info regarding the accessory the user picks (passed from the Pet Store)
        accessoriesByGearType: separates each accessory by its geartype, so we know where to place the accessory in the pet's `wearingAccessories` array
        displayNextPopup: changes the view to ask the user if they want to remove the selected accessory, if the pet's already wearing the selected one
     */
-    const [petArray] = useState(props.goalArray);
+    const [sortedPetArray] = useState(props.goalArray.slice().reverse());
     const [displayedPetsRange, setDisplayedPetsRange] = useState([0, 5]);
     const [selectedPet, setSelectedPet] = useState(null);
     const [accessoryToUse, setAccessoryToUse] = useState(props.selectedAccessory);
@@ -36,10 +36,9 @@ function DressUp(props) {
        ELSE: just make the update in the array, and push to firebase, and close this popup. */
     const tryDressPet = () => {
 
-        // Reverse the pet array to get the correct pet to access
-        let petArrayToUpdate = (petArray.reverse())
+        let petArrayToUpdate = sortedPetArray
 
-        const petToDress = (petArray.reverse())[selectedPet]
+        const petToDress = petArrayToUpdate[selectedPet]
 
         // Get the string of the accessory we want to use
         const accessoryStr = accessoryToUse[2]
@@ -81,6 +80,9 @@ function DressUp(props) {
 
                 petArrayToUpdate[selectedPet] = petToDress;
 
+                // Reverse the pet array to get the correct pet to access
+                petArrayToUpdate.reverse();
+
                 updateUserInfo(user.uid, {goalArray: petArrayToUpdate});
 
             }
@@ -95,10 +97,10 @@ function DressUp(props) {
 
     const removeAccessory = () => {
 
-        let petArrayToUpdate = (petArray.reverse())
+        let petArrayToUpdate = sortedPetArray;
 
-        const petToDress = (petArray.reverse())[selectedPet]
-        const accessoryStr = accessoryToUse[2]
+        const petToDress = petArrayToUpdate[selectedPet];
+        const accessoryStr = accessoryToUse[2];
 
         for (let gearType = 0; gearType < accessoriesByGearType.length; gearType++) {
 
@@ -111,6 +113,8 @@ function DressUp(props) {
                 }
 
                 petArrayToUpdate[selectedPet] = petToDress;
+
+                petArrayToUpdate.reverse();
 
                 updateUserInfo(user.uid, {goalArray: petArrayToUpdate});
 
@@ -201,11 +205,19 @@ function DressUp(props) {
 
                 <>
 
-                    <p className="BubbleHeader">Your pet is already wearing the {accessoryToUse[2]}. Do you want to remove it?</p>
+                    <p className="BubbleHeader">Your pet is already wearing the&nbsp;
+                    <span style={{"font-weight": "bold"}}>
+                        
+                        {accessoryToUse !== undefined ? accessoryToUse[2] : ""}
+
+                    </span>
+                    .
+                    <br/>
+                    Do you want to remove it?</p>
 
                     <div className="spotlightPet">
 
-                        <DisplayPet currGoal = {petArray[selectedPet]}/>
+                        <FindPet currGoal={sortedPetArray[selectedPet]}/>
 
                     </div>
 
@@ -238,16 +250,16 @@ function DressUp(props) {
                 <div className="gridContents">
 
                     {/* Reverse order of petArray to show from LATEST to OLDEST */}
-                    {(petArray.length > 0) ?
+                    {(sortedPetArray.length > 0) ?
 
-                        ((petArray.reverse()).slice(displayedPetsRange[0], 
+                        ((sortedPetArray).slice(displayedPetsRange[0], 
                                                     displayedPetsRange[1])).map((pet, index) => (
 
                             <div className="petOption" id={index + displayedPetsRange[0]} 
                                                        key={index + displayedPetsRange[0]} 
                                                        onClick={() => setSelectedPet(index + displayedPetsRange[0])}>
 
-                            <DisplayPet currGoal = {pet} />
+                            <FindPet currGoal = {pet} />
 
                             <p className="petsName">{pet.petName}</p>
 
@@ -271,7 +283,7 @@ function DressUp(props) {
 
                 displayedRange={displayedPetsRange} 
 
-                backLimit={5} frwdLimit={petArray.length - 1} 
+                backLimit={5} frwdLimit={sortedPetArray.length - 1} 
 
                 backFunc={changeStoreViewBkwd}
 
