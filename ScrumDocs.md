@@ -1,8 +1,12 @@
 *Here is a list of Scrum Documents*
 
+- Release Plan [Link](https://docs.google.com/document/d/1As_NxFEMY9xPRGsHM9bI7ebfgVZGopKb2B2A2lRf7gs/edit?usp=sharing)
+
 - Release Summary [Link](https://docs.google.com/document/d/142CGFKdrinSs72_qesF6F0-xMslx27LQWTe_ZkDbM04/edit?usp=drive_link)
 
 - Test Plan and Report [Link](https://docs.google.com/document/d/1Ah53S7TgB5EUskbqVwajecYvEnH1D3uSGjdr90Pn_K8/edit?usp=drive_link)
+
+- Documentation  [Link](https://docs.google.com/document/d/1dd_ruJQqNV40VKTFdwuemyHw9EXxPumgxWstkTUJVd8/edit?usp=sharing)
 
 #### Sprint Plans
 - Sprint 1 Plan [Link to doc](https://docs.google.com/document/d/15jwBSaielChRLcK-Koyaf803fupRi1IbTyJAVrrgpMg/edit?usp=drive_link)
