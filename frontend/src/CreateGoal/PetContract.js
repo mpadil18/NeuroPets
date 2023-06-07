@@ -1,4 +1,4 @@
-import "./petContract.css";
+import "./PetContract.css";
 import "../App.css";
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
