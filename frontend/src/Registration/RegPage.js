@@ -78,27 +78,19 @@ function RegPage({ setIsSignedIn }) {
           var errorCode = error.code;
           
           if (errorCode === 'auth/email-already-in-use') {
-
             setErrorMsg("Email already in use");
-
           } 
 
           else if(errorCode === 'auth/invalid-email') {
-
             setErrorMsg("Enter a valid email address");
-
           }
 
           else if (errorCode === 'auth/weak-password'){
-
             setErrorMsg("Enter a stronger password");
-
           }
 
           else{
-
             setErrorMsg("Please refresh your page");
-
           }
          
         });

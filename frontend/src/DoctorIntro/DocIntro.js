@@ -14,14 +14,11 @@ function DocIntro() {
   function changeImage() {
 
     if (imageIndex === images.length - 1) {
-
       navigate('../CreateGoal');
-
     } else {
-
       setImageIndex(imageIndex + 1);
-
     }
+    
   }
 
   return (

@@ -22,7 +22,8 @@ function GoalCompleted () {
         // set active goal to false to indicate that there are no active goals now that the current one is complete
         let timeStamp = (getUserInfo(user.uid)).lastProgressMade;
 
-        updateUserInfo(user.uid, {activeGoal: 0, lastProgressMade : firebase.firestore.FieldValue.delete(timeStamp) });
+        updateUserInfo(user.uid, {activeGoal: 0, 
+            lastProgressMade : firebase.firestore.FieldValue.delete(timeStamp) });
 
         // navigate back to home page
         navigate('../Home');
@@ -36,6 +37,7 @@ function GoalCompleted () {
                 <div className = "GoalCompleteBubbleHeader">
 
                     <h1>Congratulations!</h1>
+
                     <p>You’ve worked towards your goal for 60 days. That’s an incredible accomplishment!</p>
 
                 </div>

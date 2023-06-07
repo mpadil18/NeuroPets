@@ -22,7 +22,9 @@ function Login({ setIsSignedIn }) {
             .then((userCredential) => {
 
                 setIsSignedIn(true)
+
                 navigate('../Home');
+                
             })
 
             .catch((error) => {

@@ -10,6 +10,7 @@ function LogProgress(props) {
     const navigate = useNavigate();
 
     const user = auth.currentUser; 
+
     // If user submits an entry for manually logging progress
     // then add to db and hide popup
     const [loggedProgress, setLoggedProgress] = useState("");
@@ -55,7 +56,8 @@ function LogProgress(props) {
                     tempArr[props.currGoalId].logs.pop();
                 }
 
-                tempArr[props.currGoalId].logs.push({"date": props.progressTimestamp, "log": loggedProgress});
+                tempArr[props.currGoalId].logs.push(
+                    {"date": props.progressTimestamp, "log": loggedProgress});
 
                 updateUserInfo(user.uid, {goalArray: tempArr});
 
@@ -78,7 +80,9 @@ function LogProgress(props) {
 
             <div className="InputBubble">
 
-                <button className="close-btn" onClick={closePopup}><img src={Close} alt="close popup button"/></button>
+                <button className="close-btn" onClick={closePopup}>
+                    
+                    <img src={Close} alt="close popup button"/></button>
 
                 <p className="BubbleHeader">Journal Entry?</p>
 
@@ -86,12 +90,15 @@ function LogProgress(props) {
                 placeholder="Example: I read 5 pages of “The Four Agreements”, I jogged with my friend for 30 minutes..."
 
                 value={loggedProgress}
+
                 onChange = {(e) => setLoggedProgress(e.target.value)}
 
                 />
 
                 <button className="bubbleButton" onClick={logUserProgress}> 
+
                     Log in Journal
+
                 </button>
 
                 { errorMsg && <p style={{margin: 0}}> Error logging progress</p>}
