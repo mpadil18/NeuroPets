@@ -1,8 +1,8 @@
-import "./Navbar.css"
-import { useNavigate } from "react-router-dom"
-import { auth} from "../Backend/firebaseSetup.js";
+import "./Navbar.css";
+import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { useState } from "react";
+import { auth } from "../Backend/firebaseSetup.js";
 import { DeleteGoal } from "../DeleteGoal/DeleteGoal";
 
 function NavBar(props){

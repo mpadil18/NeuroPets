@@ -1,11 +1,11 @@
-import "./petContract.css"
+import "./petContract.css";
 import "../App.css";
-import React from "react"
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { auth } from "../Backend/firebaseSetup";
 import { createNewGoal } from "../Backend/handleSubmit";
-import { useLocation } from 'react-router-dom';
+
 
 // Props that need to be passed is goalText
 function PetContract(){

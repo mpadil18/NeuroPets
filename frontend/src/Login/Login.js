@@ -1,9 +1,9 @@
-import "./Login.css"
-import React, { useState } from "react"
-import { useNavigate } from "react-router-dom"
-import { signInWithEmailAndPassword } from "firebase/auth"
-import { auth } from "../Backend/firebaseSetup"
-import logo from "../assets/branding/logo.svg"
+import "./Login.css";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../Backend/firebaseSetup";
+import logo from "../assets/branding/logo.svg";
 
 function Login({ setIsSignedIn }) {
 

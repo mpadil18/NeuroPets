@@ -1,19 +1,15 @@
+import { useEffect, useState } from "react";
 import bunny1 from "../assets/sprites/bunny1.png";
 import bunny2 from "../assets/sprites/bunny2.png";
 import bunny3 from "../assets/sprites/bunny3.png";
-
 import penguin1 from "../assets/sprites/penguin1.png";
 import penguin2 from "../assets/sprites/penguin2.png";
 import penguin3 from "../assets/sprites/penguin3.png";
-
 import frog1 from "../assets/sprites/frog1.png";
 import frog2 from "../assets/sprites/frog2.png";
 import frog3 from "../assets/sprites/frog3.png";
-
 import egg from "../assets/sprites/egg.png";
 import loading from "../assets/sprites/loading.png";
-
-import { useEffect, useState } from "react";
 
 // Props to be passed - Current user gola
 function DisplayPet(props) {
@@ -29,7 +25,7 @@ function DisplayPet(props) {
     const eggIndex = 9; 
 
     useEffect(() => {     
-        console.log(props.currGoal)
+
         if (props.currGoal !== null){ // When curr goal is 
             let petNum = props.currGoal.pet; 
             let progressCounter = props.currGoal.progressCounter;

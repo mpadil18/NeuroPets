@@ -62,7 +62,6 @@ function DressUp(props) {
                 updateUserInfo(user.uid, {goalArray: petArrayToUpdate});
             }
         }
-        console.log("Tada!", petArrayToUpdate)
         closePopup();
         setDisplayNextPopup(false);
     }
@@ -82,7 +81,6 @@ function DressUp(props) {
                 updateUserInfo(user.uid, {goalArray: petArrayToUpdate});
             }
         }
-        console.log("Tada!", petArrayToUpdate)
         closePopup();
         setDisplayNextPopup(false);
     }

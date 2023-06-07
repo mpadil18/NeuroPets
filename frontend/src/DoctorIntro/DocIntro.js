@@ -1,6 +1,6 @@
+import './DocIntro.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './DocIntro.css';
 import doc1 from '../assets/DocFlow/Doc1.png';
 import doc2 from '../assets/DocFlow/Doc2.png';
 import doc3 from '../assets/DocFlow/Doc3.png';

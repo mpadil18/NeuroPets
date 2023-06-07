@@ -1,19 +1,16 @@
 import "./GoalCompleted.css"
-import DisplayPet from "../Home/DisplayPet";
-import { updateUserInfo, getUserInfo } from '../Backend/handleSubmit';
 import { auth } from "../Backend/firebaseSetup.js";
-import { useNavigate } from "react-router-dom";
-import { useLocation } from 'react-router-dom';
-import firebase from 'firebase/compat/app'
-import 'firebase/compat/firestore';
+import { useNavigate, useLocation } from "react-router-dom";
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
+import DisplayPet from "../Home/DisplayPet";
+import { updateUserInfo, getUserInfo } from "../Backend/handleSubmit";
 
 function GoalCompleted () {
 
     const navigate = useNavigate();
     const location = useLocation();
     const props = location.state;
-
-    console.log(props);
 
     const endCurrentGoalCycle = () => {
 

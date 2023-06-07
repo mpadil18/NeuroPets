@@ -1,10 +1,10 @@
-import "./ViewProgress.css"
+import "./ViewProgress.css";
 import { useState, useEffect } from "react";
-import {useLocation} from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 import NavBar from "../Navbar/Navbar";
-import GoldProgress from "../assets/elements/GoldProgress.png"
-import GreenProgress from "../assets/elements/GreenProgress.png"
-import Close from "../assets/elements/Close.svg"
+import GoldProgress from "../assets/elements/GoldProgress.png";
+import GreenProgress from "../assets/elements/GreenProgress.png";
+import Close from "../assets/elements/Close.svg";
 
 function ViewProgress() {
     // ViewProgress is navigated to from another page (PetGallery)

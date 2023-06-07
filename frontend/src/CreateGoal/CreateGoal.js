@@ -1,8 +1,8 @@
-import "./CreateGoal.css"
-import React, { useState } from "react"
-import { useNavigate } from "react-router-dom"
-import ProfText from "../assets/branding/ProfTextA.svg"; 
-import { presetGoals } from "../Backend/presetData.js";
+import "./CreateGoal.css";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { presetGoals } from "../Backend/presetData";
+import ProfText from "../assets/branding/ProfTextA.svg";
 
 function CreateGoal() {
   

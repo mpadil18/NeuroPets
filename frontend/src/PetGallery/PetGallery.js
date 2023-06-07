@@ -1,13 +1,12 @@
-import "./PetGallery.css"
+import "./PetGallery.css";
 import { useState, useEffect } from "react";
-import {useLocation, useNavigate } from "react-router-dom"
-import {getUserInfo} from '../Backend/handleSubmit';
-import { auth } from "../Backend/firebaseSetup.js";
+import { useLocation, useNavigate } from "react-router-dom";
+import NavigationArrows from "../PetStore/NavigationArrows";
+import { getUserInfo } from '../Backend/handleSubmit';
+import { auth } from "../Backend/firebaseSetup";
 import NavBar from "../Navbar/Navbar";
 import FindPet from "../Home/FindPet";
-import NavigationArrows from "../PetStore/NavigationArrows"
 
-import { useAutoAnimate } from '@formkit/auto-animate/react'
 
 function PetGallery() {
 
@@ -97,8 +96,6 @@ function PetGallery() {
                     cachedGoalArray.forEach(element => logList.push(element.logs));
                     
                     setGoalPetList(cachedGoalArray);
-
-                    console.log(cachedGoalArray, logList)
 
                     setLogsPerGoal(logList);
 

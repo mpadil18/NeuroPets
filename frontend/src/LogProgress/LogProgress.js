@@ -1,9 +1,9 @@
-import "./LogProgress.css"
-import Close from "../assets/elements/Close.svg"
-import {updateUserInfo, getUserInfo} from '../Backend/handleSubmit';
-import { auth } from "../Backend/firebaseSetup.js";
+import "./LogProgress.css";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import { updateUserInfo, getUserInfo } from '../Backend/handleSubmit';
+import { auth } from "../Backend/firebaseSetup";
+import Close from "../assets/elements/Close.svg";
 
 function LogProgress(props) {
 

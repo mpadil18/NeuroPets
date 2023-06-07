@@ -1,19 +1,16 @@
-import "./Home.css"
-import ProfText from "../assets/branding/ProfTextB.svg"
-import GreenCheckmark from "../assets/elements/GreenCheckmark.svg"
-
+import "./Home.css";
 import { useEffect, useState } from "react";
-import { getUserInfo, updateUserInfo } from '../Backend/handleSubmit';
+import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { motion } from "framer-motion";
+import { getUserInfo, updateUserInfo } from "../Backend/handleSubmit";
 import { auth } from "../Backend/firebaseSetup.js";
 import FindPet from "./FindPet";
 import NavBar from "../Navbar/Navbar";
 import LogProgress from "../LogProgress/LogProgress"
 import NoActiveGoal from "../NoActiveGoal/NoActiveGoal";
-import { presetGoals, goalData } from "../Backend/presetData.js";
-
-//Animation antics:
-import { useAutoAnimate } from '@formkit/auto-animate/react'
-import { motion } from "framer-motion";
+import { presetGoals, goalData } from "../Backend/presetData";
+import ProfText from "../assets/branding/ProfTextB.svg";
+import GreenCheckmark from "../assets/elements/GreenCheckmark.svg";
 
 function Home() {
 

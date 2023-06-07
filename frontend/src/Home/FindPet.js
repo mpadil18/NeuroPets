@@ -1,5 +1,5 @@
-import loading from "../assets/sprites/loading.png";
 import { useEffect, useState } from "react";
+import loading from "../assets/sprites/loading.png";
 
 function FindPet(props){
 

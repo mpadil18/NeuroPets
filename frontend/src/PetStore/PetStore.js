@@ -1,10 +1,17 @@
+import "./PetStore.css"
 import NavBar from "../Navbar/Navbar";
 import UnlockItem from "./UnlockItem";
-import "./PetStore.css"
+
+import DressUp from "./DressUp.js"
+import NavigationArrows from "./NavigationArrows"
+import { auth } from "../Backend/firebaseSetup.js";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom"
+import { getDoc, doc} from "firebase/firestore"; 
+import { db } from "../Backend/firebaseSetup.js";
 
 import bandanaBlue from "../assets/PetStoreItems/bandanaBlue.png";
 import bandanaRed from "../assets/PetStoreItems/bandanaRed.png";
-
 import capBlue from "../assets/PetStoreItems/capBlue.png";
 import capOrange from "../assets/PetStoreItems/capOrange.png";
 import capRed from "../assets/PetStoreItems/capRed.png";
@@ -12,18 +19,8 @@ import cowboyhat from "../assets/PetStoreItems/cowboyhat.png";
 import partyhatBlue from "../assets/PetStoreItems/partyhatBlue.png";
 import partyhatGreen from "../assets/PetStoreItems/partyhatGreen.png";
 import partyhatPink from "../assets/PetStoreItems/partyhatPink.png";
-
 import Key from "../assets/elements/Key.png";
 import Shirt from "../assets/elements/Shirt.png"
-
-import DressUp from "./DressUp.js"
-import NavigationArrows from "./NavigationArrows"
-
-import { auth } from "../Backend/firebaseSetup.js";
-import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom"
-import { getDoc, doc} from "firebase/firestore"; 
-import { db } from "../Backend/firebaseSetup.js";
 
 function PetStore() {
     const location = useLocation();

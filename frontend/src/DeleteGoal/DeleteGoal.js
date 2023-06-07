@@ -1,10 +1,10 @@
-import "./DeleteGoal.css"
+import "./DeleteGoal.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"
 import { getDoc, updateDoc, doc} from "firebase/firestore"; 
-import { db } from "../Backend/firebaseSetup.js";
-import firebase from 'firebase/compat/app'
-import 'firebase/compat/firestore';
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
+import { db } from "../Backend/firebaseSetup";
 
 function DeleteGoal(props) {
 
