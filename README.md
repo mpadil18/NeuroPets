@@ -47,9 +47,9 @@ They then hatch into one of a number of animals, who evolves in
 multiple stages as you make progress on your goal.
 
 ### Pet Accessories
-Pets can be dressed up with in a variety of ways, who can wear
-a vaiety of hats and clothing purchased from the pet store
-using points recieved from completing your goals each day.
+Pets can be dressed up with in a variety of ways, who can be
+adorned in a number of hats and clothing purchased from the pet
+store using points recieved from completing your goals each day.
 
 ### Goal Changing and viewing Goal Logs
 Users can also change or cancel their goals on the home screen
