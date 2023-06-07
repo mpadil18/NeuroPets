@@ -14,6 +14,7 @@ function UnlockItem (props) {
     let itemIndex = itemData[4];
 
     const unlockItem = async () => { 
+
         const docRef = doc(db, 'all_data', user.uid);
         const docSnap = await getDoc(docRef);
 
@@ -41,32 +42,62 @@ function UnlockItem (props) {
 
         // close the popup
         props.setUnlockItemPopup(false);
+
     }
 
     const closeUnlockItemPopup = () => {
+
         // close the popup
         props.setUnlockItemPopup(false);
+
     }
     
    
     return (
+
         <>
+
         {unlockItemPopup && (
+
             <div className="Popup">
+
                 <div className="UnlockItem">
+
                     <div className="InputBubble">
-                        <p className="UnlockItemText">Are you sure you want to unlock the <span className="BoldedItemData">{itemName}</span> for <span className="BoldedItemData">{itemPrice}</span> points?</p>
+
+                        <p className="UnlockItemText">Are you sure you want to unlock the 
+                            <span className="BoldedItemData">{itemName}
+                            
+                            </span> for 
+                            
+                            <span className="BoldedItemData">{itemPrice}
+                            
+                            </span> points?
+
+                        </p>
+
                         <img src={itemImg} style={{"height":100}} alt="anItem"/>
+
                         <div className="BinaryBubbleButtons">
+
                             <button onClick={unlockItem} className="BinaryBubbleButton"> Yes </button>
+
                             <button onClick={closeUnlockItemPopup} className="BinaryBubbleButton"> No </button>
+
                         </div>
+
                     </div>
+
                 </div>
+
             </div>
+
         )}
+
         </>
+
     )
+    
 }
 
 export default UnlockItem

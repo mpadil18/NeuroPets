@@ -16,44 +16,40 @@ function FindPet(props){
     const stage3 = 60;
 
     useEffect(() => {
+        
         if(props.currGoal !== null){
 
             let progressCounter = (props.currGoal.progressCounter);
             let petNumber = (props.currGoal.pet);
-            
             let headgear = 0;
 
             if(props.currGoal.wearingAccessories["headgear"] !== ""){
-
                 headgear = props.currGoal.wearingAccessories["headgear"];
-
             }
 
             let neckwear = 0;
 
             if(props.currGoal.wearingAccessories["neckwear"] !== ""){
-
                 neckwear = props.currGoal.wearingAccessories["neckwear"];
-
             }
 
-            let hg_id = GetAccessoryID(headgear);
-            setHeadgearID(hg_id);
+            let hgId = GetAccessoryID(headgear);
+            setHeadgearID(hgId);
 
-            let nw_id = GetAccessoryID(neckwear);
-            setNeckwearID(nw_id);
+            let nwId = GetAccessoryID(neckwear);
+            setNeckwearID(nwId);
 
-            let pet_type = GetPet(petNumber, progressCounter);
-            setPetType(pet_type);
+            let petType = GetPet(petNumber, progressCounter);
+            setPetType(petType);
 
             let file = GetFileExt();
-            
             setFileExt(file);
 
         }
     })
 
     function GetFileExt(){
+
         let file = "/Pet_Sprites/";
         
         if(petType === "egg")
@@ -62,7 +58,8 @@ function FindPet(props){
         if(petType === null)
             return (file + "loading.png")
 
-        return  file + petType + "/" + petType + (petStage % 3) + "/" + petType + (petStage % 3) + "_" + headgearID + neckwearID + ".png";
+        return  file + petType + "/" + petType + (petStage % 3) + 
+                       "/" + petType + (petStage % 3) + "_" + headgearID + neckwearID + ".png";
         
     }
 
@@ -74,68 +71,92 @@ function FindPet(props){
         if(progressCount <= stage1){
             setPetStage(petID);
         }
+
         else if (progressCount <= stage2){
             setPetStage(petID + 1);
         }
+
         else if(progressCount <= stage3){
             setPetStage(petID + 2);
         }
-
+        
         if(petID < 3)
             return "bunny";
+
         if(petID < 6)
             return "penguin";
+
         if(petID < 9)
             return "frog";
+
         if(petID === null)
             return "loading"
+
     }
 
     function GetAccessoryID(accString){
+
         if(accString === "Blue Cap"){
             return 1;
         }
+
         else if(accString === "Red Cap"){
             return 2;
         }
+
         else if(accString === "Orange Cap"){
             return 3;
         }
+
         else if(accString === "Cowboy Hat"){
             return 4;
         }
+
         else if(accString === "Pink Party Hat"){
             return 5;
         }
+
         else if(accString === "Green Party Hat"){
             return 6;
         }
+
         else if(accString === "Blue Party Hat"){
             return 7;
         }
+
         else if(accString === "Red Bandana"){
             return 1;
         }
+
         else if(accString === "Blue Bandana"){
             return 2;
         }
-        else{
+        
+        else {
             return 0;
         }
+
     }
 
     function DisplayPet(){
+
         console.log(fileExt);
+
         if (fileExt === "") {
             return (<img className ="pet" src = {loading} alt = "loading pet" />)
-        } else {
+        }
+
+        else {
             return (<img className ="pet" src = {fileExt} alt = "retrieved pet" />)
         }
+
     }
 
 
     return (
+
         <DisplayPet></DisplayPet>
+
     );
 
 }

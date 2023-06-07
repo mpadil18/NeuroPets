@@ -15,7 +15,10 @@ import loading from "../assets/sprites/loading.png";
 function DisplayPet(props) {
 
     const [petId, setPetId] = useState(10);
-    const [petImgsByCode] = useState([bunny1, bunny2, bunny3, penguin1, penguin2, penguin3, frog1, frog2, frog3,egg, loading]);
+    const [petImgsByCode] = useState([bunny1, bunny2, bunny3, 
+                                      penguin1, penguin2, penguin3,
+                                      frog1, frog2, frog3,
+                                      egg, loading]);
 
     // Assigning constants for pet transformation
     const stage0 = 7;
@@ -24,36 +27,49 @@ function DisplayPet(props) {
     const stage3 = 60;
     const eggIndex = 9; 
 
-    useEffect(() => {     
-
+    useEffect(() => {  
+        
         if (props.currGoal !== null){ // When curr goal is 
+
             let petNum = props.currGoal.pet; 
             let progressCounter = props.currGoal.progressCounter;
             
             if (progressCounter <= stage0){  // Egg stage 
                 setPetId(eggIndex); 
             }
+
             else if(progressCounter <= stage1){
                 setPetId(petNum);
             }
+
             else if (progressCounter <= stage2){
                 setPetId(petNum + 1);
             }
+
             else if  (progressCounter <= stage3){
                 setPetId(petNum + 2);
             }
+
         }
+
     }, [setPetId, props.currGoal])
 
     function GetPet(){
+
         return (<img className ="pet" src = {petImgsByCode[petId]} alt = "pet stage"/>)
+
     }
 
     return (
+
      <> 
+
         <GetPet></GetPet>
+
     </>    
+
     );
+
 }
 
 export default DisplayPet;

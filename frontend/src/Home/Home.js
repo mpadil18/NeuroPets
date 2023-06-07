@@ -36,14 +36,18 @@ function Home() {
                 damping: 2,
 
             },
+
         },
+
     };
 
     const shakeAnimation = shouldShake
+
         ? {
             x: [0, 10, -10, 10, -10, 0],
             transition: { duration: 1.0 },
         }
+
         : {};
 
     
@@ -90,8 +94,10 @@ function Home() {
     const isPresetGoal = (someGoal) => {
         
         for (let i = 0; i < presetGoals.length; i++) {
+            
             if (presetGoals[i] === someGoal)
                 return i;
+
         }
 
         return false;
@@ -117,6 +123,7 @@ function Home() {
         updateUserInfo(user.uid, {lastProgressMade : completedDate, 
                                   goalArray : _goalArray,
                                   petPoints : petPoints + 5});
+
         setGoalArray(_goalArray);
 
 
@@ -130,7 +137,9 @@ function Home() {
 
     // Conditionally displays progress button depending on if user has clicked or not
     function ProgressButton(){
+
         if (goalComplete) {
+
             return (
 
             <div>
@@ -138,18 +147,25 @@ function Home() {
                 <img className = "GreenCheck" src = {GreenCheckmark} alt = "green checkmark"/>
 
             </div>
+
             );
+
         }
 
         else {
+
             return (
 
                 <button className = "GoalButton" onClick = {completeGoal}>
+
                     <p className = "G1Text">{progressCounter}/60 Days</p>
+
                     <p className = "G2Text">Complete...?</p>
+
                 </button>
             
             );
+
         }
 
     }
@@ -157,21 +173,21 @@ function Home() {
     useEffect(() => {
         
         const checkIfGoalComplete = (lastProgressDate) => {
+
             // When user first creates a goal, they don't have a 
             // `lastProgressMade` attribute
             if (lastProgressDate === undefined) {
-
                 setGoalComplete(false);
             }
 
             else if (checkIfProgressMadeToday(lastProgressDate.toDate())) {
-
                 setGoalComplete(true);
-
             }
+
         }
 
         const getAllData = async () => {
+
             try {
 
                 const user = auth.currentUser;
@@ -179,7 +195,6 @@ function Home() {
                 if (user) {
                     
                     // Getting user data specific to the current user
-
                     const userData =  await getUserInfo(user.uid);
 
                     if (userData !== null) {
@@ -187,7 +202,6 @@ function Home() {
                         // Sets the state to whether there are active goals or not
                         // the !! is used to convert the retrieved value from 0/1 to true/false
                         setActiveGoalExists(!!(userData.activeGoal));
-                        console.log(userData.activeGoal);
                         
                         // Sets the current state of whether the goal is complete
                         checkIfGoalComplete(userData.lastProgressMade);
@@ -202,8 +216,8 @@ function Home() {
 
                         if (isPresetGoal(currGoalName) === false) {
                             setUserGoalName(currGoalName);
-
                         }
+                        
                         else {
                             setUserGoalName(goalData[isPresetGoal(currGoalName)][((new Date().getDate())*3)%10]);
                         }
@@ -212,13 +226,16 @@ function Home() {
                         setPetPoints(userData.petPoints);
                  
                     }
+
                 }
+
             } catch (error) {
 
                 console.log(error);
                 console.log("ERROR GETTING ALL DATA");
 
             }
+
         }
 
         getAllData();
@@ -255,6 +272,7 @@ function Home() {
                 <div className = "WindowTextBox1">
 
                     <p className = "WindowText">Day</p>
+
                     <p className = "WindowText">{progressCounter}</p>
 
                 </div>
@@ -279,25 +297,24 @@ function Home() {
 
                 {popupDisplay &&
 
-                <LogProgress ref = {animationParent} currGoal = {currGoal} currGoalId={goalIndex} setPopupDisplay={setPopupDisplay} 
-                                                     progressCounter={progressCounter} progressTimestamp={progressTimestamp} 
-                                                     setGoalArray={setGoalArray}/>
+                <LogProgress ref = {animationParent} currGoal = {currGoal} currGoalId={goalIndex} 
+                                                     setPopupDisplay={setPopupDisplay} progressCounter={progressCounter} 
+                                                     progressTimestamp={progressTimestamp} setGoalArray={setGoalArray}/>
 
                 }
             
             </div>
+
             }
 
-            {!activeGoal &&
-
-            <NoActiveGoal/>
-            
-            }   
-
+            {!activeGoal && <NoActiveGoal/>}   
          
             <NavBar goalArray={goalArray} petPoints={petPoints}/>
+
         </div>
+
     );
+
 }
 
 export default Home;

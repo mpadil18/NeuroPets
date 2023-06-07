@@ -62,76 +62,163 @@ function PetStore() {
     const user = auth.currentUser;
 
     const changeStoreViewFrwd = () => {
-        setDisplayedAccessoryRange([displayedAccessoryRange[0] + 4, displayedAccessoryRange[1] + 4]);
+        setDisplayedAccessoryRange([displayedAccessoryRange[0] + 4, 
+                                    displayedAccessoryRange[1] + 4]);
     }
 
     const changeStoreViewBkwd = () => {
-        setDisplayedAccessoryRange([displayedAccessoryRange[0] - 4, displayedAccessoryRange[1] - 4]);
+        setDisplayedAccessoryRange([displayedAccessoryRange[0] - 4, 
+                                    displayedAccessoryRange[1] - 4]);
     }
 
     const openUnlockItem = (item) => {
         // only open the unlock item popup if the user has enough pets points to purchase the item
         let pointsToUnlock = item[1];
         let userPoints = userPetPoints;
+
         if (userPoints >= pointsToUnlock){
+
             setItemData(item);
             setUnlockItemPopup(true);
+
         }
+
     }
 
     useEffect(() => {
+
         const getAccessoriesArray = async () => {
+
             const docRef = doc(db, 'all_data', user.uid);
             const docSnap = await getDoc(docRef);
+
             let accessories = docSnap.data().unlockedAccessories;
             setIsUnlocked(accessories);
+
         }
+
         getAccessoriesArray();
+
     }, [user.uid]);
 
     //Sets the selectedAccessory by accessing the accessories array,
     //and reveals the dressup popup
     const dressUpPet = (accessoryId) => {
+
         setSelectedAccessory(accessories[Number(accessoryId)]);
         setPopupDisplay(true);
+
     }
 
     return (
+
    <div className="CardDisplay">
-    <p className="HeaderBubble">Pet Store</p>
+
+        <p className="HeaderBubble">Pet Store</p>
+
     <div className="Gallery">
+
         <div className="galleryContents">
-        {(accessories.slice(displayedAccessoryRange[0], displayedAccessoryRange[1])).map((itemAndPrice, index) => (
+
+        {(accessories.slice(displayedAccessoryRange[0],
+                            displayedAccessoryRange[1])).map((itemAndPrice, index) => (
+
             <div className="ItemCard" key={index + displayedAccessoryRange[0]}>
+
                 <p className="ItemName">{itemAndPrice[2]}</p>
+
                 <p className="ItemTextDesc">{itemAndPrice[3]}</p>
+
                 <img src={itemAndPrice[0]} style={{"height":100}} alt="anItem"/>
+
                 {/* This dressUpPet function should be called on the dress up button instead, but it's being tested as a plain button for now */}
             
                 {isUnlocked[itemAndPrice[4]] &&
-                <button className="newBubbleButton" id={Number(index + displayedAccessoryRange[0])} onClick={(e) => dressUpPet(e.target.id)}><img src={Shirt} id={Number(index + displayedAccessoryRange[0])} alt ="acc"/>Dress a pet</button>
+                    <button className="newBubbleButton" 
+
+                        id={Number(index + displayedAccessoryRange[0])} 
+                        
+                        onClick={(e) => dressUpPet(e.target.id)}>
+                            
+                            <img src={Shirt} id={Number(index + displayedAccessoryRange[0])} 
+                            alt ="acc"/>
+                            
+                            Dress a pet
+
+                    </button>
+
                 }
+
                 {!isUnlocked[itemAndPrice[4]] &&
                     ((itemAndPrice[1] <= userPetPoints) ? 
-                        <button onClick = {() => openUnlockItem(itemAndPrice)} className="newBubbleButton" id={index}><img src={Key} alt="key"/><span className="priceTag">{itemAndPrice[1]} pts</span></button>
-                        : <button className="disabledBubbleButton" id={index}><img src={Key} alt="key"/><span className="priceTag">{itemAndPrice[1]} pts</span></button>)
+
+                        <button onClick = {() => openUnlockItem(itemAndPrice)} className="newBubbleButton"
+                        
+                        id={index}><img src={Key} alt="key"/>
+                        
+                            <span className="priceTag">
+                                
+                                {itemAndPrice[1]} pts
+                                
+                            </span>
+
+                        </button>
+                        : 
+                        <button className="disabledBubbleButton" 
+                        
+                        id={index}><img src={Key} alt="key"/>
+                        
+                            <span className="priceTag">
+                                
+                                {itemAndPrice[1]} pts
+                                
+                            </span>
+                        
+                        </button>)
+
                 }
-                <UnlockItem unlockItemPopup={unlockItemPopup} setUnlockItemPopup={setUnlockItemPopup} setIsUnlocked={setIsUnlocked} itemData={itemData} user={user} userPetPoints={userPetPoints} setUserPetPoints={setUserPetPoints}/>
+
+                <UnlockItem unlockItemPopup={unlockItemPopup} 
+                
+                            setUnlockItemPopup={setUnlockItemPopup}
+
+                            setIsUnlocked={setIsUnlocked} itemData={itemData} 
+
+                            user={user} userPetPoints={userPetPoints} 
+
+                            setUserPetPoints={setUserPetPoints}
+                />
                 
             </div>
+
         ))}
+
         </div>
+
     </div>
+
     <NavigationArrows 
+
         displayedRange={displayedAccessoryRange} 
+
         backLimit={4} frwdLimit={9} 
+        
         backFunc={changeStoreViewBkwd}
+
         frwdFunc={changeStoreViewFrwd}
-        middleComponent={<p className="petPointsDisplay">{(userPetPoints)} pts</p>}/>
-    {popupDisplay && <DressUp goalArray={petArray} selectedAccessory={selectedAccessory} popupDisplay={popupDisplay} setPopupDisplay={setPopupDisplay}/>}
+
+        middleComponent={<p className="petPointsDisplay">
+            {(userPetPoints)} pts</p>}/>
+
+    {popupDisplay && <DressUp goalArray={petArray} selectedAccessory={selectedAccessory}
+                      popupDisplay={popupDisplay} setPopupDisplay={setPopupDisplay}/>}
+
     <NavBar goalArray={petArray} petPoints={userPetPoints}/>
+
    </div>
+
    );
+
 }
 
 export default PetStore;

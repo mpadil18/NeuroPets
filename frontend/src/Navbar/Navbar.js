@@ -50,7 +50,8 @@ function NavBar(props){
     // Pass goalArray to navbar, to emulate caching
     const navToPetGallery = () => {
 
-        navigate("../PetGallery", {state:{goalArray: props.goalArray, petPoints: props.petPoints}});
+        navigate("../PetGallery", {state:{goalArray: props.goalArray, 
+                                   petPoints: props.petPoints}});
 
     }
     
@@ -62,7 +63,10 @@ function NavBar(props){
 
     // Pass goalArray to navbar, to emulate caching
     const navToPetStore = () => {
-        navigate("../PetStore", {state:{goalArray: props.goalArray, petPoints: props.petPoints}});
+
+        navigate("../PetStore", {state:{goalArray: props.goalArray,
+                                 petPoints: props.petPoints}});
+                                 
     }
     
     function Logout(){
@@ -70,6 +74,7 @@ function NavBar(props){
         return (
 
         <>
+
         {isOpen && (
 
             <div className = "Popup">
@@ -81,11 +86,15 @@ function NavBar(props){
                                  <p className = "ConfirmSignOutText">Would you like to sign out?</p>
                          
                                 <button className = "bubbleButton" onClick = {SignOutButton}>
+
                                     Okay
+
                                 </button>
 
                                 <button className = "bubbleButton" onClick = {setClosed}>
+
                                     Cancel
+
                                 </button>
                            
                      </div>
@@ -95,8 +104,11 @@ function NavBar(props){
              </div>
 
         )}
+
         </>
+
         );
+
     }
 
 
@@ -124,7 +136,8 @@ function NavBar(props){
 
         <Logout/>
 
-        <DeleteGoal user={user} isDeleteGoalOpen={isDeleteGoalOpen} setIsDeleteGoalOpen={setIsDeleteGoalOpen}/>
+        <DeleteGoal user={user} isDeleteGoalOpen={isDeleteGoalOpen} 
+                    setIsDeleteGoalOpen={setIsDeleteGoalOpen}/>
 
     </div>
     

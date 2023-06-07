@@ -17,7 +17,8 @@ function PetGallery() {
     // then we get the data that the other page passed by using location
     // In this case, we get the list of goals passed from the Navbar
     const location = useLocation();
-    const [cachedGoalArray] = useState((location.state) ? location.state.goalArray : []);
+    const [cachedGoalArray] = useState((location.state) 
+                            ? location.state.goalArray : []);
     const [userPetPoints] = useState(location.state.petPoints);
 
     // To easily pass goal and log data to the ViewPage, 
@@ -35,7 +36,8 @@ function PetGallery() {
         // Only allow user to navigate if they have logs for this goal
         if (logsPerGoal[goalID].length > 0) {
 
-            navigate('/ViewProgress',{state:{goal:goalPetList[goalID].goal, goalArray:goalPetList, goalId: goalID}});
+            navigate('/ViewProgress',{state:{goal:goalPetList[goalID].goal,
+                                      goalArray:goalPetList, goalId: goalID}});
 
         }
         else {
@@ -66,8 +68,9 @@ function PetGallery() {
 
                     let logList = [];
 
-                    goalList.forEach(element => tempArr.push({goal: element.goal, pet: element.pet, logs: element.logs,
-                                                              progressCounter: element.progressCounter}));
+                    goalList.forEach(element => tempArr.push({goal: element.goal, 
+                                            pet: element.pet, logs: element.logs, 
+                                            progressCounter: element.progressCounter}));
 
                     // Iterate over new array of goals, and push each set of logs into our logList
                     tempArr.forEach(element => logList.push(element.logs));
@@ -89,7 +92,8 @@ function PetGallery() {
 
                 // Load cached data (if the user accesses page from navbar)
 
-                if (cachedGoalArray !== undefined && cachedGoalArray !== null && cachedGoalArray.length > 0) {
+                if (cachedGoalArray !== undefined && cachedGoalArray !== null
+                     && cachedGoalArray.length > 0) {
 
                     let logList = [];
 
@@ -121,11 +125,17 @@ function PetGallery() {
     }, [cachedGoalArray])
 
     const changeStoreViewFrwd = () => {
-        setDisplayedAccessoryRange([displayedAccessoryRange[0] + 4, displayedAccessoryRange[1] + 4]);
+
+        setDisplayedAccessoryRange([displayedAccessoryRange[0] + 4, 
+                                    displayedAccessoryRange[1] + 4]);
+
     }
 
     const changeStoreViewBkwd = () => {
-        setDisplayedAccessoryRange([displayedAccessoryRange[0] - 4, displayedAccessoryRange[1] - 4]);
+
+        setDisplayedAccessoryRange([displayedAccessoryRange[0] - 4, 
+                                    displayedAccessoryRange[1] - 4]);
+
     }
 
     return (
@@ -170,11 +180,17 @@ function PetGallery() {
                 
                 </div>
                 <NavigationArrows 
+
                     displayedRange={displayedAccessoryRange} 
+
                     backLimit={4} frwdLimit={goalPetList.length > 0 ? goalPetList.length : 0} 
+
                     backFunc={changeStoreViewBkwd}
+
                     frwdFunc={changeStoreViewFrwd}
+
                     middleComponent={null}/>
+
             {/* Pass goalPetList to navbar, to emulate caching */}
             <NavBar goalArray={goalPetList} petPoints={userPetPoints}/>
 

@@ -27,7 +27,9 @@ function ViewProgress() {
        displayedDateLog: Will contain the date and log associated with the checkmark
                          that the user clicked on, and is then rendered on the popup 
                          component */
-    const [allMonths] = useState(["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]);
+    const [allMonths] = useState(["Jan", "Feb", "Mar", "Apr", "May", 
+                                  "Jun", "Jul", "Aug", "Sep", "Oct", 
+                                  "Nov", "Dec"]);
     const [months, setMonths] = useState(["", ""]);
     const [years, setYears] = useState(["", ""]);
     const [displayedDateLog, setDisplayedDateLog] = useState([]);
@@ -52,9 +54,7 @@ function ViewProgress() {
         // Edge case check: if object is result of recent cache, it's a JS date object
         // Otherwise, it's a firebase timestamp
         if (isNaN(dateObj)) {
-
             dateObj = listOfLogs[logIndex].date;
-
         }
 
         let selectedMo = (dateObj.getMonth() + 1);
@@ -140,9 +140,11 @@ function ViewProgress() {
 
                         (logDatePair.log.length > 0 ? 
 
-                        <img id={index} key={index} src={GoldProgress} style={{"width":40, "margin":"8px 3px"}} alt="Journal Entry available" onClick={() => checkMarkClick(index)} />
+                        <img id={index} key={index} src={GoldProgress} style={{"width":40, "margin":"8px 3px"}}
+                             alt="Journal Entry available" onClick={() => checkMarkClick(index)} />
 
-                        : <img id={index} key={index} src={GreenProgress} style={{"width":40,"margin":"8px 3px"}} alt="No journal entry available"/>)
+                        : <img id={index} key={index} src={GreenProgress} style={{"width":40,"margin":"8px 3px"}} 
+                               alt="No journal entry available"/>)
 
                     )) : null
 
@@ -160,7 +162,11 @@ function ViewProgress() {
 
                     <div className="InputBubble">
 
-                        <button className="close-btn" onClick={closePopup}><img src={Close} alt="close popup button"/></button>
+                        <button className="close-btn" onClick={closePopup}>
+                            
+                            <img src={Close} alt="close popup button"/>
+                            
+                        </button>
 
                         <p className="Bubble-Header">{currGoal}</p>
 
