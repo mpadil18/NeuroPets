@@ -32,8 +32,6 @@ function CreateGoal() {
     if (goalText.length === 0){
       setErrorMsg("Please fill in a goal");
     } else {
-
-      console.log(goalText + "in create goal");
       navigate('/petContract', { state:{goalText: goalText || {} }});
 
     }

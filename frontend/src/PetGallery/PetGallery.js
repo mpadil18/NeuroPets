@@ -1,6 +1,7 @@
 import "./PetGallery.css";
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 import NavigationArrows from "../PetStore/NavigationArrows";
 import { getUserInfo } from '../Backend/handleSubmit';
 import { auth } from "../Backend/firebaseSetup";

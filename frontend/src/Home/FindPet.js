@@ -140,8 +140,6 @@ function FindPet(props){
 
     function DisplayPet(){
 
-        console.log(fileExt);
-
         if (fileExt === "") {
             return (<img className ="pet" src = {loading} alt = "loading pet" />)
         }
