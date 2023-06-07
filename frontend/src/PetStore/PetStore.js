@@ -1,9 +1,6 @@
 import NavBar from "../Navbar/Navbar";
 import UnlockItem from "./UnlockItem";
 import "./PetStore.css"
-import babybunny from "../assets/PetStoreItems/babybunny.png";
-import babyfrog from "../assets/PetStoreItems/babyfrog.png";
-import babypenguin from "../assets/PetStoreItems/babypenguin.png";
 
 import bandanaBlue from "../assets/PetStoreItems/bandanaBlue.png";
 import bandanaRed from "../assets/PetStoreItems/bandanaRed.png";
@@ -21,10 +18,7 @@ import Shirt from "../assets/elements/Shirt.png"
 
 import DressUp from "./DressUp.js"
 import NavigationArrows from "./NavigationArrows"
-import loading from "../assets/sprites/loading.png";
-import Close from "../assets/elements/Close.svg"
 
-import {updateUserInfo, getUserInfo} from '../Backend/handleSubmit';
 import { auth } from "../Backend/firebaseSetup.js";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom"
@@ -118,7 +112,7 @@ function PetStore() {
                 {/* This dressUpPet function should be called on the dress up button instead, but it's being tested as a plain button for now */}
             
                 {isUnlocked[itemAndPrice[4]] &&
-                <button className="newBubbleButton" id={Number(index + displayedAccessoryRange[0])} onClick={(e) => dressUpPet(e.target.id)}><img src={Shirt} id={Number(index + displayedAccessoryRange[0])}/>Dress a pet</button>
+                <button className="newBubbleButton" id={Number(index + displayedAccessoryRange[0])} onClick={(e) => dressUpPet(e.target.id)}><img src={Shirt} id={Number(index + displayedAccessoryRange[0])} alt ="acc"/>Dress a pet</button>
                 }
                 {!isUnlocked[itemAndPrice[4]] &&
                     ((itemAndPrice[1] <= userPetPoints) ? 
