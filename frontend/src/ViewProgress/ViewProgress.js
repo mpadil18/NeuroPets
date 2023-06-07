@@ -57,7 +57,7 @@ function ViewProgress() {
 
         }
 
-        let selectedMo = dateObj.getMonth();
+        let selectedMo = (dateObj.getMonth() + 1);
         let selectedDay = dateObj.getDate();
         let selectedYr = dateObj.getFullYear() % 100;
 
