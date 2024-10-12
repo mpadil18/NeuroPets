@@ -142,7 +142,7 @@ function Home() {
 
             return (
 
-            <div>
+            <div className="GreenCheckParent">
 
                 <img className = "GreenCheck" src = {GreenCheckmark} alt = "green checkmark"/>
 

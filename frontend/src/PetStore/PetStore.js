@@ -123,7 +123,7 @@ function PetStore() {
         {(accessories.slice(displayedAccessoryRange[0],
                             displayedAccessoryRange[1])).map((itemAndPrice, index) => (
 
-            <div className="ItemCard" key={index + displayedAccessoryRange[0]}>
+            <div className="ItemStoreCard" key={index + displayedAccessoryRange[0]}>
 
                 <p className="ItemName">{itemAndPrice[2]}</p>
 

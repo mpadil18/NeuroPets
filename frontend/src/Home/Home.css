@@ -8,7 +8,7 @@
     align-items: center;
     flex-direction: column;
    
-    padding-bottom: 60px;
+    /* padding-bottom: 60px; */
 }
 
 .ActiveGoal {
@@ -29,7 +29,7 @@
  
     max-width: 500px;
     width: 90%;
-    height: 80%;
+    height: 15vh;
     background: #F9F9F9;
     border-radius: 15px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -75,7 +75,7 @@
 
 .GreenCheck {
     position: relative;
-    margin: px 0px 28px 0px;
+    height: 15vh;
 }
 
 .GoalButton {
@@ -135,7 +135,7 @@
     position: relative;
     
     width: 90%;
-    height: 50vh;
+    height: 45vh;
     top: 25px;
     max-width: 400px;
     max-height: 650px;
@@ -145,7 +145,7 @@
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
 
     border-radius: 20px;
-    margin: 0px 0px 30px 0px;
+    margin: 0px 0px 25px 0px;
 }
 
 .PetHeader {
@@ -153,14 +153,15 @@
     justify-content: center;
     align-items: center;
 
-    height: 60vh;
+    height: 100%;
 }
 
 .WindowTextBox1{
     
     position: absolute;
     top: 0%;
-    left: 2%;
+    left: 5%;
+    text-align: center;
   
 }
 
@@ -168,13 +169,13 @@
 
     position: absolute;
     top: 0%;
-    left: 80%;
+    left: 75%;
 }
 
 .WindowTextBox3{
     position: absolute;
     top: 27px;
-    left: 92%;
+    left: 86%;
 }
 
 .WindowText {
@@ -186,3 +187,13 @@
     line-height: 12px;
 }
 
+.pet {
+    padding-top: 25%;
+}
+
+.GreenCheckParent {
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
