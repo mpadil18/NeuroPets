@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/NeuroPets/static/css/main.665b132d.css",
+    "main.css": "/NeuroPets/static/css/main.b011b8f9.css",
     "main.js": "/NeuroPets/static/js/main.18c15902.js",
     "static/js/453.c6d3df48.chunk.js": "/NeuroPets/static/js/453.c6d3df48.chunk.js",
     "static/media/logo.svg": "/NeuroPets/static/media/logo.eb6dcd46a5bc9755911424cb9a8cbb38.svg",
@@ -22,12 +22,12 @@
     "static/media/signOut.svg": "/NeuroPets/static/media/signOut.5106975e648efd251c93.svg",
     "static/media/PinkWave.svg": "/NeuroPets/static/media/PinkWave.bab3d4b517ab22909e42.svg",
     "static/media/wave.svg": "/NeuroPets/static/media/wave.ca59b280f192ee8893ec.svg",
-    "main.665b132d.css.map": "/NeuroPets/static/css/main.665b132d.css.map",
+    "main.b011b8f9.css.map": "/NeuroPets/static/css/main.b011b8f9.css.map",
     "main.18c15902.js.map": "/NeuroPets/static/js/main.18c15902.js.map",
     "453.c6d3df48.chunk.js.map": "/NeuroPets/static/js/453.c6d3df48.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.665b132d.css",
+    "static/css/main.b011b8f9.css",
     "static/js/main.18c15902.js"
   ]
 }
