@@ -185,6 +185,16 @@
     .ItemStoreCard {
         max-height: 170px;
     }
+    .buttonArea {
+        height: 10vh;
+        align-items: center;
+    }
+
+    .petPointsDisplay {
+        height: 90%;
+        margin: 0;
+        text-align: center;
+    }
 }
 
 @media (min-width: 768px) {
