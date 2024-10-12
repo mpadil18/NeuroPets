@@ -56,7 +56,7 @@ function DisplayPet(props) {
 
     function GetPet(){
 
-        return (<img className ="pet" src = {petImgsByCode[petId]} alt = "pet stage"/>)
+        return (<img className ="pet" src = {`/NeuroPets/${petImgsByCode[petId]}`} alt = "pet stage"/>)
 
     }
 

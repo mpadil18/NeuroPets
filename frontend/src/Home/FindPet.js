@@ -141,11 +141,11 @@ function FindPet(props){
     function DisplayPet(){
 
         if (fileExt === "") {
-            return (<img className ="pet" src = {loading} alt = "loading pet" />)
+            return (<img className ="pet" src = {`/NeuroPets/${loading}`} alt = "loading pet" />)
         }
 
         else {
-            return (<img className ="pet" src = {fileExt} alt = "retrieved pet" />)
+            return (<img className ="pet" src = {`/NeuroPets/${fileExt}`} alt = "retrieved pet" />)
         }
 
     }
