@@ -3,7 +3,7 @@
 ## Requirements
 
 Being a mobile web app, there is no installation neccessary
-for using neuropets.net, all that is required for use is
+for using [NeuroPets](https://mpadil18.github.io/NeuroPets/), all that is required for use is
 a functioning email and a device to access the site url.
 
 Note for mobile users: if desired to use as an app, access the site in your
